@@ -38,3 +38,10 @@ j)
 boolean(sum(//open_auctions/open_auction
 [sum(./bidder/increase/text()) > 500]
 /initial/text()) > 300)
+
+k)
+count(//bidder
+[floor(number(increase)) <115
+and
+floor(number(increase)) > 112])
+> 0
