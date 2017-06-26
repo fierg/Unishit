@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT site (open_auctions, closed_auctions) >
+<!ELEMENT open_auctions (open_auction*) >
+<!ELEMENT open_auction (initial, reserve?, bidder*, current, privacy?, itemref, seller, annotation, quantity, type, interval) >
+
+<!ATTLIST open_auction id ID #REQUIRED>
+<!ELEMENT initial (#PCDATA) >
+<!ELEMENT bidder (date, time, personref, increase) >
+
+<!ELEMENT reserve (#PCDATA) >
+<!ELEMENT date (#PCDATA) >
+<!ELEMENT time (#PCDATA) >
+<!ELEMENT personref EMPTY >
+<!ATTLIST personref person CDATA #REQUIRED >
+<!ELEMENT increase (#PCDATA) >
+
+<!ELEMENT current (#PCDATA) >
+<!ELEMENT privacy (#PCDATA) >
+<!ELEMENT itemref EMPTY >
+<!ATTLIST itemref item CDATA #REQUIRED >
+<!ELEMENT seller EMPTY >
+<!ATTLIST seller person CDATA #REQUIRED >
+<!ELEMENT annotation (author, description, happiness) >
+
+<!ELEMENT author EMPTY >
+<!ATTLIST author person CDATA #REQUIRED >
+
+<!ELEMENT description (text+) >
+<!ATTLIST description xml:lang NMTOKEN #IMPLIED>
+
+<!ELEMENT text (#PCDATA) >
+<!ATTLIST text xml:lang NMTOKEN #IMPLIED>
+
+<!ELEMENT happiness (#PCDATA) >
+
+<!ELEMENT quantity (#PCDATA) >
+<!ELEMENT type (#PCDATA) >
+<!ELEMENT interval (start, end) >
+<!ELEMENT start (#PCDATA) >
+<!ELEMENT end (#PCDATA) >
+
+<!ELEMENT closed_auctions (closed_auction*) >
+<!ELEMENT closed_auction (seller, buyer, itemref, price, date, quantity, type, annotation) >
+
+<!ELEMENT buyer EMPTY >
+<!ATTLIST buyer person CDATA #REQUIRED>
+<!ELEMENT price (#PCDATA) >
