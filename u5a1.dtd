@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!ELEMENT Unternehmen (Chef, Abteilung+)>
-<!ATTLIST Unternehmen Name CDATA #REQUIRED >
-<!ELEMENT Abteilung ((Chef, Abteilung*, Mitarbeiter, Mitarbeiter+) | (Chef, Mitarbeiter)) >
-<!ATTLIST Abteilung Etage (1 | 2| 3 | 4 | 5) #REQUIRED >
-<!ELEMENT Mitarbeiter (#PCDATA) >
