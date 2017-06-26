@@ -1,0 +1,34 @@
+Aufgabe 1
+
+a)
+/site/closed_auctions/count(closed_auction)
+
+b)
+/site/open_auctions/open_auction/@id
+
+c)
+/site/closed_auctions/closed_auction
+[./annotation/description/text[string-length() > 7500]]/price
+
+d)
+/site/open_auctions/open_auction[last()]/bidder/date
+|
+/site/open_auctions/open_auction[last()]/bidder/personref/@person
+
+e)
+sum(//open_auction[25]/bidder/increase/text())
+
+f)
+//open_auctions/open_auction
+[bidder/personref/@person = //closed_auctions/closed_auction[./itemref/@item="itedm9300"]/seller]/@id
+
+g)
+count(/site/open_auctions/open_auction/annotation/description/text[@xml:lang = "de"])
+
+h)
+//open_auctions/open_auction
+[bidder/personref[@person="person8815"]]
+/bidder/personref[@person !="person8815"]/@person
+
+i)
+count(/site/closed_auctions/closed_auction[contains(./itemref, "6077")])
