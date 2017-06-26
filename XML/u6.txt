@@ -19,8 +19,9 @@ e)
 sum(//open_auction[25]/bidder/increase/text())
 
 f)
-//open_auctions/open_auction
-[bidder/personref/@person = //closed_auctions/closed_auction[./itemref/@item="itedm9300"]/seller]/@id
+//open_auctions/open_auction[./bidder/personref/@person =
+//closed_auctions/closed_auction
+[contains(./itemref/@item,"item9300")]/seller/@person]/@id
 
 g)
 count(/site/open_auctions/open_auction/annotation/description/text[@xml:lang = "de"])
@@ -31,4 +32,9 @@ h)
 /bidder/personref[@person !="person8815"]/@person
 
 i)
-count(/site/closed_auctions/closed_auction[contains(./itemref, "6077")])
+count(/site/closed_auctions/closed_auction[contains(./itemref/@item, "6077")])
+
+j)
+boolean(sum(//open_auctions/open_auction
+[sum(./bidder/increase/text()) > 500]
+/initial/text()) > 300)
