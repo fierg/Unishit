@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  26 JUN 2017 19:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  27 JUN 2017 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -333,74 +333,126 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/amsrefs/amsrefs.sty
+Package: amsrefs 2013/03/07 v2.14
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsrefs/pcatcode.sty
+Package: pcatcode 2002/04/16 v1.04
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsrefs/ifoption.sty
+Package: ifoption 2002/03/04 v1.02
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsrefs/rkeyval.sty
+Package: rkeyval 2004/05/05 v1.08
+\@emptytoks=\toks16
+\@temptokenb=\toks17
+\rsk@toks=\toks18
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsrefs/textcmds.sty
+Package: textcmds 2012/08/02 v2.00
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsrefs/mathscinet.sty
+Package: mathscinet 2002/04/17 v1.05
+)
+\c@bib=\count87
+\@maxlabelwidth=\dimen103
+\c@bib@env=\count88
+\bib@dbfile=\read1
+\alpha@suffix=\count89
+\series@index=\count90
+)
 (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux)
 \openout1 = `"Eine universelle Turingmaschine mit zwei inneren Zuständen.aux"'
 .
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 26.
+(Font)              <14.4> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 26.
+(Font)              <7> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 37.
+(Font)              <12> on input line 39.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 37.
+(Font)              <8> on input line 39.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 37.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 61.
+(Font)              <6> on input line 39.
 
+! Undefined control sequence.
+<argument> ...\Sigma ,\Gamma ,q_0,\delta ,\Square 
+                                                  ,F)
+l.39 ... = (Q,\Sigma,\Gamma,q_0,\delta,\Square,F)}
+                                                   $
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 71.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 61.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 71.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 1460) in paragraph at lines 89--90
+Underfull \hbox (badness 1460) in paragraph at lines 99--100
 []\OT1/cmr/m/n/12 and p for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
 \OT1/cmr/m/n/12 pre-de-fined
  []
 
-[2] [3] (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux) ) 
+[2]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 115.
+ [3] (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 567 strings out of 493029
- 5900 string characters out of 6136234
- 59678 words of memory out of 5000000
- 4156 multiletter control sequences out of 15000+600000
- 10128 words of font info for 35 fonts, out of 8000000 for 9000
+ 1570 strings out of 493029
+ 18107 string characters out of 6136234
+ 75894 words of memory out of 5000000
+ 5132 multiletter control sequences out of 15000+600000
+ 11398 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 23i,8n,19p,348b,205s stack positions out of 5000i,500n,10000p,200000b,80000s
-</
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmti8.pfb>
+ 26i,8n,21p,348b,280s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti7.pfb>
 Output written on "Eine universelle Turingmaschine mit zwei inneren Zuständen.
-pdf" (3 pages, 93871 bytes).
+pdf" (3 pages, 124866 bytes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 58 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
