@@ -1,0 +1,16 @@
+Sven Fiergolla
+1252732
+
+Aufgabe 2
+
+Da der Algorithmus von Floyd & Warshall alle Kanten der Adjazenzmatrix durchgeht, ist die Laufzeit kaum anhängig von den exisitierenden Kanten sondern hauptsächlich von der Anzahl der Knoten. In der Literatur wird eine Abschätzung von O(n³) genannt, meine Zeitmesssung ergab:
+
+Zeitmessung für  50 x  50 in milli	0.79
+Zeitmessung für 100 x 100 in milli	3.05
+Zeitmessung für 200 x 200 in milli	36.48
+Zeitmessung für 400 x 400 in milli	400.5
+Zeitmessung für 800 x 1000 in milli	3459.8
+Zeitmessung für 1600 x 2000 in milli	58327.0
+
+Durch Regression errechnet sich eine Abschätzung meines Algorithmus von ca O(0,000001 * n^3,45). Laut der Internet Domain Survey von Januar 2017 sind ca 1,062 Mrd. Host im Internet verfügbar, was einer Laufzeit von 1.380796199×10²⁵ Millisekunden ( ~ 7.297460039×10¹⁶ Jahre) entspricht.
+

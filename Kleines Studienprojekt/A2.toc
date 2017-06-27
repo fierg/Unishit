@@ -1,0 +1,3 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {german}
+\beamer@sectionintoc {1}{Einf\IeC {\"u}hrung}{2}{0}{1}
