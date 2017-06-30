@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  28 JUN 2017 13:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  30 JUN 2017 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,33 +369,38 @@ Package: mathscinet 2002/04/17 v1.05
 \openout1 = `"Eine universelle Turingmaschine mit zwei inneren Zuständen.aux"'
 .
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 28.
+(Font)              <14.4> on input line 11.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 28.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 39.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 39.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 39.
+(Font)              <7> on input line 11.
 
+Overfull \hbox (48.69601pt too wide) in paragraph at lines 19--22
+\OT1/cmr/m/n/12 einem \OT1/cmr/m/it/12 Steuerungse-le-ment\OT1/cmr/m/n/12 , h^^
+?aufig beschrieben durch eine (par-tielle) []Ubergangsfunktion.
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 26.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 26.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 26.
 ! Undefined control sequence.
 <argument> ...\Sigma ,\Gamma ,q_0,\delta ,\Square 
                                                   ,F)
-l.39 ... = (Q,\Sigma,\Gamma,q_0,\delta,\Square,F)}
+l.26 ... = (Q,\Sigma,\Gamma,q_0,\delta,\Square,F)}
                                                    $
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -404,238 +409,103 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (8.12698pt too wide) in paragraph at lines 39--41
+Overfull \hbox (8.12698pt too wide) in paragraph at lines 26--28
 \OT1/cmr/m/n/12 Formal definieren wir die Tur-ing-mas-chine als Sep-tu-pel $[]$
 
  []
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.47 ... endliche Bandalphabet und es gilt {\Sigma
-                                                   \subset \Gamma }
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-l.47 ...habet und es gilt {\Sigma \subset \Gamma }
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-! LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48  \item
-            $\mathbf{ q_0 = }$ der Anfangszustand
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48  \item $
-             \mathbf{ q_0 = }$ der Anfangszustand
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48  \item $
-             \mathbf{ q_0 = }$ der Anfangszustand
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: \mathbf allowed only in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48  \item $\mathbf
-                    { q_0 = }$ der Anfangszustand
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.48  \item $\mathbf{ q_
-                        0 = }$ der Anfangszustand
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-l.48  \item $\mathbf{ q_0 = }
-                             $ der Anfangszustand
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
 ! Undefined control sequence.
-<argument>  \Square 
+<argument>  \square 
                     = 
-l.50  \item $\mathbf{ \Square = }
-                                 $steht für das leere Feld (Blank)
+l.37  \item $\mathbf{ \square = }
+                                 $ steht für das leere Feld (Blank)
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.53 \end{description}
-                      
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.53 \end{description}
-                      
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.62 ...uringmaschine eine Maschine {\displaystyle
-                                                   UTM_{\phi }} UTM_{\phi },...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+! Undefined control sequence.
+<recently read> \mathbb 
+                        
+l.52 ...elle Turingmaschine eine Maschine $\mathbb
+                                                  {UTM}$, die eine Eingabe $...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-! Extra }, or forgotten $.
-l.62 ... eine Maschine {\displaystyle UTM_{\phi }}
-                                                   UTM_{\phi }, die eine Ein...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+! Undefined control sequence.
+l.52 ...$\mathbb{UTM}$, die eine Eingabe $ \mathbb
+                                                  { w \| x } $ liest. Das Wo...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \mathbb 
+                        
+l.52 ... Eingabe x die Ausgabe berechnet. $\mathbb
+                                                  {UTM}$ simuliert also das ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \mathbb 
+                        
+l.52 ... simuliert also das Verhalten von $\mathbb
+                                                  {M_{w}}$ mit Hilfe der Fun...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Command \" invalid in math mode on input line 62.
-
-! Please use \mathaccent for accents in math mode.
-\add@accent ...@spacefactor \spacefactor }\accent 
-                                                  #1 #2\egroup \spacefactor ...
-l.62 ...ge universelle Turingmaschine gibt. So kö
-                                                  nnten z. B. {\displaystyle...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-! You can't use `\spacefactor' in math mode.
-\add@accent ...}\accent #1 #2\egroup \spacefactor 
-                                                  \accent@spacefactor 
-l.62 ...ge universelle Turingmaschine gibt. So kö
-                                                  nnten z. B. {\displaystyle...
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-
-LaTeX Warning: Command \" invalid in math mode on input line 62.
-
-! Please use \mathaccent for accents in math mode.
-\add@accent ...@spacefactor \spacefactor }\accent 
-                                                  #1 #2\egroup \spacefactor ...
-l.62 ...laystyle UTM_{2}} UTM_{2} verschiedene Wö
-                                                  rter verstehen. Das Wort {...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-! You can't use `\spacefactor' in math mode.
-\add@accent ...}\accent #1 #2\egroup \spacefactor 
-                                                  \accent@spacefactor 
-l.62 ...laystyle UTM_{2}} UTM_{2} verschiedene Wö
-                                                  rter verstehen. Das Wort {...
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.63 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-Missing character: There is no � in font cmex10!
-Missing character: There is no � in font cmex10!
-
-Overfull \hbox (3179.6342pt too wide) in paragraph at lines 62--63
-[]\OT1/cmr/m/n/12 Formal ist eine uni-verselle Tur-ing-mas-chine eine Mas-chine
- $\OML/cmm/m/it/12 UTM[]UTM[]; dieeineEingabe[]w\OMS/cmsy/m/n/12 k\OML/cmm/m/it
-/12 xliest:DasWort[]wisthierbeieinehinreichendeinfacheBeschreibungeinerMaschine
-[]M[]; diezueinerbestimmtenFunktionmitEingabe[]xdieAusgabeberechnet:[]\OMS/cmsy
-/m/n/12 k\OML/cmm/m/it/12 isteinTrennzeichenzwischenProgrammbeschreibungundEing
-abe:[]UTM[]simuliertalsodasVerhaltenvon[]M[]mitHilfederFunktionsbeschreibung[]w
-undderEingabe[]x:DerIndex[]^^^in[]UTM[]zeigtan; dassesnichtnureineeinzigeuniver
-selleTuringmaschinegibt:Sok[]nntenz:B:[]UTM[]und[]UTM[]verschiedeneW[]rterverst
-ehen:DasWort[]wmussdabeiineinerSprachecodiertsein; diedie[]UTM[]versteht:$ 
+Overfull \hbox (3.21017pt too wide) in paragraph at lines 60--61
+[]$ \OT1/cmr/m/n/12 Bandsym-bolen, kon-stru-ieren wir eine Mas-chine B mit zwei
+ Zust^^?anden
  []
 
-[2] (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux) )
-(\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 62 ({)
-### bottom level 
+Overfull \hbox (20.13602pt too wide) in paragraph at lines 62--63
+\OT1/cmr/m/n/12 gew^^?unschte Zu-s-tand wird durch in-cre-men-tieren und decre-
+men-tieren der speziellen
+ []
+
+[2] [3] (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux) ) 
 Here is how much of TeX's memory you used:
- 1534 strings out of 493029
- 17616 string characters out of 6136234
- 75894 words of memory out of 5000000
- 5104 multiletter control sequences out of 15000+600000
+ 1536 strings out of 493029
+ 17628 string characters out of 6136234
+ 76860 words of memory out of 5000000
+ 5106 multiletter control sequences out of 15000+600000
  9776 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 26i,6n,21p,1118b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmti12.pfb>
+ 26i,6n,21p,579b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
+</
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmti12.pfb>
 Output written on "Eine universelle Turingmaschine mit zwei inneren Zuständen.
-pdf" (2 pages, 108110 bytes).
+pdf" (3 pages, 107030 bytes).
 PDF statistics:
- 47 PDF objects out of 1000 (max. 8388607)
- 33 compressed objects within 1 object stream
+ 50 PDF objects out of 1000 (max. 8388607)
+ 35 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
