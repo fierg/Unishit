@@ -22,7 +22,7 @@
 %\usepackage{makeidx}
 %\usepackage{graphicx}
 \author{Sven Fiergolla}
-\title[Kleines Studienprojekt]{Eine universelle Turingmaschine mit zwei Zuständen}
+\title[Kleines Studienprojekt]{Eine universelle Turingmaschine mit zwei Zuständen/Symbolen}
 \subtitle[short version]{Ein Paper von Claude E. Shannon}
 \date{\today}
 %\institute[Uni Trier]{Universität Trier}
@@ -31,10 +31,31 @@
 \begin{document}
 	\frame{\maketitle}
 	
-	\begin{frame}
+
 	
-	\section{Einführung}
-	Einführung:
+	\begin{frame}
+		
+	\frametitle{Einführung}
+Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\Gamma,q_0,\delta,\Square,F)} $
+ wobei:
+
+\begin{description}
+
+
+ \item $\mathbf{ Q = }$ die endliche Zustandsmenge
+ \item $\mathbf{ \Sigma = }$ das endliche Eingabealphabet
+ \item $\mathbf{ \Gamma = }$ das endliche Bandalphabet und es gilt $\mathbf{\Sigma\subset\Gamma}$
+ \item $\mathbf{ q_0 = }$ der Anfangszustand
+ \item $\mathbf{ \delta = }$ die (partielle) Überführungsfunktion
+ \item $\mathbf{ \square = }$ steht für das leere Feld (Blank)
+ \item $\mathbf{F = }$ die Menge der akzeptierenden Endzustände
+
+\end{description}	
+	
+	
+	\end{frame}
+	
+	\frame{\frametitle{Beispiel}
 	
 	\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
    \node[state,initial] (0) {$q_0$};
@@ -43,7 +64,7 @@
    \node[state] (3) [above=of 2] {$q_3$};
    \node[state] (4) [right=of 3] {$q_4$};
    % push this node further to the right
-   \node[state] (5) [right=3cm of 2] {$q_5$};
+   \node[state,accepting] (5) [right=3cm of 2] {$q_5$};
 
    \path[->]
     (0) edge                    node {$B\:B\:R$} (1)
@@ -61,5 +82,105 @@
     (5) edge                    node {$E\:E\:L$} (2);
 \end{tikzpicture}
 	
-	\end{frame}
+}
+	
+	\frame{\frametitle{Universelle Turingmaschinen}
+		Formal ist eine universelle Turingmaschine eine Maschine $UTM$, die eine Eingabe $w|x$ liest. Das Wort $w$ ist hierbei eine  die Beschreibung einer Turingmaschine $M_w$, die zu einer bestimmten Funktion mit Eingabe $x$ die Ausgabe berechnet. $UTM$ simuliert also das Verhalten von $\mathbb{M_{w}}$ mit Hilfe der Funktionsbeschreibung $w$ und der Eingabe $x$.
+	}
+	
+	
+	
+	\frame{\frametitle{Konstruktion}
+	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
+	Maschine B besitzt:
+\begin{itemize}
+	\item elementare Symbolen von Maschine $A$, $B_1,B_2,...,B_m \in \Sigma_B$
+	\item $4mn$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
+	\begin{itemize}
+	\item $m =$ Symbole von $A, |\Sigma_A|$
+	\item $n =$ Zustände von $A, |Q_A|$
+	\item $x = +$ oder $-$ ob der Zustand des letzten Feldes in diese Feld übertragen wird oder aus diesem Feld stammt 
+	\item $y = R$ oder $L$  ob die Information in das rechte oder linke Feld übertragen wird.
+	 
+	\end{itemize}
+\end{itemize}	
+	 
+	 Insgesammt besitzt Maschine $B$ also $m+4mn$ Symbole.  
+	}
+	
+	\frame{\frametitle{Zustände}
+	Die Zustände von Maschine $B$ werden $\alpha$ und $\beta$ heißen.\\
+	\medskip
+	Um die Information des aktuellen Zustands nach bearbeiten eines Symbols in der nächsten Zelle zur Verfügung zu haben, auch wenn die $TM$ $B$ nur zwei Zustände hat, wird diese in den Symbolen gespeichert (Index $n$) und über die sogenannte \textit{bouncing operation} in die nächste Zelle übertragen.
+	}
+	
+	\frame{\frametitle{Übergange}
+	\begin{center}
+	\begin{tabular}{c c|c||c|c|c}
+
+Nr. &\textbf{Symbol} & \textbf{Zustand $\Rightarrow$} & \textbf{Symbol} & \textbf{Zustand} &\textbf{Richtung} \\
+\hline
+(1) & $B_i$ & $\alpha$  & $B_{i,1,-,R}$  & $\alpha$ & $R$\\
+\hline
+(2) & $B_i$ & $\beta$  & $B_{i,1,-,L}$  & $\alpha$ & $L$\\
+\hline
+(3) & $B_{i,j,-,x}$ & $\alpha$ or $\beta$  & $B_{i,(j+1),-,x}$  & $\alpha$ & $x\in \{ R,L \}$\\
+\hline
+(4) & $B_{i,j,+,x}$ & $\alpha$ or $\beta$  & $B_{i,(j-1),-,x}$  & $\beta$ & $x\in \{ R,L \}$\\
+\hline
+(5) & $B_{i,1,+,x}$ & $\alpha$ or $\beta$  & $B_i$  & $\alpha$ & $x\in \{ R,L \}$\\
+
+
+\end{tabular}
+\\
+\bigskip
+zusätzlich erhält Maschine $B$ für jeden Übergang in $A :$\\
+ 
+(6) $(A_i,q_j) \to (A_k,q_l,{R \atop L}) \Rightarrow (B_{i,j,-,x},\alpha) \to (B_{k,l,+,{R \atop L} }),{\beta \atop \alpha},{R \atop L}$\\
+
+
+\end{center}
+}
+
+	\frame{\frametitle{Beispiel}
+	Maschine $A$:\\
+	\bigskip
+	$...|\underbrace{A_3}|A_{13}|...$
+	
+	\bigskip
+		\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+   
+   \node[state] (1) [right=of 0] {$q_7$};
+   \node[state] (2) [right=of 1] {$q_4$};
+   
+
+   \path[->]
+    (1) edge                    node {$A_3\:A_8\:R$} (2);
+
+\end{tikzpicture}
+\\
+\bigskip
+$...|A_8|\underbrace{A_{13}}|...$
+
+	}
+	
+	\frame{\frametitle{Beispiel}
+	Maschine $B$:\\
+	\bigskip
+	\begin{tabular}{c|c| c}
+	\textbf{Ausgangssituation} & \textbf{Übergangsfunktion} & \textbf{Gleichung}\\
+	\\
+	$...|\underbrace{B_{3,7,-,x}}|B_{13}|...$ &
+	$\delta(B_{3,7,-,x},\alpha) = (B_{8,4,+,R},\beta,R)$ &  $(6)$\\
+	\hline
+	$...|B_{8,4,+,R}|\underbrace{B_{13}}|...$ & & \\
+	
+	\end{tabular}
+
+	
+	
+	}
+	
+	
+	
 \end{document}
