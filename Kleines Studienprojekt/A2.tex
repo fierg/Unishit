@@ -12,8 +12,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[german]{babel}
-\usepackage[T1]{fontenc}
-% needed for the matrix envirionment
+
 \usepackage{amsmath}
 \usepackage{tikz, wasysym}
 \usetikzlibrary{automata,positioning}
@@ -95,7 +94,7 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
 	Maschine B besitzt:
 \begin{itemize}
 	\item elementare Symbolen von Maschine $A$, $B_1,B_2,...,B_m \in \Sigma_B$
-	\item $4mn$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
+	\item $2\cdot2\cdot m \cdot n$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
 	\begin{itemize}
 	\item $m =$ Symbole von $A, |\Sigma_A|$
 	\item $n =$ Zustände von $A, |Q_A|$
@@ -135,7 +134,7 @@ Nr. &\textbf{Symbol} & \textbf{Zustand $\Rightarrow$} & \textbf{Symbol} & \textb
 \\
 \bigskip
 zusätzlich erhält Maschine $B$ für jeden Übergang in $A :$\\
- 
+\bigskip
 (6) $(A_i,q_j) \to (A_k,q_l,{R \atop L}) \Rightarrow (B_{i,j,-,x},\alpha) \to (B_{k,l,+,{R \atop L} }),{\beta \atop \alpha},{R \atop L}$\\
 
 
@@ -167,7 +166,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\frame{\frametitle{Beispiel}
 	Maschine $B$:\\
 	\bigskip
-	\begin{tabular}{c|c| c}
+	\begin{tabular}{c||c|c}
 	\textbf{Ausgangssituation} & \textbf{Übergangsfunktion} & \textbf{Gleichung}\\
 	\\
 	$...|\underbrace{B_{3,7,-,x}}|B_{13}|...$ &

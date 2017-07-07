@@ -1,0 +1,8 @@
+\contentsline {paragraph}{Abstract}{1}
+\contentsline {section}{\numberline {1}Einf\IeC {\"u}hrung}{1}
+\contentsline {section}{\numberline {2}Wissenschaftliche Arbeiten}{1}
+\contentsline {section}{\numberline {3}Funktionalit\IeC {\"a}t von \LaTeX }{1}
+\contentsline {subsection}{\numberline {3.1}Graphen}{1}
+\contentsline {paragraph}{}{1}
+\contentsline {paragraph}{}{2}
+\contentsline {subsection}{\numberline {3.2}Pseudocode}{2}
