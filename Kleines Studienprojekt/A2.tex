@@ -12,6 +12,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[german]{babel}
+\usepackage[]{csquotes}
 
 \usepackage{amsmath}
 \usepackage{tikz, wasysym}
@@ -93,8 +94,8 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
 	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
 	Maschine B besitzt:
 \begin{itemize}
-	\item elementare Symbolen von Maschine $A$, $B_1,B_2,...,B_m \in \Sigma_B$
-	\item $2\cdot2\cdot m \cdot n$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
+	\item elementare Symbolen von Maschine $A$:  $B_1,B_2,...,B_m \in \Sigma_B$
+	\item $m\cdot n \cdot 2 \cdot 2$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
 	\begin{itemize}
 	\item $m =$ Symbole von $A, |\Sigma_A|$
 	\item $n =$ Zustände von $A, |Q_A|$
@@ -125,7 +126,7 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
 \hline
 (3) & $B_{i,j,-,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j+1),-,x}$  & $\alpha$ & $x\in \{ R,L \}$\\
 \hline
-(4) & $B_{i,j,+,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j-1),-,x}$  & $\beta$ & $x\in \{ R,L \}$\\
+(4) & $B_{i,j,+,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j-1),+,x}$  & $\beta$ & $x\in \{ R,L \}$\\
 \hline
 (5) & $B_{i,1,+,x}$ & $\alpha$ oder $\beta$  & $B_i$  & $\alpha$ & $x\in \{ R,L \}$\\
 
@@ -191,13 +192,54 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\hline
 	$...|B_{8,1,+,R}|\underbrace{B_{13,3,-,L}}|...$ & $\delta(B_{13,3,-,L},\beta) = (B_{13,4,-,L},\alpha,L)$ & $(3)$\\
 	\hline
-	$...|\underbrace{B_{8,1,+,R}}|B_{13,4,-,L}|...$ & $\delta(B_{8,1,+,R},\alpha) = (B_{8},\beta,R)$ & $(5)$\\
+	$...|\underbrace{B_{8,1,+,R}}|B_{13,4,-,L}|...$ & $\delta(B_{8,1,+,R},\alpha) = (B_{8},\alpha,R)$ & $(5)$\\
 	\hline
-	$...|B_{8}|\underbrace{B_{13,4,-,L}}|...$ & $\dots$ & $(6)$\\
+	$...|B_{8}|\underbrace{B_{13,4,-,L}}|B_{x}|...$ & $\dots$ & $(6)$\\
 	\end{tabular}
 	}
+	
 	\section{Unmöglichkeit einer universellen Turingmaschine mit einem Zustand}
-	\frame{\frametitle{die quadratwurzel von 2 mit nur einem Zustand berechnen}
+	\frame{\frametitle{die Quadratwurzel von $2$ mit nur einem Zustand berechnen}
+	Beweis per () von Schannon:\\
+	Annahme: es existiert eine universelle Turingmaschine mit nur einem Zustand.\\
+	\bigskip
+	$\sqrt{2}$ ist turingberechenbar $\Rightarrow$ eine $UTM$ kann $\sqrt{2}$ berechnen $\Rightarrow$ eine $TM$ mit einem Zustand kann $\sqrt{2}$ berechnen.
+	}
+	
+	
+	\frame{\frametitle{die Quadratwurzel von $2$ mit nur einem Zustand berechnen}
+	Fall $1:$ doppelt unendliches Band
+	\begin{itemize}
+	\item $1.1:$ Lesekopf liest $\Square \Rightarrow$ Lesekopf bleibt im $\Square$-Bereich
+	\item $1.2:$ Lesekopf verlässt $\Square$
+	\begin{itemize}
+	\item $1.2.1:$ Lesekopf verlässt $\Square$ nach Links
+	\begin{itemize}
+	\item $1.2.1.1$ linke unendliche Seite des Bandes wird nicht betreten
+	\item $1.2.1.2$ linke unendliche Seite des Bandes wird betreten
+	\end{itemize}
+	\item $1.2.2:$ Lesekopf verlässt $\Square$ nach Rechts
+	\end{itemize}
+	\end{itemize}
+
+	
+	%1.1
+	$1.1$ Die $TM$ wird nie mehr als ein $\Square$ der Eingabe verändern $\Rightarrow$ das Eingabeband ist nur auf einem endlichen Teil beschrieben $\Rightarrow$ das Band kann nach der Bearbeitung nicht $\sqrt{2}$ enthalten.
+	
+	$1.2.1.1$ Die $TM$ betritt nur eine Seite des Bandes $\rightarrow$ wird in Fall $2$ behandelt
+	
+	$1.2.1.2$ Die $TM$ geht unendlich weit nach Links $\Rightarrow$ linke Seite des Bandes wird mit konstantem Symbol beschrieben und rechte unendliche Seite des Bandes nie betreten $\Rightarrow$ Band kann nach der Bearbeitung nicht $\sqrt{2}$ enthalten.
+	
+	$1.2.2$ analog zu $1.2.1$.	
+	}
+	
+	\frame{\frametitle{die Quadratwurzel von $2$ mit nur einem Zustand berechnen}
+	Fall $2:$ einseitig unendliches Band
+	Annahe: Band ist rechts der Eingabe unendlich.
+	Beweishilfe: \enquote{\textit{reflection number}}
+		
+	}
+	
 	
 	
 	

@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[10pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsrefs}
 \usepackage{tikz, wasysym}
@@ -7,17 +7,20 @@
 \usepackage[]{csquotes}
 
 \author{Sven Fiergolla}
-\title{Research
-Methods \& wissenschaftliches Arbeiten mit \LaTeX}
+\title{Research Methods \& wissenschaftliches Arbeiten mit \LaTeX}
 \date{\today}
 
+%TODOs: fix empfy last page
+%		fill placeholher
+
 \begin{document}
- 
 \maketitle
 
 \paragraph{Abstract}
-Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten als solches, sowie den dabei notwendigen Einsatz von \LaTeX \ zur Ausarbeitung.\par
+Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten als solches, sowie den dabei notwendigen Einsatz von \LaTeX\  zur Ausarbeitung.
+\par
 \tableofcontents
+\bigskip
 %\pagebreak
 %\chapter{Wissenschaftliche Arbeiten}
 
@@ -25,6 +28,7 @@ Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten
 \subsection{Gründe für die Publikaton}
 \paragraph{}
 Wissenschaftler haben verschiedene Beweggründe für die Veröffentlichung ihrer Resultate aus Forschung, Kongressen oder ähnlichem:
+\par
 \begin{itemize}
 \item den Zeitpunkt einer Erkenntnis zu dokumentieren
 \item die Ergebnisse der Arbeit zu teilen und sie zitierbar zu machen
@@ -33,31 +37,52 @@ Wissenschaftler haben verschiedene Beweggründe für die Veröffentlichung ihrer
 \item sich in der allgemeinen Öffentlichkeit bekannt zu machen
 \end{itemize}
 \par
+\paragraph{}
+Dazu verfassen sie sogenannte \enquote{Paper}, eine strukturierte Verschriftlichung der Resultate als wissenschaftliche Arbeit, zur Veröffentlichung.
+\par
 
 \subsection{Aufbau einer Arbeit}
 \paragraph{}
-Der grudsätzliche Aufbau einer wissenschaflichen Arbeit umfasst:
+Der grundsätzliche Aufbau einer wissenschaflichen Arbeit umfasst:
 \begin{itemize}
 \item den Titel, die Authoren und andere übergeordnete Informationen (Affiliation, Datum etc.)
 \item ein Abstract (eine allgemeine Zusammenfassung)
 \item eine Einführung mit den Grundlagen der Fragestellung
-\item Ablauf der Forschung/konferenz
-\item technische Details
-\item Conclusion (Fazit) und fukünftige Aspekte
+\item Ablauf der Forschung/Konferenz
+\item technische Details/Beweis der Resultate
+\item Conclusion (Fazit) und zukünftige Aspekte
 \item References (Literaturverzeichnis)
 \item Author Contributions () und Conflict of Interests ()
 \end{itemize}
+\par
+
+\paragraph{}
+
 
 
 \section{Wissenschaftliche Arbeiten}
 \subsection{Die \textit{DBLP}}
 1
+
 \subsection{Research Methods}
 2
-\subsection{Google Scholar}
+
+\subsection{TCS Magazin}
+%TODO
 3
+
+\subsection{Google Scholar}
+\paragraph{}
+Das zunehmend an Bedeutung gewinnende \textit{Google Scholar} dient als öffentliche Suchmaschine für wissenschaftliche Arbeiten und andere Veröffentlichungen. Zudem ist sichtbar, wie häufig ein Paper von anderen zitiert wurde.
+\par
+%TODO: insert picture
+
+
 \subsection{Der \textit{Ipact-Factor}}
-4
+
+
+
+
 %\chapter{\LaTeX}
 \section{Funktionalität von \LaTeX}
 \subsection{Allgemeine Funktionalität}
@@ -135,5 +160,5 @@ Der grudsätzliche Aufbau einer wissenschaflichen Arbeit umfasst:
 
 \par
 \end{algorithm}
-
+%TODO:fix empty last page
 \end{document}

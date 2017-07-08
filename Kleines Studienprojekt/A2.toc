@@ -4,3 +4,4 @@
 \beamer@sectionintoc {2}{universelle Turingmaschinen}{4}{0}{2}
 \beamer@sectionintoc {3}{Turingaschine mit zwei Zust\IeC {\"a}nden}{5}{0}{3}
 \beamer@sectionintoc {4}{Beispiel}{8}{0}{4}
+\beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{10}{0}{5}
