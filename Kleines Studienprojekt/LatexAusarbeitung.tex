@@ -7,25 +7,62 @@
 \usepackage[]{csquotes}
 
 \author{Sven Fiergolla}
-\title{Wissenschaftliches Arbeiten mit \LaTeX}
+\title{Research
+Methods \& wissenschaftliches Arbeiten mit \LaTeX}
 \date{\today}
 
 \begin{document}
  
 \maketitle
-%\pagebreak
-\tableofcontents
 
-%\chapter{Wissenschaftliche Arbeiten}
 \paragraph{Abstract}
-Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten als solches, sowie den dabei notwendigen Einsatz von \LaTeX \ zur Ausarbeitung.
+Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten als solches, sowie den dabei notwendigen Einsatz von \LaTeX \ zur Ausarbeitung.\par
+\tableofcontents
+%\pagebreak
+%\chapter{Wissenschaftliche Arbeiten}
+
 \section{Einführung}
+\subsection{Gründe für die Publikaton}
+\paragraph{}
+Wissenschaftler haben verschiedene Beweggründe für die Veröffentlichung ihrer Resultate aus Forschung, Kongressen oder ähnlichem:
+\begin{itemize}
+\item den Zeitpunkt einer Erkenntnis zu dokumentieren
+\item die Ergebnisse der Arbeit zu teilen und sie zitierbar zu machen
+\item sich im eigenen Fach einen Ruf zu verschaffen
+\item Geld durch die Veröffentlichung zu erhalten \textit{(Tantieme)}
+\item sich in der allgemeinen Öffentlichkeit bekannt zu machen
+\end{itemize}
+\par
+
+\subsection{Aufbau einer Arbeit}
+\paragraph{}
+Der grudsätzliche Aufbau einer wissenschaflichen Arbeit umfasst:
+\begin{itemize}
+\item den Titel, die Authoren und andere übergeordnete Informationen (Affiliation, Datum etc.)
+\item ein Abstract (eine allgemeine Zusammenfassung)
+\item eine Einführung mit den Grundlagen der Fragestellung
+\item Ablauf der Forschung/konferenz
+\item technische Details
+\item Conclusion (Fazit) und fukünftige Aspekte
+\item References (Literaturverzeichnis)
+\item Author Contributions () und Conflict of Interests ()
+\end{itemize}
+
 
 \section{Wissenschaftliche Arbeiten}
-
-
+\subsection{Die \textit{DBLP}}
+1
+\subsection{Research Methods}
+2
+\subsection{Google Scholar}
+3
+\subsection{Der \textit{Ipact-Factor}}
+4
 %\chapter{\LaTeX}
 \section{Funktionalität von \LaTeX}
+\subsection{Allgemeine Funktionalität}
+
+\subsection{Vorteile gegenüber \textit{WYSIWYG-Editoren}}
 \subsection{Graphen}
 \paragraph{}
 1.Graph
@@ -48,6 +85,7 @@ Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten
 	\path[-] (1) edge node {e} (3);
 	
 	\end{tikzpicture}
+\par
 \paragraph{}
 2.Graph
 	
@@ -73,26 +111,29 @@ Dies ist eine Zusammenfassung über die Enstehung von wissenschftlichen Arbeiten
 	\path[-] (4) edge node {} (6);
 	
 	\end{tikzpicture}
-	
+\par
 \subsection{Pseudocode}
-
+\paragraph{}
 \begin{algorithm}[H]
-\textbf{begin}\\
+
  $q:=q_0$\\
  \For{$j:=1$ \KwTo $n$}{
  \While{$g[q,s_j]=$fail}{
-  $q:=h[q]$\\
+  $q:=h[q]$\\}
   \If{q is in F}{\KwRet{\enquote{yes}}
 
-   }
+   
  }
- \KwRet{\enquote{no}}
+
  }
+  \KwRet{\enquote{no}}
+ \par
+ \bigskip
  
+ \paragraph{}
  \caption{Fig. 9. The Aho-Corasik algorithm for matching multiple keywords}
+
+\par
 \end{algorithm}
-
-
-
 
 \end{document}

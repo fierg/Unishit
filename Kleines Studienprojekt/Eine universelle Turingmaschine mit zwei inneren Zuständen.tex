@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage{amsrefs}
 \usepackage{amsmath,wasysym}
+\usepackage[]{csquotes}
 
 
 \author{Sven Fiergolla}
@@ -61,7 +62,7 @@ Im folgenden wird die Umwandlung einer beliebigen Turingmaschine A in eine Turin
 
 Aus einer beliebigen Turingmaschine A mit $\mathbf{|Q| = n}$ Zuständen sowie $\mathbf{|\Gamma| = m}$ Bandsymbolen, konstruieren wir eine Maschine B mit zwei Zuständen und höchstens $4mn + m$ Symbolen. Maschine B handelt im wesentlichen exakt wie Maschine A, überträgt die Informtion des aktuellen Zustandes jedoch über die Symbole des aktuellen und folgenden Bandsymbols, da diese Information auch in die nächste Zelle des Bands übertragen werden muss, die Maschine aber nur zwei Zustände hat.
 
-Wechselt die Turingmaschine A nach dem besuchen eines Feldes in den Zustand 4, wird diese Information über sogenannte \textit{"bouncing operations"}, also hin- und herspringen zwischen den beiden Feldern übertragen. Der gewünschte Zustand wird durch incrementieren und decrementieren der speziellen Symbole erreicht. Nach dem 4. Springen ist der neue Zustand in das Symbol des folgenden Feldes übertragen.
+Wechselt die Turingmaschine A nach dem besuchen eines Feldes in den Zustand 4, wird diese Information über sogenannte \textit{\enquote{bouncing operations}}, also hin- und herspringen zwischen den beiden Feldern übertragen. Der gewünschte Zustand wird durch incrementieren und decrementieren der speziellen Symbole erreicht. Nach dem 4. Springen ist der neue Zustand in das Symbol des folgenden Feldes übertragen.
 
 \subsection{Konstruktion}
 

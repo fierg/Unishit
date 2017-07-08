@@ -1,2 +1,6 @@
 \beamer@endinputifotherversion {3.36pt}
 \select@language {german}
+\beamer@sectionintoc {1}{Einf\IeC {\"u}hrung}{2}{0}{1}
+\beamer@sectionintoc {2}{universelle Turingmaschinen}{4}{0}{2}
+\beamer@sectionintoc {3}{Turingaschine mit zwei Zust\IeC {\"a}nden}{5}{0}{3}
+\beamer@sectionintoc {4}{Beispiel}{8}{0}{4}

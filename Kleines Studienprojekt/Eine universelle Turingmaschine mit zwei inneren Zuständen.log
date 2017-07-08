@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  7 JUL 2017 15:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  8 JUL 2017 21:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -397,34 +397,65 @@ Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
 LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 (Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2016/01/31 v5.1g context-sensitive quotations (JAW)
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count99
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks21
+)
+\csq@reset=\count100
+\csq@gtype=\count101
+\csq@glevel=\count102
+\csq@qlevel=\count103
+\csq@maxlvl=\count104
+\csq@tshold=\count105
+\csq@ltx@everypar=\toks22
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2016/01/31 v5.1g csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... none found.
+
 (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux)
 \openout1 = `"Eine universelle Turingmaschine mit zwei inneren Zuständen.aux"'
 .
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Try loading font information for U+wasy on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 14.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-Overfull \hbox (48.69601pt too wide) in paragraph at lines 21--24
+Overfull \hbox (48.69601pt too wide) in paragraph at lines 22--25
 \OT1/cmr/m/n/12 einem \OT1/cmr/m/it/12 Steuerungse-le-ment\OT1/cmr/m/n/12 , h^^
 ?aufig beschrieben durch eine (par-tielle) []Ubergangsfunktion.
  []
 
 
-Overfull \hbox (17.09367pt too wide) in paragraph at lines 28--29
+Overfull \hbox (17.09367pt too wide) in paragraph at lines 29--30
 \OT1/cmr/m/n/12 Formal definieren wir die Tur-ing-mas-chine als Sep-tu-pel $[]$
 
  []
@@ -432,26 +463,26 @@ Overfull \hbox (17.09367pt too wide) in paragraph at lines 28--29
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (3.21017pt too wide) in paragraph at lines 62--63
+Overfull \hbox (3.21017pt too wide) in paragraph at lines 63--64
 []$ \OT1/cmr/m/n/12 Bandsym-bolen, kon-stru-ieren wir eine Mas-chine B mit zwei
  Zust^^?anden
  []
 
 
-Overfull \hbox (20.13602pt too wide) in paragraph at lines 64--65
+Overfull \hbox (20.13602pt too wide) in paragraph at lines 65--66
 \OT1/cmr/m/n/12 gew^^?unschte Zu-s-tand wird durch in-cre-men-tieren und decre-
 men-tieren der speziellen
  []
 
 [2] [3] (./Eine universelle Turingmaschine mit zwei inneren Zuständen.aux) ) 
 Here is how much of TeX's memory you used:
- 1332 strings out of 493029
- 14248 string characters out of 6136234
- 72600 words of memory out of 5000000
- 4896 multiletter control sequences out of 15000+600000
+ 2182 strings out of 493029
+ 26587 string characters out of 6136234
+ 97911 words of memory out of 5000000
+ 5730 multiletter control sequences out of 15000+600000
  12182 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,6n,20p,579b,189s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,6n,20p,850b,191s stack positions out of 5000i,500n,10000p,200000b,80000s
 </
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/tex
@@ -464,7 +495,7 @@ amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/wasy2-ps/was
 y10.pfb>
 Output written on "Eine universelle Turingmaschine mit zwei inneren Zuständen.
-pdf" (3 pages, 109026 bytes).
+pdf" (3 pages, 109335 bytes).
 PDF statistics:
  54 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream

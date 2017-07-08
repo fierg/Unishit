@@ -29,9 +29,9 @@
 
 \begin{document}
 	\frame{\maketitle}
-	
+	%\tableofcontents
 
-	
+	\section{Einführung}
 	\begin{frame}
 		
 	\frametitle{Einführung}
@@ -82,13 +82,13 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
 \end{tikzpicture}
 	
 }
-	
+	\section{universelle Turingmaschinen}
 	\frame{\frametitle{Universelle Turingmaschinen}
-		Formal ist eine universelle Turingmaschine eine Maschine $UTM$, die eine Eingabe $w|x$ liest. Das Wort $w$ ist hierbei eine  die Beschreibung einer Turingmaschine $M_w$, die zu einer bestimmten Funktion mit Eingabe $x$ die Ausgabe berechnet. $UTM$ simuliert also das Verhalten von $\mathbb{M_{w}}$ mit Hilfe der Funktionsbeschreibung $w$ und der Eingabe $x$.
+		Formal ist eine universelle Turingmaschine eine Maschine $UTM$, die eine Eingabe $w|x$ liest. Das Wort $w$ ist hierbei eine  die Beschreibung einer Turingmaschine $M_{w}$, die zu einer bestimmten Funktion mit Eingabe $x$ die Ausgabe berechnet. $UTM$ simuliert also das Verhalten von $M_{w}$ mit Hilfe der Funktionsbeschreibung $w$ und der Eingabe $x$.
 	}
 	
 	
-	
+	\section{Turingaschine mit zwei Zuständen}
 	\frame{\frametitle{Konstruktion}
 	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
 	Maschine B besitzt:
@@ -113,21 +113,21 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
 	Um die Information des aktuellen Zustands nach bearbeiten eines Symbols in der nächsten Zelle zur Verfügung zu haben, auch wenn die $TM$ $B$ nur zwei Zustände hat, wird diese in den Symbolen gespeichert (Index $n$) und über die sogenannte \textit{bouncing operation} in die nächste Zelle übertragen.
 	}
 	
-	\frame{\frametitle{Übergange}
+	\frame{\frametitle{Übergänge}
 	\begin{center}
 	\begin{tabular}{c c|c||c|c|c}
 
-Nr. &\textbf{Symbol} & \textbf{Zustand $\Rightarrow$} & \textbf{Symbol} & \textbf{Zustand} &\textbf{Richtung} \\
+\textbf{Nr.}&\textbf{Symbol} & \textbf{Zustand $\Rightarrow$} & \textbf{Symbol} & \textbf{Zustand} &\textbf{Richtung} \\
 \hline
 (1) & $B_i$ & $\alpha$  & $B_{i,1,-,R}$  & $\alpha$ & $R$\\
 \hline
 (2) & $B_i$ & $\beta$  & $B_{i,1,-,L}$  & $\alpha$ & $L$\\
 \hline
-(3) & $B_{i,j,-,x}$ & $\alpha$ or $\beta$  & $B_{i,(j+1),-,x}$  & $\alpha$ & $x\in \{ R,L \}$\\
+(3) & $B_{i,j,-,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j+1),-,x}$  & $\alpha$ & $x\in \{ R,L \}$\\
 \hline
-(4) & $B_{i,j,+,x}$ & $\alpha$ or $\beta$  & $B_{i,(j-1),-,x}$  & $\beta$ & $x\in \{ R,L \}$\\
+(4) & $B_{i,j,+,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j-1),-,x}$  & $\beta$ & $x\in \{ R,L \}$\\
 \hline
-(5) & $B_{i,1,+,x}$ & $\alpha$ or $\beta$  & $B_i$  & $\alpha$ & $x\in \{ R,L \}$\\
+(5) & $B_{i,1,+,x}$ & $\alpha$ oder $\beta$  & $B_i$  & $\alpha$ & $x\in \{ R,L \}$\\
 
 
 \end{tabular}
@@ -135,13 +135,16 @@ Nr. &\textbf{Symbol} & \textbf{Zustand $\Rightarrow$} & \textbf{Symbol} & \textb
 \bigskip
 zusätzlich erhält Maschine $B$ für jeden Übergang in $A :$\\
 \bigskip
-(6) $(A_i,q_j) \to (A_k,q_l,{R \atop L}) \Rightarrow (B_{i,j,-,x},\alpha) \to (B_{k,l,+,{R \atop L} }),{\beta \atop \alpha},{R \atop L}$\\
+(6) $\delta(A_i,q_j) \to (A_k,q_l,{R \atop L}) \Rightarrow \delta(B_{i,j,-,x},\alpha) \to (B_{k,l,+,{R \atop L} },{\beta \atop \alpha},{R \atop L})$\\
 
 
 \end{center}
 }
-
-	\frame{\frametitle{Beispiel}
+\section{Beispiel}
+	\frame{\frametitle{Beispiel Maschine $A$}
+	\begin{center}
+	
+	
 	Maschine $A$:\\
 	\bigskip
 	$...|\underbrace{A_3}|A_{13}|...$
@@ -157,28 +160,44 @@ zusätzlich erhält Maschine $B$ für jeden Übergang in $A :$\\
     (1) edge                    node {$A_3\:A_8\:R$} (2);
 
 \end{tikzpicture}
-\\
+
+
+
 \bigskip
 $...|A_8|\underbrace{A_{13}}|...$
-
+\end{center}
 	}
 	
-	\frame{\frametitle{Beispiel}
-	Maschine $B$:\\
-	\bigskip
-	\begin{tabular}{c||c|c}
-	\textbf{Ausgangssituation} & \textbf{Übergangsfunktion} & \textbf{Gleichung}\\
+	
+	%TODO: nach und nach einblenden
+	\frame{\frametitle{Beispiel Maschine $B$}
+	\begin{tabular}{c||c c}
+	\textbf{Bandinhalt} & \textbf{Übergangsfunktion} & \textbf{Gleichung}\\ \hline
 	\\
 	$...|\underbrace{B_{3,7,-,x}}|B_{13}|...$ &
-	$\delta(B_{3,7,-,x},\alpha) = (B_{8,4,+,R},\beta,R)$ &  $(6)$\\
+	$\delta(B_{3,7,-,x},\alpha) = (B_{8,4,+,R},\beta,R)$ &  $(6)$\\ 
 	\hline
-	$...|B_{8,4,+,R}|\underbrace{B_{13}}|...$ & & \\
-	
+	$...|B_{8,4,+,R}|\underbrace{B_{13}}|...$ & $\delta(B_{13},\beta) = (B_{13,1,-,L},\alpha,L)$ & $(2)$\\
+	\hline
+	$...|\underbrace{B_{8,4,+,R}}|B_{13,1,-,L}|...$ & $\delta(B_{8,4,+,R},\alpha) = (B_{8,3,+,R},\beta,R)$ & $(4)$\\
+	\hline
+	$...|B_{8,3,+,R}|\underbrace{B_{13,1,-,L}}|...$ &$\delta(B_{13,1,-,L},\beta) = (B_{13,2,-,L},\alpha,L)$  & $(3)$\\
+	\hline
+	$...|\underbrace{B_{8,3,+,R}}|B_{13,2,-,L}|...$ & $\delta(B_{8,3,+,R},\alpha) = (B_{8,2,+,R},\beta,R)$ & $(4)$\\
+	\hline
+	$...|B_{8,2,+,R}|\underbrace{B_{13,2,-,L}}|...$ & $\delta(B_{13,2,-,L},\beta) = (B_{13,3,-,L},\alpha,L)$ & $(3)$\\
+	\hline
+	$...|\underbrace{B_{8,2,+,R}}|B_{13,3,-,L}|...$ & $\delta(B_{8,2,+,R},\alpha) = (B_{8,1,+,R},\beta,R)$ & $(4)$\\
+	\hline
+	$...|B_{8,1,+,R}|\underbrace{B_{13,3,-,L}}|...$ & $\delta(B_{13,3,-,L},\beta) = (B_{13,4,-,L},\alpha,L)$ & $(3)$\\
+	\hline
+	$...|\underbrace{B_{8,1,+,R}}|B_{13,4,-,L}|...$ & $\delta(B_{8,1,+,R},\alpha) = (B_{8},\beta,R)$ & $(5)$\\
+	\hline
+	$...|B_{8}|\underbrace{B_{13,4,-,L}}|...$ & $\dots$ & $(6)$\\
 	\end{tabular}
-
-	
-	
 	}
+	\section{Unmöglichkeit einer universellen Turingmaschine mit einem Zustand}
+	\frame{\frametitle{die quadratwurzel von 2 mit nur einem Zustand berechnen}
 	
 	
 	
