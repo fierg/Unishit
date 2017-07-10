@@ -244,8 +244,8 @@ $...|A_8|\underbrace{A_{13}}|...$
 	platziere den Lesekopf auf dem ersten $\Square$ nach der Eingabe:\\
 	\begin{itemize}
 	\item Lesekopf wird sich zur Eingabe hin bewegen
-	\item $...|1|0|\underbrace{\Square}|\Square$ $\rightarrow$ 
-	$...|1|\underbrace{0}|x|\Square$
+	\item $||...|1|0|\underbrace{\Square}|\Square$ $\rightarrow$ 
+	$||...|1|\underbrace{0}|x|\Square$
 	\end{itemize}
 	wenn der Lesekopf die Eingabe betritt, platziere ihn wieder auf dem ersten $\Square$ 
 	
@@ -256,24 +256,25 @@ $...|A_8|\underbrace{A_{13}}|...$
 	
 	platziere den Lesekopf am Anfang der Eingabe
 	\begin{itemize}
-	\item $|\Square|\underbrace{A_1}|A_2|...|A_m|\Square|\Square|...$
+	\item $||\underbrace{A_1}|A_2|...|A_m|\Square|\Square|...$
 	\end{itemize}
 	
 	der Lesekopf wird die Eingabe verlassen
 	\begin{itemize}
-	\item $|\Square|A_1|A_2|...|A_m|\underbrace{\Square}|\Square|...$
+	\item $||A_1|A_2|...|A_m|\underbrace{\Square}|\Square|...$
 	\end{itemize}	 
 	
 	platziere den Lesekopf wieder am Anfang
 	\begin{itemize}
-	\item $|\Square|\underbrace{A_1}|A_2|...|A_m|A_x|\Square|\Square|...$
+	\item $||\underbrace{A_1}|A_2|...|A_m|A_x|\Square|\Square|...$
 	\end{itemize}
 	
 	dies nennen wir die \textit{reflection number} für $\sqrt{2} =:S$ 
 	}
 	
 	\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
-	Fall $2:$ einseitig unendliches Band
+	Fall $2:$ einseitig unendliches Band\\
+	Annahme: Band nach Rechts unendlich, Eingabe steht am Beginn des Bandes.
 	\begin{itemize}
 	\item $2.1$ $S<\inf$ und $S > R$
 	\end{itemize}
