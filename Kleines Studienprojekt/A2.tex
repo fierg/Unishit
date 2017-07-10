@@ -16,6 +16,7 @@
 
 \usepackage{amsmath}
 \usepackage{tikz, wasysym}
+\usepackage{graphicx}
 \usetikzlibrary{automata,positioning}
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
@@ -32,16 +33,14 @@
 	\frame{\maketitle}
 	%\tableofcontents
 
+
+
 	\section{Einführung}
-	\begin{frame}
-		
-	\frametitle{Einführung}
+	\frame{\frametitle{Einführung}
 Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\Gamma,q_0,\delta,\Square,F)} $
  wobei:
 
 \begin{description}
-
-
  \item $\mathbf{ Q = }$ die endliche Zustandsmenge
  \item $\mathbf{ \Sigma = }$ das endliche Eingabealphabet
  \item $\mathbf{ \Gamma = }$ das endliche Bandalphabet und es gilt $\mathbf{\Sigma\subset\Gamma}$
@@ -49,11 +48,11 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
  \item $\mathbf{ \delta = }$ die (partielle) Überführungsfunktion
  \item $\mathbf{ \square = }$ steht für das leere Feld (Blank)
  \item $\mathbf{F = }$ die Menge der akzeptierenden Endzustände
-
 \end{description}	
-	
-	
-	\end{frame}
+}
+
+\frame{\frametitle{Beislpiel}
+\includegraphics[scale=0.8]{TMKonzept.png}}
 	
 	\frame{\frametitle{Beispiel}
 	
@@ -199,15 +198,21 @@ $...|A_8|\underbrace{A_{13}}|...$
 	}
 	
 	\section{Unmöglichkeit einer universellen Turingmaschine mit einem Zustand}
-	\frame{\frametitle{die Quadratwurzel von $2$ mit nur einem Zustand berechnen}
+	\frame{\frametitle{$UTM$ mit nur einem Zustand unmöglich}
 	Beweis per () von Schannon:\\
 	Annahme: es existiert eine universelle Turingmaschine mit nur einem Zustand.\\
+	
+		\bigskip
+	$\sqrt{2}$ ist eine berechenbare irrationale Zahl und kann von einer $TM$ berechnet werden. Dazu muss die $TM$ kontinuierlich die Ziffern von $\sqrt{2}$ schreiben.
+	
 	\bigskip
 	$\sqrt{2}$ ist turingberechenbar $\Rightarrow$ eine $UTM$ kann $\sqrt{2}$ berechnen $\Rightarrow$ eine $TM$ mit einem Zustand kann $\sqrt{2}$ berechnen.
+	
+
 	}
 	
 	
-	\frame{\frametitle{die Quadratwurzel von $2$ mit nur einem Zustand berechnen}
+	\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
 	Fall $1:$ doppelt unendliches Band
 	\begin{itemize}
 	\item $1.1:$ Lesekopf liest $\Square \Rightarrow$ Lesekopf bleibt im $\Square$-Bereich
@@ -222,7 +227,6 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\end{itemize}
 	\end{itemize}
 
-	
 	%1.1
 	$1.1$ Die $TM$ wird nie mehr als ein $\Square$ der Eingabe verändern $\Rightarrow$ das Eingabeband ist nur auf einem endlichen Teil beschrieben $\Rightarrow$ das Band kann nach der Bearbeitung nicht $\sqrt{2}$ enthalten.
 	
@@ -233,12 +237,55 @@ $...|A_8|\underbrace{A_{13}}|...$
 	$1.2.2$ analog zu $1.2.1$.	
 	}
 	
-	\frame{\frametitle{die Quadratwurzel von $2$ mit nur einem Zustand berechnen}
-	Fall $2:$ einseitig unendliches Band
-	Annahe: Band ist rechts der Eingabe unendlich.
-	Beweishilfe: \enquote{\textit{reflection number}}
-		
+	\frame{\frametitle{\textit{reflection number}}
+	Fall $2:$ einseitig unendliches Band\\
+	Annahe: Band ist rechts der Eingabe unendlich.\\
+	Beweishilfe: \enquote{\textit{reflection number}}\\
+	platziere den Lesekopf auf dem ersten $\Square$ nach der Eingabe:\\
+	\begin{itemize}
+	\item Lesekopf wird sich zur Eingabe hin bewegen
+	\item $...|1|0|\underbrace{\Square}|\Square$ $\rightarrow$ 
+	$...|1|\underbrace{0}|x|\Square$
+	\end{itemize}
+	wenn der Lesekopf die Eingabe betritt, platziere ihn wieder auf dem ersten $\Square$ 
+	
+	wie oft man die Lesekopf so platzieren kann, nennt man \textit{reflection number}, $R \in N$
 	}
+	
+	\frame{\frametitle{\textit{reflection number} für $\sqrt{2}$}
+	
+	platziere den Lesekopf am Anfang der Eingabe
+	\begin{itemize}
+	\item $|\Square|\underbrace{A_1}|A_2|...|A_m|\Square|\Square|...$
+	\end{itemize}
+	
+	der Lesekopf wird die Eingabe verlassen
+	\begin{itemize}
+	\item $|\Square|A_1|A_2|...|A_m|\underbrace{\Square}|\Square|...$
+	\end{itemize}	 
+	
+	platziere den Lesekopf wieder am Anfang
+	\begin{itemize}
+	\item $|\Square|\underbrace{A_1}|A_2|...|A_m|A_x|\Square|\Square|...$
+	\end{itemize}
+	
+	dies nennen wir die \textit{reflection number} für $\sqrt{2} =:S$ 
+	}
+	
+	\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
+	Fall $2:$ einseitig unendliches Band
+	\begin{itemize}
+	\item $2.1$ $S<\inf$ und $S > R$
+	\end{itemize}
+
+	
+	$2.1$ nach einer endlichen Anzahl an Schritten ist der Lesekopf im Bereich der Eingabe \enquote{gefangen} $\Rightarrow$ Band ist nur auf endlichem Teil beschrieben. $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten.
+	
+	
+	
+	
+	}
+	
 	
 	
 	

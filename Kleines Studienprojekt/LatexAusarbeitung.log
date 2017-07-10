@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  8 JUL 2017 23:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  10 JUL 2017 13:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -920,38 +920,77 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (12.00043pt too wide) in paragraph at lines 72--74
+\OT1/cmr/m/n/10 g^^?anzlich die In-ter-essen des Konz-erns \  Merck", welches e
+in f^^?uhrendes Wissenschafts-
+ []
+
+[2] <GS1.png, id=23, 523.9575pt x 233.37187pt>
+File: GS1.png Graphic file (type png)
+ <use GS1.png>
+Package pdftex.def Info: GS1.png used on input line 87.
+(pdftex.def)             Requested size: 366.76775pt x 163.35919pt.
+
+Overfull \hbox (21.76775pt too wide) in paragraph at lines 87--88
+ [] 
+ []
+
+<ae.png, id=24, 1071.00125pt x 552.0625pt>
+File: ae.png Graphic file (type png)
+ <use ae.png>
+Package pdftex.def Info: ae.png used on input line 93.
+(pdftex.def)             Requested size: 321.30286pt x 165.62003pt.
+ [3 <./GS1.png>]
+Overfull \hbox (20.61171pt too wide) in paragraph at lines 98--98
+\OT1/cmr/m/n/10 Wis-senschaftlers in Fachkreisen und basiert auf den Zi-ta-tio-
+nen der Ver^^?offentlichungen
+ []
+
+
+Overfull \hbox (13.51909pt too wide) in paragraph at lines 98--98
+\OT1/cmr/m/n/10 des Wis-senschaftlers. Ist eine gro^^Ye An-zahl von Pub-likak-t
+io-nen eines Wissnschaflers
+ []
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 87.
- [2]
-Overfull \hbox (10.00002pt too wide) in paragraph at lines 142--162
+(Font)              <14.4> on input line 105.
+[4 <./ae.png>]
+Overfull \hbox (10.00002pt too wide) in paragraph at lines 163--183
  [] $[]$ 
  []
 
-[3] [4] (./LatexAusarbeitung.aux) ) 
+
+Overfull \hbox (0.14693pt too wide) in paragraph at lines 187--211
+ [] [] 
+ []
+
+[5] [6] (./LatexAusarbeitung.aux) ) 
 Here is how much of TeX's memory you used:
- 15320 strings out of 493029
- 298763 string characters out of 6136234
- 370574 words of memory out of 5000000
- 18561 multiletter control sequences out of 15000+600000
+ 15331 strings out of 493029
+ 298876 string characters out of 6136234
+ 375574 words of memory out of 5000000
+ 18570 multiletter control sequences out of 15000+600000
  11848 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,13n,66p,806b,679s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,15n,66p,806b,679s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on LatexAusarbeitung.pdf (4 pages, 146719 bytes).
+mbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti10.pfb>
+Output written on LatexAusarbeitung.pdf (6 pages, 309487 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 84 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 
