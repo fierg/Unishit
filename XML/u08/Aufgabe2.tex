@@ -11,6 +11,7 @@ Sven Fiergolla 1252732
 
 \paragraph{}
 $A)$\\
+\begin{center}
 \begin{tabular}{c||c|c|c|c|c|c}
 \textbf{TID} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} \\
 \hline \\
@@ -24,22 +25,47 @@ $A)$\\
 8 & 1 & 1 & 1 & 0 & 1 & 1 \\ \hline
 9 & 1 & 0 & 0 & 1 & 0 & 0 \\ \hline
 10 & 1 & 0 & 0 & 0 & 1 & 1 \\
-\end{tabular}\par
+\end{tabular}
+\end{center}\par
 
 \paragraph{}
 $B)$\\
+
 Aus einer $minfreq = 0,25$ resultieren folgende Itemsets:\\
 \bigskip
-\{A\},\{B\},\{C\},\{E\},\{F\},\{AC\},\{BF\},\{AE\},\{EF\},\{BE\}\par
+\begin{center}
+\{A\},\{B\},\{C\},\{E\},\{F\},\{AC\},\{BF\},\{AE\},\{EF\},\{BE\}
+\end{center}
+\par
+
 \paragraph{}
 $C)$\\
+Support =\\
 \begin{center}
-$Support = supp(\{A\}\rightarrow\{B,C\}) = supp(\{A\} \cup \{B,C\})$ \\
+$supp(\{A\}\rightarrow\{B,C\}) = supp(\{A\} \cup \{B,C\})$ \\
 = $supp(\{A,B,C\})$ =  $|\{t \in D $ : \textit{ $t$ enthält $X$}\}$|$ = $|\{t_1,t_8\}|$ = 2\\
 \bigskip
 $ Konfidenz = supp({\frac{supp(\{A,B,C\})}{supp(\{A\})})} = \frac{2}{6} = \frac{1}{3}$
 \end{center}\par
 
+\paragraph{}
+$D)$\\
+\bigskip\\
+$minsupp=2$\\
+\bigskip
+Startmenge $F_1$ = \{A,B,C,D,E,F\}\\
+Generiere $F_2$ = \textit{nicht nach $F_{k-1} \times F_k$ möglich}\\
+$C_2$ = \{\{AB\}, \{AC\}, \{AD\}, \{AE\}, \{AF\}, \{BC\}, \{BD\}, \{BE\}, \{BF\}, \{CD\}, \{CE\}, \{CF\}, \{DE\}, \{DF\}, \{EF\} \\
+\medskip
+$F_2$ = \{\{AB\},\{AC\},\{AF\},\{BC\},{BE\},\{BF\},\{CE\}
+
+
+
+
+
+
+
+\par
 
 
 
