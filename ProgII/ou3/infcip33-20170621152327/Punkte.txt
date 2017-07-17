@@ -1,0 +1,31 @@
+Sven Fiergolla 1252732: 12 / 20
+
+Aufgabe 1: 10 / 10
+
+Verteiltes Reset:
+
+MinenFegerClient:
+ok
+
+MinenFegerServer:
+ok
+
+MinenFegerServerClientThread:
+ok
+
+
+Aufgabe 2: 2 / 10
+
+ElapsedTimeUpdateThread:
+-1 Punkt: korrekte Bedingung der Schleife in run-Methode
+-2 Punkte: trialFrame.wait() inkl. Synchronisierung und while-Schleife
+-1 Punkt: Korrekten Wert auslesen und anzeigen
+
+PiTrialFrame:
+-1 Punkt: Variablen anlegen (GUI-Elemente, Thread) (Border?, Zeit-Panel
+wird nie hinzugefügt)
+-1 Punkt: elapsedTimeUpdateThread stoppen, falls existiert
+-1 Punkt: elapsedTimeUpdateThread neu erzeugen und starten (Erzeugung des
+Threads in der "init()" führt dazu, dass beim Start zwei ElapsedTimeUpdateThreads
+laufen...)
+-1 Punkt: interrupt() in "threadDone()"
