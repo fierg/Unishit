@@ -14,8 +14,8 @@ public class ReliableUDPHost {
 
 	public static final int WINDOW_SIZE = 5;
 	private static final int TIMEOUT_MIL = 5000;
-	private static final boolean DEBUG = true;
-	private static int messageCount;
+	private static final boolean DEBUG = false;
+	private static int measureSize;
 	private static int messageID = 0;
 	private static BlockingList<Integer> messagesSend = new BlockingList<>(5);
 	private static Map<Integer, Future> timers = new HashMap<Integer, Future>();
@@ -23,21 +23,21 @@ public class ReliableUDPHost {
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 3)
-			Usage("send UDP-Package from <my_port> to <peer_host> <peer_port>");
+			Usage("measure UDP-Package from <my_port> to <peer_host> <peer_port>");
 		switch (args[0].toLowerCase()) {
-		case "send":
-			if (args.length != 5)
-				Usage("Arguments: send <my_port> <peer_host> <peer_port>");
-			receiveNodeMeasureWindowOfMessages(Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-			messageCount = Integer.parseInt(args[4]);
-			System.out.println(messageCount);
-			break;
 		case "measure":
 			if (args.length < 5)
-				Usage("Arguments: measure <my_port> <peer_host> <peer_port> <messageCount>");
-			System.out.println("Start single message measure!");
-			messageCount = Integer.parseInt(args[4]);
-			receiveNodeMeasureSingle(Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
+				Usage("Arguments: measure <my_port> <peer_host> <peer_port> <measureSize>");
+			if (args.length == 5) {
+				System.out.println("Start single message measure!");
+				measureSize = Integer.parseInt(args[4]);
+				receiveNodeMeasureSingle(Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
+			} else if (args[5].equals("-w")) {
+				measureSize = Integer.parseInt(args[4]);
+				receiveNodeMeasureWindowOfMessages(Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
+			} else {
+				Usage("Arguments: measure <my_port> <peer_host> <peer_port> <measureSize> -w(optional) for sending multiple messages at once");
+			}
 			break;
 		case "console":
 			if (args.length != 3)
@@ -45,23 +45,27 @@ public class ReliableUDPHost {
 			Console(args[1], Integer.parseInt(args[2]));
 			break;
 		default:
-			System.err.println("First argument must be send");
+			System.err.println("First argument must be measure or console");
 
 		}
 	}
 
-	public static void receiveNodeMeasureWindowOfMessages(int my_port, String peer_host, int peer_port) throws IOException {
+	public static void receiveNodeMeasureWindowOfMessages(int my_port, String peer_host, int peer_port)
+			throws IOException {
 		System.out.printf("send messages from port <%d> to host <%s,%d>\n", my_port, peer_host, peer_port);
 		DatagramSocket my_socket = new DatagramSocket(my_port);
 		InetSocketAddress peer_address = new InetSocketAddress(peer_host, peer_port);
 		boolean keep_on_running = true;
 
-		sendTimedMessage(my_socket, peer_address, executorService, String.valueOf(0));
-		
-		if (DEBUG)
-			System.out.println("Send initial message");
+		System.out.println("Start measure");
+		long start = System.currentTimeMillis();
 
-		while (keep_on_running && messageID < messageCount) {
+		sendTimedMessage(my_socket, peer_address, executorService, String.valueOf(0));
+
+		if (DEBUG)
+			System.out.println("Sending initial message");
+
+		while (keep_on_running && messageID < measureSize) {
 
 			String message = Receive(my_socket);
 			if (DEBUG)
@@ -82,7 +86,7 @@ public class ReliableUDPHost {
 						timers.get(messageID).cancel(true);
 						timers.remove(messageID);
 						messagesSend.removeItem(messageID);
-						
+
 						message = String.valueOf(++messageID);
 						sendTimedMessage(my_socket, peer_address, executorService, message);
 					} else {
@@ -90,36 +94,42 @@ public class ReliableUDPHost {
 					}
 				} else {
 					System.err.println(message + " bad format!");
-					System.exit(1);
 				}
 			}
 
-
 		}
+		long duration = System.currentTimeMillis() - start;
+		Send(my_socket, peer_address, "stop");
 		my_socket.close();
+
+		System.out.println("\n" + messageID + " in " + String.valueOf(duration) + " milliseconds");
+		double bitsTransmitted = (Math.log10(measureSize) * Integer.SIZE);
+
+		System.out.println("transfer rate: " + bitsTransmitted / duration + " kb/s");
+		System.exit(0);
 
 	}
 
 	private static void sendTimedMessage(DatagramSocket my_socket, InetSocketAddress peer_address,
-			ExecutorService executorService,String message) throws IOException {
+			ExecutorService executorService, String message) throws IOException {
 		try {
 			messagesSend.put(messageID);
 			Send(my_socket, peer_address, message);
 		} catch (InterruptedException e2) {
 			e2.printStackTrace();
 		}
-		
+
 		Thread timer = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					Thread.sleep(TIMEOUT_MIL);
+					sendTimedMessage(my_socket, peer_address, executorService, message);
 				} catch (InterruptedException e1) {
-					if(DEBUG)System.out.println("timer " + message + " canceld!");
-				}
-				try {
-					Send(my_socket, peer_address, message);
+					if (DEBUG)
+						System.out.println("timer " + message + " canceld!");
 				} catch (IOException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -139,10 +149,10 @@ public class ReliableUDPHost {
 		if (DEBUG)
 			System.out.println("Send initial message");
 
-		long start = System.currentTimeMillis();
 		System.out.println("Start measure");
+		long start = System.currentTimeMillis();
 
-		while (keep_on_running && messageID < messageCount) {
+		while (keep_on_running && messageID < measureSize) {
 			String message = Receive(my_socket);
 			if (DEBUG)
 				System.out.printf("Received:\t <%s> \t\n", message, messageID);
@@ -151,7 +161,6 @@ public class ReliableUDPHost {
 				message = String.valueOf(++messageID);
 			} else {
 				System.err.println(message + "bad format");
-				System.exit(1);
 			}
 
 			Send(my_socket, peer_address, message);
@@ -161,12 +170,12 @@ public class ReliableUDPHost {
 		Send(my_socket, peer_address, "stop");
 		my_socket.close();
 
-		System.out.println("\n" + messageID + " in " + String.valueOf(duration)  + " milliseconds");
-		 double bitsTransmitted = (Math.log10(messageCount)* Integer.SIZE);
-		
-		System.out.println("transfer rate: " + bitsTransmitted/duration + " kb/s");
-		
-		}
+		System.out.println("\n" + messageID + " in " + String.valueOf(duration) + " milliseconds");
+		double bitsTransmitted = (Math.log10(measureSize) * Integer.SIZE);
+
+		System.out.println("transfer rate: " + bitsTransmitted / duration + " kb/s");
+
+	}
 
 	public static String Receive(DatagramSocket socket) throws IOException {
 		final int buffer_size = 1024;
