@@ -4,22 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class ReliableUDPHost {
 
-	private static final int WINDOW_SIZE = 5;
+	public static final int WINDOW_SIZE = 5;
 	private static final int TIMEOUT_MIL = 5000;
 	private static final boolean DEBUG = true;
 	private static int messageCount;
 	private static int messageID = 0;
-	private static List<Integer> messagesSend;
-	private static Map<Integer, Future> timers;
+	private static BlockingList<Integer> messagesSend = new BlockingList<>(5);
+	private static Map<Integer, Future> timers = new HashMap<Integer, Future>();
+	private static ExecutorService executorService = Executors.newFixedThreadPool(WINDOW_SIZE);
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 3)
@@ -30,6 +30,7 @@ public class ReliableUDPHost {
 				Usage("Arguments: send <my_port> <peer_host> <peer_port>");
 			receiveNodeMeasureWindowOfMessages(Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
 			messageCount = Integer.parseInt(args[4]);
+			System.out.println(messageCount);
 			break;
 		case "measure":
 			if (args.length < 5)
@@ -55,12 +56,12 @@ public class ReliableUDPHost {
 		InetSocketAddress peer_address = new InetSocketAddress(peer_host, peer_port);
 		boolean keep_on_running = true;
 
-		Send(my_socket, peer_address, String.valueOf(messageID));
+		sendTimedMessage(my_socket, peer_address, executorService, String.valueOf(0));
+		
 		if (DEBUG)
 			System.out.println("Send initial message");
 
-		ExecutorService executorService = Executors.newFixedThreadPool(WINDOW_SIZE);
-		while (keep_on_running) {
+		while (keep_on_running && messageID < messageCount) {
 
 			String message = Receive(my_socket);
 			if (DEBUG)
@@ -68,48 +69,64 @@ public class ReliableUDPHost {
 			switch (message.toLowerCase()) {
 			case "stop":
 				keep_on_running = false;
+				message = "stop";
 				break;
 			case "start":
 				message = String.valueOf(messageID);
+				sendTimedMessage(my_socket, peer_address, executorService, message);
 				break;
 			default:
 				if (message.startsWith("rak=")) {
-					if (message.split("=")[1].equals(String.valueOf(messageID))) {
+					int id = Integer.parseInt(message.split("=")[1]);
+					if (messagesSend.contains(id)) {
 						timers.get(messageID).cancel(true);
 						timers.remove(messageID);
+						messagesSend.removeItem(messageID);
+						
 						message = String.valueOf(++messageID);
+						sendTimedMessage(my_socket, peer_address, executorService, message);
 					} else {
-						//TODO
+						System.err.println("rak not in list!");
 					}
 				} else {
-					System.err.println(message + "bad format");
+					System.err.println(message + " bad format!");
 					System.exit(1);
 				}
 			}
-			Send(my_socket, peer_address, message);
-			Thread timer = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						Thread.sleep(TIMEOUT_MIL);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					try {
-						Send(my_socket, peer_address, String.valueOf(messageID));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			Future<?> future = executorService.submit(timer);
 
-			timers.put(messageID, future);
 
 		}
 		my_socket.close();
 
+	}
+
+	private static void sendTimedMessage(DatagramSocket my_socket, InetSocketAddress peer_address,
+			ExecutorService executorService,String message) throws IOException {
+		try {
+			messagesSend.put(messageID);
+			Send(my_socket, peer_address, message);
+		} catch (InterruptedException e2) {
+			e2.printStackTrace();
+		}
+		
+		Thread timer = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(TIMEOUT_MIL);
+				} catch (InterruptedException e1) {
+					if(DEBUG)System.out.println("timer " + message + " canceld!");
+				}
+				try {
+					Send(my_socket, peer_address, message);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		Future<?> future = executorService.submit(timer);
+
+		timers.put(messageID, future);
 	}
 
 	public static void receiveNodeMeasureSingle(int my_port, String peer_host, int peer_port) throws IOException {

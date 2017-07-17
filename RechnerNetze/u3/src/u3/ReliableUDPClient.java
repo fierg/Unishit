@@ -1,13 +1,14 @@
 package u3;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ReliableUDPClient {
 
 	private static final boolean debug = false;
+//	private static List<Integer> messagesReceived = new LinkedList<Integer>();
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 3)
@@ -35,29 +36,28 @@ public class ReliableUDPClient {
 				System.out.printf("Received:\t <%s> \t\n", message, messageID);
 			switch (message.toLowerCase()) {
 			case "stop":
+				System.out.println("recieved stop message!");
 				keep_on_running = false;
 				break;
 			case "start":
 				System.err.println("unable to start as Client");
 				break;
 			default:
-				if (messageID % 100 == 0)
-					System.out.print(".");
-				if (message.equals(String.valueOf(messageID))) {
+				if ((Integer.parseInt(message)+1) > messageID && Integer.parseInt(message) < (messageID + ReliableUDPHost.WINDOW_SIZE)) {
 					message = "rak=" + messageID;
+					messageID++;
+					Send(my_socket, peer_address, message);
 					break;
-				} else if (message.startsWith("nrak=")) {
-					System.out.println("received nrak");
+				} else {
+					System.err.println("message fail: received: "+ message);
 				}
 			}
-			messageID++;
-			Send(my_socket, peer_address, message);
 		}
 		my_socket.close();
 	}
 
 	public static String Receive(DatagramSocket socket) throws IOException {
-		final int buffer_size = 1024;
+		final int buffer_size = 2048;
 		byte[] buffer = new byte[buffer_size];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		socket.receive(packet);
@@ -78,8 +78,6 @@ public class ReliableUDPClient {
 		Send(my_socket, address, command);
 		my_socket.close();
 	}
-
-
 
 	private static void Usage(String s) {
 		System.err.println(s);
