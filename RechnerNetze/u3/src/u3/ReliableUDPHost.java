@@ -3,7 +3,9 @@ package u3;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -12,12 +14,14 @@ import java.util.concurrent.Future;
 
 public class ReliableUDPHost {
 
-	public static final int WINDOW_SIZE = 5;
+	private static final boolean DEBUG = true;
+	private static final int WINDOW_SIZE = 5;
 	private static final int TIMEOUT_MIL = 5000;
-	private static final boolean DEBUG = false;
+	public static final int PADDING_SIZE = 128;
+	
 	private static int measureSize;
 	private static int messageID = 0;
-	private static BlockingList<Integer> messagesSend = new BlockingList<>(5);
+	private static BlockingList<Integer> messagesSend = new BlockingList<>(WINDOW_SIZE);
 	private static Map<Integer, Future> timers = new HashMap<Integer, Future>();
 	private static ExecutorService executorService = Executors.newFixedThreadPool(WINDOW_SIZE);
 
@@ -134,6 +138,7 @@ public class ReliableUDPHost {
 				}
 			}
 		});
+		
 		Future<?> future = executorService.submit(timer);
 
 		timers.put(messageID, future);
@@ -182,12 +187,14 @@ public class ReliableUDPHost {
 		byte[] buffer = new byte[buffer_size];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		socket.receive(packet);
-		String message = new String(packet.getData(), 0, packet.getLength(), "UTF-8");
+		byte[] data = packet.getData();
+		data = Arrays.copyOfRange(data, 0, (data.length-PADDING_SIZE-1));
+		String message = new String(data, 0, data.length, "UTF-8");
 		return message;
 	}
 
 	public static void Send(DatagramSocket socket, InetSocketAddress receiver, String message) throws IOException {
-		byte[] buffer = message.getBytes("UTF-8");
+		byte[] buffer = concatenate((message).getBytes("UTF-8"),new byte[PADDING_SIZE]);
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, receiver);
 		socket.send(packet);
 	}
@@ -230,4 +237,15 @@ public class ReliableUDPHost {
 		System.err.println(s);
 		System.exit(-1);
 	}
+	public static byte[] concatenate (byte[] bs, byte[] bs2) {
+	    int aLen = bs.length;
+	    int bLen = bs2.length;
+
+	    byte[] c = new byte[aLen + bLen];
+	    System.arraycopy(bs, 0, c, 0, aLen);
+	    System.arraycopy(bs2, 0, c, aLen, bLen);
+
+	    return c;
+	}
+
 }

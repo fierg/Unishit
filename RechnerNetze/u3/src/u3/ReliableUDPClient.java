@@ -2,12 +2,11 @@ package u3;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.Arrays;
 
 public class ReliableUDPClient {
 
-	private static final boolean debug = false;
-	// private static List<Integer> messagesReceived = new
-	// LinkedList<Integer>();
+	private static final boolean debug = true;
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 3)
@@ -31,7 +30,7 @@ public class ReliableUDPClient {
 		while (keep_on_running) {
 			String message = Receive(my_socket);
 			if (debug)
-				System.out.printf("Received:\t <%s> \t\n", message);
+				System.out.println(String.format("Received:\t <%s> \t\n", message));
 			switch (message.toLowerCase()) {
 			case "stop":
 				System.out.println("recieved stop message!");
@@ -42,14 +41,14 @@ public class ReliableUDPClient {
 				break;
 			default:
 				if (message.matches("-?[0-9]+")) {
-					message = "rak=" + message ;
+					message = "rak=" + message;
 					Send(my_socket, peer_address, message);
-					if(debug)
-					System.out.println("send "+ message);
+					if (debug)
+						System.out.println("send " + message);
 					break;
 				} else {
-					if(debug)
-					System.err.println("message fail! received: " + message);
+					if (debug)
+						System.err.println("message fail!");
 				}
 			}
 		}
@@ -57,21 +56,22 @@ public class ReliableUDPClient {
 	}
 
 	public static String Receive(DatagramSocket socket) throws IOException {
-		final int buffer_size = 2048;
+		final int buffer_size = 1024;
 		byte[] buffer = new byte[buffer_size];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		socket.receive(packet);
-		String message = new String(packet.getData(), 0, packet.getLength(), "UTF-8");
+		byte[] data = packet.getData();
+		data = Arrays.copyOfRange(data, 0, (data.length - ReliableUDPHost.PADDING_SIZE-1));
+		String message = new String(data, 0, data.length, "UTF-8");
 		return message;
 	}
 
 	public static void Send(DatagramSocket socket, InetSocketAddress receiver, String message) throws IOException {
-		byte[] buffer = message.getBytes("UTF-8");
+		byte[] buffer = ReliableUDPHost.concatenate((message).getBytes("UTF-8"),
+				new byte[ReliableUDPHost.PADDING_SIZE]);
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, receiver);
 		socket.send(packet);
 	}
-
-
 
 	private static void Usage(String s) {
 		System.err.println(s);
