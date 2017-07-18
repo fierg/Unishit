@@ -1,0 +1,24 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[]{csquotes}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+
+\begin{document}
+
+\paragraph{Sven Fiergolla 1252732}
+\section*{3. Übung, Aufgabe 2}
+\paragraph{Ergebnisse der Messung}
+Auf einem Rechner kam ich auf einen maximalen Durchsatz von $0,1 \frac{mbit}{s}$ und bei einer Messung zwischen meinem Rechner und einem raspberryPi im gleichen Netzwerk auf $0,03 \frac{mbit}{s}$, lokal macht es keinen großen Unterschied ob Nachrichten einzelnd gesendet werden oder bis zu n (habe mit max 5 getestet) gleichzeitig auf eine Bestätigung warten.\par
+\paragraph{Diskussion der Ergebnisse}
+Habe lange versucht es zu optimieren und ich habe einen viel besseren Durchsatz erreicht, wenn ich deutlich größere Nachrichten verschickt habe als nur einzelne $int$, lag jedoch in allen Versuchen \textbf{weit} hinter dem theoretisch möglichen Durchsatz des Netzwerks/Speichers.\\
+In der jetzt vorliegenden Version werden jedoch wieder nur einzelne Zeichen versendet und der Durchsatz ist fast erschreckend niedrig.\par
+
+
+
+\paragraph{Hinweis}
+Client muss vor dem Host gestartet werden!
+
+
+\end{document}
