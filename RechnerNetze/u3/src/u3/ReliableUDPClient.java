@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class ReliableUDPClient {
 
-	private static final boolean debug = true;
+	private static final boolean DEBUG = false;
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 3)
@@ -29,11 +29,11 @@ public class ReliableUDPClient {
 		boolean keep_on_running = true;
 		while (keep_on_running) {
 			String message = Receive(my_socket);
-			if (debug)
-				System.out.println(String.format("Received:\t <%s> \t\n", message));
+			if (DEBUG)
+				System.out.println(String.format("Received:\t <%s> \t", message));
 			switch (message.toLowerCase()) {
 			case "stop":
-				System.out.println("recieved stop message!");
+				System.out.println("received stop message!");
 				keep_on_running = false;
 				break;
 			case "start":
@@ -42,12 +42,12 @@ public class ReliableUDPClient {
 			default:
 				if (message.matches("-?[0-9]+")) {
 					message = "rak=" + message;
-					Send(my_socket, peer_address, message);
-					if (debug)
+					Send(my_socket, peer_address, message.getBytes());
+					if (DEBUG)
 						System.out.println("send " + message);
 					break;
 				} else {
-					if (debug)
+					if (DEBUG)
 						System.err.println("message fail!");
 				}
 			}
@@ -60,16 +60,12 @@ public class ReliableUDPClient {
 		byte[] buffer = new byte[buffer_size];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		socket.receive(packet);
-		byte[] data = packet.getData();
-		data = Arrays.copyOfRange(data, 0, (data.length - ReliableUDPHost.PADDING_SIZE-1));
-		String message = new String(data, 0, data.length, "UTF-8");
+		String message = new String(packet.getData(), 0, packet.getLength(), "UTF-8");
 		return message;
 	}
 
-	public static void Send(DatagramSocket socket, InetSocketAddress receiver, String message) throws IOException {
-		byte[] buffer = ReliableUDPHost.concatenate((message).getBytes("UTF-8"),
-				new byte[ReliableUDPHost.PADDING_SIZE]);
-		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, receiver);
+	public static void Send(DatagramSocket socket, InetSocketAddress receiver, byte[] message) throws IOException {
+		DatagramPacket packet = new DatagramPacket(message, message.length, receiver);
 		socket.send(packet);
 	}
 

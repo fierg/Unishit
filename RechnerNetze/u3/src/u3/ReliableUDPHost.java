@@ -14,11 +14,11 @@ import java.util.concurrent.Future;
 
 public class ReliableUDPHost {
 
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private static final int WINDOW_SIZE = 5;
 	private static final int TIMEOUT_MIL = 5000;
 	public static final int PADDING_SIZE = 128;
-	
+
 	private static int measureSize;
 	private static int messageID = 0;
 	private static BlockingList<Integer> messagesSend = new BlockingList<>(WINDOW_SIZE);
@@ -56,7 +56,8 @@ public class ReliableUDPHost {
 
 	public static void receiveNodeMeasureWindowOfMessages(int my_port, String peer_host, int peer_port)
 			throws IOException {
-		System.out.printf("send messages from port <%d> to host <%s,%d>\n", my_port, peer_host, peer_port);
+		System.out.printf("send up to <%d> messages from port <%d> to host <%s,%d>\n", WINDOW_SIZE, my_port, peer_host,
+				peer_port);
 		DatagramSocket my_socket = new DatagramSocket(my_port);
 		InetSocketAddress peer_address = new InetSocketAddress(peer_host, peer_port);
 		boolean keep_on_running = true;
@@ -64,7 +65,7 @@ public class ReliableUDPHost {
 		System.out.println("Start measure");
 		long start = System.currentTimeMillis();
 
-		sendTimedMessage(my_socket, peer_address, executorService, String.valueOf(0));
+		sendTimedMessage(my_socket, peer_address, executorService, String.valueOf(0), true);
 
 		if (DEBUG)
 			System.out.println("Sending initial message");
@@ -81,7 +82,7 @@ public class ReliableUDPHost {
 				break;
 			case "start":
 				message = String.valueOf(messageID);
-				sendTimedMessage(my_socket, peer_address, executorService, message);
+				sendTimedMessage(my_socket, peer_address, executorService, message, true);
 				break;
 			default:
 				if (message.startsWith("rak=")) {
@@ -92,7 +93,7 @@ public class ReliableUDPHost {
 						messagesSend.removeItem(messageID);
 
 						message = String.valueOf(++messageID);
-						sendTimedMessage(my_socket, peer_address, executorService, message);
+						sendTimedMessage(my_socket, peer_address, executorService, message, true);
 					} else {
 						System.err.println("rak not in list!");
 					}
@@ -103,45 +104,16 @@ public class ReliableUDPHost {
 
 		}
 		long duration = System.currentTimeMillis() - start;
-		Send(my_socket, peer_address, "stop");
+		Send(my_socket, peer_address, "stop".getBytes());
 		my_socket.close();
 
-		System.out.println("\n" + messageID + " in " + String.valueOf(duration) + " milliseconds");
+		System.out.println("\nReceived " + messageID + " messages in " + String.valueOf(duration) + " milliseconds");
 		double bitsTransmitted = (Math.log10(measureSize) * Integer.SIZE);
 
 		System.out.println("transfer rate: " + bitsTransmitted / duration + " kb/s");
+
 		System.exit(0);
 
-	}
-
-	private static void sendTimedMessage(DatagramSocket my_socket, InetSocketAddress peer_address,
-			ExecutorService executorService, String message) throws IOException {
-		try {
-			messagesSend.put(messageID);
-			Send(my_socket, peer_address, message);
-		} catch (InterruptedException e2) {
-			e2.printStackTrace();
-		}
-
-		Thread timer = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(TIMEOUT_MIL);
-					sendTimedMessage(my_socket, peer_address, executorService, message);
-				} catch (InterruptedException e1) {
-					if (DEBUG)
-						System.out.println("timer " + message + " canceld!");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		Future<?> future = executorService.submit(timer);
-
-		timers.put(messageID, future);
 	}
 
 	public static void receiveNodeMeasureSingle(int my_port, String peer_host, int peer_port) throws IOException {
@@ -150,7 +122,7 @@ public class ReliableUDPHost {
 		InetSocketAddress peer_address = new InetSocketAddress(peer_host, peer_port);
 		boolean keep_on_running = true;
 
-		Send(my_socket, peer_address, String.valueOf(messageID));
+		Send(my_socket, peer_address, String.valueOf(0).getBytes());
 		if (DEBUG)
 			System.out.println("Send initial message");
 
@@ -160,25 +132,82 @@ public class ReliableUDPHost {
 		while (keep_on_running && messageID < measureSize) {
 			String message = Receive(my_socket);
 			if (DEBUG)
-				System.out.printf("Received:\t <%s> \t\n", message, messageID);
+				System.out.printf("Received:\t <%s> \t expected: \t<%d>\n", message, messageID);
 
-			if (message.split("=")[1].equals(String.valueOf(messageID))) {
-				message = String.valueOf(++messageID);
+			if (message.startsWith("rak=")) {
+				int id = Integer.parseInt(message.split("=")[1]);
+				if (id != 0) {
+					if (id == messageID) {
+						timers.get(messageID).cancel(true);
+						timers.remove(messageID);
+						message = String.valueOf(++messageID);
+						sendTimedMessage(my_socket, peer_address, executorService, message, false);
+					} else {
+						System.err.println("unexpected but valid message!");
+					}
+				} else {
+					message = String.valueOf(++messageID);
+					sendTimedMessage(my_socket, peer_address, executorService, message, false);
+				}
 			} else {
-				System.err.println(message + "bad format");
+				System.err.println("bad format! " + message);
 			}
 
-			Send(my_socket, peer_address, message);
+			// sendTimedMessage(my_socket, peer_address, executorService,
+			// message, false);
 		}
 
+		for (Integer id : timers.keySet()) {
+			timers.get(id).cancel(true);
+		}
+		timers.clear();
+
 		long duration = System.currentTimeMillis() - start;
-		Send(my_socket, peer_address, "stop");
+		Send(my_socket, peer_address, "stop".getBytes());
+
+		for (Integer id : timers.keySet()) {
+			timers.get(id).cancel(true);
+		}
+		timers.clear();
+
 		my_socket.close();
 
-		System.out.println("\n" + messageID + " in " + String.valueOf(duration) + " milliseconds");
+		System.out.println("\nSend " + messageID + " messages in " + String.valueOf(duration) + " milliseconds");
 		double bitsTransmitted = (Math.log10(measureSize) * Integer.SIZE);
 
 		System.out.println("transfer rate: " + bitsTransmitted / duration + " kb/s");
+		System.exit(0);
+	}
+
+	private static void sendTimedMessage(DatagramSocket my_socket, InetSocketAddress peer_address,
+			ExecutorService executorService, String message, boolean messagesInWindow) throws IOException {
+		try {
+			if (messagesInWindow) {
+				messagesSend.put(messageID);
+			}
+			Send(my_socket, peer_address, message.getBytes());
+		} catch (InterruptedException e2) {
+			e2.printStackTrace();
+		}
+
+		Thread timer = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(TIMEOUT_MIL);
+					sendTimedMessage(my_socket, peer_address, executorService, message, messagesInWindow);
+				} catch (InterruptedException e1) {
+					if (DEBUG)
+						System.out.println("timer " + message + " canceld!");
+				} catch (IOException e) {
+					if (DEBUG)
+						e.printStackTrace();
+				}
+			}
+		});
+
+		Future<?> future = executorService.submit(timer);
+		timers.put(messageID, future);
 
 	}
 
@@ -187,23 +216,31 @@ public class ReliableUDPHost {
 		byte[] buffer = new byte[buffer_size];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		socket.receive(packet);
-		byte[] data = packet.getData();
-		data = Arrays.copyOfRange(data, 0, (data.length-PADDING_SIZE-1));
-		String message = new String(data, 0, data.length, "UTF-8");
+		String message = new String(packet.getData(), 0, packet.getLength(), "UTF-8");
 		return message;
 	}
 
-	public static void Send(DatagramSocket socket, InetSocketAddress receiver, String message) throws IOException {
-		byte[] buffer = concatenate((message).getBytes("UTF-8"),new byte[PADDING_SIZE]);
-		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, receiver);
+	public static void Send(DatagramSocket socket, InetSocketAddress receiver, byte[] message) throws IOException {
+		DatagramPacket packet = new DatagramPacket(message, message.length, receiver);
 		socket.send(packet);
+	}
+
+	public static byte[] concatenate(byte[] bs, byte[] bs2) {
+		int aLen = bs.length;
+		int bLen = bs2.length;
+
+		byte[] c = new byte[aLen + bLen];
+		System.arraycopy(bs, 0, c, 0, aLen);
+		System.arraycopy(bs2, 0, c, aLen, bLen);
+
+		return c;
 	}
 
 	private static void Control(String command, String host, int port) throws IOException {
 		System.out.printf("Sending command <%s> to <%s,%d>\n", command, host, port);
 		InetSocketAddress address = new InetSocketAddress(host, port);
 		DatagramSocket my_socket = new DatagramSocket();
-		Send(my_socket, address, command);
+		Send(my_socket, address, command.getBytes());
 		my_socket.close();
 	}
 
@@ -236,16 +273,6 @@ public class ReliableUDPHost {
 	private static void Usage(String s) {
 		System.err.println(s);
 		System.exit(-1);
-	}
-	public static byte[] concatenate (byte[] bs, byte[] bs2) {
-	    int aLen = bs.length;
-	    int bLen = bs2.length;
-
-	    byte[] c = new byte[aLen + bLen];
-	    System.arraycopy(bs, 0, c, 0, aLen);
-	    System.arraycopy(bs2, 0, c, aLen, bLen);
-
-	    return c;
 	}
 
 }
