@@ -134,13 +134,18 @@ Anschließend wird von $anf$ an begonnen und alle Markierungen werden gelöscht.
 \raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D u  C u R u  D y  A y  A y ; z  \Square D v  A v  A v  D v  D x  C x  C x  R w  D w  A  w  ::0: \Square D y A y$
 \end{small}\par
 \paragraph{}
-nach $find\_last(l(branch(R \dots )))$ (Rechter branch) ist die neue vollständige Konfiguration:\\
+nach $find\_last(l(branch(R \dots )))$ (Rechter branch) ist die neue vollständige Konfiguration am rechten Rand:
+
+(v = neue Konfiguration, y = neuer Zustand, x neu gelesenes Zeichen, u = neu zu schreibendes Zeichen)\par
 \begin{small}
 \raisebox{\depth}{\rotatebox{180}{ee}};$\Square D\Square A\Square D\Square D\Square C\Square R\Square D\Square A\Square A\Square ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R\Square D\Square A\Square :: 0 : \Square D \Square A \Square A \Square D\Square D\Square C\Square C\Square R\Square D\Square A \Square$\\
 \end{small}\par
 \paragraph{}
-Das Band ist nun frei von Markierungen, hat den ersten Übergang der Maschine $M$ erfolgreich simuliert und ist wieder im Zustand $anf$. Nun laufen die letzten Schritte endlos ab und es wird eine Folge von 01010... auf das Band geschrieben.
-
+Das Band ist nun frei von Markierungen, hat den ersten Übergang der Maschine $M$ erfolgreich simuliert und ist wieder im Zustand $anf$. Nun laufen die letzten Schritte endlos ab und es wird eine Folge von 01010... auf das Band geschrieben.\\
+Nach einer weiteren Iteration der beschrieben Schritte würde das Band folgendes enthalten: \par
+\begin{small}
+\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D\Square A\Square D\Square D\Square C\Square R\Square D\Square A\Square A\Square ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R\Square D\Square A\Square :: 0 : 1: \Square D \Square A \Square D\Square D\Square C\Square  R\Square D\Square A \Square A \Square$\\
+\end{small}\par
 
 
 
