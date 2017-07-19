@@ -5,6 +5,7 @@
 \usepackage[german]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath,wasysym}
+\usepackage{a4wide}
 
 
 \begin{document}
@@ -14,20 +15,133 @@
 \paragraph{Sven Fiergolla 1252732}
 \subsection*{Aufgabe a)}
 
+-
 
 \subsection*{Aufgabe b)}
-Vorgehensweise der Maschine $U$:\\
-\bigskip
-Eingabe:\\
+
+\setlength{\parindent}{0pt}
+\paragraph{}
+Vorgehensweise der TM $M$ und der UTM $U$:\\
+Eingabe:\par
+
+\paragraph{}
 \begin{small}
 \raisebox{\depth}{\rotatebox{180}{ee}};$\Square D\Square A\Square D\Square D\Square C\Square R\Square D\Square A\Square A\Square ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R\Square D\Square A\Square ::\Square $\\
-\end{small}
+\end{small}\par
 
-Beginn in Zustand $q_0$ $\rightarrow$ $anf$\\
+\paragraph{}
+Übersetzung der Eingabe nach: (aktueller Zustand, gelesenes Zeichen, zu schreibendes Zeichen, Kopfbewegung, neuer Zustand)\\
+$\Rightarrow$ $;(s_1,\Square ,a_1,R,s_2);(s_2,\Square ,a_2,R,s_1)::$\\
+die zu simulierende TM  $M$ schreibt also bei $\Square$ als Eingabe eine endlose Folge von $a_1,a_2,a,1,a_2,\dots$ bzw. $0,1,0,1,0,\dots$ auf das Band.\par
+\medskip
+Ablauf UTM $U_M$
+Beginn in Zustand $q_0$ $\rightarrow$ $anf$ \\ \medskip
+Maschine $U_M$ schreibt $::\Square \underbrace{ : \Square D \Square A }$ \par
+
+
+\paragraph{}
 \begin{small}
-\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D\Square A\Square D\Square D\Square C\Square R\Square D\Square A\Square A\Square ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R\Square D\Square A\Square ::\Square : \Square D \Square A$\\
-\end{small}
+\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D\Square A\Square D\Square D\Square C\Square R\Square D\Square A\Square A\Square ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R\Square D\Square A\Square ::\Square : \Square D \Square A \Square$\\
+\end{small}\par
 
-Zustand $anf$ $\rightarrow$ $anf$\\
+\paragraph{}
+Zustand $anf$ $\rightarrow$ $kom$\\
+Maschine geht zur linkesten Konfiguration und markiert nach dem folgenden : die Eingabe und den Anfangszustand mit y\\
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D \Square  A \Square  D \Square  D \Square  C \Square  R \Square  D \Square  A \Square  A \Square  ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R \Square D\Square A\Square ::\Square : \Square D y A y $
+\end{small}\par
+
+\paragraph{}
+Zustand $kom$ $\rightarrow$ $kmp$\\
+Maschine geht zur rechtesten, nicht mit z markierte Konfiguration und markiert diese mit x\\
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D \Square  A \Square  D \Square  D \Square  C \Square  R \Square  D \Square  A \Square  A \Square  ; z  \Square D x  A x  A x  D x  D \Square  C \Square  C \Square  R \Square  D \Square  A  \Square  ::\Square : \Square D y A y$
+\end{small}\par
+
+\paragraph{}
+Zustand $kmp$ $\rightarrow$ $anf$\\
+Maschine vergleicht mit x und y markierte Konfigurationen. Diese sind ungleich, folglich werden die x entfernt und die nächste Konfiguration wird ausprobiert.\\
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D \Square  A \Square  D \Square  D \Square  C \Square  R \Square  D \Square  A \Square  A \Square  ; z  \Square D \Square  A \Square  A \Square  D \Square  D \Square  C \Square  C \Square  R \Square  D \Square  A  \Square  ::\Square : \Square D y A y$
+\end{small}\par
+
+\paragraph{}
+Zustand $anf \rightarrow kom \rightarrow kmp$\\
+Nächste Instruktion wird mit x markiert.\\
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D \Square  C \Square  R \Square  D \Square  A \Square  A \Square  ; z  \Square D \Square  A \Square  A \Square  D \Square  D \Square  C \Square  C \Square  R \Square  D \Square  A  \Square  ::\Square : \Square D y A y$
+\end{small}\par
+
+
+\paragraph{}
+Zustand $kmp \rightarrow s_1$\\
+Maschine vergleicht neue mit x und y markierte Konfigurationen. Diese sind gleich, folglich wird in $s_1$ gewechselt und der Lesekopf auf : platziert.\\
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D \Square  C \Square  R \Square  D \Square  A \Square  A \Square  ; z  \Square D \Square  A \Square  A \Square  D \Square  D \Square  C \Square  C \Square  R \Square  D \Square  A  \Square  ::\Square : \Square D y A y$
+\end{small}\par
+
+\paragraph{}
+Zustand $s_1 \rightarrow s_2 \rightarrow mf_1$\\
+Maschine markiert auszuführende Operationen\\
+
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D u  C u R u  D y  A y  A y ; z  \Square D \Square  A \Square  A \Square  D \Square  D \Square  C \Square  C \Square  R \Square  D \Square  A  \Square  ::\Square : \Square D y A y$
+\end{small}\par
+
+\paragraph{}
+Zustand $mf_1 \rightarrow mf_2 \rightarrow mf_3 \rightarrow mf_5 \rightarrow sh_1$\\
+Maschine markiert letzte Instruktion um sie im folgenden als vollständige Instruktions ans Ende des Bands zu schreiben.\\
+
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D u  C u R u  D y  A y  A y ; z  \Square D v  A v  A v  D v  D x  C x  C x  R w  D w  A  w  :: \Square : \Square D y A y$
+\end{small}\par
+
+\paragraph{}
+Zustand $sh_1\rightarrow sh_2 \rightarrow sh_3 \rightarrow inst$\\
+Maschine entscheidet über Ausgabe. Je nach R/L andere Reihenfolge der Ausgabe der Konfiguration.\\
+\textit{Anmerkung: \enquote{zwischen die vollständigen Konfigurationen} unklare Formulierung}\\
+
+
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D u  C u R u  D y  A y  A y ; z  \Square D v  A v  A v  D v  D x  C x  C x  R w  D w  A  w  :: 0 : \Square D y A y$
+\end{small}\par
+
+\paragraph{}
+Zustand $inst\rightarrow anf$\\
+Maschine muss Information über den folgenden Zustand ans Ende der Eingabe schreiben um ihn im nächsten Durchlauf der Prozedur mit dem jetzt aktuellen Zustand $s_2$, bzw $DAA$ fortzufahren.\\
+Anschließend wird von $anf$ an begonnen und alle Markierungen werden gelöscht.
+
+
+\begin{small}
+\par
+\paragraph{}
+\raisebox{\depth}{\rotatebox{180}{ee}};$z D x  A x  D x  D u  C u R u  D y  A y  A y ; z  \Square D v  A v  A v  D v  D x  C x  C x  R w  D w  A  w  ::0: \Square D y A y$
+\end{small}\par
+\paragraph{}
+nach $find\_last(l(branch(R \dots )))$ (Rechter branch) ist die neue vollständige Konfiguration:\\
+\begin{small}
+\raisebox{\depth}{\rotatebox{180}{ee}};$\Square D\Square A\Square D\Square D\Square C\Square R\Square D\Square A\Square A\Square ;\Square \Square D\Square A\Square A\Square D\Square D\Square C\Square C\Square R\Square D\Square A\Square :: 0 : \Square D \Square A \Square A \Square D\Square D\Square C\Square C\Square R\Square D\Square A \Square$\\
+\end{small}\par
+\paragraph{}
+Das Band ist nun frei von Markierungen, hat den ersten Übergang der Maschine $M$ erfolgreich simuliert und ist wieder im Zustand $anf$. Nun laufen die letzten Schritte endlos ab und es wird eine Folge von 01010... auf das Band geschrieben.
+
+
+
 
 \end{document}
