@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  20 JUL 2017 16:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  20 JUL 2017 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -798,6 +798,53 @@ Package csquotes Info: ... configuration file loaded successfully.
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/numberedblock/numberedblock.sty
+Package: numberedblock 2014/02/24 v1.10
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks33
+\verbatim@line=\toks34
+\verbatim@in@stream=\read3
+)
+(/usr/share/texlive/texmf-dist/tex/latex/verbatimbox/verbatimbox.sty
+Package: verbatimbox 2014/03/12 v3.13 Routines for placing verbatim text into b
+oxes, useful in places where the verbatim environment is inaccessible. Secondar
+ily, for adding vertical buffer around an object.
+
+(/usr/share/texlive/texmf-dist/tex/latex/readarray/readarray.sty
+Package: readarray 2013/05/09 v1.2 Routines for inputting array data and recall
+ing it on an element-by-element basis. Currently supports 2-D and 3-D array
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifnextok/ifnextok.sty
+Package: ifnextok 2011/06/27 v0.3 test next token (UL)
+)
+\c@@index=\count122
+\c@@plane=\count123
+\c@@row=\count124
+\c@@col=\count125
+\c@use@args=\count126
+\c@@record=\count127
+\c@arg@index=\count128
+\c@break@count=\count129
+)
+\savedverbbox=\box65
+\c@VerbboxLineNo=\count130
+\boxtopsep=\dimen158
+\boxbottomsep=\dimen159
+\ps@tempdima=\dimen160
+\ps@tempboxa=\box66
+\boxtop@sep=\skip61
+\boxbottom@sep=\skip62
+)
+\c@nb@counter=\count131
+\@savedverbbox=\box67
+\maxblocklabelsize=\skip63
+\blockindent=\skip64
+\c@blocknum=\count132
+\codeblockwidth=\skip65
+\parindentsave=\skip66
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
@@ -819,17 +866,17 @@ LaTeX Font Info:    ... okay on input line 16.
  ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
-\scratchdimen=\dimen158
-\scratchbox=\box65
-\nofMPsegments=\count123
-\nofMParguments=\count124
-\everyMPshowfont=\toks33
-\MPscratchCnt=\count125
-\MPscratchDim=\dimen159
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
-\everyMPtoPDFconversion=\toks34
+\scratchcounter=\count133
+\scratchdimen=\dimen161
+\scratchbox=\box68
+\nofMPsegments=\count134
+\nofMParguments=\count135
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count136
+\MPscratchDim=\dimen162
+\MPnumerator=\count137
+\makeMPintoPDFobject=\count138
+\everyMPtoPDFconversion=\toks36
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -879,43 +926,76 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 17.
+(Font)              <7> on input line 23.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 17.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 17.
-LaTeX Font Info:    Try loading font information for U+wasy on input line 17.
+(Font)              <5> on input line 23.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 23.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 21.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 21.
- [1
+Underfull \hbox (badness 10000) in alignment at lines 27--27
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 38--38
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 46--46
+[]
+ []
+
+
+LaTeX Warning: Characters dropped after `\end{numVblock}' on input line 46.
+
+
+Underfull \hbox (badness 10000) in alignment at lines 51--51
+[]
+ []
+
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 55.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 55.
+
+Underfull \hbox (badness 10000) in alignment at lines 60--60
+[]
+ []
+
+
+LaTeX Warning: Characters dropped after `\end{numVblock}' on input line 60.
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./DebuggingAbgabe.aux) ) 
 Here is how much of TeX's memory you used:
- 15204 strings out of 493029
- 296630 string characters out of 6136234
- 363531 words of memory out of 5000000
- 18453 multiletter control sequences out of 15000+600000
- 9216 words of font info for 34 fonts, out of 8000000 for 9000
+ 15419 strings out of 493029
+ 299920 string characters out of 6136234
+ 373252 words of memory out of 5000000
+ 18656 multiletter control sequences out of 15000+600000
+ 5708 words of font info for 22 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,6n,66p,804b,193s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,17n,66p,830b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
 <
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmti10.pfb>
-Output written on DebuggingAbgabe.pdf (1 page, 75610 bytes).
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/wasy2-ps/
+wasy10.pfb>
+Output written on DebuggingAbgabe.pdf (1 page, 106614 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
