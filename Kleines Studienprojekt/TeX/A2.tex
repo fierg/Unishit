@@ -276,7 +276,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	Fall $2:$ einseitig unendliches Band\\
 	Annahme: Band nach Rechts unendlich, Eingabe steht am Beginn des Bandes.
 	\begin{itemize}
-	\item $2.1$ $S<\inf$ und $S > R$
+	\item $2.1$ $S<\infty$ und $S < R$
 	\end{itemize}
 
 	
@@ -284,6 +284,63 @@ $...|A_8|\underbrace{A_{13}}|...$
 	
 	
 	
+	
+	}
+	
+		\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
+	Fall $2:$ einseitig unendliches Band\\
+
+	\begin{itemize}
+	\item $2.1$ $S<\infty$ und $S < R$
+	\item $2.2$ $S=R=\infty$
+	\begin{itemize}
+	\item $2.2.1$ Lesekopf betritt nur endlichen Bereich des Bandes
+	\item $2.2.2$ beschränkter Teil des Bandes ändert sich unendlich oft
+	\begin{itemize}
+	\item $2.2.2.1$ Symbol in allen Zellen konstant
+	\item $2.2.2.2$ Symbole in den Zellen ändern sich endlos
+	\end{itemize}
+	\end{itemize}
+	\item $2.3$ $R<=S$
+	\end{itemize}
+
+	$2.2$ Der Lesekopf kommt unendlich oft wieder zur Eingabe zurück. Der urprünglich leere Bereich des Bandes wird entweder beschränkt oder unbeschränkt weit beschrieben.\\
+	$2.2.1$ nur endlicher Teil des Bandes beschrieben $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten\\
+	$2.2.2$ beschränkter Teil des Bandes ändert sich unendlich oft\\
+	Da die $TM$ nur über ein endliches Alphabet verfügt und nur einen Zustand hat, muss dass Symbol entweder in allen Zellen Konstant sein oder sich ständig ändern.\\
+	$2.2.2.1$ Symbole in allen Zellen konstant $\Rightarrow$ kann nicht $\sqrt{2}$ beschreiben\\
+	$2.2.2.2$ Symbole in allen Zellen ändern sich endlos $\Rightarrow$ kann nicht $\sqrt{2}$ beschreiben
+	
+	}
+	
+	\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
+	Fall $2:$ einseitig unendliches Band\\
+
+	\begin{itemize}
+	\item $2.1$ $S<\infty$ und $S < R$
+	\item $2.2$ $S=R=\infty$
+	\begin{itemize}
+	\item $2.2.1$ Lesekopf betritt nur endlichen Bereich des Bandes
+	\item $2.2.2$ beschränkter Teil des Bandes ändert sich unendlich oft
+	\begin{itemize}
+	\item $2.2.2.1$ Symbol in allen Zellen konstant
+	\item $2.2.2.2$ Symbole in den Zellen ändern sich endlos
+	\end{itemize}
+	\end{itemize}
+	\item $2.3$ $R<=S$ 
+	\end{itemize}
+	
+	$2.3$ Lesekopf betritt ursprünglich unbeschriebenen Bereich des Bandes und bleibt dort\\
+	$2.3.1$ Lesekopf verlässt erstes leere Feld nach Links $\Rightarrow$ Lesekopf auf endlichem Bereich des Bandes gefangen $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten\\
+	$2.3.2$ Lesekopf verlässt erstes leeres Feld $R$ mal nach rechts $\Rightarrow$ Lesekopf wird nicht zu erstem leeren Feld zurückkommen, da $R$ die \textit{reflection number} für $\Square$ ist\\
+	$2.3.2.1$ unklar\\
+	$2.3.2.2$ unklar\\
+	%TODO : Fälle abklären!	
+	}
+	
+	\section{äquivalente TM mit nur zwei Symbolen}
+	\frame{\frametitle{äquivalente TM mit nur zwei Symbolen}
+		
 	
 	}
 	
