@@ -91,7 +91,7 @@ Formal definieren wir die Turingmaschine als Septupel $\mathbf{ M = (Q,\Sigma,\G
 	\section{Turingaschine mit zwei Zuständen}
 	\frame{\frametitle{Konstruktion}
 	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
-	Maschine B besitzt:
+	Maschine $B$ besitzt:
 \begin{itemize}
 	\item elementare Symbolen von Maschine $A$:  $B_1,B_2,...,B_m \in \Sigma_B$
 	\item $m\cdot n \cdot 2 \cdot 2$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
@@ -290,8 +290,8 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\end{itemize}
 	\visible<7->{\item $2.3$ $R<=S$}
 	\begin{itemize}
-	\visible<8->{\item $2.3.1$}
-	\visible<9->{\item $2.3.2$}
+	\visible<8->{\item $2.3.1$ Lesekopf verlässt erstes leere Feld nach Links}
+	\visible<9->{\item $2.3.2$ Lesekopf verlässt erstes leeres Feld $R$ mal nach rechts}
 	\begin{itemize}
 	\visible<10->{\item $2.3.2.1$}
 	\visible<11->{\item $2.3.2.2$}
@@ -316,10 +316,124 @@ $...|A_8|\underbrace{A_{13}}|...$
 	
 	\section{äquivalente TM mit nur zwei Symbolen}
 	\frame{\frametitle{äquivalente TM mit nur zwei Symbolen}
-		
+
+	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
+	Maschine $C$ besitzt:
+\begin{itemize}
+	\item die Symbole $\{\Square,1\} \in \Sigma_B$
+\end{itemize}
+	Zudem sei $l$ Imfimum für $ m\leq 2^l$ \\
+	Nun können Symbole der Maschine $A$ als Binärsequenzen der Länge $l$ interpretiert werden. zB.: $\Square_A \equiv \Square_C^l$
+	\begin{itemize}
+	\item für Maschine $C$ gilt $|Q_C| = 3n 2^l + n(2^l -7)$ 
+	\end{itemize}
+	 }
+	 
+	 
+	 
+	 	\frame{\frametitle{Beispiel Maschine $A$}
+	\begin{center}
 	
+	
+	Maschine $A$:\\
+	\bigskip
+	$...|\underbrace{A_3}|A_{13}|...$
+	
+	\bigskip
+		\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+   
+   \node[state] (1) [right=of 0] {$q_7$};
+   \node[state] (2) [right=of 1] {$q_4$};
+   
+
+   \path[->]
+    (1) edge                    node {$A_3\:A_8\:R$} (2);
+
+\end{tikzpicture}
+
+
+
+\bigskip
+$...|A_8|\underbrace{A_{13}}|...$
+\end{center}
+	}
+	\frame{\frametitle{Beispiel Maschine $C$}
+	\begin{center}
+	  Maschine $C$ ist in Zustand $T_3$\\
+
+\bigskip
+	
+	\only<1>{$...|\overbrace{\underbrace{1}|1|\Square|1|\Square|...}^{\text{l Felder lang}}|1|\Square|...$}
+		\only<2>{$...|\overbrace{1|\underbrace{1}|\Square|1|\Square|...}^{\text{l Felder lang}}|1|\Square|...$}
+		\only<3>{$...|\overbrace{1|1|\underbrace{\Square}|1|\Square|...}^{\text{l Felder lang}}|1|\Square|...$}
+ 
+ 
+	\end{center}
+	\bigskip
+ 
+ 		\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+   
+   \node[state] (1) at (0,0) {$T_3$};
+   
+   \only<1>{
+   \node[state] (2) at (2,1) {$T_{3,1}$};
+   \node[state] (3) at (2,-1) {$T_{3,0}$};
+   }
+   
+   \only<2>{
+   \node[state] (2) at (2,0) {$T_{3,1}$};
+   \node[state] (3) at (4,1) {$T_{3,1,1}$};
+   \node[state] (4) at (4,-1) {$T_{3,1,0}$};
+   }
+   
+      \only<3>{
+   \node[state] (2) at (2,0) {$T_{3,1}$};
+   \node[state] (3) at (4,0) {$T_{3,1,1}$};
+   \node[state] (4) at (6,1) {$T_{3,1,1,1}$};
+   \node[state] (5) at (6,-1) {$T_{3,1,1,0}$};
+   }
+   
+
+
+    \only<1>{
+       \path[->]
+    (1) edge    node[above, yshift=0.4cm] {$1\:1\:R$} (2)
+    (1) edge    node[below, yshift=-0.4cm] {$\Square\:\Square\:R$} (3);
+    }
+    
+        \only<2>{
+           \path[->]
+    (1) edge    node[above] {$1\:1\:R$} (2)
+    (2) edge    node[above, yshift=0.4cm] {$1\:1\:R$} (3)
+    (2) edge    node[below, yshift=-0.4cm] {$\Square\:\Square\:R$} (4);
+    }
+ 
+ 
+        \only<3>{
+           \path[->]
+    (1) edge    node[above] {$1\:1\:R$} (2)
+    (2) edge    node[above] {$1\:1\:R$} (3)
+    (3) edge    node[above, yshift=0.4cm] {$1\:1\:R$} (4)
+    (3) edge    node[below, yshift=-0.4cm] {$\Square\:\Square\:R$} (5);
+    }
+    
+\end{tikzpicture}
+
 	}
 	
+		\frame{\frametitle{äquivalente TM mit nur zwei Symbolen}
+
+	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
+	Maschine $C$ besitzt:
+\begin{itemize}
+	\item die Symbole $\{\Square,1\} \in \Sigma_B$
+\end{itemize}
+	Zudem sei $l$ Imfimum für $ m\leq 2^l$ \\
+	Nun können Symbole der Maschine $A$ als Binärsequenzen der Länge $l$ interpretiert werden. zB.: $\Square_A \equiv \Square_C^l$
+	\begin{itemize}
+	\item für Maschine $C$ gilt $|Q_C| = 3n 2^l + n(2^l -7)$ 
+	\end{itemize}
+	 }
 	
 	
 	
