@@ -4,4 +4,5 @@
 \beamer@sectionintoc {2}{universelle Turingmaschinen}{5}{0}{2}
 \beamer@sectionintoc {3}{Turingaschine mit zwei Zust\IeC {\"a}nden}{6}{0}{3}
 \beamer@sectionintoc {4}{Beispiel}{9}{0}{4}
-\beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{11}{0}{5}
+\beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{19}{0}{5}
+\beamer@sectionintoc {6}{\IeC {\"a}quivalente TM mit nur zwei Symbolen}{42}{0}{6}
