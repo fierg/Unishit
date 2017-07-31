@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  30 JUL 2017 20:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  31 JUL 2017 17:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1189,8 +1189,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'german'.
-
-No file universelleTM2Zustände.aux.
+ (./universelleTM2Zustände.aux)
 \openout1 = `universelleTM2Zustände.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
@@ -1207,6 +1206,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
 LaTeX Font Info:    ... okay on input line 32.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
 LaTeX Font Info:    ... okay on input line 32.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1284,6 +1284,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 32.
 LaTeX Info: Redefining \pageref on input line 32.
 LaTeX Info: Redefining \nameref on input line 32.
+
+(./universelleTM2Zustände.out) (./universelleTM2Zustände.out)
 \@outlinefile=\write5
 \openout5 = `universelleTM2Zustände.out'.
 
@@ -1314,7 +1316,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 LaTeX Info: Redefining \includegraphics on input line 32.
 
-No file universelleTM2Zustände.nav.
+(./universelleTM2Zustände.nav)
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 (Font)              size <5> substituted on input line 33.
@@ -1322,47 +1324,48 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 52.
+(./universelleTM2Zustände.toc) [2
+
+]
+LaTeX Font Info:    Try loading font information for U+msa on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 52.
+LaTeX Font Info:    Try loading font information for U+msb on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 52.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
-) [2
+) [3
 
 ]
-<TMKonzept.png, id=38, 381.425pt x 280.04625pt>
+<TMKonzept.png, id=85, 381.425pt x 280.04625pt>
 File: TMKonzept.png Graphic file (type png)
  <use TMKonzept.png>
-Package pdftex.def Info: TMKonzept.png used on input line 55.
+Package pdftex.def Info: TMKonzept.png used on input line 56.
 (pdftex.def)             Requested size: 305.1404pt x 224.0373pt.
- [3
+ [4
 
- <./TMKonzept.png>] [4
-
-] [5
+ <./TMKonzept.png>] [5
 
 ] [6
 
 ] [7
 
+] [8
+
 ]
 
 Package amsmath Warning: Foreign command \atop;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 142.
+(amsmath)                 on input line 143.
 
-[8
-
-] [9
+[9
 
 ] [10
 
@@ -1390,10 +1393,10 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [22
 
-]
-[23
+] [23
 
-] [24
+]
+[24
 
 ] [25
 
@@ -1421,16 +1424,51 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [37
 
-]
-[38
+] [38
 
-] [39
+]
+[39
 
 ] [40
 
 ] [41
 
 ] [42
+
+] [43
+
+] [44
+
+] [45
+
+] [46
+
+] [47
+
+] [48
+
+] [49
+
+] [50
+
+] [51
+
+] [52
+
+] [53
+
+]
+[54
+
+] [55
+
+] [56
+
+] [57
+
+] [58
+
+] [59
 
 ]
 \tf@nav=\write6
@@ -1442,35 +1480,29 @@ Package amsmath Warning: Foreign command \atop;
 \tf@snm=\write8
 \openout8 = `universelleTM2Zustände.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 327.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 327.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 472.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 472.
  (./universelleTM2Zustände.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 327.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 327.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 472.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 472.
+Package rerunfilecheck Info: File `universelleTM2Zustände.out' has not changed
+.
+(rerunfilecheck)             Checksum: AB6CD7D8776967F4DB8D05E2B2B0AF2E;440.
 
-
-Package rerunfilecheck Warning: File `universelleTM2Zustände.out' has changed.
-
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `universelleTM2Zustände.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  0C7CD31E060F41192C23B539A5EDF95F;400.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 327.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 472.
  ) 
 Here is how much of TeX's memory you used:
- 22478 strings out of 493029
- 441786 string characters out of 6136234
- 562291 words of memory out of 5000000
- 25400 multiletter control sequences out of 15000+600000
+ 22621 strings out of 493029
+ 443575 string characters out of 6136234
+ 564488 words of memory out of 5000000
+ 25498 multiletter control sequences out of 15000+600000
  18015 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,16n,70p,928b,934s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,18n,70p,928b,934s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
@@ -1482,27 +1514,30 @@ public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/wasy2-ps/wasy9.pfb>
-Output written on universelleTM2Zustände.pdf (42 pages, 342318 bytes).
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
+i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/wasy2-ps/wasy10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/wasy2-ps/wasy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/wasy2-ps/wasy9.pfb>
+Output written on universelleTM2Zustände.pdf (59 pages, 390129 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 344 compressed objects within 4 object streams
- 91 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 585 PDF objects out of 1000 (max. 8388607)
+ 477 compressed objects within 5 object streams
+ 126 named destinations out of 1000 (max. 500000)
+ 104 words of extra memory for PDF output out of 10000 (max. 10000000)
 
