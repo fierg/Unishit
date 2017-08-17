@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  8 AUG 2017 20:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  17 AUG 2017 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -974,13 +974,13 @@ File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf used on input line
- 42.
+ 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf used on input line
- 42.
+ 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 <Aufgabenauswahl_Portfolio_FINAL.pdf, id=23, page=1, 597.23125pt x 845.1575pt>
@@ -988,48 +988,48 @@ File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf, page 1>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf, page1 used on inp
-ut line 42.
+ut line 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf, page 1>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf, page1 used on inp
-ut line 42.
+ut line 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf, page 1>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf, page1 used on inp
-ut line 42.
+ut line 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf, page 1>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf, page1 used on inp
-ut line 42.
+ut line 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Aufgabenauswahl_Portfolio_FINAL.pdf Graphic file (type pdf)
 
 <use Aufgabenauswahl_Portfolio_FINAL.pdf, page 1>
 Package pdftex.def Info: Aufgabenauswahl_Portfolio_FINAL.pdf, page1 used on inp
-ut line 42.
+ut line 61.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
  [4 <./Aufgabenauswahl_Portfolio_FINAL.pdf>] (./Portfolio.aux) ) 
 Here is how much of TeX's memory you used:
- 16221 strings out of 493029
- 297352 string characters out of 6136234
- 363527 words of memory out of 5000000
- 19397 multiletter control sequences out of 15000+600000
- 9549 words of font info for 35 fonts, out of 8000000 for 9000
+ 16220 strings out of 493029
+ 297329 string characters out of 6136234
+ 365506 words of memory out of 5000000
+ 19396 multiletter control sequences out of 15000+600000
+ 9249 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,19n,54p,825b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,19n,54p,825b,535s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmti10.pfb>
-Output written on Portfolio.pdf (4 pages, 95742 bytes).
+Output written on Portfolio.pdf (4 pages, 101133 bytes).
 PDF statistics:
  56 PDF objects out of 1000 (max. 8388607)
  36 compressed objects within 1 object stream
