@@ -13,15 +13,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage[german]{babel}
 \usepackage[]{csquotes}
-
 \usepackage{amsmath}
 \usepackage{tikz, wasysym}
 \usepackage{graphicx}
 \usetikzlibrary{automata,positioning}
+\usepackage{hyperref}
+
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
 %\usepackage{makeidx}
 %\usepackage{graphicx}
+
+
+\usepackage{hyperref}
 \author{Sven Fiergolla}
 \title[Kleines Studienprojekt]{Eine universelle Turingmaschine mit zwei Zuständen/Symbolen}
 \subtitle[short version]{Ein Paper von Claude E. Shannon}
@@ -173,7 +177,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	
 	\section{Unmöglichkeit einer universellen Turingmaschine mit einem Zustand}
 	\frame{\frametitle{$UTM$ mit nur einem Zustand unmöglich}
-	Beweis per Kontraposition von Schannon:\\
+	Beweis per Kontraposition von Shannon:\\
 	Annahme: es existiert eine universelle Turingmaschine mit nur einem Zustand.\\
 	
 		\bigskip
@@ -216,12 +220,15 @@ $...|A_8|\underbrace{A_{13}}|...$
 	Beweishilfe: \enquote{\textit{reflection number}}\\
 	platziere den Lesekopf auf dem ersten $\Square$ nach der Eingabe:\\
 	\begin{itemize}
-	\item Lesekopf wird sich zur Eingabe hin bewegen
-	\item $||...|1|0|\underbrace{\Square}|\Square$ $\rightarrow$ 
+	\item Lesekopf wird sich evtl. zur Eingabe hin bewegen
+	\pause \item $||...|1|0|\underbrace{\Square}|\Square$ $\rightarrow$ 
 	$||...|1|\underbrace{0}|x|\Square$
 	\end{itemize}
-	wenn der Lesekopf die Eingabe betritt, platziere ihn wieder auf dem ersten $\Square$ 
-	
+	\pause wenn der Lesekopf die Eingabe betritt, platziere ihn wieder auf dem selben Feld.\\ 
+	\begin{itemize}
+	\item $||...|1|0|\underbrace{x}|\Square$
+	\end{itemize}
+	\bigskip
 	wie oft man die Lesekopf so platzieren kann, nennt man \textit{reflection number}, $R \in N$
 	}
 	
@@ -237,18 +244,19 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\pause \item $||A_1|A_2|...|A_m|\underbrace{\Square}|\Square|...$
 	\end{itemize}	 
 	
-	platziere den Lesekopf wieder am Anfang
+	platziere den Lesekopf am Ende der eingabe
 	\begin{itemize}
-	\pause \item $||\underbrace{A_1}|A_2|...|A_m|A_x|\Square|\Square|...$
+	\pause \item $||A_1|A_2|...|\underbrace{A_m}|A_x|\Square|\Square|...$
 	\end{itemize}
-	
-	dies nennen wir die \textit{reflection number} für $\sqrt{2} =:S$ 
+	der Lesekopf wird sich evtl. wieder von der Eingabe weg bewegen.\\
+	\bigskip	
+	wie oft man die Lesekopf so platzieren kann, nennen wir die \textit{reflection number} für $\sqrt{2} =:S$ 
 	}
 	
 
 	
 		\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
-	Fall $2:$ einseitig unendliches Band\\
+	Annahme: einseitig unendliches Band\\
 
 	\begin{itemize}
 	\item $2.1$ $S<\infty$ und $S < R$
@@ -433,7 +441,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	 \bigskip
 	 \begin{itemize}
 	 \pause \item Wolfram Alpha versprach ein Preisgeld von 25,000 für den Beweis der Universalität einer (2,3) Turingmachine. (2 Zustände, 3 Symbole)
-	 \pause \item On 24 October 2007, it was announced that the prize had been won by Alex Smith, a student in electronics and computing at the University of Birmingham, for his proof that it was universal
+	 \pause \item Am 24 October 2007 wurde bekanntgegeben, dass Alex Smith, Student bei der University of Birmingham, die Universalität bewiesen hat.
 	 \end{itemize}
 	 
 	 }
@@ -441,6 +449,11 @@ $...|A_8|\underbrace{A_{13}}|...$
 	 \section{Quellen}
 	 	 \frame{\frametitle{Quellen}
 	
+	\begin{itemize}
+		\item Shannon, C. E. \enquote{A Universal Turing Machine with Two Internal States.} Automata Studies. Princeton, NJ: Princeton University Press, pp. 157-165, 1956. \footnote{\url{http://www.sns.ias.edu/~tlusty/courses/InfoInBio/Papers/Shannon1956.pdf}}
+		\item Wolfram Research and Wolfram, S. \enquote{The Wolfram 2,3 Turing Machine Research Prize.} \footnote{\url{http://www.wolframscience.com/prizes/tm23/}}
+		\item Wolfram, S. A New Kind of Science. Champaign, IL: Wolfram Media, pp. 706-711 and 1119, 2002.
+	\end{itemize}
 	 
 	 }
 	

@@ -5,5 +5,6 @@
 \beamer@sectionintoc {3}{Turingaschine mit zwei Zust\IeC {\"a}nden}{5}{0}{3}
 \beamer@sectionintoc {4}{Beispiel}{8}{0}{4}
 \beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{19}{0}{5}
-\beamer@sectionintoc {6}{Aquivalente Turingmaschine mit nur zwei Symbolen}{44}{0}{6}
-\beamer@sectionintoc {7}{Fazit}{53}{0}{7}
+\beamer@sectionintoc {6}{Aquivalente Turingmaschine mit nur zwei Symbolen}{46}{0}{6}
+\beamer@sectionintoc {7}{Fazit}{55}{0}{7}
+\beamer@sectionintoc {8}{Quellen}{60}{0}{8}
