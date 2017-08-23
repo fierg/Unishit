@@ -7,4 +7,4 @@
 \beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{19}{0}{5}
 \beamer@sectionintoc {6}{Aquivalente Turingmaschine mit nur zwei Symbolen}{46}{0}{6}
 \beamer@sectionintoc {7}{Fazit}{55}{0}{7}
-\beamer@sectionintoc {8}{Quellen}{60}{0}{8}
+\beamer@sectionintoc {8}{Quellen}{59}{0}{8}

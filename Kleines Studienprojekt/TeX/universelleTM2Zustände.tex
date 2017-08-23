@@ -196,7 +196,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\visible<2->{ \item $1.1:$ Lesekopf liest $\Square$ und bleibt im $\Square$-Bereich}
 	\visible<3->{\item $1.2:$ Lesekopf verlässt $\Square$}
 	\begin{itemize}
-	\visible<4->{\item $1.2.1:$ Lesekopf verlässt $\Square$ nach Links}
+	\visible<4->{\item $1.2.1:$ Lesekopf verlässt $\Square$ nach links}
 	\begin{itemize}
 	\visible<5->{\item $1.2.1.1$ linke unendliche Seite des Bandes wird nicht betreten}
 	\visible<6->{\item $1.2.1.2$ linke unendliche Seite des Bandes wird betreten}
@@ -255,6 +255,8 @@ $...|A_8|\underbrace{A_{13}}|...$
 	
 
 	
+	%TODO : Fälle abklären!	
+	
 		\frame{\frametitle{$\sqrt{2}$ mit nur einem Zustand berechnen}
 	Annahme: einseitig unendliches Band\\
 
@@ -263,16 +265,16 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\visible<2->{\item $2.2$ $S=R=\infty$}
 	\begin{itemize}
 	\visible<3->{\item $2.2.1$ Lesekopf betritt nur endlichen Bereich des Bandes}
-	\visible<4->{\item $2.2.2$ beschränkter Teil des Bandes ändert sich unendlich oft}
+	\visible<4->{\item $2.2.2$ Lesekopf betritt unbeschränkten Bereich des Bandes}
 	\begin{itemize}
 	\visible<5->{\item $2.2.2.1$ Symbol in allen Zellen konstant}
 	\visible<6->{\item $2.2.2.2$ Symbole in den Zellen ändern sich endlos}
 	\end{itemize}
 	\end{itemize}
-	\visible<7->{\item $2.3$ $R \leq S$}
+	\visible<7->{\item $2.3$ $R \leq S$ ($R$ endlich)}
 	\begin{itemize}
-	\visible<8->{\item $2.3.1$ Lesekopf verlässt erstes leere Feld nach Links}
-	\visible<9->{\item $2.3.2$ Lesekopf verlässt erstes leeres Feld $R$ mal nach rechts}
+	\visible<8->{\item $2.3.1$ Lesekopf verlässt erstes leere Feld nach links}
+	\visible<9->{\item $2.3.2$ Lesekopf verlässt erstes leere Feld $R$ mal nach rechts}
 	\begin{itemize}
 	\visible<10->{\item $2.3.2.1$ $R<S$ Lesekopf auf erstem $\Square$ gefangen}
 	\visible<11->{\item $2.3.2.2$ $R=S$ }
@@ -283,16 +285,21 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\only<1>{$2.1$ nach einer endlichen Anzahl an Schritten ist der Lesekopf im Bereich der Eingabe \enquote{gefangen} $\Rightarrow$ Band ist nur auf endlichem Teil beschrieben. $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten.}
 	\only<2>{$2.2$ Der Lesekopf kommt unendlich oft wieder zur Eingabe zurück. Der urprünglich leere Bereich des Bandes wird entweder beschränkt oder unbeschränkt weit beschrieben.}
 	\only<3>{$2.2.1$ nur endlicher Teil des Bandes beschrieben $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten}
-	\only<4>{$2.2.2$ beschränkter Teil des Bandes ändert sich unendlich oft\\
+	\only<4>{$2.2.2$ unbeschränkter Teil des Bandes wird betreten\\
 	Da die $TM$ nur über ein endliches Alphabet verfügt und nur einen Zustand hat, muss dass Symbol entweder in allen Zellen Konstant sein oder sich ständig ändern.}
 	\only<5>{$2.2.2.1$ Symbole in allen Zellen konstant $\Rightarrow$ kann nicht $\sqrt{2}$ beschreiben}
 	\only<6>{$2.2.2.2$ Symbole in allen Zellen ändern sich endlos $\Rightarrow$ kann nicht $\sqrt{2}$ beschreiben}
 	\only<7-10>{$2.3$ Lesekopf betritt ursprünglich unbeschriebenen Bereich des Bandes und bleibt dort\\}
-	\only<8>{$2.3.1$ Lesekopf verlässt erstes leere Feld nach Links $\Rightarrow$ Lesekopf auf endlichem Bereich des Bandes gefangen $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten}
+	
+	%TODO 	
+	\only<8>{$2.3.1$ Lesekopf verlässt erstes leere Feld nach Links\\
+	Band wird mit konstantem Symbol beschrieben $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten}
+	
+	%TODO abklären
 	\only<9>{$2.3.2$ Lesekopf verlässt erstes leeres Feld $R$ mal nach rechts $\Rightarrow$ Lesekopf wird nicht zu erstem leeren Feld zurückkommen, da $R$ die \textit{reflection number} für $\Square$ ist}
 	\only<10>{$2.3.2.1$ Lesekopf auf erstem $\Square$ gefangen $\Rightarrow$ Band enthält nicht $\sqrt{2}$}
 	\only<11>{$2.3.2.2$ Lesekopf verlässt erstes $\Square$ $R$-mal, ($R=$ \textit{reflection number für $\Square$}) $\Rightarrow$ Lesekopf wird nicht zum ersten leeren Feld zurückkehren $\Rightarrow$ diese Feld enthält das Ergebniss eines $\Square$-Feldes das $2\cdot R$ mal besucht wurde. Das nächste Feld jedoch auch, da die Maschine auf einer endlosen Folge von $\Square$ arbeitet $\Rightarrow$ alle Felder enthalten konstantes Symbol.} 
-	%TODO : Fälle abklären!	
+	
 	}
 	
 	\section{Aquivalente Turingmaschine mit nur zwei Symbolen}
@@ -441,7 +448,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	 \bigskip
 	 \begin{itemize}
 	 \pause \item Wolfram Alpha versprach ein Preisgeld von 25,000 für den Beweis der Universalität einer (2,3) Turingmachine. (2 Zustände, 3 Symbole)
-	 \pause \item Am 24 October 2007 wurde bekanntgegeben, dass Alex Smith, Student bei der University of Birmingham, die Universalität bewiesen hat.
+	 \item Am 24 October 2007 wurde bekanntgegeben, dass Alex Smith, Student bei der University of Birmingham, die Universalität der (2,3) TM bewiesen hat.
 	 \end{itemize}
 	 
 	 }
