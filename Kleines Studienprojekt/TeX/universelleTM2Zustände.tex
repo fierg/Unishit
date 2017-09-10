@@ -38,6 +38,10 @@
 	\frame{\frametitle{Übersicht}
 	\tableofcontents
 	}
+	
+	\frame{\frametitle{Einführung}
+\includegraphics[scale=0.18]{2000px-Turingmaschine.png}
+}
 
 
 	\section{Einführung}
@@ -53,10 +57,6 @@ Formal definieren wir die Turingmaschine als Sextupel $\mathbf{ M = (Q,\Sigma,\G
  \item $\mathbf{ \delta = }$ die (partielle) Überführungsfunktion
  \item $\mathbf{ \square = }$ steht für das leere Feld (Blank)
 \end{description}	
-}
-
-\frame{\frametitle{Einführung}
-\includegraphics[scale=0.18]{2000px-Turingmaschine.png}
 }
 
 
@@ -84,7 +84,7 @@ Formal definieren wir die Turingmaschine als Sextupel $\mathbf{ M = (Q,\Sigma,\G
 	\begin{itemize}
 	\item $m =$ Symbole von $A, |\Sigma_A|$
 	\item $n =$ Zustände von $A, |Q_A|$
-	\item $x = +$ oder $-$ ob der Zustand des letzten Feldes in diese Feld übertragen wird oder aus diesem Feld stammt 
+	\item $x = +$ oder $-$ ob der Zustand des letzten Feldes in dieses Feld übertragen wird oder aus diesem Feld stammt 
 	\item $y = R$ oder $L$  ob die Information in das rechte oder linke Feld übertragen wird.
 	 
 	\end{itemize}
@@ -248,7 +248,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\pause \item $||A_1|A_2|...|A_m|\underbrace{\Square}|\Square|...$
 	\end{itemize}	 
 	
-	platziere den Lesekopf am Ende der eingabe
+	platziere den Lesekopf am Ende der Eingabe
 	\begin{itemize}
 	\pause \item $||A_1|A_2|...|\underbrace{A_m}|A_x|\Square|\Square|...$
 	\end{itemize}
@@ -277,12 +277,8 @@ $...|A_8|\underbrace{A_{13}}|...$
 	\end{itemize}
 	\visible<7->{\item $2.3$ $R \leq S$ ($R$ endlich)}
 	\begin{itemize}
-	\visible<8->{\item $2.3.1$ Lesekopf verlässt erstes leere Feld nach links}
-	\visible<9->{\item $2.3.2$ Lesekopf verlässt erstes leere Feld $R$ mal nach rechts}
-	\begin{itemize}
-	\visible<10->{\item $2.3.2.1$ $R<S$ Lesekopf auf erstem $\Square$ gefangen}
-	\visible<11->{\item $2.3.2.2$ $R=S$ }
-	\end{itemize}
+	\visible<9->{\item $2.3.1$ $k \leq R \leq S$}
+	\visible<10->{\item $2.3.2$ $k > R$}	
 	\end{itemize}
 	\end{itemize}
 
@@ -293,16 +289,21 @@ $...|A_8|\underbrace{A_{13}}|...$
 	Da die $TM$ nur über ein endliches Alphabet verfügt und nur einen Zustand hat, muss dass Symbol entweder in allen Zellen Konstant sein oder sich ständig ändern.}
 	\only<5>{$2.2.2.1$ Symbole in allen Zellen konstant $\Rightarrow$ kann nicht $\sqrt{2}$ beschreiben}
 	\only<6>{$2.2.2.2$ Symbole in allen Zellen ändern sich endlos $\Rightarrow$ kann nicht $\sqrt{2}$ beschreiben}
-	\only<7-10>{$2.3$ Lesekopf betritt ursprünglich unbeschriebenen Bereich des Bandes und bleibt dort\\}
+	\only<7-11>{$2.3$ Lesekopf betritt ursprünglich unbeschriebenen Bereich des Bandes und bleibt dort\\}
+	\only<8-11>{$k:=$ Anzahl wie oft Lesekopf das erste ursprünglich leere Feld nach rechts verlässt}
+	
+	\only<9>{$2.3.1$ $k \leq R \leq S \Rightarrow$  Lesekopf auf erstem $\Square$ gefangen}
+	
+	\only<10-11>{$2.3.2$ $k > R$\\
+	erstes ursprünglich leeres Feld wird $2R$ mal besucht (enthält Beschriftung welche der Lesekopf auf ein $\Square$ nach $2R$ Schritten schreibt)}
+	\only<11>{gilt für das nächste und für alle folgenden ursprünglich unbeschrifteten Felder $\Rightarrow$ Band enthält konstante Beschriftung}
 	
 	%TODO 	
-	\only<8>{$2.3.1$ Lesekopf verlässt erstes leere Feld nach Links\\
-	Band wird mit konstantem Symbol beschrieben $\Rightarrow$ Band kann nicht $\sqrt{2}$ enthalten}
-	
-	%TODO abklären
-	\only<9>{$2.3.2$ Lesekopf verlässt erstes leeres Feld $R$ mal nach rechts $\Rightarrow$ Lesekopf wird nicht zu erstem leeren Feld zurückkommen, da $R$ die \textit{reflection number} für $\Square$ ist}
-	\only<10>{$2.3.2.1$ Lesekopf auf erstem $\Square$ gefangen $\Rightarrow$ Band enthält nicht $\sqrt{2}$}
-	\only<11>{$2.3.2.2$ Lesekopf verlässt erstes $\Square$ $R$-mal, ($R=$ \textit{reflection number für $\Square$}) $\Rightarrow$ Lesekopf wird nicht zum ersten leeren Feld zurückkehren $\Rightarrow$ diese Feld enthält das Ergebniss eines $\Square$-Feldes das $2\cdot R$ mal besucht wurde. Das nächste Feld jedoch auch, da die Maschine auf einer endlosen Folge von $\Square$ arbeitet $\Rightarrow$ alle Felder enthalten konstantes Symbol.} 
+%	\only<8>{$2.3.1$ Lesekopf verlässt erstes leere Feld nach Links\\
+%	Band wird mit konstantem Symbol beschrieben $\Rightarrow$ Band kann nicht $\sqrt{2}$ %enthalten}
+%	\only<9>{$2.3.2$ Lesekopf verlässt erstes leeres Feld $R$ mal nach rechts $\Rightarrow$ Lesekopf wird nicht zu erstem leeren Feld zurückkommen, da $R$ die \textit{reflection number} für $\Square$ ist}
+%	\only<10>{$2.3.2.1$ Lesekopf auf erstem $\Square$ gefangen $\Rightarrow$ Band enthält nicht $\sqrt{2}$}
+%	\only<11>{$2.3.2.2$ Lesekopf verlässt erstes $\Square$ $R$-mal, ($R=$ \textit{reflection number für $\Square$}) $\Rightarrow$ Lesekopf wird nicht zum ersten leeren Feld zurückkehren $\Rightarrow$ diese Feld enthält das Ergebniss eines $\Square$-Feldes das $2\cdot R$ mal besucht wurde. Das nächste Feld jedoch auch, da die Maschine auf einer endlosen Folge von $\Square$ arbeitet $\Rightarrow$ alle Felder enthalten konstantes Symbol.} 
 	
 	}
 	
@@ -355,9 +356,10 @@ $...|A_8|\underbrace{A_{13}}|...$
 
 \bigskip
 	
-	\only<1>{$...|\overbrace{\underbrace{1}|1|\Square|1|\Square|...}^{\text{l Felder lang}}|1|\Square|...$}
+	\only<1>{$...|\overbrace{\underbrace{1}|1|\Square|1|\Square|...}^{\text{Binärkodierung von A3}}|1|\Square|...$}
 		\only<2>{$...|\overbrace{1|\underbrace{1}|\Square|1|\Square|...}^{\text{l Felder lang}}|1|\Square|...$}
 		\only<3>{$...|\overbrace{1|1|\underbrace{\Square}|1|\Square|...}^{\text{l Felder lang}}|1|\Square|...$}
+		
  
  
 	\end{center}
@@ -452,7 +454,7 @@ $...|A_8|\underbrace{A_{13}}|...$
 	 \bigskip
 	 \begin{itemize}
 	 \pause \item Wolfram Alpha versprach ein Preisgeld von 25,000 für den Beweis der Universalität einer (2,3) Turingmachine. (2 Zustände, 3 Symbole)
-	 \item Am 24 October 2007 wurde bekanntgegeben, dass Alex Smith, Student bei der University of Birmingham, die Universalität der (2,3) TM bewiesen hat.
+	 \item Am 24 October 2007 wurde bekanntgegeben, dass Alex Smith, Student an der University of Birmingham, die Universalität der (2,3) TM bewiesen hat.
 	 \end{itemize}
 	 
 	 }
