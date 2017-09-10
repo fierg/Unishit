@@ -3,8 +3,8 @@
 \beamer@sectionintoc {1}{Einf\IeC {\"u}hrung}{4}{0}{1}
 \beamer@sectionintoc {2}{Universelle Turingmaschinen}{5}{0}{2}
 \beamer@sectionintoc {3}{Turingaschine mit zwei Zust\IeC {\"a}nden}{6}{0}{3}
-\beamer@sectionintoc {4}{Beispiel}{9}{0}{4}
-\beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{20}{0}{5}
-\beamer@sectionintoc {6}{Aquivalente Turingmaschine mit nur zwei Symbolen}{47}{0}{6}
-\beamer@sectionintoc {7}{Fazit}{56}{0}{7}
-\beamer@sectionintoc {8}{Quellen}{60}{0}{8}
+\beamer@sectionintoc {4}{Beispiel}{13}{0}{4}
+\beamer@sectionintoc {5}{Unm\IeC {\"o}glichkeit einer universellen Turingmaschine mit einem Zustand}{24}{0}{5}
+\beamer@sectionintoc {6}{Aquivalente Turingmaschine mit nur zwei Symbolen}{51}{0}{6}
+\beamer@sectionintoc {7}{Fazit}{60}{0}{7}
+\beamer@sectionintoc {8}{Quellen}{64}{0}{8}

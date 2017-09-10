@@ -63,7 +63,9 @@ Formal definieren wir die Turingmaschine als Sextupel $\mathbf{ M = (Q,\Sigma,\G
 
 	\section{Universelle Turingmaschinen}
 	\frame{\frametitle{Universelle Turingmaschinen}
-		Formal ist eine universelle Turingmaschine eine Maschine $UTM$, die eine Eingabe $w|x$ liest. Das Wort $w$ ist hierbei eine  die Beschreibung einer Turingmaschine $M_{w}$, die zu einer bestimmten Funktion mit Eingabe $x$ die Ausgabe berechnet. $UTM$ simuliert also das Verhalten von $M_{w}$ mit Hilfe der Funktionsbeschreibung $w$ und der Eingabe $x$.
+		Formal ist eine universelle Turingmaschine eine Maschine $UTM$, die eine Eingabe $w|x$ liest.\\
+		\medskip
+		 Das Wort $w$ ist hierbei die Beschreibung einer Turingmaschine $M_{w}$, die zu einer bestimmten Funktion mit Eingabe $x$ die Ausgabe berechnet. Die $UTM$ simuliert also das Verhalten von $M_{w}$ mit Hilfe der Funktionsbeschreibung $w$ und der Eingabe $x$.
 	}
 	
 	
@@ -79,10 +81,10 @@ Formal definieren wir die Turingmaschine als Sextupel $\mathbf{ M = (Q,\Sigma,\G
 	Turingmaschine $A$: $ A_1,A_2,...,A_m \in$ $\Sigma_A$ die Symbole und $q_1,q_2,...q_n \in Q_A$ die Zustände der Maschine.
 	Maschine $B$ besitzt:
 \begin{itemize}
-	\item elementare Symbolen von Maschine $A$:  $B_1,B_2,...,B_m \in \Sigma_B$
-	\item $m\cdot n \cdot 2 \cdot 2$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
+	\pause \item elementare Symbolen von Maschine $A$:  $B_1,B_2,...,B_m \in \Sigma_B$
+	\pause \item $m\cdot n \cdot 2 \cdot 2$ neue Symbole, welche Informationen über den Zustand und den Status der \textit{bouncing operation} speichern: $B_{m,n,x,y} \in \Sigma_B$
 	\begin{itemize}
-	\item $m =$ Symbole von $A, |\Sigma_A|$
+	\pause \item $m =$ Symbole von $A, |\Sigma_A|$
 	\item $n =$ Zustände von $A, |Q_A|$
 	\item $x = +$ oder $-$ ob der Zustand des letzten Feldes in dieses Feld übertragen wird oder aus diesem Feld stammt 
 	\item $y = R$ oder $L$  ob die Information in das rechte oder linke Feld übertragen wird.
@@ -90,7 +92,7 @@ Formal definieren wir die Turingmaschine als Sextupel $\mathbf{ M = (Q,\Sigma,\G
 	\end{itemize}
 \end{itemize}	
 	 
-	 Insgesammt besitzt Maschine $B$ also $m+4mn$ Symbole.  
+	\pause Insgesammt besitzt Maschine $B$ also $m+4mn$ Symbole.  
 	}
 	
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  10 SEP 2017 13:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.25)  10 SEP 2017 22:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1364,11 +1364,6 @@ File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 ] [7
 
 ]
-
-Package amsmath Warning: Foreign command \atop;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 124.
-
 [8
 
 ] [9
@@ -1377,7 +1372,13 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [11
 
-] [12
+]
+
+Package amsmath Warning: Foreign command \atop;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 126.
+
+[12
 
 ] [13
 
@@ -1399,8 +1400,7 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [22
 
-]
-[23
+] [23
 
 ] [24
 
@@ -1408,7 +1408,8 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [26
 
-] [27
+]
+[27
 
 ] [28
 
@@ -1430,8 +1431,7 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [37
 
-]
-[38
+] [38
 
 ] [39
 
@@ -1439,7 +1439,8 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [41
 
-] [42
+]
+[42
 
 ] [43
 
@@ -1461,8 +1462,7 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [52
 
-]
-[53
+] [53
 
 ] [54
 
@@ -1470,13 +1470,22 @@ Package amsmath Warning: Foreign command \atop;
 
 ] [56
 
-] [57
+]
+[57
 
 ] [58
 
 ] [59
 
 ] [60
+
+] [61
+
+] [62
+
+] [63
+
+] [64
 
 ]
 \tf@nav=\write6
@@ -1488,11 +1497,11 @@ Package amsmath Warning: Foreign command \atop;
 \tf@snm=\write8
 \openout8 = `universelleTM2Zustände.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 475.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 475.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 477.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 477.
  (./universelleTM2Zustände.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 475.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 475.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 477.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 477.
 Package rerunfilecheck Info: File `universelleTM2Zustände.out' has not changed
 .
 (rerunfilecheck)             Checksum: C88C79397584CF8B8C8F4E23DEC00E76;491.
@@ -1501,11 +1510,11 @@ Package rerunfilecheck Info: File `universelleTM2Zustände.out' has not changed
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 475.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 477.
  ) 
 Here is how much of TeX's memory you used:
- 22600 strings out of 493029
- 443214 string characters out of 6136234
+ 22608 strings out of 493029
+ 443290 string characters out of 6136234
  562571 words of memory out of 5000000
  25473 multiletter control sequences out of 15000+600000
  18483 words of font info for 71 fonts, out of 8000000 for 9000
@@ -1542,10 +1551,10 @@ ist/fonts/type1/public/amsfonts/symbols/msam5.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/wasy2-ps/wasy10.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/wasy2-ps/wasy9.pfb>
-Output written on universelleTM2Zustände.pdf (60 pages, 408994 bytes).
+Output written on universelleTM2Zustände.pdf (64 pages, 416150 bytes).
 PDF statistics:
- 599 PDF objects out of 1000 (max. 8388607)
- 490 compressed objects within 5 object streams
- 129 named destinations out of 1000 (max. 500000)
+ 626 PDF objects out of 1000 (max. 8388607)
+ 512 compressed objects within 6 object streams
+ 137 named destinations out of 1000 (max. 500000)
  112 words of extra memory for PDF output out of 10000 (max. 10000000)
 
