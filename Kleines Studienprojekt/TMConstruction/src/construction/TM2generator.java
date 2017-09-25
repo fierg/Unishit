@@ -34,6 +34,7 @@ public class TM2generator {
 		TM2generator gen = new TM2generator(args[0]);
 		gen.generateTransitions();
 		if (args.length == 2 && "-debug".equals(args[1])) {
+			System.out.println("Transitions:\n\n");
 			gen.printTransitions();
 		}
 		gen.writeTM2toFile(filename.split(".tur")[0] + "_2S" + ".tur");
@@ -50,6 +51,62 @@ public class TM2generator {
 	}
 
 	public TM2generator(String path) {
+		readTMfromFile(path);
+
+	}
+
+	public void generateTransitions() {
+		if(sigma == null || states == null || transitions == null){
+			throw new IllegalArgumentException("sigma, states or transitions equals null!");
+		}
+		generateComSymbolTable();
+		generateCompTransitions();
+		generateNativeTransitions();
+	}
+
+	public void printTransitions() {
+		for (String string : transitionsNew) {
+			System.out.println(string);
+		}
+	}
+
+	public void writeTM2toFile(String filename) {
+		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
+			out.print(get2StateTM());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String get2StateTM() {
+		StringBuilder sb = new StringBuilder();
+	
+		sb.append(STATES + "\nalpha\nbeta\n\n");
+	
+		sb.append(TRANSITIONS + "\n");
+		for (String string : transitionsNew) {
+			sb.append(string);
+			sb.append("\n");
+		}
+		sb.append("\n" + SYMBOLS + "\n");
+		for (String symbol : sigma) {
+			sb.append(symbol);
+			sb.append(" ");
+		}
+		for (String[] symbols : compSymbolTable) {
+			for (String symbol : symbols) {
+				sb.append(symbol);
+				sb.append(" ");
+			}
+		}
+	
+		sb.append("\n\n" + TAPE + "\n");
+		sb.append(this.tape);
+	
+		return sb.toString();
+	}
+
+	private void readTMfromFile(String path) {
 		LinkedList<String> states = new LinkedList<>();
 		LinkedList<String> transitions = new LinkedList<>();
 		String[] symbols = null;
@@ -81,19 +138,9 @@ public class TM2generator {
 			System.err.println("Failed to read TM from File!");
 			e.getMessage();
 		}
-
 	}
 
-	public void generateTransitions() {
-		if(sigma == null || states == null || transitions == null){
-			return;
-		}
-		generateComSymbolTable();
-		generateCompTransitions();
-		generateNativeTransitions();
-	}
-
-	public void generateNativeTransitions() {
+	private void generateNativeTransitions() {
 
 		for (String trans : transitions) {
 			String result = "alpha\t";
@@ -130,7 +177,7 @@ public class TM2generator {
 		}
 	}
 
-	public String[] generateSymbolArrays(String symbol, String[] states) {
+	private String[] generateSymbolArray(String symbol, String[] states) {
 		LinkedList<String> result = new LinkedList<>();
 
 		for (String state : states) {
@@ -148,21 +195,21 @@ public class TM2generator {
 
 	}
 
-	public String[][] generateComSymbolTable() {
+	private String[][] generateComSymbolTable() {
 		compSymbolTable = new String[sigma.length][];
 
 		for (int index = 0; index < sigma.length; index++) {
-			compSymbolTable[index] = generateSymbolArrays(sigma[index], states);
+			compSymbolTable[index] = generateSymbolArray(sigma[index], states);
 		}
 
 		return compSymbolTable;
 	}
 
-	public void generateCompTransitions() {
+	private void generateCompTransitions() {
 
 		// generiere Übergänge nach Gleichung (1)
 		for (int index = 0; index < sigma.length; index++) {
-			transitionsNew.add("alpha\t alpha\t" + sigma[index] + "\t" + compSymbolTable[index][0] + "\tR");
+			transitionsNew.add("alpha\t alpha\t" + sigma[index] + "\t\t" + compSymbolTable[index][0] + "\tR");
 		}
 
 		// generiere Übergänge nach Gleichung (2)
@@ -213,57 +260,14 @@ public class TM2generator {
 
 		// generiere Übergänge nach Gleichung(5)
 		for (int index = 0; index < compSymbolTable.length; index++) {
-			transitionsNew.add("alpha\t beta\t" + compSymbolTable[index][0] + "\t" + sigma[index] + "\tR");
-			transitionsNew.add("beta\t beta\t" + compSymbolTable[index][0] + "\t" + sigma[index] + "\tR");
-			transitionsNew.add("alpha\t beta\t" + compSymbolTable[index][1] + "\t" + sigma[index] + "\tL");
-			transitionsNew.add("beta\t beta\t" + compSymbolTable[index][1] + "\t" + sigma[index] + "\tL");
+			transitionsNew.add("alpha\t alpha\t" + compSymbolTable[index][0] + "\t" + sigma[index] + "\tR");
+			transitionsNew.add("beta\t alpha\t" + compSymbolTable[index][0] + "\t" + sigma[index] + "\tR");
+			transitionsNew.add("alpha\t alpha\t" + compSymbolTable[index][1] + "\t" + sigma[index] + "\tL");
+			transitionsNew.add("beta\t alpha\t" + compSymbolTable[index][1] + "\t" + sigma[index] + "\tL");
 		}
 	}
 
-	public void printTransitions() {
-		for (String string : transitionsNew) {
-			System.out.println(string);
-		}
-	}
-
-	public void writeTM2toFile(String filename) {
-		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
-			out.print(get2StateTM());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public String get2StateTM() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(STATES + "\nalpha\nbeta\n\n");
-
-		sb.append(TRANSITIONS + "\n");
-		for (String string : transitionsNew) {
-			sb.append(string);
-			sb.append("\n");
-		}
-		sb.append("\n" + SYMBOLS + "\n");
-		for (String symbol : sigma) {
-			sb.append(symbol);
-			sb.append(" ");
-		}
-		for (String[] symbols : compSymbolTable) {
-			for (String symbol : symbols) {
-				sb.append(symbol);
-				sb.append(" ");
-			}
-		}
-
-		sb.append("\n\n" + TAPE + "\n");
-		sb.append(this.tape);
-
-		return sb.toString();
-	}
-
-	public static int indexOf(String[] arr, String val) {
+	private static int indexOf(String[] arr, String val) {
 		return Arrays.asList(arr).indexOf(val);
 	}
 
