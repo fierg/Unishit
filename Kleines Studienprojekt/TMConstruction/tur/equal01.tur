@@ -2,9 +2,9 @@ states
 q0
 q1
 q2
-q3
+q3a
 q4
-q5
+q5d
 
 transitions
 q0 q0 0 0 L

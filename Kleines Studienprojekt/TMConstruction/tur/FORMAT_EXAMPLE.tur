@@ -9,6 +9,16 @@ q0
 q1
 ...
 
+//to mark a state as final, end its name with f
+//to mark a state as accept state, end its name with a
+//to mark a state as decline state, end its name with d
+
+
+//example
+q2f
+q3a
+...
+
 
 //list of all transitions, seperated by whitespace and split over lines
 transitions

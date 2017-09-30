@@ -11,15 +11,15 @@ import java.util.LinkedList;
 
 public class TM2generator {
 
-	private static final int OLD_STATE = 0;
-	private static final int NEW_STATE = 1;
-	private static final int OLD_SYMBOL = 2;
-	private static final int NEW_SYMBOL = 3;
-	private static final int DIRECTION = 4;
-	private static final String STATES = "states";
-	private static final String TRANSITIONS = "transitions";
-	private static final String SYMBOLS = "symbols";
-	private static final String TAPE = "tape";
+	public static final int OLD_STATE = 0;
+	public static final int NEW_STATE = 1;
+	public static final int OLD_SYMBOL = 2;
+	public static final int NEW_SYMBOL = 3;
+	public static final int DIRECTION = 4;
+	public static final String STATES = "states";
+	public static final String TRANSITIONS = "transitions";
+	public static final String SYMBOLS = "symbols";
+	public static final String TAPE = "tape";
 
 	private String[][] compSymbolTable;
 	private String[] sigma;
