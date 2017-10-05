@@ -61,7 +61,7 @@ public class Tape {
 		StringBuilder tape = new StringBuilder();
 		tape.append("# # ");
 
-		for (int i = leftTape.size() - 1; i >= 0; i--) {
+		for (int i = 0; i < leftTape.size(); i++) {
 			tape.append(leftTape.elementAt(i) + " ");
 		}
 
@@ -69,13 +69,21 @@ public class Tape {
 		tape.append(currentSymbol + " ");
 		tape.append("] ");
 
-		for (int i = 0; i < rightTape.size(); i++) {
+		for (int i = rightTape.size() -1; i >= 0; i--) {
 			tape.append(rightTape.elementAt(i) + " ");
 		}
 
 		tape.append("# # ");
 
 		return tape.toString();
+	}
+
+	public String getCurrentSymbol() {
+		return currentSymbol;
+	}
+
+	public void setCurrentSymbol(String currentSymbol) {
+		this.currentSymbol = currentSymbol;
 	}
 
 }
