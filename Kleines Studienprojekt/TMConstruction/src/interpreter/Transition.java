@@ -5,7 +5,7 @@ public class Transition {
 	private State newState;
 	private String symbolOut;
 	private String direction;
-	
+
 	public Transition(State state, String symbolOut, String direction) {
 		this.newState = state;
 		this.symbolOut = symbolOut;
@@ -19,7 +19,6 @@ public class Transition {
 	public void setNewState(State newState) {
 		this.newState = newState;
 	}
-
 
 	public String getSymbolOut() {
 		return symbolOut;
@@ -35,6 +34,13 @@ public class Transition {
 
 	public void setDirection(String direction) {
 		this.direction = direction;
+	}
+
+	public String toString() {
+
+		StringBuilder s = new StringBuilder().append(newState.getName()).append(" ").append(symbolOut).append(" ")
+				.append(direction);
+		return s.toString();
 	}
 
 }

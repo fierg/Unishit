@@ -167,7 +167,7 @@ public class TM2generator {
 					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
 					result = result + "L\t";
 				} catch (ArrayIndexOutOfBoundsException e) {
-					throw new IllegalArgumentException("invalid transition!");
+					throw new IllegalArgumentException("invalid transition! " +e.getCause());
 				}
 			} else {
 				throw new IllegalArgumentException("invalid transition!");
@@ -214,7 +214,7 @@ public class TM2generator {
 
 		// generiere Übergänge nach Gleichung (2)
 		for (int index = 0; index < sigma.length; index++) {
-			transitionsNew.add("beta\t alpha\t" + sigma[index] + "\t" + compSymbolTable[index][1] + "\tL");
+			transitionsNew.add("beta\t alpha\t" + sigma[index] + "\t\t" + compSymbolTable[index][1] + "\tL");
 		}
 
 		// generiere Übergänge nach Gleichung (3)
@@ -233,26 +233,26 @@ public class TM2generator {
 
 		// generiere Übergänge nach Gleichung (4)
 		for (int symbolclass = 0; symbolclass < compSymbolTable.length; symbolclass++) {
-			for (int index = 4; index < compSymbolTable[symbolclass].length; index = index + 4) {
+			for (int index = 6; index < compSymbolTable[symbolclass].length; index = index + 4) {
 				transitionsNew.add("alpha\t beta\t" + compSymbolTable[symbolclass][index] + "\t"
 						+ compSymbolTable[symbolclass][index - 4] + "\tR");
 			}
 		}
 		for (int symbolclass = 0; symbolclass < compSymbolTable.length; symbolclass++) {
-			for (int index = 5; index < compSymbolTable[symbolclass].length; index = index + 4) {
+			for (int index = 7; index < compSymbolTable[symbolclass].length; index = index + 4) {
 				transitionsNew.add("alpha\t beta\t" + compSymbolTable[symbolclass][index] + "\t"
 						+ compSymbolTable[symbolclass][index - 4] + "\tL");
 			}
 		}
 
 		for (int symbolclass = 0; symbolclass < compSymbolTable.length; symbolclass++) {
-			for (int index = 4; index < compSymbolTable[symbolclass].length; index = index + 4) {
+			for (int index = 6; index < compSymbolTable[symbolclass].length; index = index + 4) {
 				transitionsNew.add("beta\t beta\t" + compSymbolTable[symbolclass][index] + "\t"
 						+ compSymbolTable[symbolclass][index - 4] + "\tR");
 			}
 		}
 		for (int symbolclass = 0; symbolclass < compSymbolTable.length; symbolclass++) {
-			for (int index = 5; index < compSymbolTable[symbolclass].length; index = index + 4) {
+			for (int index = 7; index < compSymbolTable[symbolclass].length; index = index + 4) {
 				transitionsNew.add("beta\t beta\t" + compSymbolTable[symbolclass][index] + "\t"
 						+ compSymbolTable[symbolclass][index - 4] + "\tL");
 			}
@@ -260,10 +260,10 @@ public class TM2generator {
 
 		// generiere Übergänge nach Gleichung(5)
 		for (int index = 0; index < compSymbolTable.length; index++) {
-			transitionsNew.add("alpha\t alpha\t" + compSymbolTable[index][0] + "\t" + sigma[index] + "\tR");
-			transitionsNew.add("beta\t alpha\t" + compSymbolTable[index][0] + "\t" + sigma[index] + "\tR");
-			transitionsNew.add("alpha\t alpha\t" + compSymbolTable[index][1] + "\t" + sigma[index] + "\tL");
-			transitionsNew.add("beta\t alpha\t" + compSymbolTable[index][1] + "\t" + sigma[index] + "\tL");
+			transitionsNew.add("alpha\t alpha\t" + compSymbolTable[index][2] + "\t" + sigma[index] + "\tR");
+			transitionsNew.add("beta\t alpha\t" + compSymbolTable[index][2] + "\t" + sigma[index] + "\tR");
+			transitionsNew.add("alpha\t alpha\t" + compSymbolTable[index][3] + "\t" + sigma[index] + "\tL");
+			transitionsNew.add("beta\t alpha\t" + compSymbolTable[index][3] + "\t" + sigma[index] + "\tL");
 		}
 	}
 

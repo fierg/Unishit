@@ -6,16 +6,14 @@ public class State {
 	private boolean isFinal = false;
 	private boolean isAccepting = false;
 	private boolean isDeclining = false;
-	
-	
 
 	public State(String name) {
 		this.name = name;
-		if(name.endsWith("a")){
-			setAccepting(true);
-		} else if(name.endsWith("d")){
-			setDeclining(true);
-		} else if(name.endsWith("f")){
+		if (name.endsWith("a")) {
+			setAccepting();
+		} else if (name.endsWith("d")) {
+			setDeclining();
+		} else if (name.endsWith("f")) {
 			setFinal(true);
 		}
 	}
@@ -44,8 +42,9 @@ public class State {
 		return isAccepting;
 	}
 
-	public void setAccepting(boolean isAccepting) {
-		this.isAccepting = isAccepting;
+	public void setAccepting() {
+		this.isAccepting = true;
+		this.isFinal = true;
 		if (isDeclining) {
 			isDeclining = false;
 		}
@@ -55,8 +54,9 @@ public class State {
 		return isDeclining;
 	}
 
-	public void setDeclining(boolean isDeclining) {
-		this.isDeclining = isDeclining;
+	public void setDeclining() {
+		this.isDeclining = true;
+		this.isFinal = true;
 		if (isAccepting) {
 			isAccepting = false;
 		}

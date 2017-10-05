@@ -32,10 +32,6 @@ public class Tape {
 		}
 	}
 
-	// TODO
-	public void readTapeFromFile(File file) {
-
-	}
 
 	public void readTapeFromString(String tape) {
 		String[] tapeArray = tape.split(" ");

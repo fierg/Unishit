@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public class TuringMachine {
 
 	private Tape tape;
 	private State currentState;
+	private String[] sigma;
 	private Map<State, HashMap<String, Transition>> transitions;
 
 	public TuringMachine() {
@@ -49,9 +51,12 @@ public class TuringMachine {
 				}
 			}
 
+			this.sigma = symbols;
+
 			String[] statesArray = states.toArray(new String[states.size()]);
-			String[] sigma = symbols;
 			String[] transitionsArray = transitions.toArray(new String[transitions.size()]);
+
+			setTransitionMap(statesArray, transitionsArray);
 
 		} catch (IOException e) {
 			System.err.println("Failed to read TM from File!");
@@ -60,18 +65,71 @@ public class TuringMachine {
 	}
 
 	public void setTransitionMap(String[] states, String[] transitionsArray) {
+		boolean first = true;
 		for (String stateName : states) {
-			
+
 			stateName.trim();
-			transitions.put(new State(stateName), new HashMap<String, Transition>());
+			State s = new State(stateName);
+			transitions.put(s, new HashMap<String, Transition>());
+
+			if (first) {
+				currentState = s;
+				first = false;
+			}
+
+			for (String symbol : sigma) {
+				transitions.get(s).put(symbol.trim(), null);
+			}
 
 		}
 
 		for (String transitionString : transitionsArray) {
 			String[] tr = transitionString.split(" ");
-			transitions.get(tr[OLD_STATE]).put(tr[OLD_SYMBOL], new Transition(transitions., tr[NEW_SYMBOL], tr[DIRECTION]));
+
+			State oldState = null;
+			State newState = null;
+			boolean foundOldState = false;
+			boolean foundNewState = false;
+			Iterator<State> i = transitions.keySet().iterator();
+
+			while (i.hasNext()) {
+				State curr = i.next();
+				if (curr.getName().equals(tr[OLD_STATE].trim())) {
+					oldState = curr;
+					foundOldState = true;
+				}
+				if (curr.getName().equals(tr[NEW_STATE].trim())) {
+					newState = curr;
+					foundNewState = true;
+				}
+				if (foundNewState && foundOldState) {
+					break;
+				}
+			}
+
+			if (!foundNewState || !foundOldState) {
+				System.err
+						.println("Error!\nFound old State:\t" + foundOldState + "\nFound new State:\t" + foundNewState);
+				throw new IllegalArgumentException();
+			}
+
+			if (transitions.get(oldState).get(tr[OLD_SYMBOL].trim()) == null) {
+				transitions.get(oldState).put(tr[OLD_SYMBOL],
+						new Transition(newState, tr[NEW_SYMBOL].trim(), tr[DIRECTION].trim()));
+			} else {
+				System.err.println("Current transition:\t" + transitions.get(oldState).get(tr[OLD_SYMBOL]).toString()
+						+ "\nNew transition:\t" + new Transition(newState, tr[NEW_SYMBOL], tr[DIRECTION]).toString());
+				throw new IllegalArgumentException("TM nondeterministic !!!");
+
+			}
+
 		}
 
+	}
+	
+	
+	public void step() {
+		
 	}
 
 }
