@@ -38,7 +38,7 @@ public class TuringMachine {
 		tape = new Tape();
 		transitions = new HashMap<State, HashMap<String, Transition>>();
 	}
-	
+
 	public void writeTMtoFile(String filename, boolean includeDetails) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
 			out.print(getHistory(includeDetails));
@@ -46,14 +46,14 @@ public class TuringMachine {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getHistory(boolean includeDetails) {
 		StringBuilder sb = new StringBuilder();
 		int index = 0;
 		for (String entry : history) {
-			sb.append(entry);
-			if(includeDetails) {
-				sb.append(historyDetails.get(index++));
+			sb.append(entry + "\n");
+			if (includeDetails) {
+				sb.append(historyDetails.get(index++) + "\n");
 			}
 		}
 		return sb.toString();
@@ -62,7 +62,7 @@ public class TuringMachine {
 	public void readTMfromFile(String path) {
 		LinkedList<String> states = new LinkedList<>();
 		LinkedList<String> transitions = new LinkedList<>();
-//		String[] symbols = null;
+		// String[] symbols = null;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			for (String line; (line = br.readLine()) != null;) {
@@ -74,9 +74,10 @@ public class TuringMachine {
 					while ((line = br.readLine()) != null && !"symbols".equals(line) && !"".equals(line)) {
 						transitions.add(line);
 					}
-			/*	} else if (TM2generator.SYMBOLS.equals(line)) {
-					line = br.readLine();
-					symbols = line.split(" "); */
+					/*
+					 * } else if (TM2generator.SYMBOLS.equals(line)) { line = br.readLine(); symbols
+					 * = line.split(" ");
+					 */
 				} else if (TM2generator.TAPE.equals(line)) {
 					tape.readTapeFromString(br.readLine());
 				}
@@ -161,9 +162,9 @@ public class TuringMachine {
 
 	}
 
-	public void step() {
+	private void step() {
 		Transition t = transitions.get(currentState).get(tape.getCurrentSymbol());
-		if (t == null) {
+		if (t == null || t.equals(null)) {
 			System.err.println(
 					"Current state: " + currentState.getName() + "\nCurrent symbol: " + tape.getCurrentSymbol());
 			throw new IllegalArgumentException("No existing transition for current state and symbol found!");
@@ -196,8 +197,8 @@ public class TuringMachine {
 		history.add(tape.toString());
 
 		while (!terminated) {
-			historyDetails.add("Current state: " + currentState.getName());
-			historyDetails.add("Transition: " + transitions.get(currentState).get(tape.getCurrentSymbol()));
+			historyDetails.add("Current state: " + currentState.getName() + "\t Transition: \t"
+					+ transitions.get(currentState).get(tape.getCurrentSymbol()));
 			if (debug) {
 				System.out.println("Current state: " + currentState.getName());
 				System.out.println("Transition: " + transitions.get(currentState).get(tape.getCurrentSymbol()) + "\n");
@@ -234,9 +235,14 @@ public class TuringMachine {
 			return;
 		}
 
-		System.out.println("Starting TM with Tape:\n");
+		System.out.println("Starting 2 State TM with Tape:\n");
 		System.out.println(tape.toString());
+		history.add(tape.toString());
+
 		while (!terminated) {
+			historyDetails.add("Current state: " + currentState.getName() + "\t Transition: \t"
+					+ transitions.get(currentState).get(tape.getCurrentSymbol()));
+
 			if (debug) {
 				System.out.println("Current state: " + currentState.getName());
 				System.out.println("Transition: " + transitions.get(currentState).get(tape.getCurrentSymbol()) + "\n");
@@ -251,25 +257,27 @@ public class TuringMachine {
 					break;
 				} else {
 					System.err.println("Failed to simulate TM!\n" + e.getMessage());
+					historyDetails.add("Failed to simulate TM!\n" + e.getMessage());
 					break;
 				}
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			history.add(tape.toString());
 			System.out.println(tape.toString());
 		}
 
 		if (terminated) {
-			System.out.println("TM terminated!");
+			String output = "TM terminated!";
 			State s = new State(tape.getCurrentSymbol().split(";")[1]);
 			if (s.isAccepting()) {
-				System.out.println("TM accepts input");
+				output += "TM accepts input";
 			} else if (s.isDeclining()) {
-				System.out.println("TM declines input");
+				output += "TM declines input";
 			}
+			System.out.println(output);
+			historyDetails.add(output);
 		}
 
 	}
-
 }

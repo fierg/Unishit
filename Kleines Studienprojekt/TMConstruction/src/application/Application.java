@@ -27,20 +27,23 @@ public class Application {
 		String filename = args[0];
 		if (contains(args, "-d")) {
 			debug = true;
-		} else if (contains(args, "-p")) {
+		}
+		if (contains(args, "-p")) {
 			print2File = true;
-		} else if (contains(args, "-pd")) {
+		}
+		if (contains(args, "-pd")) {
 			printDetails = true;
-		} else if (contains(args, "-c")) {
+		}
+		if (contains(args, "-c")) {
 			convert = true;
-			System.out.println("Init 2 State TM Generator...");
+			System.out.println("Init 2 State TM Generator...\n");
 			TM2generator gen = new TM2generator(args[0]);
 			gen.generate2StateTM();
 			if (debug) {
 				gen.printTransitions();
 			}
 			filename = args[0].split(".tur")[0] + "_2S.tur";
-			System.out.println("writing 2 State TM to file " + filename);
+			System.out.println("\n\nwriting 2 State TM to file " + filename);
 			gen.writeTM2toFile(filename);
 			try {
 				TimeUnit.SECONDS.sleep(1);
@@ -49,9 +52,12 @@ public class Application {
 			}
 		}
 
+		System.out.println("reading TM from file\t" + filename);
+		
 		TuringMachine tm = new TuringMachine(debug);
 		tm.readTMfromFile(filename);
-
+		
+		System.out.println("starting simulator\n");
 		if (convert) {
 			tm.run2StateTM(delayMilis);
 		} else {
@@ -59,14 +65,15 @@ public class Application {
 		}
 
 		if (print2File) {
-			tm.writeTMtoFile(filename.split(".tur")[0] + "_history", printDetails);
+			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + ".history");
+			tm.writeTMtoFile(filename.split(".tur")[0] + ".history", printDetails);
 		}
 
 	}
 
 	private static boolean contains(String[] arr, String key) {
 		for (String string : arr) {
-			if (string.equals(key)) {
+			if (key.equals(string)) {
 				return true;
 			}
 		}

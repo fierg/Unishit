@@ -1,5 +1,4 @@
 package interpreter;
-import java.io.File;
 import java.util.Stack;
 
 public class Tape {
