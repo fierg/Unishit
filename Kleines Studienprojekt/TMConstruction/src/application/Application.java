@@ -11,7 +11,6 @@ public class Application {
 		boolean debug = false;
 		boolean print2File = false;
 		boolean printDetails = false;
-		boolean convert = false;
 		long delayMilis = 0;
 
 		if (args.length < 1) {
@@ -35,7 +34,6 @@ public class Application {
 			printDetails = true;
 		}
 		if (contains(args, "-c")) {
-			convert = true;
 			System.out.println("Init 2 State TM Generator...\n");
 			TM2generator gen = new TM2generator(args[0]);
 			gen.generate2StateTM();
@@ -53,16 +51,11 @@ public class Application {
 		}
 
 		System.out.println("reading TM from file\t" + filename);
-		
 		TuringMachine tm = new TuringMachine(debug);
 		tm.readTMfromFile(filename);
-		
+
 		System.out.println("starting simulator\n");
-		if (convert) {
-			tm.run2StateTM(delayMilis);
-		} else {
-			tm.runTM(delayMilis);
-		}
+		tm.run(delayMilis);
 
 		if (print2File) {
 			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + ".history");

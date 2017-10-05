@@ -23,7 +23,8 @@ public class TuringMachine {
 	private static final int DIRECTION = 4;
 
 	private boolean terminated;
-	private boolean debug = true;
+	private boolean debug;
+	private int nrOfStates = 0;
 	private Tape tape;
 	private State currentState;
 	private Map<State, HashMap<String, Transition>> transitions;
@@ -96,6 +97,7 @@ public class TuringMachine {
 
 	private void setTransitionMap(String[] states, String[] transitionsArray) {
 		boolean first = true;
+		nrOfStates = states.length;
 		for (String stateName : states) {
 			stateName.trim();
 			State s = new State(stateName);
@@ -185,7 +187,14 @@ public class TuringMachine {
 		}
 	}
 
-	public void runTM(long timeoutMili) {
+	public void run(long timeoutMili) {
+		if(nrOfStates == 2) {
+			run2StateTM(timeoutMili);
+		} else {
+			runTM(timeoutMili);
+		}
+	}
+	private void runTM(long timeoutMili) {
 
 		if (transitions.get(currentState).isEmpty()) {
 			System.out.println("No transitions! unable to simulate TM!\n");
@@ -228,7 +237,7 @@ public class TuringMachine {
 
 	}
 
-	public void run2StateTM(long timeoutMili) {
+	private void run2StateTM(long timeoutMili) {
 
 		if (transitions.get(currentState).isEmpty()) {
 			System.out.println("No transitions! unable to simulate TM!\n");
