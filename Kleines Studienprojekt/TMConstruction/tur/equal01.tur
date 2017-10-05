@@ -19,7 +19,7 @@ q2 q0 0 0 R
 q2 q0 1 X L
 q2 q2 X X R
 q2 q3d # # R
-q4 q1 0 X L
+q4 q0 0 X L
 q4 q4 1 1 R
 q4 q4 X X R
 q4 q4 # # R
@@ -28,4 +28,4 @@ symbols
 0 1 X #
 
 tape
-[ 0 ] 1 1 1 0 0
+[ 0 ] 1 1 1 0 0 0

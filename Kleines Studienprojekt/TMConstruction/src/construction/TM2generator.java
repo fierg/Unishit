@@ -9,6 +9,8 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import interpreter.Tape;
+
 public class TM2generator {
 
 	public static final int OLD_STATE = 0;
@@ -34,7 +36,7 @@ public class TM2generator {
 		if (args.length >= 1) {
 			String filename = args[0];
 			TM2generator gen = new TM2generator(args[0]);
-			gen.generateTransitions();
+			gen.generate2StateTM();
 			if (args.length == 2 && "-debug".equals(args[1])) {
 				System.out.println("Transitions:\n\n");
 				gen.printTransitions();
@@ -57,13 +59,15 @@ public class TM2generator {
 
 	}
 
-	public void generateTransitions() {
-		if (sigma == null || states == null || transitions == null) {
-			throw new IllegalArgumentException("sigma, states or transitions equals null!");
+	public void generate2StateTM() {
+		if (sigma == null || states == null || transitions == null || tape == null || tape == "") {
+			throw new IllegalArgumentException("sigma, states, tape or transitions equals null!");
 		}
 		generateComSymbolTable();
 		generateCompTransitions();
 		generateNativeTransitions();
+		modifyInitialSymbol();
+
 	}
 
 	public void printTransitions() {
@@ -159,12 +163,27 @@ public class TM2generator {
 					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4] + "\t";
 					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 2] + "\t";
 					result = result + "R\t";
+
+					transitionsNew.add(result);
+
+					result = ALPHA + "\t" + BETA + "\t";
+					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4 + 1] + "\t";
+					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 2] + "\t";
+					result = result + "R\t";
+
 				} catch (ArrayIndexOutOfBoundsException e) {
 					throw new IllegalArgumentException("invalid transition!");
 				}
 			} else if ("L".equals(transArray[DIRECTION])) {
 				try {
-					result = result + ALPHA + "\t";
+					result = ALPHA + "\t" + ALPHA + "\t";
+					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4] + "\t";
+					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
+					result = result + "L\t";
+
+					transitionsNew.add(result);
+
+					result = ALPHA + "\t" + ALPHA + "\t";
 					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4 + 1] + "\t";
 					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
 					result = result + "L\t";
@@ -172,7 +191,7 @@ public class TM2generator {
 					throw new IllegalArgumentException("invalid transition! " + e.getCause());
 				}
 			} else {
-				throw new IllegalArgumentException("invalid transition!");
+				throw new IllegalArgumentException("invalid transition! direction of transition was not L or R!");
 			}
 
 			transitionsNew.add(result);
@@ -211,12 +230,12 @@ public class TM2generator {
 
 		// generiere Übergänge nach Gleichung (1)
 		for (int index = 0; index < sigma.length; index++) {
-			transitionsNew.add(ALPHA + "\t" + ALPHA + "\t" + sigma[index] + "\t\t" + compSymbolTable[index][0] + "\tR");
+			transitionsNew.add(ALPHA + "\t" + ALPHA + "\t" + sigma[index] + "\t" + compSymbolTable[index][0] + "\tR");
 		}
 
 		// generiere Übergänge nach Gleichung (2)
 		for (int index = 0; index < sigma.length; index++) {
-			transitionsNew.add(BETA + "\t" + ALPHA + "\t" + sigma[index] + "\t\t" + compSymbolTable[index][1] + "\tL");
+			transitionsNew.add(BETA + "\t" + ALPHA + "\t" + sigma[index] + "\t" + compSymbolTable[index][1] + "\tL");
 		}
 
 		// generiere Übergänge nach Gleichung (3)
@@ -269,8 +288,20 @@ public class TM2generator {
 		}
 	}
 
-	private static int indexOf(String[] arr, String val) {
+	private int indexOf(String[] arr, String val) {
 		return Arrays.asList(arr).indexOf(val);
+	}
+
+	private void modifyInitialSymbol() {
+		if (tape.trim().equals("") || tape.equals(null)) {
+			throw new IllegalArgumentException("Tape is empty!");
+		}
+		Tape t = new Tape();
+		t.readTapeFromString(tape);
+
+		t.setCurrentSymbol(compSymbolTable[0][0]);
+
+		tape = t.toString();
 	}
 
 }
