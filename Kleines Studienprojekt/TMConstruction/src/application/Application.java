@@ -19,7 +19,7 @@ public class Application {
 			System.exit(1);
 		}
 
-		if (args[1].chars().allMatch(Character::isDigit)) {
+		if (args.length >=2 && args[1].chars().allMatch(Character::isDigit)) {
 			delayMilis = Long.parseLong(args[1]);
 		}
 

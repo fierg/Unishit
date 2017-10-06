@@ -201,8 +201,8 @@ public class TuringMachine {
 			return;
 		}
 
-		System.out.println("Starting TM with Tape:\n");
-		System.out.println(tape.toString());
+		System.out.println("Starting TM with Tape:");
+		System.out.println(tape.toString()+"\n\n");
 		history.add(tape.toString());
 
 		while (!terminated) {
