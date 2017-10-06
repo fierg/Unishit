@@ -231,7 +231,7 @@ public class TuringMachine {
 			} else if (currentState.isDeclining()) {
 				output = output + "TM declines input";
 			}
-			historyDetails.add(output);
+			history.add(output);
 			System.out.println(output);
 		}
 
@@ -277,7 +277,7 @@ public class TuringMachine {
 		}
 
 		if (terminated) {
-			String output = "TM terminated!";
+			String output = "TM terminated!\t";
 			State s = new State(tape.getCurrentSymbol().split(";")[1]);
 			if (s.isAccepting()) {
 				output += "TM accepts input";
@@ -285,7 +285,7 @@ public class TuringMachine {
 				output += "TM declines input";
 			}
 			System.out.println(output);
-			historyDetails.add(output);
+			history.add(output);
 		}
 
 	}

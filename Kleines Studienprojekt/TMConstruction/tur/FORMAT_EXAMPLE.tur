@@ -53,7 +53,7 @@ symbols
 0 1 X #
 
 
-//TODO
+
 //used for the turinginterpreter, unable to do so after transformation
 tape
 //example
