@@ -5,6 +5,11 @@ import java.util.concurrent.TimeUnit;
 import construction.TM2generator;
 import interpreter.TuringMachine;
 
+/**
+ * Anwendung
+ * Kapselt die eigentliche Anwendung und handelt Parameter ab
+ *
+ */
 public class Application {
 
 	public static void main(String[] args) {

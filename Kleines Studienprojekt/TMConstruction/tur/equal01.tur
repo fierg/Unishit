@@ -29,3 +29,6 @@ symbols
 
 tape
 [ 0 ] 1 1 1 0 0
+
+description
+This TM evaluates if the given input contains an equal ammount of zeros and ones. 

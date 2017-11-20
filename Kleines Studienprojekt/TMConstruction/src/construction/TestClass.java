@@ -4,6 +4,11 @@ import java.util.concurrent.TimeUnit;
 
 import interpreter.TuringMachine;
 
+/**
+ * Testklasse
+ * 
+ *
+ */
 public class TestClass {
 
 /*	private static String[] oldSymbols = { "0", "1", "X", "#" };

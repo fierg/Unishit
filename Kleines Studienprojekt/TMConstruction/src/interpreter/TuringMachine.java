@@ -95,6 +95,18 @@ public class TuringMachine {
 		}
 	}
 
+	/**
+	 * @param timeoutMili
+	 * TESTMETHODE
+	 */
+	public void run(long timeoutMili) {
+		if(nrOfStates == 2) {
+			run2StateTM(timeoutMili);
+		} else {
+			runTM(timeoutMili);
+		}
+	}
+
 	private void setTransitionMap(String[] states, String[] transitionsArray) {
 		boolean first = true;
 		nrOfStates = states.length;
@@ -186,14 +198,9 @@ public class TuringMachine {
 			terminated = true;
 		}
 	}
-
-	public void run(long timeoutMili) {
-		if(nrOfStates == 2) {
-			run2StateTM(timeoutMili);
-		} else {
-			runTM(timeoutMili);
-		}
-	}
+	
+	
+	
 	private void runTM(long timeoutMili) {
 
 		if (transitions.get(currentState).isEmpty()) {

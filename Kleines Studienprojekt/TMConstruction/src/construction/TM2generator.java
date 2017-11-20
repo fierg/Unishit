@@ -11,13 +11,25 @@ import java.util.LinkedList;
 
 import interpreter.Tape;
 
+/**
+ * Generiert eine TM mit nur 2 Zuständen aus einer gegeben TM (im .tur Format)
+ *
+ */
 public class TM2generator {
 
+	
+	/**
+	 * statische indizes der symbole in den Transitionarrays
+	 */
 	public static final int OLD_STATE = 0;
 	public static final int NEW_STATE = 1;
 	public static final int OLD_SYMBOL = 2;
 	public static final int NEW_SYMBOL = 3;
 	public static final int DIRECTION = 4;
+	
+	/**
+	 * 
+	 */
 	public static final String STATES = "states";
 	public static final String TRANSITIONS = "transitions";
 	public static final String SYMBOLS = "symbols";

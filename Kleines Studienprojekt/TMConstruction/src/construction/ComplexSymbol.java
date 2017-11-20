@@ -1,5 +1,9 @@
 package construction;
 
+/**
+ * Boilerplate-Code für die zusätzlich erstellten Symbole beim Umwandeln einer TM
+ *
+ */
 public class ComplexSymbol {
 	
 	public static final String INFORMATION_PLUS = "+";
