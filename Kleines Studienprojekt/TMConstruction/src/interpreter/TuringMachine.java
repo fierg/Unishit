@@ -16,6 +16,7 @@ import construction.TM2generator;
 
 public class TuringMachine {
 
+	// statische indizes der Symbole in den Transitionarrays
 	private static final int OLD_STATE = 0;
 	private static final int NEW_STATE = 1;
 	private static final int OLD_SYMBOL = 2;
@@ -25,12 +26,17 @@ public class TuringMachine {
 	private boolean terminated;
 	private boolean debug;
 	private int nrOfStates = 0;
+
+	// eigentliche TM
 	private Tape tape;
 	private State currentState;
 	private Map<State, HashMap<String, Transition>> transitions;
+
+	// Verlauf, kann nach Terminierung ausgegeben werden
 	private LinkedList<String> history;
 	private LinkedList<String> historyDetails;
 
+	// Konstruktor
 	public TuringMachine(boolean debug) {
 		history = new LinkedList<>();
 		historyDetails = new LinkedList<>();
@@ -40,7 +46,8 @@ public class TuringMachine {
 		transitions = new HashMap<State, HashMap<String, Transition>>();
 	}
 
-	public void writeTMtoFile(String filename, boolean includeDetails) {
+	// schriebt verlauf der TM in Datei
+	public void writeHistoryToFile(String filename, boolean includeDetails) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
 			out.print(getHistory(includeDetails));
 		} catch (FileNotFoundException e) {
@@ -60,10 +67,10 @@ public class TuringMachine {
 		return sb.toString();
 	}
 
+	// ließt TM von Datei ein
 	public void readTMfromFile(String path) {
 		LinkedList<String> states = new LinkedList<>();
 		LinkedList<String> transitions = new LinkedList<>();
-		// String[] symbols = null;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			for (String line; (line = br.readLine()) != null;) {
@@ -75,10 +82,6 @@ public class TuringMachine {
 					while ((line = br.readLine()) != null && !"symbols".equals(line) && !"".equals(line)) {
 						transitions.add(line);
 					}
-					/*
-					 * } else if (TM2generator.SYMBOLS.equals(line)) { line = br.readLine(); symbols
-					 * = line.split(" ");
-					 */
 				} else if (TM2generator.TAPE.equals(line)) {
 					tape.readTapeFromString(br.readLine());
 				}
@@ -97,16 +100,21 @@ public class TuringMachine {
 
 	/**
 	 * @param timeoutMili
-	 * TESTMETHODE
+	 *            TESTMETHODE
 	 */
 	public void run(long timeoutMili) {
-		if(nrOfStates == 2) {
-			run2StateTM(timeoutMili);
+		if (this.currentState.equals(null) || this.nrOfStates == 0 || this.tape.equals(null)
+				|| this.transitions.equals(null)) {
+			throw new IllegalArgumentException("Unable to run this TM!");
+		}
+		if (nrOfStates == 2) {
+			runTM(timeoutMili, true);
 		} else {
-			runTM(timeoutMili);
+			runTM(timeoutMili, false);
 		}
 	}
 
+	// erstellt Übergangs-Map aus eingelesenen Übergängen
 	private void setTransitionMap(String[] states, String[] transitionsArray) {
 		boolean first = true;
 		nrOfStates = states.length;
@@ -120,6 +128,8 @@ public class TuringMachine {
 			}
 		}
 
+		// jeder Übergang wird zunäachst normiert und anschließend in Map mit übergängen
+		// gespeichert
 		for (String transitionString : transitionsArray) {
 
 			String[] tr = transitionString.replace("\t", " ").split(" ");
@@ -155,11 +165,17 @@ public class TuringMachine {
 				System.out.println("Transition: " + Arrays.toString(tr));
 				System.out.println("Map before: " + transitions.get(oldState).entrySet().toString());
 			}
+
+			// wenn neuer Übergang noch nicht exisitiert, wird er hinzugefügt
 			if (transitions.get(oldState).put(tr[OLD_SYMBOL],
 					new Transition(newState, tr[NEW_SYMBOL].trim(), tr[DIRECTION].trim())) == null) {
 				if (debug) {
 					System.out.println("Map after: " + transitions.get(oldState).entrySet().toString());
 				}
+
+				// andernfalls wird überprüft ob neuer Übergang von altem abweicht, falls ja ist
+				// TM nicht deterministisch und kann nicht durch diesen Simulator simuliert
+				// werden.
 			} else {
 				System.err.println("Current transition:\t" + transitions.get(oldState).get(tr[OLD_SYMBOL]).toString()
 						+ "\nNew transition:\t" + new Transition(newState, tr[NEW_SYMBOL], tr[DIRECTION]).toString());
@@ -176,14 +192,20 @@ public class TuringMachine {
 
 	}
 
+	// führ einen schritt der TM aus
 	private void step() {
+
+		// zu beginn wird Übergang aus Map geladen, falls kein Übergang exisitiert wird
+		// abgebrochen.
 		Transition t = transitions.get(currentState).get(tape.getCurrentSymbol());
 		if (t == null || t.equals(null)) {
 			System.err.println(
 					"Current state: " + currentState.getName() + "\nCurrent symbol: " + tape.getCurrentSymbol());
-			throw new IllegalArgumentException("No existing transition for current state and symbol found!");
-
+			System.err.println("No existing transition for current state and symbol found!");
+			terminated = true;
 		}
+
+		// anschließend wird aktueller Schritt vollzogen und das Band bewegt
 		tape.setCurrentSymbol(t.getSymbolOut());
 		if (t.getDirection().equals("R")) {
 			tape.moveRight();
@@ -194,14 +216,16 @@ public class TuringMachine {
 		}
 
 		currentState = t.getNewState();
+		
+		//wenn aktueller Zustand final ist, wird die Simulation beendet.
 		if (currentState.isFinal()) {
 			terminated = true;
 		}
 	}
+
 	
-	
-	
-	private void runTM(long timeoutMili) {
+	//Führt eine TM vollstaändig aus
+	private void runTM(long timeoutMili, boolean twoStates) {
 
 		if (transitions.get(currentState).isEmpty()) {
 			System.out.println("No transitions! unable to simulate TM!\n");
@@ -209,9 +233,10 @@ public class TuringMachine {
 		}
 
 		System.out.println("Starting TM with Tape:");
-		System.out.println(tape.toString()+"\n\n");
+		System.out.println(tape.toString() + "\n\n");
 		history.add(tape.toString());
 
+		//Solange TM nicht terminiert, werden einzeln Schritte vollzogen und der Verlauf gespeichert
 		while (!terminated) {
 			historyDetails.add("Current state: " + currentState.getName() + "\t Transition: \t"
 					+ transitions.get(currentState).get(tape.getCurrentSymbol()));
@@ -231,69 +256,33 @@ public class TuringMachine {
 			System.out.println(tape.toString());
 		}
 
-		if (terminated) {
-			String output = "TM terminated!\t";
-			if (currentState.isAccepting()) {
-				output = output + "TM accepts input";
-			} else if (currentState.isDeclining()) {
-				output = output + "TM declines input";
-			}
-			history.add(output);
-			System.out.println(output);
-		}
+		//Nachdem TM terminiert, wird entschieden ob eingabe akzeptiert oder abgelehnt wird
+		String output = "TM terminated!\t";
 
-	}
-
-	private void run2StateTM(long timeoutMili) {
-
-		if (transitions.get(currentState).isEmpty()) {
-			System.out.println("No transitions! unable to simulate TM!\n");
-			return;
-		}
-
-		System.out.println("Starting 2 State TM with Tape:\n");
-		System.out.println(tape.toString());
-		history.add(tape.toString());
-
-		while (!terminated) {
-			historyDetails.add("Current state: " + currentState.getName() + "\t Transition: \t"
-					+ transitions.get(currentState).get(tape.getCurrentSymbol()));
-
-			if (debug) {
-				System.out.println("Current state: " + currentState.getName());
-				System.out.println("Transition: " + transitions.get(currentState).get(tape.getCurrentSymbol()) + "\n");
-			}
-			try {
-				step();
-				TimeUnit.MILLISECONDS.sleep(timeoutMili);
-			} catch (IllegalArgumentException e) {
-				State s = new State(tape.getCurrentSymbol().split(";")[1]);
-				if (s.isFinal()) {
-					terminated = true;
-					break;
-				} else {
-					System.err.println("Failed to simulate TM!\n" + e.getMessage());
-					historyDetails.add("Failed to simulate TM!\n" + e.getMessage());
-					break;
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			history.add(tape.toString());
-			System.out.println(tape.toString());
-		}
-
-		if (terminated) {
-			String output = "TM terminated!\t";
+		if (twoStates) {
+			//in der TM mit 2 Zuständen befindet sich diese Information im aktuellen Symbol und muss erst extrahiert werden.
 			State s = new State(tape.getCurrentSymbol().split(";")[1]);
 			if (s.isAccepting()) {
 				output += "TM accepts input";
 			} else if (s.isDeclining()) {
 				output += "TM declines input";
+			} else {
+				output += "TM seems to have failed. There was no next step possible due to missing transition.";
 			}
-			System.out.println(output);
-			history.add(output);
+
+		} else {
+			if (currentState.isAccepting()) {
+				output = output + "TM accepts input";
+			} else if (currentState.isDeclining()) {
+				output = output + "TM declines input";
+			} else {
+				output += "TM seems to have failed. There was no next step possible due to missing transition.";
+			}
 		}
 
+		history.add(output);
+		System.out.println(output);
+
 	}
+
 }

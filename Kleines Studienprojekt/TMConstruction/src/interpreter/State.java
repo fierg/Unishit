@@ -1,5 +1,8 @@
 package interpreter;
 
+/*
+ * Kapselt Zustände der TM und bestimmt ob Zustand final/akzeptierend/ablehnend
+ */
 public class State {
 
 	private String name;

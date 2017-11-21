@@ -17,33 +17,39 @@ import interpreter.Tape;
  */
 public class TM2generator {
 
-	
-	/**
-	 * statische indizes der symbole in den Transitionarrays
-	 */
+	// statische indizes der Symbole in den Transitionarrays
 	public static final int OLD_STATE = 0;
 	public static final int NEW_STATE = 1;
 	public static final int OLD_SYMBOL = 2;
 	public static final int NEW_SYMBOL = 3;
 	public static final int DIRECTION = 4;
-	
-	/**
-	 * 
-	 */
+
+	// statische Namen der flags in den .tur Dateien
 	public static final String STATES = "states";
 	public static final String TRANSITIONS = "transitions";
 	public static final String SYMBOLS = "symbols";
 	public static final String TAPE = "tape";
+
+	// Namen für die beiden Zustände nach dem Umwandeln
 	public static final String ALPHA = "q0";
 	public static final String BETA = "q1";
 
+	// hält alle komlexen Symbole die für neue TM benötigt werden
 	private String[][] compSymbolTable;
+
+	// Zustände, Aphabet und Übergänge der ausgangs TM
 	private String[] sigma;
 	private String[] states;
 	private String[] transitions;
+
+	// Neue Übergänge der TM mit 2 Zständen
 	private LinkedList<String> transitionsNew;
+
+	// Tape wird in neue .tur kopiert
 	private String tape;
 
+	// Generator lässt sich separat auf eine .tur datei anwenden und erstellt eine
+	// äquivalente TM mit 2 Zuständen
 	public static void main(String[] args) {
 		if (args.length >= 1) {
 			String filename = args[0];
@@ -59,35 +65,35 @@ public class TM2generator {
 		}
 	}
 
-	public TM2generator(String[] sigmaA, String[] oldStates, String[] oldTransitions) {
-		transitionsNew = new LinkedList<>();
-		sigma = Arrays.copyOf(sigmaA, sigmaA.length);
-		states = Arrays.copyOf(oldStates, oldStates.length);
-		transitions = Arrays.copyOf(oldTransitions, oldTransitions.length);
-	}
-
+	// Konstruktor
 	public TM2generator(String path) {
 		readTMfromFile(path);
-
 	}
 
+	// generiert aus eingelesener TM eine 2 state TM
 	public void generate2StateTM() {
 		if (sigma == null || states == null || transitions == null || tape == null || tape == "") {
 			throw new IllegalArgumentException("sigma, states, tape or transitions equals null!");
 		}
+		// erstellt Tabelle mit komplexen Symbolen
 		generateComSymbolTable();
+		// erstellt die zusätzlichen Übergänge nach Shannons Konstruktion
 		generateCompTransitions();
+		// erstellt herkömmliche Übergänge
 		generateNativeTransitions();
+		// passt Startsymbol an
 		modifyInitialSymbol();
 
 	}
 
+	// gibt neu generierte Übergänge aus
 	public void printTransitions() {
 		for (String string : transitionsNew) {
 			System.out.println(string);
 		}
 	}
 
+	// schriebt die modifizierten Übergänge in eine Datei
 	public void writeTM2toFile(String filename) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
 			out.print(get2StateTM());
@@ -96,6 +102,10 @@ public class TM2generator {
 		}
 	}
 
+	/*
+	 * erstellt .tur Datei zur erstellten TM mit 2 Zuständen dazu verwendetes Schema
+	 * in FORMAT_EXAMPLE.tur beschrieben
+	 */
 	public String get2StateTM() {
 		StringBuilder sb = new StringBuilder();
 
@@ -124,6 +134,9 @@ public class TM2generator {
 		return sb.toString();
 	}
 
+	/*
+	 * ließt eine TM im .tur Format ein
+	 */
 	private void readTMfromFile(String path) {
 		LinkedList<String> states = new LinkedList<>();
 		LinkedList<String> transitions = new LinkedList<>();
@@ -158,61 +171,16 @@ public class TM2generator {
 		}
 	}
 
-	private void generateNativeTransitions() {
-
-		for (String trans : transitions) {
-			String result = ALPHA + "\t";
-			String[] transArray = trans.split(" ");
-
-			int oldSymbolIndex = indexOf(sigma, transArray[OLD_SYMBOL]);
-			int oldStateIndex = indexOf(states, transArray[OLD_STATE]);
-			int newSymbolIndex = indexOf(sigma, transArray[NEW_SYMBOL]);
-			int newStateIndex = indexOf(states, transArray[NEW_STATE]);
-
-			if ("R".equals(transArray[DIRECTION])) {
-				try {
-					result = result + BETA + "\t";
-					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4] + "\t";
-					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 2] + "\t";
-					result = result + "R\t";
-
-					transitionsNew.add(result);
-
-					result = ALPHA + "\t" + BETA + "\t";
-					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4 + 1] + "\t";
-					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 2] + "\t";
-					result = result + "R\t";
-
-				} catch (ArrayIndexOutOfBoundsException e) {
-					throw new IllegalArgumentException("invalid transition!");
-				}
-			} else if ("L".equals(transArray[DIRECTION])) {
-				try {
-					result = ALPHA + "\t" + ALPHA + "\t";
-					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4] + "\t";
-					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
-					result = result + "L\t";
-
-					transitionsNew.add(result);
-
-					result = ALPHA + "\t" + ALPHA + "\t";
-					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4 + 1] + "\t";
-					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
-					result = result + "L\t";
-				} catch (ArrayIndexOutOfBoundsException e) {
-					throw new IllegalArgumentException("invalid transition! " + e.getCause());
-				}
-			} else {
-				throw new IllegalArgumentException("invalid transition! direction of transition was not L or R!");
-			}
-
-			transitionsNew.add(result);
-		}
-	}
-
+	// erstellt zu einem nativen Symbol alle komplexen Symbole mit allen Zuständen
+	// und weiteren Informationen
 	private String[] generateSymbolArray(String symbol, String[] states) {
 		LinkedList<String> result = new LinkedList<>();
 
+		/*
+		 * Ein Symbol exisitiert pro Zustand 4 mal, mit Informationsüberschuss/defizit
+		 * im Feld und in beiden Richtungen siehe 4*m*n neue Symbole im Paper von
+		 * Shannon
+		 */
 		for (String state : states) {
 			result.add(new ComplexSymbol(symbol, state, ComplexSymbol.INFORMATION_MINUS, ComplexSymbol.DIRECTION_R)
 					.toString());
@@ -228,6 +196,7 @@ public class TM2generator {
 
 	}
 
+	// erstellt für jedes Symbol alle komplexen Symbole
 	private String[][] generateComSymbolTable() {
 		compSymbolTable = new String[sigma.length][];
 
@@ -238,19 +207,95 @@ public class TM2generator {
 		return compSymbolTable;
 	}
 
+	/*
+	 * generiert Übergänge nach Gleichung (6) wie im Paper beschrieben zuerst werden
+	 * exisitierende Übergänge eingelesen, anschließend wird für jeden dieser
+	 * Übergänge ein neuer Übergang erstellt der zwischen den neuen Symbolen gültig
+	 * ist.
+	 */
+	private void generateNativeTransitions() {
+
+		for (String trans : transitions) {
+
+			// native Übergänge sind nur aus zustand ALPHA möglich
+			String result = ALPHA + "\t";
+			String[] transArray = trans.split(" ");
+
+			int oldSymbolIndex = indexOf(sigma, transArray[OLD_SYMBOL]);
+			int oldStateIndex = indexOf(states, transArray[OLD_STATE]);
+			int newSymbolIndex = indexOf(sigma, transArray[NEW_SYMBOL]);
+			int newStateIndex = indexOf(states, transArray[NEW_STATE]);
+
+			// je nach Richtung des Übergangs ist Folgezustand entweder ALPHA oder BETA
+			if ("R".equals(transArray[DIRECTION])) {
+				try {
+					// Übergang vom alten symbol mit R im Index
+					result = result + BETA + "\t";
+					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4] + "\t";
+					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 2] + "\t";
+					result = result + "R\t";
+
+					transitionsNew.add(result);
+
+					// übergang mit altem Symbol mit L im Index
+					result = ALPHA + "\t" + BETA + "\t";
+					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4 + 1] + "\t";
+					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 2] + "\t";
+					result = result + "R\t";
+
+				} catch (ArrayIndexOutOfBoundsException e) {
+					throw new IllegalArgumentException("invalid transition!");
+				}
+			} else if ("L".equals(transArray[DIRECTION])) {
+				try {
+					// Übergang vom alten symbol mit R im Index
+					result = ALPHA + "\t" + ALPHA + "\t";
+					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4] + "\t";
+					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
+					result = result + "L\t";
+
+					transitionsNew.add(result);
+
+					// Übergang vom alten symbol mit L im Index
+					result = ALPHA + "\t" + ALPHA + "\t";
+					result = result + compSymbolTable[oldSymbolIndex][oldStateIndex * 4 + 1] + "\t";
+					result = result + compSymbolTable[newSymbolIndex][newStateIndex * 4 + 3] + "\t";
+					result = result + "L\t";
+				} catch (ArrayIndexOutOfBoundsException e) {
+					throw new IllegalArgumentException("invalid transition! " + e.getCause());
+				}
+			} else {
+				throw new IllegalArgumentException("invalid transition! direction of transition was not L or R!");
+			}
+
+			transitionsNew.add(result);
+		}
+	}
+
 	private void generateCompTransitions() {
 
-		// generiere Übergänge nach Gleichung (1)
+		/*
+		 * generiere Übergänge nach Gleichung (1) für jedes native Symbol exisitiert ein
+		 * Übergang in ein komplexes Symbol, aus Zustand ALPHA mit Kopfbewegung nach R
+		 */
 		for (int index = 0; index < sigma.length; index++) {
 			transitionsNew.add(ALPHA + "\t" + ALPHA + "\t" + sigma[index] + "\t" + compSymbolTable[index][0] + "\tR");
 		}
 
-		// generiere Übergänge nach Gleichung (2)
+		/*
+		 * generiere Übergänge nach Gleichung (2) für jedes native Symbol exisitiert ein
+		 * Übergang in ein komplexes Symbol, aus Zustand BETA mit Kopfbewegung nach L
+		 */
 		for (int index = 0; index < sigma.length; index++) {
 			transitionsNew.add(BETA + "\t" + ALPHA + "\t" + sigma[index] + "\t" + compSymbolTable[index][1] + "\tL");
 		}
 
-		// generiere Übergänge nach Gleichung (3)
+		/*
+		 * generiere Übergänge nach Gleichung (3) aus jedem komplexen Symbol exisitiert
+		 * ein Übergang aus BETA mit dem komplexen Symbol mit höherem Zustannd im Index
+		 * als neues Symbol. Dies befindet sich 4 indizes weiter in der compSymbolTable.
+		 * Übergänge exisitieren in beide Richtungen.
+		 */
 		for (int symbolclass = 0; symbolclass < compSymbolTable.length; symbolclass++) {
 			for (int index = 0; index < compSymbolTable[symbolclass].length - 4; index = index + 4) {
 				transitionsNew.add(BETA + "\t" + ALPHA + "\t" + compSymbolTable[symbolclass][index] + "\t"
@@ -264,7 +309,13 @@ public class TM2generator {
 			}
 		}
 
-		// generiere Übergänge nach Gleichung (4)
+		/*
+		 * generiere Übergänge nach Gleichung (4) aus jedem komplexen Symbol exisitiert
+		 * ein Übergang aus beiden Zuständen, mit dem komplexen Symbol mit niedirigerem
+		 * Zustannd im Index als neues Symbol. Dies befindet sich 4 indizes vorher in
+		 * der compSymbolTable. Übergänge exisitieren zudem in beide Richtungen,
+		 * folglich gibt es 4 neue Übergänge pro Symbol pro Zustand
+		 */
 		for (int symbolclass = 0; symbolclass < compSymbolTable.length; symbolclass++) {
 			for (int index = 6; index < compSymbolTable[symbolclass].length; index = index + 4) {
 				transitionsNew.add(ALPHA + "\t" + BETA + "\t" + compSymbolTable[symbolclass][index] + "\t"
@@ -291,7 +342,12 @@ public class TM2generator {
 			}
 		}
 
-		// generiere Übergänge nach Gleichung(5)
+		/*
+		 * generiere Übergänge nach Gleichung(5) aus einem komplexen Symbol mit zustand
+		 * 1 (q0) exisitiert ein Übergang in das native Symbol Dieser Übergang
+		 * exisitiert aus beiden Zuständen und beiden Richtungen
+		 */
+
 		for (int index = 0; index < compSymbolTable.length; index++) {
 			transitionsNew.add(ALPHA + "\t" + ALPHA + "\t" + compSymbolTable[index][2] + "\t" + sigma[index] + "\tR");
 			transitionsNew.add(BETA + "\t" + ALPHA + "\t" + compSymbolTable[index][2] + "\t" + sigma[index] + "\tR");
@@ -300,10 +356,16 @@ public class TM2generator {
 		}
 	}
 
+	// utils fuktion die position im array angibt
 	private int indexOf(String[] arr, String val) {
 		return Arrays.asList(arr).indexOf(val);
 	}
 
+	/*
+	 * in TM mit 2 Zustaänden muss das startsymbol angepasst werden in neuer TM muss
+	 * das Symbol unter dem Lesekopf in das äquivalente komplexe Symbol umgewandelt
+	 * werden mit dem Startzustand der alten TM im index
+	 */
 	private void modifyInitialSymbol() {
 		if (tape.trim().equals("") || tape.equals(null)) {
 			throw new IllegalArgumentException("Tape is empty!");

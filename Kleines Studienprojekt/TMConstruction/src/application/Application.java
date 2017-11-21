@@ -64,7 +64,7 @@ public class Application {
 
 		if (print2File) {
 			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + ".history");
-			tm.writeTMtoFile(filename.split(".tur")[0] + ".history", printDetails);
+			tm.writeHistoryToFile(filename.split(".tur")[0] + ".history", printDetails);
 		}
 
 	}

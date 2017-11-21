@@ -6,8 +6,6 @@ import interpreter.TuringMachine;
 
 /**
  * Testklasse
- * 
- *
  */
 public class TestClass {
 

@@ -1,6 +1,10 @@
 package interpreter;
 import java.util.Stack;
 
+/*
+ * Simuliert das Band einer TM mit einem aktuellen Symbol und den Bewegungen L und R.
+ */
+
 public class Tape {
 
 	private Stack<String> leftTape;
@@ -31,7 +35,7 @@ public class Tape {
 		}
 	}
 
-
+	//konstruiert ein Tape aus einem String
 	public void readTapeFromString(String tape) {
 		String[] tapeArray = tape.split(" ");
 		int index = 0;

@@ -1,5 +1,8 @@
 package interpreter;
 
+/*
+ * hält alle relevanten Informationen nach Übergang
+ */
 public class Transition {
 
 	private State newState;
