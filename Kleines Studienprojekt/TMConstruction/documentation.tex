@@ -1,0 +1,44 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage{amsrefs}
+%\usepackage{tikz, wasysym}
+%\usetikzlibrary{automata,positioning}
+%\usepackage[]{algorithm2e}
+\usepackage[]{csquotes}
+\usepackage{listings}
+
+\author{Sven Fiergolla}
+\title{Dokumentation zum Konvertierer und Interpreter für Turingmaschinen}
+
+\newcommand{\ilc}{\texttt}
+
+\begin{document}
+\maketitle
+
+
+\section*{Einführung}
+\paragraph{}
+Wie in \enquote{A Universal Turing Machine with Two Internal States} von Claude E. Shannon beschrieben, lässt sich jede Turingmaschine in eine TM mit nur zwei Zuständen überführen.\\
+Im folgenden wird die Impementierung, der im Paper beschrieben Konvertierung, dokumentiert und erläutert. Zudem wird der Interpreter erläutert.
+\par
+
+\section*{Klassen \& Abhängigkeiten}
+
+\subsection*{Konvertierer (Package \ilc{construction})}
+\paragraph{}
+Für die Konvertierung einer TM nach dem beschrieben Verfahren werden eine Reihe neuer Symbole benötigt, da die Information des aktuellen Zustandes in die Symbole übertragen wird. Anschließend müssen die Übergänge der TM und das Startsymbol (das Symbol unter dem Lesekopf zum ersten Schritt) angpasst werden. Dazu existieren die Klassen \ilc{ComplexSymbol} und \ilc{TMConstructor}.\par
+
+\subsubsection*{\ilc{ComplexSymbol}}
+\paragraph{}
+Nach Shannons Verfahren, müssen zu jedem elementaren Symbol der ursprünglichen TM, pro Zustand, 4 neue Symbole erstellt werden. Dazu werden die Konstanten aus der Dummy-Klasse \ilc{ComlexSymbol} verwendet.\par
+
+\subsubsection*{\ilc{TM2Generator}}
+\paragraph{}
+Die Klasse \ilc{TM2Generator} kann mit Hilfe der Funktion \ilc{readTMfromFile(String path)} bzw. über den Konstruktor, eine Turingmaschine im beschrieben \ilc{.tur}-Format einlesen. Nun lässt sich die Funktion \ilc{generate2StateTM()} anwenden, welche 4 weitere Funktionen aufruft:\par
+\paragraph{\ilc{generateComSymbolTable()}}
+\subsection*{Interpreter}
+\subsection*{Application}
+
+\section*{Dateiformat \ilc{.tur}}
+
+\end{document}

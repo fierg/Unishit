@@ -356,14 +356,14 @@ public class TM2generator {
 		}
 	}
 
-	// utils fuktion die position im array angibt
+	// utils funktion die Position im array angibt
 	private int indexOf(String[] arr, String val) {
 		return Arrays.asList(arr).indexOf(val);
 	}
 
 	/*
-	 * in TM mit 2 Zustaänden muss das startsymbol angepasst werden in neuer TM muss
-	 * das Symbol unter dem Lesekopf in das äquivalente komplexe Symbol umgewandelt
+	 * in TM mit 2 Zuständen muss das Startsymbol angepasst werden
+	 * in neuer TM muss das Symbol unter dem Lesekopf in das äquivalente komplexe Symbol umgewandelt
 	 * werden mit dem Startzustand der alten TM im index
 	 */
 	private void modifyInitialSymbol() {
