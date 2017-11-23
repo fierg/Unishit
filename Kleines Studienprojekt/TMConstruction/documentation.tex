@@ -6,6 +6,8 @@
 %\usepackage[]{algorithm2e}
 \usepackage[]{csquotes}
 \usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage[margin=0.9in]{geometry}
 
 \author{Sven Fiergolla}
 \title{Dokumentation zum Konvertierer und Interpreter für Turingmaschinen}
@@ -22,23 +24,108 @@ Wie in \enquote{A Universal Turing Machine with Two Internal States} von Claude 
 Im folgenden wird die Impementierung, der im Paper beschrieben Konvertierung, dokumentiert und erläutert. Zudem wird der Interpreter erläutert.
 \par
 
-\section*{Klassen \& Abhängigkeiten}
-
+\section*{Funktionalität \& Abhängigkeiten der verwendeten Klassen}
 \subsection*{Konvertierer (Package \ilc{construction})}
 \paragraph{}
 Für die Konvertierung einer TM nach dem beschrieben Verfahren werden eine Reihe neuer Symbole benötigt, da die Information des aktuellen Zustandes in die Symbole übertragen wird. Anschließend müssen die Übergänge der TM und das Startsymbol (das Symbol unter dem Lesekopf zum ersten Schritt) angpasst werden. Dazu existieren die Klassen \ilc{ComplexSymbol} und \ilc{TMConstructor}.\par
 
-\subsubsection*{\ilc{ComplexSymbol}}
+\subsection*{\ilc{ComplexSymbol}}
 \paragraph{}
 Nach Shannons Verfahren, müssen zu jedem elementaren Symbol der ursprünglichen TM, pro Zustand, 4 neue Symbole erstellt werden. Dazu werden die Konstanten aus der Dummy-Klasse \ilc{ComlexSymbol} verwendet.\par
 
-\subsubsection*{\ilc{TM2Generator}}
+\subsection*{\ilc{TM2Generator}}
 \paragraph{}
 Die Klasse \ilc{TM2Generator} kann mit Hilfe der Funktion \ilc{readTMfromFile(String path)} bzw. über den Konstruktor, eine Turingmaschine im beschrieben \ilc{.tur}-Format einlesen. Nun lässt sich die Funktion \ilc{generate2StateTM()} anwenden, welche 4 weitere Funktionen aufruft:\par
-\paragraph{\ilc{generateComSymbolTable()}}
+\subsubsection*{\ilc{generateComSymbolTable()}}
+\paragraph*{}
+Die von der neuen TM benötigten Symbole werden pro Symbol von der Methode \ilc{generateSymbolArray (String symbol, String[] states)} mit Hilfe von \ilc{ComplexSymbol} für alle Zustände in je 4 Variationen erstellt und anschließend im \ilc{String[][] compSymbolTable} gehalten. Sind $A_1,A_2$ \dots $A_m$ die Symbole der ursprünglichen TM und $q_0, q_1$ \dots $q_n$, so ist das Array \ilc{compSymbolTable} anschließen wie folgt aufgebaut:
+
+\begin{center}
+\begin{tabular}{c|c||c||c}
+$A_{0,q_0,-,R}$ & $A_{1,q_0,-,R}$ & \dots & $A_{m,q_0,-,R}$\\
+\hline
+$A_{0,q_0,-,L}$ & $A_{1,q_0,-,L}$ & \dots & $A_{m,q_0,-,L}$\\
+\hline
+$A_{0,q_0,+,R}$ & $A_{1,q_0,+,R}$ & \dots & $A_{m,q_0,+,R}$\\
+\hline
+$A_{0,q_0,+,L}$ & $A_{1,q_0,+,L}$ & \dots & $A_{m,q_0,+,L}$\\
+\hline
+$A_{0,q_1,-,R}$ & $A_{1,q_1,-,R}$ & \dots & $A_{m,q_1,-,R}$\\
+\hline
+$A_{0,q_1,-,L}$ & $A_{1,q_1,-,L}$ & \dots & $A_{m,q_1,-,L}$\\
+\hline
+\hline
+\dots & \dots & \dots & \dots \\
+\hline
+\hline
+$A_{0,q_n,+,L}$ & $A_{1,q_n,+,L}$ & \dots & $A_{m,q_n,+,L}$\\
+\end{tabular}
+\end{center}
+\par
+
+\subsubsection*{\ilc{generateCompTransitions()}}
+\subsubsection*{\ilc{generateNativeTransitions()}}
+\subsubsection*{\ilc{modifyInitialSymbol()}}
+
+
 \subsection*{Interpreter}
+\subsection*{\ilc{State}}
+\subsection*{\ilc{Tape}}
+\subsection*{\ilc{Transition}}
+\subsection*{\ilc{TuringMachine}}
+
 \subsection*{Application}
 
+
 \section*{Dateiformat \ilc{.tur}}
+\paragraph*{}
+Der Versuch einen Konverter für Turingmaschinen, für einen bereits existierenden Simulator für TM's, zu entwerfen erwies sich als schwierig, da die verwendeten Konventionen und Notationen stark von den in der Vorlesung verwendeten abweichen. So wurde das Format \ilc{.tur} für das einfache Einlesen und Konvertieren von TM's konzipiert.
+
+\paragraph*{}
+\begin{center}
+Beispieldatei \texttt{equal01.tur}
+\end{center}
+\begin{tiny}
+\begin{tcolorbox}
+\begin{verbatim}
+states
+q0
+q1
+q2
+q3d
+q4
+q5a
+
+transitions
+q0 q0 0 0 L
+q0 q0 1 1 L
+q0 q1 # # R
+q0 q0 X X L
+q1 q2 0 X R
+q1 q4 1 X R
+q1 q1 X X R
+q1 q5a # # L
+q2 q0 0 0 R
+q2 q0 1 X L
+q2 q2 X X R
+q2 q3d # # R
+q4 q0 0 X L
+q4 q4 1 1 R
+q4 q4 X X R
+q4 q4 # # R
+
+symbols
+0 1 X #
+
+tape
+[ 0 ] 1 1 1 0 0
+
+description
+This TM evaluates if the given input contains an equal ammount
+of zeros and ones. 
+\end{verbatim}
+\end{tcolorbox}
+\end{tiny}
+\section*{Anwendung}
 
 \end{document}
