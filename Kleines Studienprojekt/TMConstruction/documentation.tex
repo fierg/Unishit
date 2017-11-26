@@ -63,8 +63,60 @@ $A_{0,q_n,+,L}$ & $A_{1,q_n,+,L}$ & \dots & $A_{m,q_n,+,L}$\\
 \end{center}
 \par
 
-\subsubsection*{\ilc{generateCompTransitions()}}
 \subsubsection*{\ilc{generateNativeTransitions()}}
+\paragraph*{}
+Damit die neue TM im wesentlichen wie die ursprüngliche TM agiert, werden die alten Übergänge modifiziert. Nach Shannon's Konstruktion muss folgende Gleichung gelten:
+\begin{equation}
+\delta(A_i,q_j) \to (A_k,q_l,{R \atop L}) \Rightarrow \delta(B_{i,j,-,x},\alpha) \to (B_{k,l,+,{R \atop L} },{\beta \atop \alpha},{R \atop L})
+\end{equation}
+Jeder ursprüngliche Übergang aus dem \ilc{transitions}-Array wird wie folgt bearbeitet:\\
+Zu Beginn werden die Indizes der Symbole und Zustände analysiert, sodass bekannt ist, welche Position die Symbole und Zustände in \ilc{sigma} und \ilc{states} haben. Ist der alte Übergang aus Zustand $q_j$ mit Symbol $A_i$, so ist der neue Übergang aus dem Symbol im \ilc{compSymbolTable} der Zeile $4\cdot j$ und $4\cdot j+1$ (da der Übergang aus beiden Symbolen mit $-$ im Index exisitiert) und Spalte $i$.\\
+Je nach Richtung des alten Übergangs wird nun ein neuer Übergang erstellt. Ist die Richtung \ilc{R}, so wird das neue Symbol \ilc{R} im Index haben, die Richtung des Übergangs ist ebenfalls \ilc{R} und der Folgezustand wird $\beta$ sein (analog bei ursprünglicher Kopfbewegung nach links).\\
+Das auszugebende Symbol wird ähnlich aus der \ilc{compSymbolTable} ermittelt. Ist das auszugebden Symbol im alten Übergang $A_k$ und der Folgezustand $q_l$ , so wird für den neuen Übergang das passende auszugebende Symbol aus der Tabelle der komplexen Symbole ermittelt. Es befindet sich in der Zeile $4\cdot l +2$ wenn der ursprüngliche Übergang mit Kopfbewegung nach rechts ist (sonst in der Zeile $4\cdot l +3)$ und in der Spalte $k$.\\
+Anschließend sind die Übergänge äquivalent von der TM mit nur 2 Zuständen zu realisieren.\par
+
+\subsubsection*{\ilc{generateCompTransitions()}}
+\paragraph*{}
+Die neue TM benötigt eine Reihe Hilfsübergänge, um elementare Symbole in komplexe umzuwandel und umgekehrt sowie für die sogenannte \enquote{bouncing operation}, der von Shannon beschriebenen Vorgehensweise die Information des Zustandes in Symbole ausulagern und diese Information, zwischen den Feldern des Bandes einer TM, zu verschieben.\\
+Die benötigten Übergänge lauten:\\
+\begin{center}
+\begin{tabular}{c c|c||c|c|c}
+\textbf{Gleichung}&\textbf{Symbol} & \textbf{Zustand $\Rightarrow$} & \textbf{Symbol} & \textbf{Zustand} &\textbf{Richtung} \\
+\hline
+(1) & $B_i$ & $\alpha$  & $B_{i,1,-,R}$  & $\alpha$ & $R$\\
+\hline
+(2) & $B_i$ & $\beta$  & $B_{i,1,-,L}$  & $\alpha$ & $L$\\
+\hline
+(3) & $B_{i,j,-,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j+1),-,x}$  & $\alpha$ & $x\in \{ R,L \}$\\
+\hline
+(4) & $B_{i,j,+,x}$ & $\alpha$ oder $\beta$  & $B_{i,(j-1),+,x}$  & $\beta$ & $x\in \{ R,L \}$\\
+\hline
+(5) & $B_{i,1,+,x}$ & $\alpha$ oder $\beta$  & $B_i$  & $\alpha$ & $x\in \{ R,L \}$\\
+\end{tabular}
+\end{center}
+Nach Gleichung $(1)$ exisitiert ein Übergang zwischen jedem elementaren
+Symbol B i in Zustand $\alpha$, zu dem komplexem Symbol mit gleichem Index
+welches sich in der ersten Zeile der Tabelle befindet, mit Folgezustand $\alpha$
+und Richtung R.\\
+Nach Gleichung $(2)$ exisitiert ein Übergang zwischen jedem elementaren
+Symbol $B_i$ in Zustand $\beta$, zu dem komplexem Symbol mit gleichem Index
+welches sich in der zweiten Zeile der Tabelle befindet, mit Folgezustand
+$\alpha$ und Richtung L.\\
+Nach Gleichung $(3)$ exisitiert ein Übergang zwischen einem komplexen
+Symbol mit $-$ im Index aus Zustand $\beta$, zu dem komplexen Symbol in
+der gleichen Spalte und 4 Zeilen weiter mit Folgezustand $\alpha$. Dies gilt
+für beide Richtungsinzes \ilc{R} und \ilc{L}.\\
+Nach Gleichung $(4)$ exisitiert ein Übergang zwischen einem komplexen
+Symbol mit $+$ im Index aus Zustand $\alpha$ oder $\beta$, zu dem komplexen
+Symbol in der gleichen Spalte und $4$ Zeilen zurück mit Folgezustand $\beta$.
+Dies gilt für beide Richtungsinzes \ilc{R} und \ilc{L} und natürlich nur für Symbole
+ab Zeile $4$.\\
+Nach Gleichung $(5)$ exisitiert ein Übergang zwischen einem komplexem
+Symbol aus der 1. und 2. Spalte, aus Zustand $\alpha$ oder $\beta$, zu dem
+elemntaren Symbol mit gleichem Index. Abhängig vom Zustand ist die
+Richtungsänderung \ilc{R} oder \ilc{L}.\\
+Alle modifizierten nativen und Hilfsübergänge werden in der Liste \ilc{transitionsNew} gespeichert und nach erfolgreicher Konvertierung in die neue \ilc{.tur}-Datei geschrieben.\par
+
 \subsubsection*{\ilc{modifyInitialSymbol()}}
 
 
