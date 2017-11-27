@@ -118,7 +118,9 @@ Richtungsänderung \ilc{R} oder \ilc{L}.\\
 Alle modifizierten nativen und Hilfsübergänge werden in der Liste \ilc{transitionsNew} gespeichert und nach erfolgreicher Konvertierung in die neue \ilc{.tur}-Datei geschrieben.\par
 
 \subsubsection*{\ilc{modifyInitialSymbol()}}
-
+\paragraph*{}
+Shannon nennt in seinem Paper bei der Beschreibung des Beispiels als induktive Annahme, dass das Symbol unter dem Lesekopf bereits ein komplexes ist. Dies bedeutet, dass das erste Symbol der neuen TM mit nur 2 Zuständen, im Startsymbol bereits die Information über den Aktuellen Zustand hält. Ist dies nicht der Fall, so läuft die TM endlos nach links auf der Suche nach dem ersten komplexen Zeichen welches Information über den aktuellen Zustand innehält.\\
+Folglich muss das Symbol unter dem Lesekopf beim Start der TM angepasst werden, in das äquivalente komplexe Symbol, welches den Startzustand der ursrünglichen TM behält. Dies ist nach Konvention des \ilc{.tur}-Formats das erste Symbol der \ilc{compSymbolTable}.\par
 
 \subsection*{Interpreter}
 \subsection*{\ilc{State}}
@@ -131,7 +133,7 @@ Alle modifizierten nativen und Hilfsübergänge werden in der Liste \ilc{transit
 
 \section*{Dateiformat \ilc{.tur}}
 \paragraph*{}
-Der Versuch einen Konverter für Turingmaschinen, für einen bereits existierenden Simulator für TM's, zu entwerfen erwies sich als schwierig, da die verwendeten Konventionen und Notationen stark von den in der Vorlesung verwendeten abweichen. So wurde das Format \ilc{.tur} für das einfache Einlesen und Konvertieren von TM's konzipiert.
+Der Versuch einen Konverter für Turingmaschinen, für einen bereits existierenden Simulator für TM's, zu entwerfen erwies sich als schwierig, da die verwendeten Konventionen und Notationen stark von den in der Vorlesung verwendeten abweichen. So wurde das Format \ilc{.tur} für das einfache Einlesen und Konvertieren von TM's konzipiert.\par
 
 \paragraph*{}
 \begin{center}
@@ -178,6 +180,20 @@ of zeros and ones.
 \end{verbatim}
 \end{tcolorbox}
 \end{tiny}
+\par
+
+\paragraph*{}
+Das Dateiformat besetht aus einer Auflistung aller in der TM vorkommenden Zustände, beginnend mit dem Startzustand, eingeleitet durch das flag \ilc{states}, getrennt durch Zeilenumbruch. Darauf folgt eine Liste der Übergänge, eingeleited durch \ilc{transitions} und eine Zeile aller Symbole welcher das flag \ilc{symbols} voraus geht. Für die Simulation kann ebenfalls ein Band beschrieben werden, es besteht aus einer Aneinanderreihung von Symbolen, getrennt durch whitespace. Das Symbol, welches zu Beginn der Simualtion unter dem Lesekopf sein soll, ist von eckigen Klammern umgeben, ebenfalls getrennt durch whitespace.\\
+Weitere Informationen über das Dateiformat lassen sich der Datei \ilc{FORMAT\_EXAMPLE.tur} entnehmen.\par
+
 \section*{Anwendung}
+\paragraph*{}
+Die fertige Anwendung lässt sich als \ilc{jar} wie folgt benutzen:\\
+\ilc{<.tur Datei> <delay in millisekunden>} (optional, ohne Verzögerung ist es jedoch schwer der Simulation zu folgen)\\
+Weitere Parameter die gesetzt werden können:\\
+\ilc{-c} konvertiert die TM in eine TM mit 2 Zuständen vor der Simulation\\
+\ilc{-p} speichert Simulation in einer .history Datei ab\\
+\ilc{-pd} speicher zudem Details wie aktueller Zustand und Übergang\\
+\ilc{-d} debug (Genaurere Informationen des Ablaufs werden über st.out ausgegeben)
 
 \end{document}

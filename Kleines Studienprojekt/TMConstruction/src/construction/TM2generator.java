@@ -276,7 +276,7 @@ public class TM2generator {
 
 		/*
 		 * generiere Übergänge nach Gleichung (1) für jedes native Symbol exisitiert ein
-		 * Übergang in ein komplexes Symbol, aus Zustand ALPHA mit Kopfbewegung nach R
+		 * Übergang in das erste komplexes Symbol, aus Zustand ALPHA mit Kopfbewegung nach R
 		 */
 		for (int index = 0; index < sigma.length; index++) {
 			transitionsNew.add(ALPHA + "\t" + ALPHA + "\t" + sigma[index] + "\t" + compSymbolTable[index][0] + "\tR");
