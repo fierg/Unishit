@@ -7,7 +7,7 @@
 \usepackage[]{csquotes}
 \usepackage{listings}
 \usepackage{tcolorbox}
-\usepackage[margin=0.9in]{geometry}
+\usepackage[margin=1in]{geometry}
 
 \author{Sven Fiergolla}
 \title{Dokumentation zum Konvertierer und Interpreter für Turingmaschinen}
@@ -95,7 +95,7 @@ Die benötigten Übergänge lauten:\\
 \end{tabular}
 \end{center}
 Nach Gleichung $(1)$ exisitiert ein Übergang zwischen jedem elementaren
-Symbol B i in Zustand $\alpha$, zu dem komplexem Symbol mit gleichem Index
+Symbol $B_i$ in Zustand $\alpha$, zu dem komplexem Symbol mit gleichem Index
 welches sich in der ersten Zeile der Tabelle befindet, mit Folgezustand $\alpha$
 und Richtung R.\\
 Nach Gleichung $(2)$ exisitiert ein Übergang zwischen jedem elementaren
@@ -109,8 +109,7 @@ für beide Richtungsinzes \ilc{R} und \ilc{L}.\\
 Nach Gleichung $(4)$ exisitiert ein Übergang zwischen einem komplexen
 Symbol mit $+$ im Index aus Zustand $\alpha$ oder $\beta$, zu dem komplexen
 Symbol in der gleichen Spalte und $4$ Zeilen zurück mit Folgezustand $\beta$.
-Dies gilt für beide Richtungsinzes \ilc{R} und \ilc{L} und natürlich nur für Symbole
-ab Zeile $4$.\\
+Dies gilt für beide Richtungsinzes \ilc{R} und \ilc{L} und natürlich nur für Symbole ab Zeile $4$.\\
 Nach Gleichung $(5)$ exisitiert ein Übergang zwischen einem komplexem
 Symbol aus der 1. und 2. Spalte, aus Zustand $\alpha$ oder $\beta$, zu dem
 elemntaren Symbol mit gleichem Index. Abhängig vom Zustand ist die
@@ -123,7 +122,14 @@ Shannon nennt in seinem Paper bei der Beschreibung des Beispiels als induktive A
 Folglich muss das Symbol unter dem Lesekopf beim Start der TM angepasst werden, in das äquivalente komplexe Symbol, welches den Startzustand der ursrünglichen TM behält. Dies ist nach Konvention des \ilc{.tur}-Formats das erste Symbol der \ilc{compSymbolTable}.\par
 
 \subsection*{Interpreter}
+\paragraph*{}
+Um die Turingmaschinen vor und nach der Modifizierung ausführen beziehungsweise visualisieren zu können, ist ein Interpreter für Turingmaschinen von nöten, welcher das Dateiformat interpretieren kann. Dazu exisitieren die folgenden Klassen.\par
+
 \subsection*{\ilc{State}}
+\paragraph*{}
+Ein State kapselt im wesentlichen nicht mehr als den Namen des Zustands und die Information, ob der Zustand final, wenn ja, akzeptierend oder ablehnend ist. Nach Konvention endet der Name eines Finalzustandes mit f, der Name eines ablehnenden Zustandes mit d (für \textit{decline}) und der Name eines akzeptierenden Zustandes mit a (für \textit{accept}).\\
+Diese Konvention wird auch bei der TM mit nur 2 Zuständen genutzt. In dem fall sind die beiden Zustände der Maschine $\alpha$ und $\beta$ nicht final, jedoch ist die Information des aktuellen Zustandes in die Symbole kodiert. Hat eine solche TM ein Eingabeband abgearbeitet, erreicht sie ein Symbol für das sie keinen Übergang besitzt (falls in der original TM aus dem final/akzeptierenden/ablehnenden Zustand kein Übergang exisitiert). In diesem Fall lässt sich der in das Symbol eingebettete Zustand analysieren und es lässt sich entscheiden, ob und welcher Finalzustand äquivalent ist. So lässt sich auch über  
+
 \subsection*{\ilc{Tape}}
 \subsection*{\ilc{Transition}}
 \subsection*{\ilc{TuringMachine}}

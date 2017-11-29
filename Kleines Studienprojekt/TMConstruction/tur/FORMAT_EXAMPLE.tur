@@ -58,3 +58,9 @@ symbols
 tape
 //example
 [0] 1 1 1 0 0
+
+
+//description of the TM, its action and way of solving its problem
+description
+//example
+This TM evaluates if a given String contains an equal ammount of zeros and ones.
