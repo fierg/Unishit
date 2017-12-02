@@ -128,9 +128,13 @@ Um die Turingmaschinen vor und nach der Modifizierung ausführen beziehungsweise
 \subsection*{\ilc{State}}
 \paragraph*{}
 Ein State kapselt im wesentlichen nicht mehr als den Namen des Zustands und die Information, ob der Zustand final, wenn ja, akzeptierend oder ablehnend ist. Nach Konvention endet der Name eines Finalzustandes mit f, der Name eines ablehnenden Zustandes mit d (für \textit{decline}) und der Name eines akzeptierenden Zustandes mit a (für \textit{accept}).\\
-Diese Konvention wird auch bei der TM mit nur 2 Zuständen genutzt. In dem fall sind die beiden Zustände der Maschine $\alpha$ und $\beta$ nicht final, jedoch ist die Information des aktuellen Zustandes in die Symbole kodiert. Hat eine solche TM ein Eingabeband abgearbeitet, erreicht sie ein Symbol für das sie keinen Übergang besitzt (falls in der original TM aus dem final/akzeptierenden/ablehnenden Zustand kein Übergang exisitiert). In diesem Fall lässt sich der in das Symbol eingebettete Zustand analysieren und es lässt sich entscheiden, ob und welcher Finalzustand äquivalent ist. So lässt sich auch über  
+Diese Konvention wird auch bei der TM mit nur 2 Zuständen genutzt. In dem Fall sind die beiden Zustände der Maschine $\alpha$ und $\beta$ nicht final, jedoch ist die Information des aktuellen Zustandes in die Symbole kodiert. Hat eine solche TM ein Eingabeband abgearbeitet, erreicht sie ein Symbol für das sie keinen Übergang besitzt (falls in der original TM aus dem final/akzeptierenden/ablehnenden Zustand kein Übergang exisitiert). In diesem Fall lässt sich der in das Symbol eingebettete Zustand analysieren und es lässt sich entscheiden, ob und welcher Finalzustand äquivalent ist. So lässt sich auch bei der Simmulation der TM mit nur 2 Zutsänden das Terminieren der TM erkennen und auswerten.\par
 
 \subsection*{\ilc{Tape}}
+\paragraph*{}
+Das Band der simmulierten TM wird durch die Klasse \ilc{Tape} realisiert. Sie speichert das aktuelle Symbol sowie die linke und rechte Seite des Bands durch zwei Stacks. Zudem werden die Basisoperationen Kopfbewegung nach \ilc{L} oder \ilc{R} unterstützt.\\
+Das Lesen und Schreiben eines Tapes aus einer Datei wird ebenfalls durch diese Klasse realisiert.\par
+
 \subsection*{\ilc{Transition}}
 \subsection*{\ilc{TuringMachine}}
 
