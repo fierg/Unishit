@@ -136,8 +136,20 @@ Das Band der simmulierten TM wird durch die Klasse \ilc{Tape} realisiert. Sie sp
 Das Lesen und Schreiben eines Tapes aus einer Datei wird ebenfalls durch diese Klasse realisiert.\par
 
 \subsection*{\ilc{Transition}}
+\paragraph*{}
+Eine Instanz der Klasse \ilc{Transition} speichert den Folgeschritt aus einem Übergang, sprich den neuen Zustand, das auszugebende Symbol und die Richtung der Kopfbewegung dieses Übergangs. Damit ist diese Kalsse ebenfalls reine Kapselung von Daten und hat an sich keinerlei eigene Funktionalität.
+\par
 \subsection*{\ilc{TuringMachine}}
-
+\paragraph*{}
+Die eigentliche TM und deren simmulation wird durch die Klasse \ilc{TuringMachine} realisiert. Sie besteht aus einer Reihe statischer Indizes, einem aktuellen Zustand gespeichert in \ilc{currentState}, einem Tape und einer Übergangstabelle. Diese wird durch eine doppelt verschachtelte Map realisiert, sodass einem Zustand, eine Reihe eingabe Symbole zugeordnet sind, und jeder Zustands/Eingabesymbol-Kombination nur ein Übergang in Form einer \ilc{Transition}.
+Die Listen \ilc{history} und \ilc{historyDetails} speichern zudem den Verlauf und genaue Einzelheiten des Ablaufs der TM.\\
+Neben einfachen Utilities-Methoden die das Lesen und Schreiben einer TM aus einer Datei ermöglichen, hat die Klasse die folgenden wichtigen Funktionen:\par
+\subsubsection*{\ilc{setTransitionMap(String[] states, String[] transitionsArray)}}
+\paragraph*{}
+Diese Methode erstellt aus der eingelesenen TM die bereits beschriebene, doppelt verschachtelte (Hash)Map aus Zustand, eingelesenes Symbol $\rightarrow$ Übergang. Dazu werden alle Übergänge nacheinander in die Map eingefügt. Wird ein neuer Übergang an die Position eines bereits exisitierenden Übergangs eingefügt, ist die zu simmulierende TM nicht deterministisch und der Prozess wird abgebrochen.\par
+\subsubsection*{\ilc{step()}}
+Die Methode \ilc{step()} reslisiert einen Schritt der TM. Mit dem aktuellen Zustand und Symbol wird aus der \ilc{transitions} Map der passende Übergang herausgesucht. Anschließend wird das aktuelle Symbol verändert und eine Kopfbewegung und Zustandsänderung ausgeführt.
+\subsubsection*{\ilc{run(long timeoutMili)}}
 \subsection*{Application}
 
 
