@@ -15,28 +15,58 @@ import java.util.concurrent.TimeUnit;
 import construction.TM2generator;
 import utils.Utilities;
 
+/**
+ * The Class TuringMachine.
+ */
 public class TuringMachine {
 
+	/** The Constant OLD_STATE. */
 	// statische indizes der Symbole in den Transitionarrays
 	private static final int OLD_STATE = 0;
+	
+	/** The Constant NEW_STATE. */
 	private static final int NEW_STATE = 1;
+	
+	/** The Constant OLD_SYMBOL. */
 	private static final int OLD_SYMBOL = 2;
+	
+	/** The Constant NEW_SYMBOL. */
 	private static final int NEW_SYMBOL = 3;
+	
+	/** The Constant DIRECTION. */
 	private static final int DIRECTION = 4;
 
+	/** The terminated. */
 	private boolean terminated;
+	
+	/** The debug. */
 	private boolean debug;
+	
+	/** The nr of states. */
 	private int nrOfStates = 0;
 
+	/** The tape. */
 	// eigentliche TM
 	private Tape tape;
+	
+	/** The current state. */
 	private State currentState;
+	
+	/** The transitions. */
 	private Map<State, HashMap<String, Transition>> transitions;
 
+	/** The history. */
 	// Verlauf, kann nach Terminierung ausgegeben werden
 	private LinkedList<String> history;
+	
+	/** The history details. */
 	private LinkedList<String> historyDetails;
 
+	/**
+	 * Instantiates a new turing machine.
+	 *
+	 * @param debug the debug
+	 */
 	// Konstruktor
 	public TuringMachine(boolean debug) {
 		history = new LinkedList<>();
@@ -47,6 +77,13 @@ public class TuringMachine {
 		transitions = new HashMap<State, HashMap<String, Transition>>();
 	}
 
+	/**
+	 * Write history to file.
+	 *
+	 * @param filename the filename
+	 * @param includeDetails the include details
+	 * @param tex the tex
+	 */
 	// schreibt verlauf der TM in Datei
 	public void writeHistoryToFile(String filename, boolean includeDetails, boolean tex) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
@@ -60,6 +97,12 @@ public class TuringMachine {
 		}
 	}
 
+	/**
+	 * Gets the history as tex.
+	 *
+	 * @param includeDetails the include details
+	 * @return the history as tex
+	 */
 	private String getHistoryAsTex(boolean includeDetails) {
 		StringBuilder sb = new StringBuilder();
 		int index = 0;
@@ -78,6 +121,12 @@ public class TuringMachine {
 		return sb.toString();
 	}
 
+	/**
+	 * Gets the history.
+	 *
+	 * @param includeDetails the include details
+	 * @return the history
+	 */
 	public String getHistory(boolean includeDetails) {
 		StringBuilder sb = new StringBuilder();
 		int index = 0;
@@ -92,7 +141,12 @@ public class TuringMachine {
 		return sb.toString();
 	}
 
+	/**
+	 * Read T mfrom file.
 	// ließt TM von Datei ein
+	 *
+	 * @param path the path
+	 */
 	public void readTMfromFile(String path) {
 		LinkedList<String> states = new LinkedList<>();
 		LinkedList<String> transitions = new LinkedList<>();
@@ -125,8 +179,10 @@ public class TuringMachine {
 	}
 
 	/**
-	 * @param timeoutMili
-	 *            TESTMETHODE
+	 * Runs a tm.
+	 *
+	 * @param timeoutMili            TESTMETHODE
+	 * @param texOut the tex out
 	 */
 	public void run(long timeoutMili, boolean texOut) {
 		if (this.currentState.equals(null) || this.nrOfStates == 0 || this.tape.equals(null)
@@ -140,7 +196,13 @@ public class TuringMachine {
 		}
 	}
 
+	/**
+	 * Sets the transition map.
+	 *
 	// erstellt Übergangs-Map aus eingelesenen Übergängen
+	 * @param states the states
+	 * @param transitionsArray the transitions array
+	 */
 	private void setTransitionMap(String[] states, String[] transitionsArray) {
 		boolean first = true;
 		nrOfStates = states.length;
@@ -218,7 +280,10 @@ public class TuringMachine {
 
 	}
 
+	/**
+	 * Step.
 	// führ einen schritt der TM aus
+	 */
 	private void step() {
 
 		// zu beginn wird Übergang aus Map geladen, falls kein Übergang exisitiert wird
@@ -249,7 +314,14 @@ public class TuringMachine {
 		}
 	}
 
+	/**
+	 * Run TM.
 	// Führt eine TM vollstaändig aus
+	 *
+	 * @param timeoutMili the timeout mili
+	 * @param twoStates the two states
+	 * @param texOutput the tex output
+	 */
 	public void runTM(long timeoutMili, boolean twoStates, boolean texOutput) {
 
 		if (transitions.get(currentState).isEmpty()) {
@@ -323,9 +395,11 @@ public class TuringMachine {
 
 		} else {
 			if (currentState.isAccepting()) {
-				output = output + "TM accepts input";
+				output = output + "TM accepts input!";
 			} else if (currentState.isDeclining()) {
-				output = output + "TM declines input";
+				output = output + "TM declines input!";
+			} else if (currentState.isFinal()) {
+				output = output + "TM terminates as planned!";
 			} else {
 				output += "TM seems to have failed. There was no next step possible due to missing transition.";
 			}

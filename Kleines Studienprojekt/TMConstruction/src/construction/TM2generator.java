@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import interpreter.Tape;
+import utils.Utilities;
 
+// TODO: Auto-generated Javadoc
 /**
  * Generiert eine TM mit nur 2 Zuständen aus einer gegeben TM (im .tur Format)
  *
@@ -18,38 +20,71 @@ import interpreter.Tape;
 public class TM2generator {
 
 	// statische indizes der Symbole in den Transitionarrays
+	/** The Constant OLD_STATE. */
 	public static final int OLD_STATE = 0;
+
+	/** The Constant NEW_STATE. */
 	public static final int NEW_STATE = 1;
+
+	/** The Constant OLD_SYMBOL. */
 	public static final int OLD_SYMBOL = 2;
+
+	/** The Constant NEW_SYMBOL. */
 	public static final int NEW_SYMBOL = 3;
+
+	/** The Constant DIRECTION. */
 	public static final int DIRECTION = 4;
 
 	// statische Namen der flags in den .tur Dateien
+	/** The Constant STATES. */
 	public static final String STATES = "states";
+
+	/** The Constant TRANSITIONS. */
 	public static final String TRANSITIONS = "transitions";
+
+	/** The Constant SYMBOLS. */
 	public static final String SYMBOLS = "symbols";
+
+	/** The Constant TAPE. */
 	public static final String TAPE = "tape";
 
+	/** The Constant ALPHA. */
 	// Namen für die beiden Zustände nach dem Umwandeln
 	public static final String ALPHA = "q0";
+
+	/** The Constant BETA. */
 	public static final String BETA = "q1";
 
 	// hält alle komlexen Symbole die für neue TM benötigt werden
+	/** The comp symbol table. */
 	private String[][] compSymbolTable;
 
 	// Zustände, Aphabet und Übergänge der ausgangs TM
+	/** The sigma. */
 	private String[] sigma;
+
+	/** The states. */
 	private String[] states;
+
+	/** The transitions. */
 	private String[] transitions;
 
 	// Neue Übergänge der TM mit 2 Zständen
+	/** The transitions new. */
 	private LinkedList<String> transitionsNew;
 
 	// Tape wird in neue .tur kopiert
+	/** The tape. */
 	private String tape;
 
+	/**
+	 * The main method.
 	// Generator lässt sich separat auf eine .tur datei anwenden und erstellt eine
 	// äquivalente TM mit 2 Zuständen
+	 *
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		if (args.length >= 1) {
 			String filename = args[0];
@@ -65,12 +100,21 @@ public class TM2generator {
 		}
 	}
 
+	/**
+	 * Instantiates a new TM 2 generator.
 	// Konstruktor
+	 *
+	 * @param path
+	 *            the path
+	 */
 	public TM2generator(String path) {
 		readTMfromFile(path);
 	}
 
+	/**
+	 * Generate 2 state TM.
 	// generiert aus eingelesener TM eine 2 state TM
+	 */
 	public void generate2StateTM() {
 		if (sigma == null || states == null || transitions == null || tape == null || tape == "") {
 			throw new IllegalArgumentException("sigma, states, tape or transitions equals null!");
@@ -86,14 +130,23 @@ public class TM2generator {
 
 	}
 
+	/**
+	 * Prints the transitions.
 	// gibt neu generierte Übergänge aus
+	 */
 	public void printTransitions() {
 		for (String string : transitionsNew) {
 			System.out.println(string);
 		}
 	}
 
+	/**
+	 * Write TM 2 to file.
+	 *
 	// schriebt die modifizierten Übergänge in eine Datei
+	 * @param filename
+	 *            the filename
+	 */
 	public void writeTM2toFile(String filename) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
 			out.print(get2StateTM());
@@ -102,7 +155,11 @@ public class TM2generator {
 		}
 	}
 
-	/*
+	/**
+	 * Gets the 2 state TM.
+	 *
+	 * @return the 2 state TM
+
 	 * erstellt .tur Datei zur erstellten TM mit 2 Zuständen dazu verwendetes Schema
 	 * in FORMAT_EXAMPLE.tur beschrieben
 	 */
@@ -134,7 +191,12 @@ public class TM2generator {
 		return sb.toString();
 	}
 
-	/*
+	/**
+	 * Read T mfrom file.
+	 *
+	 * @param path
+	 *            the path
+	
 	 * ließt eine TM im .tur Format ein
 	 */
 	private void readTMfromFile(String path) {
@@ -171,8 +233,18 @@ public class TM2generator {
 		}
 	}
 
-	// erstellt zu einem nativen Symbol alle komplexen Symbole mit allen Zuständen
-	// und weiteren Informationen
+	/**
+	 * Generate symbol array.
+	 *
+	 * erstellt zu einem nativen Symbol alle komplexen Symbole mit allen Zuständen
+	 * und weiteren Informationen
+	 * 
+	 * @param symbol
+	 *            the symbol
+	 * @param states
+	 *            the states
+	 * @return the string[]
+	 */
 	private String[] generateSymbolArray(String symbol, String[] states) {
 		LinkedList<String> result = new LinkedList<>();
 
@@ -196,7 +268,11 @@ public class TM2generator {
 
 	}
 
-	// erstellt für jedes Symbol alle komplexen Symbole
+	/**
+	 * Generate com symbol table. erstellt für jedes Symbol alle komplexen Symbole
+	 *
+	 * @return the string[][]
+	 */
 	private String[][] generateComSymbolTable() {
 		compSymbolTable = new String[sigma.length][];
 
@@ -207,11 +283,11 @@ public class TM2generator {
 		return compSymbolTable;
 	}
 
-	/*
-	 * generiert Übergänge nach Gleichung (6) wie im Paper beschrieben zuerst werden
-	 * exisitierende Übergänge eingelesen, anschließend wird für jeden dieser
-	 * Übergänge ein neuer Übergang erstellt der zwischen den neuen Symbolen gültig
-	 * ist.
+	/**
+	 * Generate native transitions. generiert Übergänge nach Gleichung (6) wie im
+	 * Paper beschrieben zuerst werden exisitierende Übergänge eingelesen,
+	 * anschließend wird für jeden dieser Übergänge ein neuer Übergang erstellt der
+	 * zwischen den neuen Symbolen gültig ist.
 	 */
 	private void generateNativeTransitions() {
 
@@ -221,10 +297,10 @@ public class TM2generator {
 			String result = ALPHA + "\t";
 			String[] transArray = trans.split(" ");
 
-			int oldSymbolIndex = indexOf(sigma, transArray[OLD_SYMBOL]);
-			int oldStateIndex = indexOf(states, transArray[OLD_STATE]);
-			int newSymbolIndex = indexOf(sigma, transArray[NEW_SYMBOL]);
-			int newStateIndex = indexOf(states, transArray[NEW_STATE]);
+			int oldSymbolIndex = Utilities.indexOf(sigma, transArray[OLD_SYMBOL]);
+			int oldStateIndex = Utilities.indexOf(states, transArray[OLD_STATE]);
+			int newSymbolIndex = Utilities.indexOf(sigma, transArray[NEW_SYMBOL]);
+			int newStateIndex = Utilities.indexOf(states, transArray[NEW_STATE]);
 
 			// je nach Richtung des Übergangs ist Folgezustand entweder ALPHA oder BETA
 			if ("R".equals(transArray[DIRECTION])) {
@@ -272,11 +348,15 @@ public class TM2generator {
 		}
 	}
 
+	/**
+	 * Generate comp transitions.
+	 */
 	private void generateCompTransitions() {
 
 		/*
 		 * generiere Übergänge nach Gleichung (1) für jedes native Symbol exisitiert ein
-		 * Übergang in das erste komplexes Symbol, aus Zustand ALPHA mit Kopfbewegung nach R
+		 * Übergang in das erste komplexes Symbol, aus Zustand ALPHA mit Kopfbewegung
+		 * nach R
 		 */
 		for (int index = 0; index < sigma.length; index++) {
 			transitionsNew.add(ALPHA + "\t" + ALPHA + "\t" + sigma[index] + "\t" + compSymbolTable[index][0] + "\tR");
@@ -356,15 +436,10 @@ public class TM2generator {
 		}
 	}
 
-	// utils funktion die Position im array angibt
-	private int indexOf(String[] arr, String val) {
-		return Arrays.asList(arr).indexOf(val);
-	}
-
-	/*
-	 * in TM mit 2 Zuständen muss das Startsymbol angepasst werden
-	 * in neuer TM muss das Symbol unter dem Lesekopf in das äquivalente komplexe Symbol umgewandelt
-	 * werden mit dem Startzustand der alten TM im index
+	/**
+	 * Modify initial symbol. in TM mit 2 Zuständen muss das Startsymbol angepasst
+	 * werden in neuer TM muss das Symbol unter dem Lesekopf in das äquivalente
+	 * komplexe Symbol umgewandelt werden mit dem Startzustand der alten TM im index
 	 */
 	private void modifyInitialSymbol() {
 		if (tape.trim().equals("") || tape.equals(null)) {

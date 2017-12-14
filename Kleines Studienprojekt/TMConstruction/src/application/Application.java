@@ -7,11 +7,15 @@ import interpreter.TuringMachine;
 import utils.Utilities;
 
 /**
- * Anwendung Kapselt die eigentliche Anwendung und handelt Parameter ab
- *
+ * Anwendung Kapselt die eigentliche Anwendung und handelt Parameter ab.
  */
 public class Application {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		boolean debug = false;
 		boolean print2File = false;
@@ -61,19 +65,20 @@ public class Application {
 				e.printStackTrace();
 			}
 		}
-
-		System.out.println("reading TM from file\t" + filename);
+		
 		TuringMachine tm = new TuringMachine(debug);
+
+		System.out.println("Reading TM from file\t" + filename);
 		tm.readTMfromFile(filename);
 
-		System.out.println("starting simulator\n");
+		System.out.println("Starting simulator\n");
 		tm.runTM(delayMilis , twoStateTM, texOutput);
 
 		if (print2File && !texOutput) {
-			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + ".history");
+			System.out.println("Printing history to file:\t" + filename.split(".tur")[0] + ".history");
 			tm.writeHistoryToFile(filename.split(".tur")[0] + ".history", printDetails , texOutput);
 		} else if (print2File && texOutput) {
-			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + "history.tex");
+			System.out.println("Printing history to file:\t" + filename.split(".tur")[0] + "history.tex");
 			tm.writeHistoryToFile(filename.split(".tur")[0] + "history.tex", printDetails , texOutput);
 		}
 

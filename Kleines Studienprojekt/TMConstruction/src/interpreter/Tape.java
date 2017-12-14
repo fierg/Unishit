@@ -6,30 +6,54 @@ import java.util.HashSet;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-/*
- * Simuliert das Band einer TM mit einem aktuellen Symbol und den Bewegungen L und R.
+/**
+ * The Class Tape. Simuliert das Band einer TM mit einem aktuellen Symbol und
+ * den Bewegungen L und R.
  */
-
 public class Tape {
 
+	/** The Constant LATEX_ESCAPE_SYMBOLS. */
 	public static final Set<String> LATEX_ESCAPE_SYMBOLS = new HashSet<String>(Arrays.asList(new String[] { "#" }));
+
+	/** The Constant COMP_SYMBOL_Q. */
 	private static final String COMP_SYMBOL_Q = "q";
+
+	/** The Constant COMP_SYMBOL_S. */
 	private static final String COMP_SYMBOL_S = "s";
+
+	/** The Constant REGEX_Q. */
 	private static final String REGEX_Q = "(.+;.+;[+];.+)";
+
+	/** The Constant REGEX_S. */
 	private static final String REGEX_S = "(.+;.+;[-];.+)";
 
+	/** The left tape. */
 	private Stack<String> leftTape;
+
+	/** The right tape. */
 	private Stack<String> rightTape;
+
+	/** The current symbol. */
 	private String currentSymbol;
+
+	/** The q symbol. */
 	private String qSymbol;
+
+	/** The s symbol. */
 	private String sSymbol;
 
+	/**
+	 * Instantiates a new tape.
+	 */
 	public Tape() {
 		leftTape = new Stack<>();
 		rightTape = new Stack<>();
 		currentSymbol = "";
 	}
 
+	/**
+	 * Move left.
+	 */
 	public void moveLeft() {
 		rightTape.push(currentSymbol);
 		if (leftTape.isEmpty()) {
@@ -39,6 +63,9 @@ public class Tape {
 		}
 	}
 
+	/**
+	 * Move right.
+	 */
 	public void moveRight() {
 		leftTape.push(currentSymbol);
 		if (rightTape.isEmpty()) {
@@ -48,6 +75,12 @@ public class Tape {
 		}
 	}
 
+	/**
+	 * Read tape from string.
+	 *
+	 * @param tape
+	 *            the tape
+	 */
 	// konstruiert ein Tape aus einem String
 	public void readTapeFromString(String tape) {
 		String[] tapeArray = tape.split(" ");
@@ -73,6 +106,11 @@ public class Tape {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		StringBuilder tape = new StringBuilder();
 		tape.append("# # ");
@@ -94,6 +132,13 @@ public class Tape {
 		return tape.toString();
 	}
 
+	/**
+	 * To string 2 states.
+	 *
+	 * @param texOutput
+	 *            the tex output
+	 * @return the string
+	 */
 	public String toString2States(boolean texOutput) {
 		StringBuilder tape = new StringBuilder();
 		if (texOutput) {
@@ -125,8 +170,8 @@ public class Tape {
 		} else if (Pattern.matches(REGEX_S, currentSymbol)) {
 			tape.append(COMP_SYMBOL_S + " ");
 			sSymbol = currentSymbol;
-		}else if(Tape.LATEX_ESCAPE_SYMBOLS.contains(currentSymbol)) {
-			tape.append("\\" +currentSymbol + " ");
+		} else if (Tape.LATEX_ESCAPE_SYMBOLS.contains(currentSymbol)) {
+			tape.append("\\" + currentSymbol + " ");
 		} else {
 			tape.append(currentSymbol + " ");
 		}
@@ -154,16 +199,28 @@ public class Tape {
 		} else {
 			tape.append("\\# \\# $ \\\\");
 			tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = $" + State.getNameAsTex(qSymbol) + "$ \\\\");
-			tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = $" + State.getNameAsTex(sSymbol) + "$ \\\\ \n \\medskip");
+			tape.append(
+					"\nComplexSymbol " + COMP_SYMBOL_S + " = $" + State.getNameAsTex(sSymbol) + "$ \\\\ \n \\medskip");
 		}
 
 		return tape.toString();
 	}
 
+	/**
+	 * Gets the current symbol.
+	 *
+	 * @return the current symbol
+	 */
 	public String getCurrentSymbol() {
 		return currentSymbol;
 	}
 
+	/**
+	 * Sets the current symbol.
+	 *
+	 * @param currentSymbol
+	 *            the new current symbol
+	 */
 	public void setCurrentSymbol(String currentSymbol) {
 		this.currentSymbol = currentSymbol;
 	}

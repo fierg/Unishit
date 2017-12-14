@@ -1,6 +1,19 @@
 package utils;
 
+import java.util.Arrays;
+
+/**
+ * The Class Utilities.
+ */
 public class Utilities {
+	
+	/**
+	 * true if array contains the key
+	 *
+	 * @param arr the arr
+	 * @param key the key
+	 * @return true, if successful
+	 */
 	public static boolean contains(String[] arr, String key) {
 		for (String string : arr) {
 			if (key.equals(string)) {
@@ -9,7 +22,23 @@ public class Utilities {
 		}
 		return false;
 	}
+	/**
+	 * Index of.
+	 *
+	 * @param arr the arr
+	 * @param val the val
+	 * @return the int
+	 */
+	// utils funktion die Position im array angibt
+	public static int indexOf(String[] arr, String val) {
+		return Arrays.asList(arr).indexOf(val);
+	}
 	
+	/**
+	 * Builds the static beginning of the tex. file
+	 *
+	 * @return the string
+	 */
 	public static String buildStaticTex() {
 		StringBuilder sb = new StringBuilder();
 		
@@ -21,8 +50,6 @@ public class Utilities {
 		
 		return sb.toString();
 	}
-	public static void main(String[] args) {
-		System.out.println(buildStaticTex());
-	}
+
 
 }
