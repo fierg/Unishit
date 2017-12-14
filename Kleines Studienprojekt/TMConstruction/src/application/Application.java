@@ -20,7 +20,6 @@ public class Application {
 		boolean debug = false;
 		boolean print2File = false;
 		boolean printDetails = false;
-		boolean twoStateTM = false;
 		boolean texOutput = false;
 		long delayMilis = 0;
 
@@ -49,7 +48,6 @@ public class Application {
 			printDetails = true;
 		}
 		if (Utilities.contains(args, "-c")) {
-			twoStateTM = true;
 			System.out.println("Init 2 State TM Generator...\n");
 			TM2generator gen = new TM2generator(args[0]);
 			gen.generate2StateTM();
@@ -72,7 +70,7 @@ public class Application {
 		tm.readTMfromFile(filename);
 
 		System.out.println("Starting simulator\n");
-		tm.runTM(delayMilis , twoStateTM, texOutput);
+		tm.run(delayMilis ,  texOutput);
 
 		if (print2File && !texOutput) {
 			System.out.println("Printing history to file:\t" + filename.split(".tur")[0] + ".history");

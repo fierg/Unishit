@@ -79,12 +79,12 @@ public class TuringMachine {
 
 	/**
 	 * Write history to file.
+	// schreibt verlauf der TM in Datei
 	 *
 	 * @param filename the filename
 	 * @param includeDetails the include details
 	 * @param tex the tex
 	 */
-	// schreibt verlauf der TM in Datei
 	public void writeHistoryToFile(String filename, boolean includeDetails, boolean tex) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
 			if (tex) {
@@ -95,30 +95,6 @@ public class TuringMachine {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Gets the history as tex.
-	 *
-	 * @param includeDetails the include details
-	 * @return the history as tex
-	 */
-	private String getHistoryAsTex(boolean includeDetails) {
-		StringBuilder sb = new StringBuilder();
-		int index = 0;
-
-		for (String entry : history) {
-			sb.append(entry + "\n");
-			if (includeDetails) {
-				if (historyDetails.size() > index) {
-					sb.append(historyDetails.get(index++) + "\n");
-				}
-			}
-		}
-
-		sb.append("\\end{document}");
-
-		return sb.toString();
 	}
 
 	/**
@@ -315,6 +291,30 @@ public class TuringMachine {
 	}
 
 	/**
+	 * Gets the history as tex.
+	 *
+	 * @param includeDetails the include details
+	 * @return the history as tex
+	 */
+	private String getHistoryAsTex(boolean includeDetails) {
+		StringBuilder sb = new StringBuilder();
+		int index = 0;
+	
+		for (String entry : history) {
+			sb.append(entry + "\n");
+			if (includeDetails) {
+				if (historyDetails.size() > index) {
+					sb.append(historyDetails.get(index++) + "\n");
+				}
+			}
+		}
+	
+		sb.append("\\end{document}");
+	
+		return sb.toString();
+	}
+
+	/**
 	 * Run TM.
 	// Führt eine TM vollstaändig aus
 	 *
@@ -322,7 +322,7 @@ public class TuringMachine {
 	 * @param twoStates the two states
 	 * @param texOutput the tex output
 	 */
-	public void runTM(long timeoutMili, boolean twoStates, boolean texOutput) {
+	private void runTM(long timeoutMili, boolean twoStates, boolean texOutput) {
 
 		if (transitions.get(currentState).isEmpty()) {
 			System.out.println("No transitions! unable to simulate TM!\n");
@@ -332,7 +332,7 @@ public class TuringMachine {
 		System.out.println("Starting TM with Tape:");
 		if (twoStates) {
 			history.add(Utilities.buildStaticTex());
-			history.add(tape.toString2States(texOutput) + "\n");
+			history.add(tape.toString2States(texOutput) );
 		} else {
 			history.add(tape.toString());
 		}

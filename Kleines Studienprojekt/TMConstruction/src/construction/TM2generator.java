@@ -6,13 +6,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 import interpreter.Tape;
 import utils.Utilities;
 
-// TODO: Auto-generated Javadoc
 /**
  * Generiert eine TM mit nur 2 Zuständen aus einer gegeben TM (im .tur Format)
  *
