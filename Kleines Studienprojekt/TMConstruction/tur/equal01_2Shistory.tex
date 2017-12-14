@@ -1,5 +1,923 @@
-\documentclass[10pt, a4paper]{article}\usepackage[utf8]{inputenc}\usepackage[margin=1in]{geometry}\begin{document}\section*{Output}
-$\# \# \# \# [ 0;q0;-;R ] 1 1 1 0 0 \# \# \# \# $
-Current state: q0	 Transition: 	q0 0;q0;+;L L
+\documentclass[10pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\section*{Output}
 
+
+Current state: q0	 Current Symbol: 	 $0_{q0,-,R}$\\
+$\# \#\# \# [ s ] 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $null$ \\
+ComplexSymbol s = $0_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#$\\
+$\# \#\# [ \# ] q 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $0_{q0,+,L}$ \\
+ComplexSymbol s = $0_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $0_{q0,+,L}$\\
+$\# \#\# s [ q ] 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $0_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,-,R}$\\
+$\# \#\# [ s ] 0 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $0_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0$\\
+$\# \#\# q [ 0 ] 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q1,+,R}$\\
+$\# \#\# [ q ] s 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $0_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q0,-,L}$\\
+$\# \#\# q [ s ] 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,+,R}$\\
+$\# \#\# [ q ] s 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $0_{q1,-,L}$\\
+$\# \#\# \# [ s ] 1 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1$\\
+$\# \#\# \# q [ 1 ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q2,+,R}$\\
+$\# \#\# \# [ q ] s 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q0,-,L}$\\
+$\# \#\# \# q [ s ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# [ q ] s 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q1,-,L}$\\
+$\# \#\# \# q [ s ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# [ q ] s 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q2,-,L}$\\
+$\# \#\# \# X [ s ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# [ X ] q 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $1_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# s [ q ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# [ s ] X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#$\\
+$\# \#\# [ \# ] q X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# s [ q ] X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,-,R}$\\
+$\# \#\# [ s ] X X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# q [ X ] X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q1,+,R}$\\
+$\# \#\# [ q ] s X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# q [ s ] X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,+,R}$\\
+$\# \#\# [ q ] s X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# [ s ] X 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# q [ X ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# [ q ] s 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# q [ s ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# [ q ] s 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X [ s ] 1 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1$\\
+$\# \#\# \# X q [ 1 ] 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X [ q ] s 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q0,-,L}$\\
+$\# \#\# \# X q [ s ] 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X [ q ] s 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q1,-,L}$\\
+$\# \#\# \# X X [ s ] 1 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1$\\
+$\# \#\# \# X X q [ 1 ] 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q4,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q4,+,R}$\\
+$\# \#\# \# X X [ q ] s 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q4,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q0,-,L}$\\
+$\# \#\# \# X X q [ s ] 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q3d,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q3d,+,R}$\\
+$\# \#\# \# X X [ q ] s 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q3d,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q1,-,L}$\\
+$\# \#\# \# X X q [ s ] 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q2,+,R}$\\
+$\# \#\# \# X X [ q ] s 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $1_{q2,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q2,-,L}$\\
+$\# \#\# \# X X q [ s ] 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $1_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X [ q ] s 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $1_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q3d,-,L}$\\
+$\# \#\# \# X X q [ s ] 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X [ q ] s 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q4,-,L}$\\
+$\# \#\# \# X X X [ s ] 0 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q4,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0$\\
+$\# \#\# \# X X X q [ 0 ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q4,+,R}$ \\
+ComplexSymbol s = $1_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q4,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q4,+,R}$ \\
+ComplexSymbol s = $0_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q0,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q3d,+,R}$ \\
+ComplexSymbol s = $0_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q3d,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q3d,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q1,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q2,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q2,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q2,+,R}$ \\
+ComplexSymbol s = $0_{q2,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q2,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q1,+,R}$ \\
+ComplexSymbol s = $0_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q1,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q1,+,R}$ \\
+ComplexSymbol s = $0_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q3d,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q0,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $0_{q4,-,L}$\\
+$\# \#\# \# X X X 1 [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1$\\
+$\# \#\# \# X X X [ 1 ] q 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $0_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# X X X s [ q ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $1_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q0,-,R}$\\
+$\# \#\# \# X X X [ s ] X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $1_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X [ X ] q X 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q0,+,L}$ \\
+ComplexSymbol s = $1_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q0,+,L}$\\
+$\# \#\# \# X X s [ q ] X 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X X [ s ] 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $1_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X [ X ] q 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# X s [ q ] 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X [ s ] X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# [ X ] q X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# s [ q ] X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# [ s ] X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#$\\
+$\# \#\# [ \# ] q X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# s [ q ] X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,-,R}$\\
+$\# \#\# [ s ] X X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# q [ X ] X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q1,+,R}$\\
+$\# \#\# [ q ] s X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# q [ s ] X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,+,R}$\\
+$\# \#\# [ q ] s X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# [ s ] X X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# q [ X ] X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# [ q ] s X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# q [ s ] X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# [ q ] s X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X [ s ] X 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# X q [ X ] 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X [ q ] s 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# X q [ s ] 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X [ q ] s 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X X [ s ] 1 X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1$\\
+$\# \#\# \# X X q [ 1 ] X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X [ q ] s X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $1_{q0,-,L}$\\
+$\# \#\# \# X X q [ s ] X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X [ q ] s X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $1_{q1,-,L}$\\
+$\# \#\# \# X X X [ s ] X 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X X q [ X ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q4,+,R}$ \\
+ComplexSymbol s = $1_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q4,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q4,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q3d,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q3d,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q3d,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q2,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $X_{q2,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q2,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q3d,-,L}$\\
+$\# \#\# \# X X X q [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X X [ q ] s 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q4,-,L}$\\
+$\# \#\# \# X X X X [ s ] 0 \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q4,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0$\\
+$\# \#\# \# X X X X q [ 0 ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q4,+,R}$ \\
+ComplexSymbol s = $X_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q4,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q4,+,R}$ \\
+ComplexSymbol s = $0_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q0,-,L}$\\
+$\# \#\# \# X X X X q [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q3d,+,R}$ \\
+ComplexSymbol s = $0_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q3d,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q3d,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q1,-,L}$\\
+$\# \#\# \# X X X X q [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $0_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q2,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q2,+,R}$ \\
+ComplexSymbol s = $0_{q2,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q2,-,L}$\\
+$\# \#\# \# X X X X q [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $0_{q2,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $0_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $0_{q3d,-,L}$\\
+$\# \#\# \# X X X X q [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q3d,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $0_{q4,-,L}$\\
+$\# \#\# \# X X X X X [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $0_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X X X [ X ] q \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $0_{q4,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# X X X X s [ q ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X X X X [ s ] X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X X [ X ] q X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# X X X s [ q ] X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X X X [ s ] X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X [ X ] q X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# X X s [ q ] X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X X [ s ] X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X [ X ] q X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# X s [ q ] X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X [ s ] X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# [ X ] q X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# \# s [ q ] X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# [ s ] X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#$\\
+$\# \#\# [ \# ] q X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,L}$\\
+$\# \#\# s [ q ] X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,-,R}$\\
+$\# \#\# [ s ] X X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,L}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# q [ X ] X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $\#_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q1,+,R}$\\
+$\# \#\# [ q ] s X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# q [ s ] X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,+,R}$\\
+$\# \#\# [ q ] s X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# [ s ] X X X X X \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# q [ X ] X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# [ q ] s X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# q [ s ] X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# [ q ] s X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X [ s ] X X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# X q [ X ] X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X [ q ] s X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# X q [ s ] X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X [ q ] s X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X X [ s ] X X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X q [ X ] X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X [ q ] s X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# X X q [ s ] X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X [ q ] s X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X X X [ s ] X X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X X q [ X ] X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X X [ q ] s X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# X X X q [ s ] X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X X [ q ] s X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X X X X [ s ] X \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X X X q [ X ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,L}$\\
+$\# \#\# \# X X X X q [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X X X [ q ] s \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,-,L}$\\
+$\# \#\# \# X X X X X [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $\#$\\
+$\# \#\# \# X X X X X q [ \# ] \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $X_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q1,+,R}$\\
+$\# \#\# \# X X X X X [ q ] s \# \# \# $ \\
+ComplexSymbol q = $X_{q1,+,R}$ \\
+ComplexSymbol s = $\#_{q0,-,L}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $\#_{q0,-,L}$\\
+$\# \#\# \# X X X X X q [ s ] \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $\#_{q0,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q0,+,R}$\\
+$\# \#\# \# X X X X X [ q ] s \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $\#_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q1,-,L}$\\
+$\# \#\# \# X X X X X X [ s ] \# \# \# $ \\
+ComplexSymbol q = $X_{q0,+,R}$ \\
+ComplexSymbol s = $\#_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X$\\
+$\# \#\# \# X X X X X [ X ] q \# \# \# $ \\
+ComplexSymbol q = $\#_{q5a,+,L}$ \\
+ComplexSymbol s = $\#_{q1,-,L}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q5a,+,L}$\\
+$\# \#\# \# X X X X X s [ q ] \# \# \# $ \\
+ComplexSymbol q = $\#_{q5a,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q0,-,R}$\\
+$\# \#\# \# X X X X X [ s ] q \# \# \# $ \\
+ComplexSymbol q = $\#_{q4,+,L}$ \\
+ComplexSymbol s = $X_{q0,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q4,+,L}$\\
+$\# \#\# \# X X X X X s [ q ] \# \# \# $ \\
+ComplexSymbol q = $\#_{q4,+,L}$ \\
+ComplexSymbol s = $X_{q1,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q1,-,R}$\\
+$\# \#\# \# X X X X X [ s ] q \# \# \# $ \\
+ComplexSymbol q = $\#_{q3d,+,L}$ \\
+ComplexSymbol s = $X_{q1,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q3d,+,L}$\\
+$\# \#\# \# X X X X X s [ q ] \# \# \# $ \\
+ComplexSymbol q = $\#_{q3d,+,L}$ \\
+ComplexSymbol s = $X_{q2,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q2,-,R}$\\
+$\# \#\# \# X X X X X [ s ] q \# \# \# $ \\
+ComplexSymbol q = $\#_{q2,+,L}$ \\
+ComplexSymbol s = $X_{q2,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q2,+,L}$\\
+$\# \#\# \# X X X X X s [ q ] \# \# \# $ \\
+ComplexSymbol q = $\#_{q2,+,L}$ \\
+ComplexSymbol s = $X_{q3d,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q3d,-,R}$\\
+$\# \#\# \# X X X X X [ s ] q \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,L}$ \\
+ComplexSymbol s = $X_{q3d,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q1,+,L}$\\
+$\# \#\# \# X X X X X s [ q ] \# \# \# $ \\
+ComplexSymbol q = $\#_{q1,+,L}$ \\
+ComplexSymbol s = $X_{q4,-,R}$ \\ 
+ \medskip
+Current state: q1	 Current Symbol: 	 $X_{q4,-,R}$\\
+$\# \#\# \# X X X X X [ s ] q \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q4,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $\#_{q0,+,L}$\\
+$\# \#\# \# X X X X X s [ q ] \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q5a,-,R}$ \\ 
+ \medskip
+Current state: q0	 Current Symbol: 	 $X_{q5a,-,R}$\\
+$\# \#\# \# X X X X X [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q5a,-,R}$ \\ 
+ \medskip
+$\# \#\# \# X X X X X [ s ] \# \# \# \# $ \\
+ComplexSymbol q = $\#_{q0,+,L}$ \\
+ComplexSymbol s = $X_{q5a,-,R}$ \\ 
+ \medskip
+TM terminated!	TM accepts input
 \end{document}
