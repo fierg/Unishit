@@ -1,364 +1,730 @@
 # # # # [ 0;q0;-;R ] 1 1 1 0 0 # # # # 
 Current state: q0	 Transition: 	q0 0;q0;+;L L
-# # # [ # ] 0;q0;+;L 1 1 1 0 0 # # # # 
+# # # [ # ] q 1 1 1 0 0 # # # # 
+ComplexSymbol q = 0;q0;+;L
+ComplexSymbol s = null
 Current state: q0	 Transition: 	q0 #;q0;-;R R
-# # # #;q0;-;R [ 0;q0;+;L ] 1 1 1 0 0 # # # # 
+# # # s [ q ] 1 1 1 0 0 # # # # 
+ComplexSymbol q = 0;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q0 0 L
-# # # [ #;q0;-;R ] 0 1 1 1 0 0 # # # # 
+# # # [ s ] 0 1 1 1 0 0 # # # # 
+ComplexSymbol q = 0;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q1 #;q1;+;R R
-# # # #;q1;+;R [ 0 ] 1 1 1 0 0 # # # # 
+# # # q [ 0 ] 1 1 1 0 0 # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = #;q0;-;R
 Current state: q1	 Transition: 	q0 0;q0;-;L L
-# # # [ #;q1;+;R ] 0;q0;-;L 1 1 1 0 0 # # # # 
+# # # [ q ] s 1 1 1 0 0 # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = 0;q0;-;L
 Current state: q0	 Transition: 	q1 #;q0;+;R R
-# # # #;q0;+;R [ 0;q0;-;L ] 1 1 1 0 0 # # # # 
+# # # q [ s ] 1 1 1 0 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = 0;q0;-;L
 Current state: q1	 Transition: 	q0 0;q1;-;L L
-# # # [ #;q0;+;R ] 0;q1;-;L 1 1 1 0 0 # # # # 
+# # # [ q ] s 1 1 1 0 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q0	 Transition: 	q0 # R
-# # # # [ 0;q1;-;L ] 1 1 1 0 0 # # # # 
+# # # # [ s ] 1 1 1 0 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q0	 Transition: 	q1 X;q2;+;R R
-# # # # X;q2;+;R [ 1 ] 1 1 0 0 # # # # 
+# # # # q [ 1 ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q1	 Transition: 	q0 1;q0;-;L L
-# # # # [ X;q2;+;R ] 1;q0;-;L 1 1 0 0 # # # # 
+# # # # [ q ] s 1 1 0 0 # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X;q1;+;R [ 1;q0;-;L ] 1 1 0 0 # # # # 
+# # # # q [ s ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q1	 Transition: 	q0 1;q1;-;L L
-# # # # [ X;q1;+;R ] 1;q1;-;L 1 1 0 0 # # # # 
+# # # # [ q ] s 1 1 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X;q0;+;R [ 1;q1;-;L ] 1 1 0 0 # # # # 
+# # # # q [ s ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q1	 Transition: 	q0 1;q2;-;L L
-# # # # [ X;q0;+;R ] 1;q2;-;L 1 1 0 0 # # # # 
+# # # # [ q ] s 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q2;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X [ 1;q2;-;L ] 1 1 0 0 # # # # 
+# # # # X [ s ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q2;-;L
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # [ X ] X;q0;+;L 1 1 0 0 # # # # 
+# # # # [ X ] q 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = 1;q2;-;L
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X;q0;-;R [ X;q0;+;L ] 1 1 0 0 # # # # 
+# # # # s [ q ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # [ X;q0;-;R ] X 1 1 0 0 # # # # 
+# # # # [ s ] X 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # [ # ] X;q0;+;L X 1 1 0 0 # # # # 
+# # # [ # ] q X 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 #;q0;-;R R
-# # # #;q0;-;R [ X;q0;+;L ] X 1 1 0 0 # # # # 
+# # # s [ q ] X 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # [ #;q0;-;R ] X X 1 1 0 0 # # # # 
+# # # [ s ] X X 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q1 #;q1;+;R R
-# # # #;q1;+;R [ X ] X 1 1 0 0 # # # # 
+# # # q [ X ] X 1 1 0 0 # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = #;q0;-;R
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # [ #;q1;+;R ] X;q0;-;L X 1 1 0 0 # # # # 
+# # # [ q ] s X 1 1 0 0 # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 #;q0;+;R R
-# # # #;q0;+;R [ X;q0;-;L ] X 1 1 0 0 # # # # 
+# # # q [ s ] X 1 1 0 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # [ #;q0;+;R ] X;q1;-;L X 1 1 0 0 # # # # 
+# # # [ q ] s X 1 1 0 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 # R
-# # # # [ X;q1;-;L ] X 1 1 0 0 # # # # 
+# # # # [ s ] X 1 1 0 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X;q1;+;R [ X ] 1 1 0 0 # # # # 
+# # # # q [ X ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # [ X;q1;+;R ] X;q0;-;L 1 1 0 0 # # # # 
+# # # # [ q ] s 1 1 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X;q0;+;R [ X;q0;-;L ] 1 1 0 0 # # # # 
+# # # # q [ s ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # [ X;q0;+;R ] X;q1;-;L 1 1 0 0 # # # # 
+# # # # [ q ] s 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X [ X;q1;-;L ] 1 1 0 0 # # # # 
+# # # # X [ s ] 1 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X;q1;+;R [ 1 ] 1 0 0 # # # # 
+# # # # X q [ 1 ] 1 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 1;q0;-;L L
-# # # # X [ X;q1;+;R ] 1;q0;-;L 1 0 0 # # # # 
+# # # # X [ q ] s 1 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X;q0;+;R [ 1;q0;-;L ] 1 0 0 # # # # 
+# # # # X q [ s ] 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q1	 Transition: 	q0 1;q1;-;L L
-# # # # X [ X;q0;+;R ] 1;q1;-;L 1 0 0 # # # # 
+# # # # X [ q ] s 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X [ 1;q1;-;L ] 1 0 0 # # # # 
+# # # # X X [ s ] 1 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q0	 Transition: 	q1 X;q4;+;R R
-# # # # X X X;q4;+;R [ 1 ] 0 0 # # # # 
+# # # # X X q [ 1 ] 0 0 # # # # 
+ComplexSymbol q = X;q4;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q1	 Transition: 	q0 1;q0;-;L L
-# # # # X X [ X;q4;+;R ] 1;q0;-;L 0 0 # # # # 
+# # # # X X [ q ] s 0 0 # # # # 
+ComplexSymbol q = X;q4;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q0	 Transition: 	q1 X;q3d;+;R R
-# # # # X X X;q3d;+;R [ 1;q0;-;L ] 0 0 # # # # 
+# # # # X X q [ s ] 0 0 # # # # 
+ComplexSymbol q = X;q3d;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q1	 Transition: 	q0 1;q1;-;L L
-# # # # X X [ X;q3d;+;R ] 1;q1;-;L 0 0 # # # # 
+# # # # X X [ q ] s 0 0 # # # # 
+ComplexSymbol q = X;q3d;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q0	 Transition: 	q1 X;q2;+;R R
-# # # # X X X;q2;+;R [ 1;q1;-;L ] 0 0 # # # # 
+# # # # X X q [ s ] 0 0 # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q1	 Transition: 	q0 1;q2;-;L L
-# # # # X X [ X;q2;+;R ] 1;q2;-;L 0 0 # # # # 
+# # # # X X [ q ] s 0 0 # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = 1;q2;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X;q1;+;R [ 1;q2;-;L ] 0 0 # # # # 
+# # # # X X q [ s ] 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 1;q2;-;L
 Current state: q1	 Transition: 	q0 1;q3d;-;L L
-# # # # X X [ X;q1;+;R ] 1;q3d;-;L 0 0 # # # # 
+# # # # X X [ q ] s 0 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 1;q3d;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X;q0;+;R [ 1;q3d;-;L ] 0 0 # # # # 
+# # # # X X q [ s ] 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q3d;-;L
 Current state: q1	 Transition: 	q0 1;q4;-;L L
-# # # # X X [ X;q0;+;R ] 1;q4;-;L 0 0 # # # # 
+# # # # X X [ q ] s 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q4;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X [ 1;q4;-;L ] 0 0 # # # # 
+# # # # X X X [ s ] 0 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q4;-;L
 Current state: q0	 Transition: 	q1 1;q4;+;R R
-# # # # X X X 1;q4;+;R [ 0 ] 0 # # # # 
+# # # # X X X q [ 0 ] 0 # # # # 
+ComplexSymbol q = 1;q4;+;R
+ComplexSymbol s = 1;q4;-;L
 Current state: q1	 Transition: 	q0 0;q0;-;L L
-# # # # X X X [ 1;q4;+;R ] 0;q0;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = 1;q4;+;R
+ComplexSymbol s = 0;q0;-;L
 Current state: q0	 Transition: 	q1 1;q3d;+;R R
-# # # # X X X 1;q3d;+;R [ 0;q0;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = 1;q3d;+;R
+ComplexSymbol s = 0;q0;-;L
 Current state: q1	 Transition: 	q0 0;q1;-;L L
-# # # # X X X [ 1;q3d;+;R ] 0;q1;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = 1;q3d;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q0	 Transition: 	q1 1;q2;+;R R
-# # # # X X X 1;q2;+;R [ 0;q1;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = 1;q2;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q1	 Transition: 	q0 0;q2;-;L L
-# # # # X X X [ 1;q2;+;R ] 0;q2;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = 1;q2;+;R
+ComplexSymbol s = 0;q2;-;L
 Current state: q0	 Transition: 	q1 1;q1;+;R R
-# # # # X X X 1;q1;+;R [ 0;q2;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = 1;q1;+;R
+ComplexSymbol s = 0;q2;-;L
 Current state: q1	 Transition: 	q0 0;q3d;-;L L
-# # # # X X X [ 1;q1;+;R ] 0;q3d;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = 1;q1;+;R
+ComplexSymbol s = 0;q3d;-;L
 Current state: q0	 Transition: 	q1 1;q0;+;R R
-# # # # X X X 1;q0;+;R [ 0;q3d;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = 1;q0;+;R
+ComplexSymbol s = 0;q3d;-;L
 Current state: q1	 Transition: 	q0 0;q4;-;L L
-# # # # X X X [ 1;q0;+;R ] 0;q4;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = 1;q0;+;R
+ComplexSymbol s = 0;q4;-;L
 Current state: q0	 Transition: 	q0 1 R
-# # # # X X X 1 [ 0;q4;-;L ] 0 # # # # 
+# # # # X X X 1 [ s ] 0 # # # # 
+ComplexSymbol q = 1;q0;+;R
+ComplexSymbol s = 0;q4;-;L
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # X X X [ 1 ] X;q0;+;L 0 # # # # 
+# # # # X X X [ 1 ] q 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = 0;q4;-;L
 Current state: q0	 Transition: 	q0 1;q0;-;R R
-# # # # X X X 1;q0;-;R [ X;q0;+;L ] 0 # # # # 
+# # # # X X X s [ q ] 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = 1;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # X X X [ 1;q0;-;R ] X 0 # # # # 
+# # # # X X X [ s ] X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = 1;q0;-;R
 Current state: q0	 Transition: 	q0 1;q0;+;L L
-# # # # X X [ X ] 1;q0;+;L X 0 # # # # 
+# # # # X X [ X ] q X 0 # # # # 
+ComplexSymbol q = 1;q0;+;L
+ComplexSymbol s = 1;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X X;q0;-;R [ 1;q0;+;L ] X 0 # # # # 
+# # # # X X s [ q ] X 0 # # # # 
+ComplexSymbol q = 1;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 1 L
-# # # # X X [ X;q0;-;R ] 1 X 0 # # # # 
+# # # # X X [ s ] 1 X 0 # # # # 
+ComplexSymbol q = 1;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # X [ X ] X;q0;+;L 1 X 0 # # # # 
+# # # # X [ X ] q 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X;q0;-;R [ X;q0;+;L ] 1 X 0 # # # # 
+# # # # X s [ q ] 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # X [ X;q0;-;R ] X 1 X 0 # # # # 
+# # # # X [ s ] X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # [ X ] X;q0;+;L X 1 X 0 # # # # 
+# # # # [ X ] q X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X;q0;-;R [ X;q0;+;L ] X 1 X 0 # # # # 
+# # # # s [ q ] X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # [ X;q0;-;R ] X X 1 X 0 # # # # 
+# # # # [ s ] X X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # [ # ] X;q0;+;L X X 1 X 0 # # # # 
+# # # [ # ] q X X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 #;q0;-;R R
-# # # #;q0;-;R [ X;q0;+;L ] X X 1 X 0 # # # # 
+# # # s [ q ] X X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # [ #;q0;-;R ] X X X 1 X 0 # # # # 
+# # # [ s ] X X X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q1 #;q1;+;R R
-# # # #;q1;+;R [ X ] X X 1 X 0 # # # # 
+# # # q [ X ] X X 1 X 0 # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = #;q0;-;R
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # [ #;q1;+;R ] X;q0;-;L X X 1 X 0 # # # # 
+# # # [ q ] s X X 1 X 0 # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 #;q0;+;R R
-# # # #;q0;+;R [ X;q0;-;L ] X X 1 X 0 # # # # 
+# # # q [ s ] X X 1 X 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # [ #;q0;+;R ] X;q1;-;L X X 1 X 0 # # # # 
+# # # [ q ] s X X 1 X 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 # R
-# # # # [ X;q1;-;L ] X X 1 X 0 # # # # 
+# # # # [ s ] X X 1 X 0 # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X;q1;+;R [ X ] X 1 X 0 # # # # 
+# # # # q [ X ] X 1 X 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # [ X;q1;+;R ] X;q0;-;L X 1 X 0 # # # # 
+# # # # [ q ] s X 1 X 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X;q0;+;R [ X;q0;-;L ] X 1 X 0 # # # # 
+# # # # q [ s ] X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # [ X;q0;+;R ] X;q1;-;L X 1 X 0 # # # # 
+# # # # [ q ] s X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X [ X;q1;-;L ] X 1 X 0 # # # # 
+# # # # X [ s ] X 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X;q1;+;R [ X ] 1 X 0 # # # # 
+# # # # X q [ X ] 1 X 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # X [ X;q1;+;R ] X;q0;-;L 1 X 0 # # # # 
+# # # # X [ q ] s 1 X 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X;q0;+;R [ X;q0;-;L ] 1 X 0 # # # # 
+# # # # X q [ s ] 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # X [ X;q0;+;R ] X;q1;-;L 1 X 0 # # # # 
+# # # # X [ q ] s 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X [ X;q1;-;L ] 1 X 0 # # # # 
+# # # # X X [ s ] 1 X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X;q1;+;R [ 1 ] X 0 # # # # 
+# # # # X X q [ 1 ] X 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 1;q0;-;L L
-# # # # X X [ X;q1;+;R ] 1;q0;-;L X 0 # # # # 
+# # # # X X [ q ] s X 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X;q0;+;R [ 1;q0;-;L ] X 0 # # # # 
+# # # # X X q [ s ] X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q0;-;L
 Current state: q1	 Transition: 	q0 1;q1;-;L L
-# # # # X X [ X;q0;+;R ] 1;q1;-;L X 0 # # # # 
+# # # # X X [ q ] s X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X [ 1;q1;-;L ] X 0 # # # # 
+# # # # X X X [ s ] X 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q0	 Transition: 	q1 X;q4;+;R R
-# # # # X X X X;q4;+;R [ X ] 0 # # # # 
+# # # # X X X q [ X ] 0 # # # # 
+ComplexSymbol q = X;q4;+;R
+ComplexSymbol s = 1;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # X X X [ X;q4;+;R ] X;q0;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = X;q4;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q3d;+;R R
-# # # # X X X X;q3d;+;R [ X;q0;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = X;q3d;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # X X X [ X;q3d;+;R ] X;q1;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = X;q3d;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q2;+;R R
-# # # # X X X X;q2;+;R [ X;q1;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q2;-;L L
-# # # # X X X [ X;q2;+;R ] X;q2;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = X;q2;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X X;q1;+;R [ X;q2;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q2;-;L
 Current state: q1	 Transition: 	q0 X;q3d;-;L L
-# # # # X X X [ X;q1;+;R ] X;q3d;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q3d;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X X;q0;+;R [ X;q3d;-;L ] 0 # # # # 
+# # # # X X X q [ s ] 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q3d;-;L
 Current state: q1	 Transition: 	q0 X;q4;-;L L
-# # # # X X X [ X;q0;+;R ] X;q4;-;L 0 # # # # 
+# # # # X X X [ q ] s 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q4;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X X [ X;q4;-;L ] 0 # # # # 
+# # # # X X X X [ s ] 0 # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q4;-;L
 Current state: q0	 Transition: 	q1 X;q4;+;R R
-# # # # X X X X X;q4;+;R [ 0 ] # # # # 
+# # # # X X X X q [ 0 ] # # # # 
+ComplexSymbol q = X;q4;+;R
+ComplexSymbol s = X;q4;-;L
 Current state: q1	 Transition: 	q0 0;q0;-;L L
-# # # # X X X X [ X;q4;+;R ] 0;q0;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q4;+;R
+ComplexSymbol s = 0;q0;-;L
 Current state: q0	 Transition: 	q1 X;q3d;+;R R
-# # # # X X X X X;q3d;+;R [ 0;q0;-;L ] # # # # 
+# # # # X X X X q [ s ] # # # # 
+ComplexSymbol q = X;q3d;+;R
+ComplexSymbol s = 0;q0;-;L
 Current state: q1	 Transition: 	q0 0;q1;-;L L
-# # # # X X X X [ X;q3d;+;R ] 0;q1;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q3d;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q0	 Transition: 	q1 X;q2;+;R R
-# # # # X X X X X;q2;+;R [ 0;q1;-;L ] # # # # 
+# # # # X X X X q [ s ] # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = 0;q1;-;L
 Current state: q1	 Transition: 	q0 0;q2;-;L L
-# # # # X X X X [ X;q2;+;R ] 0;q2;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q2;+;R
+ComplexSymbol s = 0;q2;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X X X;q1;+;R [ 0;q2;-;L ] # # # # 
+# # # # X X X X q [ s ] # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 0;q2;-;L
 Current state: q1	 Transition: 	q0 0;q3d;-;L L
-# # # # X X X X [ X;q1;+;R ] 0;q3d;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = 0;q3d;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X X X;q0;+;R [ 0;q3d;-;L ] # # # # 
+# # # # X X X X q [ s ] # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 0;q3d;-;L
 Current state: q1	 Transition: 	q0 0;q4;-;L L
-# # # # X X X X [ X;q0;+;R ] 0;q4;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 0;q4;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X X X [ 0;q4;-;L ] # # # # 
+# # # # X X X X X [ s ] # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = 0;q4;-;L
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # X X X X [ X ] X;q0;+;L # # # # 
+# # # # X X X X [ X ] q # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = 0;q4;-;L
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X X X X;q0;-;R [ X;q0;+;L ] # # # # 
+# # # # X X X X s [ q ] # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # X X X X [ X;q0;-;R ] X # # # # 
+# # # # X X X X [ s ] X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # X X X [ X ] X;q0;+;L X # # # # 
+# # # # X X X [ X ] q X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X X X;q0;-;R [ X;q0;+;L ] X # # # # 
+# # # # X X X s [ q ] X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # X X X [ X;q0;-;R ] X X # # # # 
+# # # # X X X [ s ] X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # X X [ X ] X;q0;+;L X X # # # # 
+# # # # X X [ X ] q X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X X;q0;-;R [ X;q0;+;L ] X X # # # # 
+# # # # X X s [ q ] X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # X X [ X;q0;-;R ] X X X # # # # 
+# # # # X X [ s ] X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # X [ X ] X;q0;+;L X X X # # # # 
+# # # # X [ X ] q X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X;q0;-;R [ X;q0;+;L ] X X X # # # # 
+# # # # X s [ q ] X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # X [ X;q0;-;R ] X X X X # # # # 
+# # # # X [ s ] X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # # [ X ] X;q0;+;L X X X X # # # # 
+# # # # [ X ] q X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X;q0;-;R [ X;q0;+;L ] X X X X # # # # 
+# # # # s [ q ] X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # # [ X;q0;-;R ] X X X X X # # # # 
+# # # # [ s ] X X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 X;q0;+;L L
-# # # [ # ] X;q0;+;L X X X X X # # # # 
+# # # [ # ] q X X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q0 #;q0;-;R R
-# # # #;q0;-;R [ X;q0;+;L ] X X X X X # # # # 
+# # # s [ q ] X X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q0 X L
-# # # [ #;q0;-;R ] X X X X X X # # # # 
+# # # [ s ] X X X X X X # # # # 
+ComplexSymbol q = X;q0;+;L
+ComplexSymbol s = #;q0;-;R
 Current state: q0	 Transition: 	q1 #;q1;+;R R
-# # # #;q1;+;R [ X ] X X X X X # # # # 
+# # # q [ X ] X X X X X # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = #;q0;-;R
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # [ #;q1;+;R ] X;q0;-;L X X X X X # # # # 
+# # # [ q ] s X X X X X # # # # 
+ComplexSymbol q = #;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 #;q0;+;R R
-# # # #;q0;+;R [ X;q0;-;L ] X X X X X # # # # 
+# # # q [ s ] X X X X X # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # [ #;q0;+;R ] X;q1;-;L X X X X X # # # # 
+# # # [ q ] s X X X X X # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 # R
-# # # # [ X;q1;-;L ] X X X X X # # # # 
+# # # # [ s ] X X X X X # # # # 
+ComplexSymbol q = #;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X;q1;+;R [ X ] X X X X # # # # 
+# # # # q [ X ] X X X X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # [ X;q1;+;R ] X;q0;-;L X X X X # # # # 
+# # # # [ q ] s X X X X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X;q0;+;R [ X;q0;-;L ] X X X X # # # # 
+# # # # q [ s ] X X X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # [ X;q0;+;R ] X;q1;-;L X X X X # # # # 
+# # # # [ q ] s X X X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X [ X;q1;-;L ] X X X X # # # # 
+# # # # X [ s ] X X X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X;q1;+;R [ X ] X X X # # # # 
+# # # # X q [ X ] X X X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # X [ X;q1;+;R ] X;q0;-;L X X X # # # # 
+# # # # X [ q ] s X X X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X;q0;+;R [ X;q0;-;L ] X X X # # # # 
+# # # # X q [ s ] X X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # X [ X;q0;+;R ] X;q1;-;L X X X # # # # 
+# # # # X [ q ] s X X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X [ X;q1;-;L ] X X X # # # # 
+# # # # X X [ s ] X X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X;q1;+;R [ X ] X X # # # # 
+# # # # X X q [ X ] X X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # X X [ X;q1;+;R ] X;q0;-;L X X # # # # 
+# # # # X X [ q ] s X X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X;q0;+;R [ X;q0;-;L ] X X # # # # 
+# # # # X X q [ s ] X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # X X [ X;q0;+;R ] X;q1;-;L X X # # # # 
+# # # # X X [ q ] s X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X [ X;q1;-;L ] X X # # # # 
+# # # # X X X [ s ] X X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X X;q1;+;R [ X ] X # # # # 
+# # # # X X X q [ X ] X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # X X X [ X;q1;+;R ] X;q0;-;L X # # # # 
+# # # # X X X [ q ] s X # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X X;q0;+;R [ X;q0;-;L ] X # # # # 
+# # # # X X X q [ s ] X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # X X X [ X;q0;+;R ] X;q1;-;L X # # # # 
+# # # # X X X [ q ] s X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X X [ X;q1;-;L ] X # # # # 
+# # # # X X X X [ s ] X # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X X X;q1;+;R [ X ] # # # # 
+# # # # X X X X q [ X ] # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 X;q0;-;L L
-# # # # X X X X [ X;q1;+;R ] X;q0;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X X X;q0;+;R [ X;q0;-;L ] # # # # 
+# # # # X X X X q [ s ] # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q0;-;L
 Current state: q1	 Transition: 	q0 X;q1;-;L L
-# # # # X X X X [ X;q0;+;R ] X;q1;-;L # # # # 
+# # # # X X X X [ q ] s # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X X X [ X;q1;-;L ] # # # # 
+# # # # X X X X X [ s ] # # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q0	 Transition: 	q1 X;q1;+;R R
-# # # # X X X X X X;q1;+;R [ # ] # # # 
+# # # # X X X X X q [ # ] # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = X;q1;-;L
 Current state: q1	 Transition: 	q0 #;q0;-;L L
-# # # # X X X X X [ X;q1;+;R ] #;q0;-;L # # # 
+# # # # X X X X X [ q ] s # # # 
+ComplexSymbol q = X;q1;+;R
+ComplexSymbol s = #;q0;-;L
 Current state: q0	 Transition: 	q1 X;q0;+;R R
-# # # # X X X X X X;q0;+;R [ #;q0;-;L ] # # # 
+# # # # X X X X X q [ s ] # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = #;q0;-;L
 Current state: q1	 Transition: 	q0 #;q1;-;L L
-# # # # X X X X X [ X;q0;+;R ] #;q1;-;L # # # 
+# # # # X X X X X [ q ] s # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = #;q1;-;L
 Current state: q0	 Transition: 	q0 X R
-# # # # X X X X X X [ #;q1;-;L ] # # # 
+# # # # X X X X X X [ s ] # # # 
+ComplexSymbol q = X;q0;+;R
+ComplexSymbol s = #;q1;-;L
 Current state: q0	 Transition: 	q0 #;q5a;+;L L
-# # # # X X X X X [ X ] #;q5a;+;L # # # 
+# # # # X X X X X [ X ] q # # # 
+ComplexSymbol q = #;q5a;+;L
+ComplexSymbol s = #;q1;-;L
 Current state: q0	 Transition: 	q0 X;q0;-;R R
-# # # # X X X X X X;q0;-;R [ #;q5a;+;L ] # # # 
+# # # # X X X X X s [ q ] # # # 
+ComplexSymbol q = #;q5a;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q0	 Transition: 	q1 #;q4;+;L L
-# # # # X X X X X [ X;q0;-;R ] #;q4;+;L # # # 
+# # # # X X X X X [ s ] q # # # 
+ComplexSymbol q = #;q4;+;L
+ComplexSymbol s = X;q0;-;R
 Current state: q1	 Transition: 	q0 X;q1;-;R R
-# # # # X X X X X X;q1;-;R [ #;q4;+;L ] # # # 
+# # # # X X X X X s [ q ] # # # 
+ComplexSymbol q = #;q4;+;L
+ComplexSymbol s = X;q1;-;R
 Current state: q0	 Transition: 	q1 #;q3d;+;L L
-# # # # X X X X X [ X;q1;-;R ] #;q3d;+;L # # # 
+# # # # X X X X X [ s ] q # # # 
+ComplexSymbol q = #;q3d;+;L
+ComplexSymbol s = X;q1;-;R
 Current state: q1	 Transition: 	q0 X;q2;-;R R
-# # # # X X X X X X;q2;-;R [ #;q3d;+;L ] # # # 
+# # # # X X X X X s [ q ] # # # 
+ComplexSymbol q = #;q3d;+;L
+ComplexSymbol s = X;q2;-;R
 Current state: q0	 Transition: 	q1 #;q2;+;L L
-# # # # X X X X X [ X;q2;-;R ] #;q2;+;L # # # 
+# # # # X X X X X [ s ] q # # # 
+ComplexSymbol q = #;q2;+;L
+ComplexSymbol s = X;q2;-;R
 Current state: q1	 Transition: 	q0 X;q3d;-;R R
-# # # # X X X X X X;q3d;-;R [ #;q2;+;L ] # # # 
+# # # # X X X X X s [ q ] # # # 
+ComplexSymbol q = #;q2;+;L
+ComplexSymbol s = X;q3d;-;R
 Current state: q0	 Transition: 	q1 #;q1;+;L L
-# # # # X X X X X [ X;q3d;-;R ] #;q1;+;L # # # 
+# # # # X X X X X [ s ] q # # # 
+ComplexSymbol q = #;q1;+;L
+ComplexSymbol s = X;q3d;-;R
 Current state: q1	 Transition: 	q0 X;q4;-;R R
-# # # # X X X X X X;q4;-;R [ #;q1;+;L ] # # # 
+# # # # X X X X X s [ q ] # # # 
+ComplexSymbol q = #;q1;+;L
+ComplexSymbol s = X;q4;-;R
 Current state: q0	 Transition: 	q1 #;q0;+;L L
-# # # # X X X X X [ X;q4;-;R ] #;q0;+;L # # # 
+# # # # X X X X X [ s ] q # # # 
+ComplexSymbol q = #;q0;+;L
+ComplexSymbol s = X;q4;-;R
 Current state: q1	 Transition: 	q0 X;q5a;-;R R
-# # # # X X X X X X;q5a;-;R [ #;q0;+;L ] # # # 
+# # # # X X X X X s [ q ] # # # 
+ComplexSymbol q = #;q0;+;L
+ComplexSymbol s = X;q5a;-;R
 Current state: q0	 Transition: 	q0 # L
-# # # # X X X X X [ X;q5a;-;R ] # # # # 
+# # # # X X X X X [ s ] # # # # 
+ComplexSymbol q = #;q0;+;L
+ComplexSymbol s = X;q5a;-;R
 Current state: q0	 Transition: 	null
+# # # # X X X X X [ s ] # # # # 
+ComplexSymbol q = #;q0;+;L
+ComplexSymbol s = X;q5a;-;R
+TM terminated!	TM accepts input

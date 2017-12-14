@@ -6,8 +6,7 @@ import construction.TM2generator;
 import interpreter.TuringMachine;
 
 /**
- * Anwendung
- * Kapselt die eigentliche Anwendung und handelt Parameter ab
+ * Anwendung Kapselt die eigentliche Anwendung und handelt Parameter ab
  *
  */
 public class Application {
@@ -16,6 +15,8 @@ public class Application {
 		boolean debug = false;
 		boolean print2File = false;
 		boolean printDetails = false;
+		boolean twoStateTM = false;
+		boolean texOutput = false;
 		long delayMilis = 0;
 
 		if (args.length < 1) {
@@ -24,7 +25,7 @@ public class Application {
 			System.exit(1);
 		}
 
-		if (args.length >=2 && args[1].chars().allMatch(Character::isDigit)) {
+		if (args.length >= 2 && args[1].chars().allMatch(Character::isDigit)) {
 			delayMilis = Long.parseLong(args[1]);
 		}
 
@@ -32,13 +33,18 @@ public class Application {
 		if (contains(args, "-d")) {
 			debug = true;
 		}
+		if(contains(args, "-tex")) {
+			texOutput = true;
+		}
 		if (contains(args, "-p")) {
 			print2File = true;
 		}
 		if (contains(args, "-pd")) {
+			print2File = true;
 			printDetails = true;
 		}
 		if (contains(args, "-c")) {
+			twoStateTM = true;
 			System.out.println("Init 2 State TM Generator...\n");
 			TM2generator gen = new TM2generator(args[0]);
 			gen.generate2StateTM();
@@ -60,11 +66,14 @@ public class Application {
 		tm.readTMfromFile(filename);
 
 		System.out.println("starting simulator\n");
-		tm.run(delayMilis);
+		tm.runTM(delayMilis , twoStateTM, texOutput);
 
-		if (print2File) {
+		if (print2File && !texOutput) {
 			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + ".history");
-			tm.writeHistoryToFile(filename.split(".tur")[0] + ".history", printDetails);
+			tm.writeHistoryToFile(filename.split(".tur")[0] + ".history", printDetails , texOutput);
+		} else if (print2File && texOutput) {
+			System.out.println("printing history to file:\t" + filename.split(".tur")[0] + "history.tex");
+			tm.writeHistoryToFile(filename.split(".tur")[0] + "history.tex", printDetails , texOutput);
 		}
 
 	}

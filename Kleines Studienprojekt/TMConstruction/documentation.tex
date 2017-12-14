@@ -133,7 +133,7 @@ Diese Konvention wird auch bei der TM mit nur 2 Zuständen genutzt. In dem Fall 
 \subsection*{\ilc{Tape}}
 \paragraph*{}
 Das Band der simmulierten TM wird durch die Klasse \ilc{Tape} realisiert. Sie speichert das aktuelle Symbol sowie die linke und rechte Seite des Bands durch zwei Stacks. Zudem werden die Basisoperationen Kopfbewegung nach \ilc{L} oder \ilc{R} unterstützt.\\
-Das Lesen und Schreiben eines Tapes aus einer Datei wird ebenfalls durch diese Klasse realisiert.\par
+Das Lesen und Schreiben eines Tapes aus einer Datei wird ebenfalls durch diese Klasse realisiert, zudem werden die Bandinhalte im Falle der Simmulation einer Tm mit nur zwei Zuständen vereinfacht um die Lesbarkeit zu gewährleisten.\par
 
 \subsection*{\ilc{Transition}}
 \paragraph*{}
@@ -149,9 +149,14 @@ Neben einfachen Utilities-Methoden die das Lesen und Schreiben einer TM aus eine
 Diese Methode erstellt aus der eingelesenen TM die bereits beschriebene, doppelt verschachtelte (Hash)Map aus Zustand, eingelesenes Symbol $\rightarrow$ Übergang. Dazu werden alle Übergänge nacheinander in die Map eingefügt. Wird ein neuer Übergang an die Position eines bereits exisitierenden Übergangs eingefügt, ist die zu simmulierende TM nicht deterministisch und der Prozess wird abgebrochen.\par
 \subsubsection*{\ilc{step()}}
 Die Methode \ilc{step()} reslisiert einen Schritt der TM. Mit dem aktuellen Zustand und Symbol wird aus der \ilc{transitions} Map der passende Übergang herausgesucht. Anschließend wird das aktuelle Symbol verändert und eine Kopfbewegung und Zustandsänderung ausgeführt.
-\subsubsection*{\ilc{run(long timeoutMili)}}
-\subsection*{Application}
+\subsubsection*{\ilc{run(long timeoutMili, boolean twoStates)}}
+\paragraph*{}
+Durch den Aufruf der Methode \ilc{run} wird die TM bis ausgeführt bis sie terminiert oder kein passender Übergang exisitiert. Wird eine TM mit nur zwei Zuständen gestartet, so exisitiert irgendwann kein passender Übergang mehr, da die ursprüngliche TM terminiert wäre und in einen FInalzustand gewechselt hätte. Nun kann entschieden werden, ob das aktuelle Symbol einen akzeptierenden oder terminierenden Zustand innehält und so das Terminieren der TM mit zwei Zuständen realisieren.\\
+Zudem wird eine Wartezeit pro step der TM festgelegt, da bei einer langsemeren Simulation das Vorgehen der TM analysiert werden kann.\par
 
+\subsection*{Application}
+\paragraph*{}
+Die eigentliche Anwendung und deren Benutzung über die Komandozeile werden durch die Klasse Application gekapselt. Dadurch können einzelne Flags für den Ablauf gesetzt werden und bei einem fehlerhaften Aufruf oder bei unzureichenden Argumenten kann ein Anwendungsbeispiel angezeigt werden. Dies erleichtert die Benutzung da keine GUI o.ä. vorhanden ist.
 
 \section*{Dateiformat \ilc{.tur}}
 \paragraph*{}
@@ -213,9 +218,19 @@ Weitere Informationen über das Dateiformat lassen sich der Datei \ilc{FORMAT\_E
 Die fertige Anwendung lässt sich als \ilc{jar} wie folgt benutzen:\\
 \ilc{<.tur Datei> <delay in millisekunden>} (optional, ohne Verzögerung ist es jedoch schwer der Simulation zu folgen)\\
 Weitere Parameter die gesetzt werden können:\\
-\ilc{-c} konvertiert die TM in eine TM mit 2 Zuständen vor der Simulation\\
+\ilc{-c} konvertiert die TM in eine TM mit 2 Zuständen (vor der Simulation)\\
 \ilc{-p} speichert Simulation in einer .history Datei ab\\
-\ilc{-pd} speicher zudem Details wie aktueller Zustand und Übergang\\
+\ilc{-pd} speichert zudem Details wie aktueller Zustand und Übergang\\
 \ilc{-d} debug (Genaurere Informationen des Ablaufs werden über st.out ausgegeben)
+
+\subsection*{Beispiel}
+\paragraph*{}
+Ein beispielhafter Aufruf sähe wie folgt aus:\par
+
+\begin{tcolorbox}
+\begin{verbatim}
+java -jar TM.jar tur/equal01.tur 200 -c -d -pd
+\end{verbatim}
+\end{tcolorbox}
 
 \end{document}

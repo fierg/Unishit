@@ -3,6 +3,7 @@ package construction;
 import java.util.concurrent.TimeUnit;
 
 import interpreter.TuringMachine;
+import construction.TM2generator;
 
 /**
  * Testklasse
@@ -18,7 +19,7 @@ public class TestClass {
 	public static void main(String[] args) {
 		TuringMachine tm = new TuringMachine(true);
 		tm.readTMfromFile("tur/equal01.tur");
-		tm.run(1000);
+//		tm.run(1000);
 		
 		TM2generator gen = new TM2generator("tur/equal01.tur");
 		gen.generate2StateTM();
@@ -33,7 +34,7 @@ public class TestClass {
 		
 		TuringMachine tm2 = new TuringMachine(false);
 		tm2.readTMfromFile("tur/equal01_2S.tur");
-		tm2.run(100);
+//		tm2.run(100);
 
 	}
 }

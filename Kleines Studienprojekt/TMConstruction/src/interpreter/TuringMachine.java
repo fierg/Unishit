@@ -46,13 +46,40 @@ public class TuringMachine {
 		transitions = new HashMap<State, HashMap<String, Transition>>();
 	}
 
-	// schriebt verlauf der TM in Datei
-	public void writeHistoryToFile(String filename, boolean includeDetails) {
+	// schreibt verlauf der TM in Datei
+	public void writeHistoryToFile(String filename, boolean includeDetails, boolean tex) {
 		try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
-			out.print(getHistory(includeDetails));
+			if (tex) {
+				out.print(getHistoryAsTex(includeDetails));
+			} else {
+				out.print(getHistory(includeDetails));
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private String getHistoryAsTex(boolean includeDetails) {
+		StringBuilder sb = new StringBuilder();
+		int index = 0;
+		sb.append("\\documentclass[10pt, a4paper]{article}");
+		sb.append("\\usepackage[utf8]{inputenc}");
+		sb.append("\\usepackage[margin=1in]{geometry}");
+		sb.append("\\begin{document}");
+		sb.append("\\section*{Output}");
+
+		for (String entry : history) {
+			sb.append(entry + "\n");
+			if (includeDetails) {
+				if (historyDetails.size() > index) {
+					sb.append(historyDetails.get(index++) + "\n");
+				}
+			}
+		}
+
+		sb.append("\\end{document}");
+
+		return sb.toString();
 	}
 
 	public String getHistory(boolean includeDetails) {
@@ -61,7 +88,9 @@ public class TuringMachine {
 		for (String entry : history) {
 			sb.append(entry + "\n");
 			if (includeDetails) {
-				sb.append(historyDetails.get(index++) + "\n");
+				if (historyDetails.size() > index) {
+					sb.append(historyDetails.get(index++) + "\n");
+				}
 			}
 		}
 		return sb.toString();
@@ -95,6 +124,7 @@ public class TuringMachine {
 		} catch (Exception e) {
 			System.err.println("Failed to read TM from File!" + e.getMessage());
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 
@@ -102,15 +132,15 @@ public class TuringMachine {
 	 * @param timeoutMili
 	 *            TESTMETHODE
 	 */
-	public void run(long timeoutMili) {
+	public void run(long timeoutMili, boolean texOut) {
 		if (this.currentState.equals(null) || this.nrOfStates == 0 || this.tape.equals(null)
 				|| this.transitions.equals(null)) {
 			throw new IllegalArgumentException("Unable to run this TM!");
 		}
 		if (nrOfStates == 2) {
-			runTM(timeoutMili, true);
+			runTM(timeoutMili, true, texOut);
 		} else {
-			runTM(timeoutMili, false);
+			runTM(timeoutMili, false, false);
 		}
 	}
 
@@ -199,10 +229,10 @@ public class TuringMachine {
 		// abgebrochen.
 		Transition t = transitions.get(currentState).get(tape.getCurrentSymbol());
 		if (t == null || t.equals(null)) {
-			System.err.println(
+			System.out.println(
 					"Current state: " + currentState.getName() + "\nCurrent symbol: " + tape.getCurrentSymbol());
-			System.err.println("No existing transition for current state and symbol found!");
 			terminated = true;
+			throw new NullPointerException("No existing transition for current state and symbol found!");
 		}
 
 		// anschließend wird aktueller Schritt vollzogen und das Band bewegt
@@ -216,16 +246,15 @@ public class TuringMachine {
 		}
 
 		currentState = t.getNewState();
-		
-		//wenn aktueller Zustand final ist, wird die Simulation beendet.
+
+		// wenn aktueller Zustand final ist, wird die Simulation beendet.
 		if (currentState.isFinal()) {
 			terminated = true;
 		}
 	}
 
-	
-	//Führt eine TM vollstaändig aus
-	private void runTM(long timeoutMili, boolean twoStates) {
+	// Führt eine TM vollstaändig aus
+	public void runTM(long timeoutMili, boolean twoStates, boolean texOutput) {
 
 		if (transitions.get(currentState).isEmpty()) {
 			System.out.println("No transitions! unable to simulate TM!\n");
@@ -236,7 +265,8 @@ public class TuringMachine {
 		System.out.println(tape.toString() + "\n\n");
 		history.add(tape.toString());
 
-		//Solange TM nicht terminiert, werden einzeln Schritte vollzogen und der Verlauf gespeichert
+		// Solange TM nicht terminiert, werden einzeln Schritte vollzogen und der
+		// Verlauf gespeichert
 		while (!terminated) {
 			historyDetails.add("Current state: " + currentState.getName() + "\t Transition: \t"
 					+ transitions.get(currentState).get(tape.getCurrentSymbol()));
@@ -247,20 +277,30 @@ public class TuringMachine {
 			try {
 				step();
 				TimeUnit.MILLISECONDS.sleep(timeoutMili);
-			} catch (IllegalArgumentException | InterruptedException e) {
-				historyDetails.add("Failed to simulate TM!\n" + e.getMessage());
-				System.err.println("Failed to simulate TM!\n" + e.getMessage());
-				break;
+			} catch (IllegalArgumentException | InterruptedException | NullPointerException e) {
+				if (!(e instanceof NullPointerException)) {
+					historyDetails.add("Failed to simulate TM!\n" + e.getMessage());
+					System.err.println("Failed to simulate TM!\n" + e.getMessage());
+					break;
+				}
 			}
-			history.add(tape.toString());
-			System.out.println(tape.toString());
+			if (!twoStates) {
+				history.add(tape.toString());
+				System.out.println(tape.toString());
+			} else {
+				history.add(tape.toString2States(texOutput));
+				System.out.println(tape.toString2States(texOutput));
+			}
+
 		}
 
-		//Nachdem TM terminiert, wird entschieden ob eingabe akzeptiert oder abgelehnt wird
+		// Nachdem TM terminiert, wird entschieden ob eingabe akzeptiert oder abgelehnt
+		// wird
 		String output = "TM terminated!\t";
 
 		if (twoStates) {
-			//in der TM mit 2 Zuständen befindet sich diese Information im aktuellen Symbol und muss erst extrahiert werden.
+			// in der TM mit 2 Zuständen befindet sich diese Information im aktuellen Symbol
+			// und muss erst extrahiert werden.
 			State s = new State(tape.getCurrentSymbol().split(";")[1]);
 			if (s.isAccepting()) {
 				output += "TM accepts input";
