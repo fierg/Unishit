@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import construction.TM2generator;
 import interpreter.TuringMachine;
+import utils.Utilities;
 
 /**
  * Anwendung Kapselt die eigentliche Anwendung und handelt Parameter ab
@@ -30,20 +31,20 @@ public class Application {
 		}
 
 		String filename = args[0];
-		if (contains(args, "-d")) {
+		if (Utilities.contains(args, "-d")) {
 			debug = true;
 		}
-		if(contains(args, "-tex")) {
+		if(Utilities.contains(args, "-tex")) {
 			texOutput = true;
 		}
-		if (contains(args, "-p")) {
+		if (Utilities.contains(args, "-p")) {
 			print2File = true;
 		}
-		if (contains(args, "-pd")) {
+		if (Utilities.contains(args, "-pd")) {
 			print2File = true;
 			printDetails = true;
 		}
-		if (contains(args, "-c")) {
+		if (Utilities.contains(args, "-c")) {
 			twoStateTM = true;
 			System.out.println("Init 2 State TM Generator...\n");
 			TM2generator gen = new TM2generator(args[0]);
@@ -78,12 +79,5 @@ public class Application {
 
 	}
 
-	private static boolean contains(String[] arr, String key) {
-		for (String string : arr) {
-			if (key.equals(string)) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 }

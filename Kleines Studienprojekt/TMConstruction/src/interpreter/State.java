@@ -21,6 +21,33 @@ public class State {
 		}
 	}
 
+	public static String getNameAsTex(String name) {
+		try {
+		String[] symbolArray = name.split(";");
+
+		if (symbolArray.length > 2) {
+			StringBuilder sb = new StringBuilder();
+			if(Tape.LATEX_ESCAPE_SYMBOLS.contains(symbolArray[0])) {
+				sb.append("\\");
+				sb.append(symbolArray[0]);
+			} else {
+				sb.append(symbolArray[0]);
+			}
+			sb.append("_{");
+			sb.append(symbolArray[1]);
+			sb.append(",");
+			sb.append(symbolArray[2]);
+			sb.append(",");
+			sb.append(symbolArray[3]);
+			sb.append("}");
+			
+			return sb.toString();
+		}
+		}catch (NullPointerException e) {
+		}
+		return name;
+	}
+
 	public String getName() {
 		return name;
 	}

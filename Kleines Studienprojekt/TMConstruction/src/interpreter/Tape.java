@@ -1,5 +1,8 @@
 package interpreter;
 
+import java.util.Set;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -9,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class Tape {
 
+	public static final Set<String> LATEX_ESCAPE_SYMBOLS = new HashSet<String>(Arrays.asList(new String[] { "#" }));
 	private static final String COMP_SYMBOL_Q = "q";
 	private static final String COMP_SYMBOL_S = "s";
 	private static final String REGEX_Q = "(.+;.+;[+];.+)";
@@ -92,7 +96,12 @@ public class Tape {
 
 	public String toString2States(boolean texOutput) {
 		StringBuilder tape = new StringBuilder();
-		tape.append("# # ");
+		if (texOutput) {
+			tape.append("$");
+			tape.append("\\# \\#");
+		} else {
+			tape.append("# # ");
+		}
 
 		for (int i = 0; i < leftTape.size(); i++) {
 			if (Pattern.matches(REGEX_Q, leftTape.elementAt(i))) {
@@ -101,6 +110,8 @@ public class Tape {
 			} else if (Pattern.matches(REGEX_S, leftTape.elementAt(i))) {
 				tape.append(COMP_SYMBOL_S + " ");
 				sSymbol = leftTape.elementAt(i);
+			} else if (LATEX_ESCAPE_SYMBOLS.contains(leftTape.elementAt(i))) {
+				tape.append("\\" + leftTape.elementAt(i) + " ");
 			} else {
 				tape.append(leftTape.elementAt(i) + " ");
 			}
@@ -114,6 +125,8 @@ public class Tape {
 		} else if (Pattern.matches(REGEX_S, currentSymbol)) {
 			tape.append(COMP_SYMBOL_S + " ");
 			sSymbol = currentSymbol;
+		}else if(Tape.LATEX_ESCAPE_SYMBOLS.contains(currentSymbol)) {
+			tape.append("\\" +currentSymbol + " ");
 		} else {
 			tape.append(currentSymbol + " ");
 		}
@@ -127,28 +140,25 @@ public class Tape {
 			} else if (Pattern.matches(REGEX_S, rightTape.elementAt(i))) {
 				tape.append(COMP_SYMBOL_S + " ");
 				sSymbol = rightTape.elementAt(i);
+			} else if (LATEX_ESCAPE_SYMBOLS.contains(rightTape.elementAt(i))) {
+				tape.append("\\" + rightTape.elementAt(i) + " ");
 			} else {
 				tape.append(rightTape.elementAt(i) + " ");
 			}
 		}
 
-		tape.append("# # ");
 		if (!texOutput) {
+			tape.append("# # ");
 			tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = " + qSymbol);
 			tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = " + sSymbol);
-		} else if (!(qSymbol == null || sSymbol == null)){
-			String[] qSymbolArray = qSymbol.split(";");
-			String[] sSymbolArray = sSymbol.split(";");
-
-			tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = " + qSymbolArray[0] + "_{" + qSymbolArray[1] + ","
-					+ qSymbolArray[2] + "," + qSymbolArray[3] + "}");
-			tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = " + sSymbolArray[0] + "_{" + sSymbolArray[1] + ","
-					+ sSymbolArray[2] + "," + sSymbolArray[3] + "}");
-
+		} else {
+			tape.append("\\# \\# $ \\\\");
+			tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = $" + State.getNameAsTex(qSymbol) + "$ \\\\");
+			tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = $" + State.getNameAsTex(sSymbol) + "$ \\\\ \n \\medskip");
 		}
+
 		return tape.toString();
 	}
-
 
 	public String getCurrentSymbol() {
 		return currentSymbol;

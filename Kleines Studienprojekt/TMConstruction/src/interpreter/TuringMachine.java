@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import construction.TM2generator;
+import utils.Utilities;
 
 public class TuringMachine {
 
@@ -62,11 +63,6 @@ public class TuringMachine {
 	private String getHistoryAsTex(boolean includeDetails) {
 		StringBuilder sb = new StringBuilder();
 		int index = 0;
-		sb.append("\\documentclass[10pt, a4paper]{article}");
-		sb.append("\\usepackage[utf8]{inputenc}");
-		sb.append("\\usepackage[margin=1in]{geometry}");
-		sb.append("\\begin{document}");
-		sb.append("\\section*{Output}");
 
 		for (String entry : history) {
 			sb.append(entry + "\n");
@@ -262,14 +258,29 @@ public class TuringMachine {
 		}
 
 		System.out.println("Starting TM with Tape:");
+		if (twoStates) {
+			history.add(Utilities.buildStaticTex());
+			history.add(tape.toString2States(texOutput) + "\n");
+		} else {
+			history.add(tape.toString());
+		}
 		System.out.println(tape.toString() + "\n\n");
-		history.add(tape.toString());
 
 		// Solange TM nicht terminiert, werden einzeln Schritte vollzogen und der
 		// Verlauf gespeichert
 		while (!terminated) {
-			historyDetails.add("Current state: " + currentState.getName() + "\t Transition: \t"
-					+ transitions.get(currentState).get(tape.getCurrentSymbol()));
+			if (texOutput) {
+				if (Tape.LATEX_ESCAPE_SYMBOLS.contains(tape.getCurrentSymbol())) {
+					historyDetails.add("Current state: " + currentState.getName() + "\t Current Symbol: \t $\\"
+							+ State.getNameAsTex(tape.getCurrentSymbol()) + "$\\\\");
+				} else {
+					historyDetails.add("Current state: " + currentState.getName() + "\t Current Symbol: \t $"
+							+ State.getNameAsTex(tape.getCurrentSymbol()) + "$\\\\");
+				}
+			} else {
+				historyDetails.add("Current state: " + currentState.getName() + "\t Current Symbol: \t"
+						+ transitions.get(currentState).get(tape.getCurrentSymbol()));
+			}
 			if (debug) {
 				System.out.println("Current state: " + currentState.getName());
 				System.out.println("Transition: " + transitions.get(currentState).get(tape.getCurrentSymbol()) + "\n");
@@ -286,11 +297,11 @@ public class TuringMachine {
 			}
 			if (!twoStates) {
 				history.add(tape.toString());
-				System.out.println(tape.toString());
 			} else {
 				history.add(tape.toString2States(texOutput));
-				System.out.println(tape.toString2States(texOutput));
 			}
+
+			System.out.println(tape.toString());
 
 		}
 
