@@ -1,9 +1,5 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
-%\usepackage{amsrefs}
-%\usepackage{tikz, wasysym}
-%\usetikzlibrary{automata,positioning}
-%\usepackage[]{algorithm2e}
 \usepackage[]{csquotes}
 \usepackage{listings}
 \usepackage{tcolorbox}
@@ -220,12 +216,13 @@ Weitere Informationen über das Dateiformat lassen sich der Datei \ilc{FORMAT\_E
 \paragraph*{}
 Die fertige Anwendung lässt sich als \ilc{jar} wie folgt benutzen:\\
 \ilc{<.tur Datei> <delay in millisekunden>} (optional, ohne Verzögerung ist es jedoch schwer der Simulation zu folgen)\\
+\medskip
 Weitere Parameter die gesetzt werden können:\\
 \ilc{-c} konvertiert die TM in eine TM mit 2 Zuständen (vor der Simulation)\\
 \ilc{-p} speichert Simulation in einer .history Datei ab\\
 \ilc{-pd} speichert zudem Details wie aktueller Zustand und Übergang\\
-\ilc{-d} debug (Genaurere Informationen des Ablaufs werden über st.out ausgegeben)\\
-\ilc{-tex} Ausgabe der history Datei als .tex (um Komplexe Symbole lesbar zu machen)
+\ilc{-tex} Ausgabe der history Datei als .tex (um Komplexe Symbole lesbar zu machen)\\
+\ilc{-d} debug (Genaurere Informationen des Ablaufs werden über st.out ausgegeben)
 
 \subsection*{Beispiel}
 \paragraph*{}
@@ -233,7 +230,7 @@ Ein beispielhafter Aufruf sähe wie folgt aus:\par
 
 \begin{tcolorbox}
 \begin{verbatim}
-java -jar TM.jar tur/equal01.tur 200 -c -d -pd -tex
+java -jar TM.jar tur/equal01.tur 200 -c -pd -tex
 \end{verbatim}
 \end{tcolorbox}
 
