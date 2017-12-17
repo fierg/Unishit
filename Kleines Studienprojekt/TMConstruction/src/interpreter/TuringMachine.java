@@ -330,7 +330,7 @@ public class TuringMachine {
 		}
 
 		System.out.println("Starting TM with Tape:");
-		if (twoStates) {
+		if (texOutput) {
 			history.add(Utilities.buildStaticTex());
 			history.add(tape.toString2States(texOutput) );
 		} else {
@@ -350,7 +350,7 @@ public class TuringMachine {
 							+ State.getNameAsTex(tape.getCurrentSymbol()) + "$\\\\");
 				}
 			} else {
-				historyDetails.add("Current state: " + currentState.getName() + "\t Current Symbol: \t"
+				historyDetails.add("Current state: " + currentState.getName() + "\t Current Transition: \t"
 						+ transitions.get(currentState).get(tape.getCurrentSymbol()));
 			}
 			if (debug) {

@@ -25,7 +25,7 @@ public class Application {
 
 		if (args.length < 1) {
 			System.err.println(
-					"Usage: <TM as .tur file> <milis delay> (optional delay between tape jumps) \n-p (print simulation history to file) \n-pd (print also details) \n-c (convert to 2 State TM before simulating) \n-d (debug)");
+					"Usage: <TM as .tur file> <milis delay> (optional delay between tape jumps) \n-p (print simulation history to file) \n-pd (print also details) \n-c (convert to 2 State TM before simulating) \n-tex (output from two state TM as .tex file)\n-d (debug)");
 			System.exit(1);
 		}
 
@@ -37,15 +37,19 @@ public class Application {
 		if (Utilities.contains(args, "-d")) {
 			debug = true;
 		}
-		if(Utilities.contains(args, "-tex")) {
-			texOutput = true;
-		}
 		if (Utilities.contains(args, "-p")) {
 			print2File = true;
 		}
 		if (Utilities.contains(args, "-pd")) {
 			print2File = true;
 			printDetails = true;
+		}
+		if(Utilities.contains(args, "-tex")) {
+			if(Utilities.contains(args, "-c") && print2File) {
+				texOutput = true;
+			} else {
+				System.err.println("\n.tex Output only for converted 2State TM and if history flag is set!\n");
+			}
 		}
 		if (Utilities.contains(args, "-c")) {
 			System.out.println("Init 2 State TM Generator...\n");
@@ -69,7 +73,7 @@ public class Application {
 		System.out.println("Reading TM from file\t" + filename);
 		tm.readTMfromFile(filename);
 
-		System.out.println("Starting simulator\n");
+		System.out.println("Starting simulator!");
 		tm.run(delayMilis ,  texOutput);
 
 		if (print2File && !texOutput) {

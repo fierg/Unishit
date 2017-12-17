@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 public class Tape {
 
 	/** The Constant LATEX_ESCAPE_SYMBOLS. */
-	public static final Set<String> LATEX_ESCAPE_SYMBOLS = new HashSet<String>(Arrays.asList(new String[] { "#" }));
+	public static final Set<String> LATEX_ESCAPE_SYMBOLS = new HashSet<String>(
+			Arrays.asList(new String[] { "#", "\\", "$" }));
 
 	/** The Constant COMP_SYMBOL_Q. */
 	private static final String COMP_SYMBOL_Q = "q";
@@ -155,7 +156,7 @@ public class Tape {
 			} else if (Pattern.matches(REGEX_S, leftTape.elementAt(i))) {
 				tape.append(COMP_SYMBOL_S + " ");
 				sSymbol = leftTape.elementAt(i);
-			} else if (LATEX_ESCAPE_SYMBOLS.contains(leftTape.elementAt(i))) {
+			} else if (texOutput && LATEX_ESCAPE_SYMBOLS.contains(leftTape.elementAt(i))) {
 				tape.append("\\" + leftTape.elementAt(i) + " ");
 			} else {
 				tape.append(leftTape.elementAt(i) + " ");
@@ -170,7 +171,7 @@ public class Tape {
 		} else if (Pattern.matches(REGEX_S, currentSymbol)) {
 			tape.append(COMP_SYMBOL_S + " ");
 			sSymbol = currentSymbol;
-		} else if (Tape.LATEX_ESCAPE_SYMBOLS.contains(currentSymbol)) {
+		} else if (texOutput && Tape.LATEX_ESCAPE_SYMBOLS.contains(currentSymbol)) {
 			tape.append("\\" + currentSymbol + " ");
 		} else {
 			tape.append(currentSymbol + " ");
@@ -185,7 +186,7 @@ public class Tape {
 			} else if (Pattern.matches(REGEX_S, rightTape.elementAt(i))) {
 				tape.append(COMP_SYMBOL_S + " ");
 				sSymbol = rightTape.elementAt(i);
-			} else if (LATEX_ESCAPE_SYMBOLS.contains(rightTape.elementAt(i))) {
+			} else if (texOutput && LATEX_ESCAPE_SYMBOLS.contains(rightTape.elementAt(i))) {
 				tape.append("\\" + rightTape.elementAt(i) + " ");
 			} else {
 				tape.append(rightTape.elementAt(i) + " ");
@@ -194,15 +195,25 @@ public class Tape {
 
 		if (!texOutput) {
 			tape.append("# # ");
-			tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = " + qSymbol);
-			tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = " + sSymbol);
+			if (qSymbol != null) {
+				tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = " + qSymbol);
+			}
+			if (sSymbol != null) {
+				tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = " + sSymbol);
+			}
 		} else {
 			tape.append("\\# \\# $ \\\\");
-			tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = $" + State.getNameAsTex(qSymbol) + "$ \\\\");
-			tape.append(
-					"\nComplexSymbol " + COMP_SYMBOL_S + " = $" + State.getNameAsTex(sSymbol) + "$ \\\\ \n \\medskip");
+			if (qSymbol != null) {
+				tape.append("\nComplexSymbol " + COMP_SYMBOL_Q + " = $" + State.getNameAsTex(qSymbol) + "$ \\\\");
+			}
+			if (sSymbol != null) {
+				tape.append("\nComplexSymbol " + COMP_SYMBOL_S + " = $" + State.getNameAsTex(sSymbol)
+						+ "$ \\\\");
+			}
+			tape.append( "\n \\medskip");
 		}
-
+		qSymbol = null;
+		sSymbol = null;
 		return tape.toString();
 	}
 
