@@ -17,6 +17,7 @@
 \usetikzlibrary{automata,positioning}
 \usepackage{hyperref}
 
+\usepackage[]{algorithm2e}
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
 %\usepackage{makeidx}
@@ -43,10 +44,10 @@
 
 	Effiziente Suche über:
 	\bigskip
-	\pause\begin{description}
+	\begin{description}
 	\item Sammlung von Büchern
 	\item das Web
-	\item Große Datenmengen
+	\item andere große Datenmengen
 \end{description}
 \bigskip
 \pause zu viel für Main Memory!
@@ -95,7 +96,9 @@ Typische Systemeigenschaften (stand 2018)
 	\frame{\frametitle{Index Creation}
 	geeignete Datenstruktur um Zugriff auf die Festplatte zu minimieren
 	\bigskip
-	\includegraphics[scale=0.4]{pdf/PostingsList.pdf}
+\only<1>{\includegraphics[scale=0.55]{pdf/postingslist1.pdf}}
+\only<2>{\includegraphics[scale=0.55]{pdf/postingslist2.pdf}}
+\only<3>{\includegraphics[scale=0.55]{pdf/postingslist3.pdf}}
 
 }
 
@@ -106,23 +109,109 @@ Typische Systemeigenschaften (stand 2018)
 		\bigskip
 		Reuters-RCV1 benötigt ca 0.8 GB für die termID/DocID Paare, bereits die DBLP übersteigt die Dokumentenanzahl, besitzt jedoch weniger Terme.
 	}
-	
+
 		\frame{\frametitle{Blocked sort-based indexing (BSI)}
-	todo: erklären usw
+\begin{columns}
+    \begin{column}{0.47\textwidth}
+	Lösung:\\
+	\begin{itemize}
+	\item Sammlung von Dokumenten in einzelne Blocks unterteilen
+	\item Index über einzelne Blöcke erstellen
+	\item Teilindizes mergen
+	\end{itemize}
+\end{column}
+ \begin{column}{0.47\textwidth}
+\begin{algorithm}[H]
+ n = 0\;
+ \While{all documents have not been processed}{
+n = n + 1\;
+block = ParseNextBlock()\;
+BSBI-INVERT(block)\;
+WriteBlockToDisk(block, $f_n$)\;
+  }
+  MergeBlocks($f_1$, $\cdots$, $f_n$; $f_{merged}$)\;
+\end{algorithm}
+\end{column}
+\end{columns}
 }
 	
-		\frame{\frametitle{Blocked sort-based indexing (BSI)}
+		\frame{\frametitle{Blocked sort-based indexing (BSI) - merging Blocks}
 \only<1>{\includegraphics[scale=0.55]{pdf/BSI_merging1.pdf}}
 \only<2>{\includegraphics[scale=0.55]{pdf/BSI_merging2.pdf}}
 \only<3>{\includegraphics[scale=0.55]{pdf/BSI_merging3.pdf}}
 \only<4>{\includegraphics[scale=0.55]{pdf/BSI_merging4.pdf}}
 }
 
+			\frame{\frametitle{Blocked sort-based indexing (BSI) - Fazit}
+			Fazit zu BSBI:
+			\begin{itemize}
+			\item Zeitkompplexität:	$\Theta ( T \cdot log(T))$
+			\begin{itemize}
+			\item das Sortieren hat die höchste Komplexität
+			\item das Parsen und Mergen der Blocks ist jedoch in der Regel am Zeitaufwendigsten
+			\end{itemize}
+			\item Datenstruktur für Mapping zwischen termen und termID's muss in Main Memory liegen
+			\begin{itemize}
+			\item kann für sehr große Datenmengen auch Server überlasten
+			\end{itemize}
+			\end{itemize}
+
+}
+
+
+
+
 	
 \subsection{Single-pass in-memory indexing}
 			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
-	
+\begin{itemize}
+\item einzelne dictionaries für jeden Block
+\begin{itemize}
+\item keine Datenstruktur für das Mapping von termen und termID's
+\end{itemize}
+\item kein Sortieren der einzelnen Blöcke
+\begin{itemize}
+\item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
+\item PostingsList sollte jedoch sortiert werden, da dann auf Sortieren/Suchen beim mergen der Blöcke verzichtet werden kann
+\end{itemize}
+
+\end{itemize}			
 }
+
+			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+SPIMI-invert(TokenStream)
+\begin{algorithm}[H]
+\caption{SPIMI-invert Algorithmus}
+ outputFile = new HashFile()\;
+ dictionary = new HashFile()\;
+ \While{free memory available}{
+ token = next(TokenStream)
+\eIf{term(token) $\notin$ dictionary}{
+PostingsList = AddToDictionary(dictionary, term(token))\;
+}{
+PostingsList = GetPostingsList(dictionary, term(token))\;
+}
+\uIf{full(PostingsList)}{
+PostingsList = DoublePostingsList(dictionary, term(token))\;
+}
+AddToPostingsList(PostingsList, docID(token))\;
+SortedTerms = SortTerms(dictionary)\;
+WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
+  }
+\end{algorithm}
+}
+
+\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+Vorteile gegenüber BSI:
+\begin{itemize}
+\item kann für beliebig große Datenmengen einen Index erstellen, solange das Festplattenvolumen nicht überstiegen wird
+\item einzelne Blocke können größer sein
+\begin{itemize}
+\item Indexerstelung effizienter
+\end{itemize}
+\end{itemize}
+}
+
 
 \subsection{Distributed indexing}
 \subsection{Dynamic indexing}
