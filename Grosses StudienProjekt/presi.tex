@@ -122,6 +122,7 @@ Typische Systemeigenschaften (stand 2018)
 \end{column}
  \begin{column}{0.47\textwidth}
 \begin{algorithm}[H]
+\caption{BSI Algorithmus}
  n = 0\;
  \While{all documents have not been processed}{
 n = n + 1\;
@@ -209,12 +210,45 @@ Vorteile gegenüber BSI:
 \begin{itemize}
 \item Indexerstelung effizienter
 \end{itemize}
+\item distionaries und die erstellte PostingsList kann durch Kompression kompakt auf der Festplatte gespeichert werden
 \end{itemize}
 }
 
 
 \subsection{Distributed indexing}
+\frame{\frametitle{Distributed indexing}
+\begin{columns}
+\begin{column}{0.47\textwidth}
+\begin{itemize}
+\item manche Sammlungen übersteigen die Leistung eines einzelnen Rechners
+\begin{itemize}
+\item beispielsweise das Web
+\end{itemize}
+\item um Indizes über solche Sammlungen zu erstellen, muss die arbeit auf mehrere Rechner verteilt werden
+\end{itemize}
+\end{column}
+\begin{column}{0.47\textwidth}
+\includegraphics[scale=0.4]{pdf/mapreduce.pdf}
+\end{column}
+\end{columns}
+}
+\frame{\frametitle{Distributed indexing - MapReduce}
+\only<1>{\includegraphics[scale=0.55]{pdf/distributedIndex.pdf}}
+\only<2>{\includegraphics[scale=0.55]{pdf/distributedIndex2.pdf}}
+\only<3>{\includegraphics[scale=0.55]{pdf/distributedIndex3.pdf}}
+\only<4>{\includegraphics[scale=0.55]{pdf/distributedIndex4.pdf}}
+\only<5>{\includegraphics[scale=0.55]{pdf/distributedIndex5.pdf}}
+\only<6>{\includegraphics[scale=0.55]{pdf/distributedIndex6.pdf}}
+\only<7>{\includegraphics[scale=0.55]{pdf/distributedIndex7.pdf}}
+}
+
+\frame{\frametitle{Distributed indexing - Fazit}
+todo}
+
 \subsection{Dynamic indexing}
+\frame{\frametitle{Dynamic indexing}
+todo}
+
 \subsection{andere Indexverfahren}
 
 \section{Fazit}
@@ -223,9 +257,8 @@ Vorteile gegenüber BSI:
 	 	 \frame{\frametitle{Quellen}
 	
 	\begin{itemize}
-		\item Shannon, C. E. \enquote{A Universal Turing Machine with Two Internal States.} Automata Studies. Princeton, NJ: Princeton University Press, pp. 157-165, 1956. \footnote{\url{http://www.sns.ias.edu/~tlusty/courses/InfoInBio/Papers/Shannon1956.pdf}}
-		\item Wolfram Research and Wolfram, S. \enquote{The Wolfram 2,3 Turing Machine Research Prize.} \footnote{\url{http://www.wolframscience.com/prizes/tm23/}}
-		\item Wolfram, S. A New Kind of Science. Champaign, IL: Wolfram Media, pp. 706-711 and 1119, 2002.
+		\item Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{Introduction to Information Retrieval} Cambridge University Press 2008, pp. 1-18 and 67-84.
+		 \footnote{\url{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}}
 	\end{itemize}
 	 
 	 }
