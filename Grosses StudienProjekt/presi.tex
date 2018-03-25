@@ -81,7 +81,7 @@ Typische Systemeigenschaften (stand 2018)
 
 	
 	
-	\section{hardware constraints}	
+	\section{Hardware constraints}	
 		\frame{\frametitle{hardware constraints}
 		Indizierung einer Sammlung von Daten auf der Festplatte\\
 		\bigskip
@@ -186,13 +186,13 @@ SPIMI-invert(TokenStream)
  outputFile = new HashFile()\;
  dictionary = new HashFile()\;
  \While{free memory available}{
- token = next(TokenStream)
+ token = next(TokenStream)\;
 \eIf{term(token) $\notin$ dictionary}{
 PostingsList = AddToDictionary(dictionary, term(token))\;
 }{
 PostingsList = GetPostingsList(dictionary, term(token))\;
 }
-\uIf{full(PostingsList)}{
+\If{full(PostingsList)}{
 PostingsList = DoublePostingsList(dictionary, term(token))\;
 }
 AddToPostingsList(PostingsList, docID(token))\;
@@ -224,11 +224,11 @@ Vorteile gegenüber BSI:
 \begin{itemize}
 \item beispielsweise das Web
 \end{itemize}
-\item um Indizes über solche Sammlungen zu erstellen, muss die arbeit auf mehrere Rechner verteilt werden
+\item um Indizes über solche Sammlungen zu erstellen, muss die Arbeit auf mehrere Rechner verteilt werden
 \end{itemize}
 \end{column}
 \begin{column}{0.47\textwidth}
-\includegraphics[scale=0.4]{pdf/mapreduce.pdf}
+\only<2>{\includegraphics[scale=0.4]{pdf/mapreduce.pdf}}
 \end{column}
 \end{columns}
 }
@@ -247,9 +247,18 @@ todo}
 
 \subsection{Dynamic indexing}
 \frame{\frametitle{Dynamic indexing}
-todo}
+\begin{itemize}
+\item viele Sammlungen von Dokumenten ändern sich häufig
+\begin{itemize}
+\item beispielsweise werden Webseiten geändert, gelöscht oder neue hinzugefügt
+\end{itemize}
+\item daher muss die Indexerstellung über eine solche Sammlung ebenfalls dynamsich sein
+\end{itemize}
+}
 
-\subsection{andere Indexverfahren}
+\subsection{andere Indexierungsverfahren}
+
+\section{Indexierung mit Solid State Drives}
 
 \section{Fazit}
 
@@ -257,10 +266,16 @@ todo}
 	 	 \frame{\frametitle{Quellen}
 	
 	\begin{itemize}
-		\item Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{Introduction to Information Retrieval} Cambridge University Press 2008, pp. 1-18 and 67-84.
-		 \footnote{\url{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}}
-	\end{itemize}
+		\item Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{Introduction to Information Retrieval} \footnote{\url{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}} Cambridge University Press 2008, pp. 1-18 and 67-84.
+
+	 \item Ian H. Witten, Alistair Moffat, Timothy C. Bell \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}  \footnote{\url{https://books.google.de/books?id=2F74jyPl48EC&dq=Witten+et+al.+index+1999&lr=&hl=de&source=gbs_navlinks_s}} Morgan Kaufman Publishers 1999, pp. 223-261.
 	 
+	\item Stephen M Ash, King-Ip Lin (University of Memphis) \enquote{Optimizing Database Index Performance for Solid State Drives} \footnote{\url{http://cs.baylor.edu/~lind/_mypaper/ashlin.pdf}} IDEAS ’14, July 07 - 09 2014, Porrto, Portugal.
+	
+	\item Yinan Li, Bingsheng He, Robin Jun Yang, Qiong Luo, Ke YiTree (Hong Kong University of Science and Technology) \enquote{Indexing on Solid State Drives} \footnote{\url{http://pages.cs.wisc.edu/~yinan/paper/fdtree_pvldb.pdf}} The 36th International Conference on Very Large Data Bases, September 13-17,
+2010, Singapore.
+	 
+\end{itemize}
 	 }
 	
 	
