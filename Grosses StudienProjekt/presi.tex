@@ -41,7 +41,6 @@
 
 	\section{Einführung}
 	\frame{\frametitle{Einführung}
-
 	Effiziente Suche über:
 	\bigskip
 	\begin{description}
@@ -51,9 +50,10 @@
 \end{description}
 \bigskip
 \pause zu viel für Main Memory!
-
-	}	
+	}
 	
+	
+\section{Hardware constraints}	
 	\frame{\frametitle{Einführung}
 Typische Systemeigenschaften (stand 2018)
 \medskip
@@ -77,17 +77,19 @@ Typische Systemeigenschaften (stand 2018)
 \end{itemize}	
 }
 
-
-
-	
-	
-	\section{Hardware constraints}	
 		\frame{\frametitle{hardware constraints}
+		\begin{center}
 		Indizierung einer Sammlung von Daten auf der Festplatte\\
 		\bigskip
 		\includegraphics[scale=0.4]{pdf/Documents.pdf}\\
 		\bigskip
 		Zugriffszeit auf Festplatte als Bottelneck
+		\end{center}
+	}	
+	
+		
+		\frame{\frametitle{Einführung}
+	todo - motivation invertierter index
 	}	
 	
 	
@@ -120,7 +122,7 @@ Typische Systemeigenschaften (stand 2018)
 	\item Teilindizes mergen
 	\end{itemize}
 \end{column}
- \begin{column}{0.47\textwidth}
+ \pause \begin{column}{0.47\textwidth}
 \begin{algorithm}[H]
 \caption{BSI Algorithmus}
  n = 0\;
@@ -164,22 +166,11 @@ WriteBlockToDisk(block, $f_n$)\;
 
 	
 \subsection{Single-pass in-memory indexing}
-			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
-\begin{itemize}
-\item einzelne dictionaries für jeden Block
-\begin{itemize}
-\item keine Datenstruktur für das Mapping von termen und termID's
-\end{itemize}
-\item kein Sortieren der einzelnen Blöcke
-\begin{itemize}
-\item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
-\item PostingsList sollte jedoch sortiert werden, da dann auf Sortieren/Suchen beim mergen der Blöcke verzichtet werden kann
-\end{itemize}
-
-\end{itemize}			
+\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+todo ablauf visualisieren
 }
 
-			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
 SPIMI-invert(TokenStream)
 \begin{algorithm}[H]
 \caption{SPIMI-invert Algorithmus}
@@ -202,6 +193,20 @@ WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
 \end{algorithm}
 }
 
+			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+\begin{itemize}
+\item einzelne dictionaries für jeden Block
+\begin{itemize}
+\item keine Datenstruktur für das Mapping von termen und termID's
+\end{itemize}
+\item kein Sortieren der einzelnen Blöcke
+\begin{itemize}
+\item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
+\item PostingsList sollte jedoch sortiert werden, da dann auf Sortieren/Suchen beim mergen der Blöcke verzichtet werden kann
+\end{itemize}
+\end{itemize}			
+}
+
 \frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
 Vorteile gegenüber BSI:
 \begin{itemize}
@@ -211,8 +216,11 @@ Vorteile gegenüber BSI:
 \item Indexerstelung effizienter
 \end{itemize}
 \item distionaries und die erstellte PostingsList kann durch Kompression kompakt auf der Festplatte gespeichert werden
+\item Zeitkompplexität:	$\Theta ( T )$, kein Sortieren von TermID-DocID Paaren, alle Operationen linear
 \end{itemize}
 }
+
+
 
 
 \subsection{Distributed indexing}
@@ -242,25 +250,59 @@ Vorteile gegenüber BSI:
 \only<7>{\includegraphics[scale=0.55]{pdf/distributedIndex7.pdf}}
 }
 
-\frame{\frametitle{Distributed indexing - Fazit}
-todo}
 
 \subsection{Dynamic indexing}
 \frame{\frametitle{Dynamic indexing}
 \begin{itemize}
 \item viele Sammlungen von Dokumenten ändern sich häufig
 \begin{itemize}
-\item beispielsweise werden Webseiten geändert, gelöscht oder neue hinzugefügt
+\item Webseiten geändert, gelöscht oder neue hinzugefügt..
 \end{itemize}
-\item daher muss die Indexerstellung über eine solche Sammlung ebenfalls dynamsich sein
+\pause \item Indexerstellung über eine solche Sammlung ebenfalls dynamsich
 \end{itemize}
 }
 
+\frame{\frametitle{Dynamic indexing}
+\begin{itemize}
+\item Index periodisch neu erstellen
+\begin{itemize}
+\item akzeptabel wenn Änderungen nicht sehr groß
+\item wenn Änderungen nicht sofort sichtbar sein müssen
+\end{itemize}
+\pause \item Hauptindex behalten und neue Dokumente in einen Hilfsindex speichern
+\begin{itemize}
+\item beide Indizes regemäßig mergen
+\end{itemize}
+\end{itemize}
+}
+
+\frame{\frametitle{Dynamic indexing}
+\only<1>{\includegraphics[scale=0.55]{pdf/dynamicindex1.pdf}}
+\only<2>{\includegraphics[scale=0.55]{pdf/dynamicindex2.pdf}}
+\only<3>{\includegraphics[scale=0.55]{pdf/dynamicindex3.pdf}}
+\only<4>{\includegraphics[scale=0.55]{pdf/dynamicindex4.pdf}}
+}
+
+
 \subsection{andere Indexierungsverfahren}
+\frame{\frametitle{andere Indexierungsverfahren}
+\begin{itemize}
+\item ranked retrieval systems
+\item zugriffsbeschränkte Indizes
+\item \enquote{in situ}-Indexerstellung
+\end{itemize}
+}
+
 
 \section{Indexierung mit Solid State Drives}
+\frame{\frametitle{Indexierung mit Solid State Drives}
+todo Tree Indexing, Datenstruktur FD-Tree erläutern, auf Vorteile eingehen.. }
+
 
 \section{Fazit}
+\frame{\frametitle{Fazit}
+todo}
+
 
 \section{Quellen}
 	 	 \frame{\frametitle{Quellen}
@@ -269,8 +311,6 @@ todo}
 		\item Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{Introduction to Information Retrieval} \footnote{\url{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}} Cambridge University Press 2008, pp. 1-18 and 67-84.
 
 	 \item Ian H. Witten, Alistair Moffat, Timothy C. Bell \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}  \footnote{\url{https://books.google.de/books?id=2F74jyPl48EC&dq=Witten+et+al.+index+1999&lr=&hl=de&source=gbs_navlinks_s}} Morgan Kaufman Publishers 1999, pp. 223-261.
-	 
-	\item Stephen M Ash, King-Ip Lin (University of Memphis) \enquote{Optimizing Database Index Performance for Solid State Drives} \footnote{\url{http://cs.baylor.edu/~lind/_mypaper/ashlin.pdf}} IDEAS ’14, July 07 - 09 2014, Porrto, Portugal.
 	
 	\item Yinan Li, Bingsheng He, Robin Jun Yang, Qiong Luo, Ke YiTree (Hong Kong University of Science and Technology) \enquote{Indexing on Solid State Drives} \footnote{\url{http://pages.cs.wisc.edu/~yinan/paper/fdtree_pvldb.pdf}} The 36th International Conference on Very Large Data Bases, September 13-17,
 2010, Singapore.
