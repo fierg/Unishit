@@ -44,12 +44,13 @@
 	Effiziente Suche über:
 	\bigskip
 	\begin{description}
+	%TODO bilder stat text..
 	\item Sammlung von Büchern
 	\item das Web
 	\item andere große Datenmengen
 \end{description}
 \bigskip
-\pause zu viel für Main Memory!
+\visible<2->{zu viel für Main Memory!}
 	}
 	
 	
@@ -61,36 +62,31 @@ Typische Systemeigenschaften (stand 2018)
 	\item \textit{clock rate} 2-4 GHz, 4-8 Kerne
 	\item \textit{main memory} 4-32 GHz
 	\item \textit{disk space} $\leq$ 1 TB SSD oder $\geq$ 1 TB HDD
-	\pause 
+	\visible<2->{ 
 	\begin{itemize}
 	\item HDD (hard disk drive)
 	\begin{itemize}
-	\item \textit{average seek time} zwischen 2 und 20 ms
+	\item \textit{average seek time} zwischen 2 und 10 ms
 	\item \textit{transfer time} 150 - 300 MB/s
-	\end{itemize}
-	\pause \item SSD (solid state disk)
+	\end{itemize}}
+	\visible<3->{\item SSD (solid state disk)
 	\begin{itemize}
 	\item \textit{average seek time} zwischen 0.08 und 0.16 ms
 	\item \textit{transfer time} Lesen: 545 MB/s, Schreiben: 525 MB/s
-	\end{itemize}
+	\end{itemize}}
 	\end{itemize}
 \end{itemize}	
 }
 
 		\frame{\frametitle{hardware constraints}
 		\begin{center}
-		Indizierung einer Sammlung von Daten auf der Festplatte\\
+		Indizierung einer Sammlung von Daten/Dokumenten auf der Festplatte\\
 		\bigskip
 		\includegraphics[scale=0.4]{pdf/Documents.pdf}\\
 		\bigskip
 		Zugriffszeit auf Festplatte als Bottelneck
 		\end{center}
-	}	
-	
-		
-		\frame{\frametitle{Einführung}
-	todo - motivation invertierter index
-	}	
+	}		
 	
 	
 
@@ -104,14 +100,29 @@ Typische Systemeigenschaften (stand 2018)
 
 }
 
-\subsection{Blocked sort-based indexing}
-	 	\frame{\frametitle{Index Creation - hardware constraints}
-		in der Regel übersteigt die Datenmenge der Dokumente den Main Memory.\\
-		\bigskip
-		\bigskip
-		Reuters-RCV1 benötigt ca 0.8 GB für die termID/DocID Paare, bereits die DBLP übersteigt die Dokumentenanzahl, besitzt jedoch weniger Terme.
-	}
 
+	 	\frame{\frametitle{Index Creation - hardware constraints}
+		Reuters-RCV1 besitzt 100.000.000 Terme...\\
+		\bigskip
+		Sortieren dieser Terme von einer Festplatte:
+		\begin{itemize}
+\visible<2->{\item Annahme
+		\begin{itemize}
+		\item $ T \cdot log_2(T)$ Vergleiche
+		\item 2 Zugriffe auf die Hard Drive zum Vergleichen
+		\item average seek time 5 ms
+		\end{itemize}}
+\visible<3->{		
+		\item $(100.000.000 \cdot log_2(100.000.000)) \cdot (5 \cdot 10^{-3})$ Sekunden
+		\item $2.6575424759... \cdot 10^7$ Sekunden
+		\item $307.59$ Tage}
+		\end{itemize}
+		
+	}
+	
+	
+	
+\subsection{Blocked sort-based indexing}
 		\frame{\frametitle{Blocked sort-based indexing (BSI)}
 \begin{columns}
     \begin{column}{0.47\textwidth}
@@ -122,7 +133,7 @@ Typische Systemeigenschaften (stand 2018)
 	\item Teilindizes mergen
 	\end{itemize}
 \end{column}
- \pause \begin{column}{0.47\textwidth}
+\visible<2->{\begin{column}{0.47\textwidth}
 \begin{algorithm}[H]
 \caption{BSI Algorithmus}
  n = 0\;
@@ -134,7 +145,7 @@ WriteBlockToDisk(block, $f_n$)\;
   }
   MergeBlocks($f_1$, $\cdots$, $f_n$; $f_{merged}$)\;
 \end{algorithm}
-\end{column}
+\end{column}}
 \end{columns}
 }
 	
@@ -158,14 +169,23 @@ WriteBlockToDisk(block, $f_n$)\;
 			\item kann für sehr große Datenmengen auch Server überlasten
 			\end{itemize}
 			\end{itemize}
+}
+\subsection{Single-pass in-memory indexing}
 
+			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+\begin{itemize}
+\item einzelne dictionaries für jeden Block
+\begin{itemize}
+\item keine Datenstruktur für das Mapping von termen und termID's
+\end{itemize}
+\item kein Sortieren der einzelnen Blöcke
+\begin{itemize}
+\item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
+\item PostingsList sollte jedoch sortiert werden, da dann auf Sortieren/Suchen beim mergen der Blöcke verzichtet werden kann
+\end{itemize}
+\end{itemize}			
 }
 
-
-
-
-	
-\subsection{Single-pass in-memory indexing}
 \frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
 todo ablauf visualisieren
 }
@@ -191,20 +211,6 @@ SortedTerms = SortTerms(dictionary)\;
 WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
   }
 \end{algorithm}
-}
-
-			\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
-\begin{itemize}
-\item einzelne dictionaries für jeden Block
-\begin{itemize}
-\item keine Datenstruktur für das Mapping von termen und termID's
-\end{itemize}
-\item kein Sortieren der einzelnen Blöcke
-\begin{itemize}
-\item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
-\item PostingsList sollte jedoch sortiert werden, da dann auf Sortieren/Suchen beim mergen der Blöcke verzichtet werden kann
-\end{itemize}
-\end{itemize}			
 }
 
 \frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
@@ -256,9 +262,9 @@ Vorteile gegenüber BSI:
 \begin{itemize}
 \item viele Sammlungen von Dokumenten ändern sich häufig
 \begin{itemize}
-\item Webseiten geändert, gelöscht oder neue hinzugefügt..
+\item Webseiten werden geändert, gelöscht oder neue hinzugefügt..
 \end{itemize}
-\pause \item Indexerstellung über eine solche Sammlung ebenfalls dynamsich
+\visible<2->{\item Indexerstellung über eine solche Sammlung ebenfalls dynamsich}
 \end{itemize}
 }
 
