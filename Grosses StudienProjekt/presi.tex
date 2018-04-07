@@ -60,7 +60,7 @@ Typische Systemeigenschaften (stand 2018)
 \medskip
 \begin{itemize}
 	\item \textit{clock rate} 2-4 GHz, 4-8 Kerne
-	\item \textit{main memory} 4-32 GHz
+	\item \textit{main memory} 4-32 Gb
 	\item \textit{disk space} $\leq$ 1 TB SSD oder $\geq$ 1 TB HDD
 	\visible<2->{ 
 	\begin{itemize}
@@ -102,7 +102,7 @@ Typische Systemeigenschaften (stand 2018)
 
 
 	 	\frame{\frametitle{Index Creation - hardware constraints}
-		Reuters-RCV1 besitzt 100.000.000 Terme...\\
+		Reuters-RCV1 Modell Sammlung besitzt 100.000.000 Terme...\\
 		\bigskip
 		Sortieren dieser Terme von einer Festplatte:
 		\begin{itemize}
@@ -113,7 +113,7 @@ Typische Systemeigenschaften (stand 2018)
 		\item average seek time 5 ms
 		\end{itemize}}
 \visible<3->{		
-		\item $(100.000.000 \cdot log_2(100.000.000)) \cdot (5 \cdot 10^{-3})$ Sekunden
+		\item $(100.000.000 \cdot log_2(100.000.000)) \cdot 2 \cdot(5 \cdot 10^{-3})$ Sekunden
 		\item $2.6575424759... \cdot 10^7$ Sekunden
 		\item $307.59$ Tage}
 		\end{itemize}
@@ -162,9 +162,9 @@ WriteBlockToDisk(block, $f_n$)\;
 			\item Zeitkompplexität:	$\Theta ( T \cdot log(T))$
 			\begin{itemize}
 			\item das Sortieren hat die höchste Komplexität
-			\item das Parsen und Mergen der Blocks ist jedoch in der Regel am Zeitaufwendigsten
+			\item das Parsen und Mergen der Blocks ist jedoch in der Regel am zeitaufwendigsten
 			\end{itemize}
-			\item Datenstruktur für Mapping zwischen termen und termID's muss in Main Memory liegen
+			\item Datenstruktur für Mapping zwischen Termen und termID's muss in Main Memory liegen
 			\begin{itemize}
 			\item kann für sehr große Datenmengen auch Server überlasten
 			\end{itemize}
@@ -216,12 +216,12 @@ WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
 \frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
 Vorteile gegenüber BSI:
 \begin{itemize}
-\item kann für beliebig große Datenmengen einen Index erstellen, solange das Festplattenvolumen nicht überstiegen wird
+\item kann für beliebig große Datenmengen einen Index erstellen
 \item einzelne Blocke können größer sein
 \begin{itemize}
 \item Indexerstelung effizienter
 \end{itemize}
-\item distionaries und die erstellte PostingsList kann durch Kompression kompakt auf der Festplatte gespeichert werden
+\item dictionaries und die erstellte PostingsList kann komprimiert gespeichert werden
 \item Zeitkompplexität:	$\Theta ( T )$, kein Sortieren von TermID-DocID Paaren, alle Operationen linear
 \end{itemize}
 }
@@ -292,17 +292,40 @@ Vorteile gegenüber BSI:
 
 \subsection{andere Indexierungsverfahren}
 \frame{\frametitle{andere Indexierungsverfahren}
-\begin{itemize}
+Alternative Indexverfahren mit unterschiedlichen Vor/Nachteile:
+
+\visible<2->{\begin{itemize}
 \item ranked retrieval systems
-\item zugriffsbeschränkte Indizes
-\item \enquote{in situ}-Indexerstellung
-\end{itemize}
+\visible<3->{\item zugriffsbeschränkte Indizes}
+\visible<4->{\item \enquote{in situ}-Indexerstellung}
+\end{itemize}}
 }
 
 
 \section{Indexierung mit Solid State Drives}
+\frame{\frametitle{Indexierung mit Solid State Drives - hardware constraints}
+\begin{itemize}
+\item schneller \enquote{random read}-Zugriff
+\visible<2->{\item \enquote{random write}-Zugriff deutlich langsamer
+\begin{itemize}
+\item wegen dem \enquote{erase before write}-Mechanismus
+\end{itemize}}
+\end{itemize}
+}
+
+
 \frame{\frametitle{Indexierung mit Solid State Drives}
-todo Tree Indexing, Datenstruktur FD-Tree erläutern, auf Vorteile eingehen.. }
+\includegraphics[scale=0.24]{pdf/fdtree.png}
+}
+
+
+
+\frame{\frametitle{Indexierung mit Solid State Drives - Fazit}
+\begin{itemize}
+\item abweichende Hardwareeigenschaften $\rightarrow$ andere Algorhythmen
+\item FD-Baumstruktur eliminiert häufige kleine \enquote{random read}-Zugriffe
+\end{itemize}
+}
 
 
 \section{Fazit}
