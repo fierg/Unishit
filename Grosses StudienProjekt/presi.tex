@@ -41,16 +41,20 @@
 
 	\section{Einführung}
 	\frame{\frametitle{Einführung}
-	Effiziente Suche über:
+	\begin{center}
+	\enquote{ad hoc retrieval}, effiziente Suche über:
 	\bigskip
 	\begin{description}
 	%TODO bilder stat text..
 	\item Sammlung von Büchern
 	\item das Web
-	\item andere große Datenmengen
+	\item ...andere große Datenmengen
 \end{description}
+\includegraphics[width=\textwidth]{pdf/bibliothek.jpg}\\
 \bigskip
+
 \visible<2->{zu viel für Main Memory!}
+\end{center}
 	}
 	
 	
@@ -109,14 +113,20 @@ Typische Systemeigenschaften (stand 2018)
 \visible<2->{\item Annahme
 		\begin{itemize}
 		\item $ T \cdot log_2(T)$ Vergleiche
-		\item 2 Zugriffe auf die Hard Drive zum Vergleichen
-		\item average seek time 5 ms
+		\item $2$ Zugriffe auf die Hard Drive zum Vergleichen
+		\item average seek time $5$ ms
 		\end{itemize}}
 \visible<3->{		
 		\item $(100.000.000 \cdot log_2(100.000.000)) \cdot 2 \cdot(5 \cdot 10^{-3})$ Sekunden
 		\item $2.6575424759... \cdot 10^7$ Sekunden
 		\item $307.59$ Tage}
 		\end{itemize}
+		
+\visible<4->{Mit einer schnellen SSD mit $0,8$ ms Zugriffszeit:
+		\begin{itemize}
+		\item $(100.000.000 \cdot log_2(100.000.000)) \cdot 2 \cdot(1 \cdot 10^{-4})$ Sekunden
+		\item $6.15$ Tage
+\end{itemize}}
 		
 	}
 	
@@ -158,17 +168,17 @@ WriteBlockToDisk(block, $f_n$)\;
 
 			\frame{\frametitle{Blocked sort-based indexing (BSI) - Fazit}
 			Fazit zu BSBI:
-			\begin{itemize}
+			\visible<2->{\begin{itemize}
 			\item Zeitkompplexität:	$\Theta ( T \cdot log(T))$
 			\begin{itemize}
 			\item das Sortieren hat die höchste Komplexität
 			\item das Parsen und Mergen der Blocks ist jedoch in der Regel am zeitaufwendigsten
 			\end{itemize}
-			\item Datenstruktur für Mapping zwischen Termen und termID's muss in Main Memory liegen
+			\visible<3->{\item Datenstruktur für Mapping zwischen Termen und termID's muss in Main Memory liegen
 			\begin{itemize}
 			\item kann für sehr große Datenmengen auch Server überlasten
-			\end{itemize}
-			\end{itemize}
+			\end{itemize}}
+			\end{itemize}}
 }
 \subsection{Single-pass in-memory indexing}
 
@@ -181,20 +191,15 @@ WriteBlockToDisk(block, $f_n$)\;
 \item kein Sortieren der einzelnen Blöcke
 \begin{itemize}
 \item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
-\item PostingsList sollte jedoch sortiert werden, da dann auf Sortieren/Suchen beim mergen der Blöcke verzichtet werden kann
 \end{itemize}
 \end{itemize}			
-}
-
-\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
-todo ablauf visualisieren
 }
 
 \frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
 SPIMI-invert(TokenStream)
 \begin{algorithm}[H]
 \caption{SPIMI-invert Algorithmus}
- outputFile = new HashFile()\;
+ outputFile = new File()\;
  dictionary = new HashFile()\;
  \While{free memory available}{
  token = next(TokenStream)\;
@@ -214,15 +219,26 @@ WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
 }
 
 \frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
+\only<1>{\includegraphics[scale=0.8]{pdf/spimi1.pdf}}
+\only<2>{\includegraphics[scale=0.8]{pdf/spimi2.pdf}}
+\only<3>{\includegraphics[scale=0.8]{pdf/spimi3.pdf}}
+\only<4>{\includegraphics[scale=0.8]{pdf/spimi4.pdf}}
+\only<5>{\includegraphics[scale=0.8]{pdf/spimi5.pdf}}
+\only<6>{\includegraphics[scale=0.8]{pdf/spimi6.pdf}}
+\only<7>{\includegraphics[scale=0.8]{pdf/spimi7.pdf}}
+}
+
+
+\frame{\frametitle{Single-pass in-memory indexing (SPIMI)}
 Vorteile gegenüber BSI:
 \begin{itemize}
 \item kann für beliebig große Datenmengen einen Index erstellen
-\item einzelne Blocke können größer sein
+\visible<2->{\item einzelne Blocke können größer sein
 \begin{itemize}
 \item Indexerstelung effizienter
-\end{itemize}
-\item dictionaries und die erstellte PostingsList kann komprimiert gespeichert werden
-\item Zeitkompplexität:	$\Theta ( T )$, kein Sortieren von TermID-DocID Paaren, alle Operationen linear
+\end{itemize}}
+\visible<3->{\item dictionaries und die erstellte PostingsList kann komprimiert gespeichert werden}
+\visible<4->{\item Zeitkompplexität:	$\Theta ( T )$, kein Sortieren von TermID-DocID Paaren, alle Operationen linear}
 \end{itemize}
 }
 
@@ -238,11 +254,11 @@ Vorteile gegenüber BSI:
 \begin{itemize}
 \item beispielsweise das Web
 \end{itemize}
-\item um Indizes über solche Sammlungen zu erstellen, muss die Arbeit auf mehrere Rechner verteilt werden
+\visible<2->{\item um Indizes über solche Sammlungen zu erstellen, muss die Arbeit auf mehrere Rechner verteilt werden}
 \end{itemize}
 \end{column}
 \begin{column}{0.47\textwidth}
-\only<2>{\includegraphics[scale=0.4]{pdf/mapreduce.pdf}}
+\visible<3->{\includegraphics[scale=0.4]{pdf/mapreduce.pdf}}
 \end{column}
 \end{columns}
 }
@@ -315,6 +331,7 @@ Alternative Indexverfahren mit unterschiedlichen Vor/Nachteile:
 
 
 \frame{\frametitle{Indexierung mit Solid State Drives}
+Datenstruktur FD-Baum
 \includegraphics[scale=0.24]{pdf/fdtree.png}
 }
 
