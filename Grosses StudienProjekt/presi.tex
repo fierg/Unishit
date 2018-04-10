@@ -41,15 +41,9 @@
 
 	\section{Einführung}
 	\frame{\frametitle{Einführung}
-	\begin{center}
-	\enquote{ad hoc retrieval}, effiziente Suche über:
+\begin{center}
+	Effiziente Suche und \enquote{ad hoc retrieval}\\
 	\bigskip
-	\begin{description}
-	%TODO bilder stat text..
-	\item Sammlung von Büchern
-	\item das Web
-	\item ...andere große Datenmengen
-\end{description}
 \includegraphics[width=\textwidth]{pdf/bibliothek.jpg}\\
 \bigskip
 
@@ -84,11 +78,11 @@ Typische Systemeigenschaften (stand 2018)
 
 		\frame{\frametitle{hardware constraints}
 		\begin{center}
-		Indizierung einer Sammlung von Daten/Dokumenten auf der Festplatte\\
-		\bigskip
 		\includegraphics[scale=0.4]{pdf/Documents.pdf}\\
 		\bigskip
-		Zugriffszeit auf Festplatte als Bottelneck
+		Zugriffszeit auf Festplatte als Bottelneck\\
+		\bigskip
+		\visible<2->{$\rightarrow$ Erstellung eines Invertieren Index der Daten/Dokumenten auf der Festplatte}
 		\end{center}
 	}		
 	
@@ -122,7 +116,7 @@ Typische Systemeigenschaften (stand 2018)
 		\item $307.59$ Tage}
 		\end{itemize}
 		
-\visible<4->{Mit einer schnellen SSD mit $0,8$ ms Zugriffszeit:
+\visible<4->{Mit einer schnellen SSD mit $0,1$ ms Zugriffszeit:
 		\begin{itemize}
 		\item $(100.000.000 \cdot log_2(100.000.000)) \cdot 2 \cdot(1 \cdot 10^{-4})$ Sekunden
 		\item $6.15$ Tage
@@ -133,7 +127,7 @@ Typische Systemeigenschaften (stand 2018)
 	
 	
 \subsection{Blocked sort-based indexing}
-		\frame{\frametitle{Blocked sort-based indexing (BSI)}
+		\frame{\frametitle{Blocked sort-based indexing (BSBI)}
 \begin{columns}
     \begin{column}{0.47\textwidth}
 	Lösung:\\
@@ -159,14 +153,14 @@ WriteBlockToDisk(block, $f_n$)\;
 \end{columns}
 }
 	
-		\frame{\frametitle{Blocked sort-based indexing (BSI) - merging Blocks}
+		\frame{\frametitle{Blocked sort-based indexing (BSBI) - merging Blocks}
 \only<1>{\includegraphics[scale=0.55]{pdf/BSI_merging1.pdf}}
 \only<2>{\includegraphics[scale=0.55]{pdf/BSI_merging2.pdf}}
 \only<3>{\includegraphics[scale=0.55]{pdf/BSI_merging3.pdf}}
 \only<4>{\includegraphics[scale=0.55]{pdf/BSI_merging4.pdf}}
 }
 
-			\frame{\frametitle{Blocked sort-based indexing (BSI) - Fazit}
+			\frame{\frametitle{Blocked sort-based indexing (BSBI) - Fazit}
 			Fazit zu BSBI:
 			\visible<2->{\begin{itemize}
 			\item Zeitkompplexität:	$\Theta ( T \cdot log(T))$
@@ -238,7 +232,7 @@ Vorteile gegenüber BSI:
 \item Indexerstelung effizienter
 \end{itemize}}
 \visible<3->{\item dictionaries und die erstellte PostingsList kann komprimiert gespeichert werden}
-\visible<4->{\item Zeitkompplexität:	$\Theta ( T )$, kein Sortieren von TermID-DocID Paaren, alle Operationen linear}
+\visible<4->{\item Zeitkomplexität:	$\Theta ( T )$, kein Sortieren von TermID-DocID Paaren, alle Operationen linear}
 \end{itemize}
 }
 
@@ -291,10 +285,10 @@ Vorteile gegenüber BSI:
 \item akzeptabel wenn Änderungen nicht sehr groß
 \item wenn Änderungen nicht sofort sichtbar sein müssen
 \end{itemize}
-\pause \item Hauptindex behalten und neue Dokumente in einen Hilfsindex speichern
+\visible<2->{ \item Hauptindex behalten und neue Dokumente in einen Hilfsindex speichern
 \begin{itemize}
 \item beide Indizes regemäßig mergen
-\end{itemize}
+\end{itemize}}
 \end{itemize}
 }
 
@@ -347,7 +341,14 @@ Datenstruktur FD-Baum
 
 \section{Fazit}
 \frame{\frametitle{Fazit}
-todo}
+\begin{itemize}
+\item unterschiedliche Anforderungen $\rightarrow$ unterschiedliche Indizierungsverfahren
+\begin{itemize}
+\item BSBI und SPIMI auf einzelnen Rechnern
+\item MapReduce auf Computer Clustern
+\end{itemize}
+\end{itemize}
+}
 
 
 \section{Quellen}
@@ -364,6 +365,27 @@ todo}
 \end{itemize}
 	 }
 	
+	\frame{\frametitle{Appendix - BSBI Zeitberechnung}
+	Reuters-RCV1 Modell Sammlung besitzt 100.000.000 Terme...\\
+	Indizieren mit BSBI:
+	\begin{itemize}	
+	\item Annahme:
+	\begin{itemize}
+	\item Sortieren von (term, doc) - Paaren, je $12$ byte
+	\item Aufteiling in 64 Blocks, $1600000$ Paare pro Block
+	\end{itemize}	
+	\visible<2->{\item $64$ blocks $\cdot 1600000 $ Paare $\cdot 12$ bytes = $1228800000$ bytes 
+	\item $N \cdot log_2(N)$ - Vergleiche = $558457725093$
+	\item $2$ Zugriffe pro Vergleich in Main Memory (Zugriffszeit von $10^{-6}$)
+	\item $55845,77$ Sekunden, $15,5$ Stunden}
+	\end{itemize}
+
+
+}
+
+\frame{\frametitle{Appendix - SSD Performance}
+\includegraphics[scale=0.25]{pdf/ssdperformance.png}
+}
 	
 	
 \end{document}
