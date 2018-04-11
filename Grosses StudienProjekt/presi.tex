@@ -52,7 +52,7 @@
 	}
 	
 	
-\section{Hardware constraints}	
+\section{Hardware Constraints}	
 	\frame{\frametitle{Einführung}
 Typische Systemeigenschaften (stand 2018)
 \medskip
@@ -65,12 +65,12 @@ Typische Systemeigenschaften (stand 2018)
 	\item HDD (hard disk drive)
 	\begin{itemize}
 	\item \textit{average seek time} zwischen 2 und 10 ms
-	\item \textit{transfer time} 150 - 300 MB/s
+	\item \textit{transfer} 150 - 300 MB/s
 	\end{itemize}}
 	\visible<3->{\item SSD (solid state disk)
 	\begin{itemize}
 	\item \textit{average seek time} zwischen 0.08 und 0.16 ms
-	\item \textit{transfer time} Lesen: 545 MB/s, Schreiben: 525 MB/s
+	\item \textit{transfer} Lesen: 545 MB/s, Schreiben: 525 MB/s
 	\end{itemize}}
 	\end{itemize}
 \end{itemize}	
@@ -80,7 +80,7 @@ Typische Systemeigenschaften (stand 2018)
 		\begin{center}
 		\includegraphics[scale=0.4]{pdf/Documents.pdf}\\
 		\bigskip
-		Zugriffszeit auf Festplatte als Bottelneck\\
+		Zugriffszeit auf Festplatte als Bottleneck\\
 		\bigskip
 		\visible<2->{$\rightarrow$ Erstellung eines Invertieren Index der Daten/Dokumenten auf der Festplatte}
 		\end{center}
@@ -182,9 +182,9 @@ WriteBlockToDisk(block, $f_n$)\;
 \begin{itemize}
 \item keine Datenstruktur für das Mapping von termen und termID's
 \end{itemize}
-\item kein Sortieren der einzelnen Blöcke
+\item kein Sortieren der einzelnen Terme eines Blocks
 \begin{itemize}
-\item Postings in der Reihenfolge ihres Vorkommens in die Postingslist aufnehmen
+\item Postings in der Reihenfolge ihres Vorkommens in die PostingsList aufnehmen
 \end{itemize}
 \end{itemize}			
 }
@@ -285,7 +285,7 @@ Vorteile gegenüber BSI:
 \item akzeptabel wenn Änderungen nicht sehr groß
 \item wenn Änderungen nicht sofort sichtbar sein müssen
 \end{itemize}
-\visible<2->{ \item Hauptindex behalten und neue Dokumente in einen Hilfsindex speichern
+\visible<2->{ \item Hauptindex behalten und neue Dokumente in einem Hilfsindex speichern
 \begin{itemize}
 \item beide Indizes regemäßig mergen
 \end{itemize}}
@@ -314,6 +314,7 @@ Alternative Indexverfahren mit unterschiedlichen Vor/Nachteile:
 
 \section{Indexierung mit Solid State Drives}
 \frame{\frametitle{Indexierung mit Solid State Drives - hardware constraints}
+\includegraphics[scale=0.25]{pdf/ssdperformance.png}
 \begin{itemize}
 \item schneller \enquote{random read}-Zugriff
 \visible<2->{\item \enquote{random write}-Zugriff deutlich langsamer
@@ -346,6 +347,7 @@ Datenstruktur FD-Baum
 \begin{itemize}
 \item BSBI und SPIMI auf einzelnen Rechnern
 \item MapReduce auf Computer Clustern
+\item alternative Datenstrurkturen für neue Hardware
 \end{itemize}
 \end{itemize}
 }
@@ -381,10 +383,6 @@ Datenstruktur FD-Baum
 	\end{itemize}
 
 
-}
-
-\frame{\frametitle{Appendix - SSD Performance}
-\includegraphics[scale=0.25]{pdf/ssdperformance.png}
 }
 	
 	
