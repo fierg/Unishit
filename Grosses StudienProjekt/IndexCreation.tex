@@ -18,19 +18,12 @@
 \usepackage{hyperref}
 
 \usepackage[]{algorithm2e}
-%\usepackage{amsfonts}
-%\usepackage{amssymb}
-%\usepackage{makeidx}
-%\usepackage{graphicx}
-
 
 \usepackage{hyperref}
 \author{Sven Fiergolla}
 \title[Großes Studienprojekt]{Index Construction}
 \subtitle[short version]{}
 \date{\today}
-%\institute[Uni Trier]{Universität Trier}
-%\logo{\includegraphics[scale=.25]{unilogo.pdf}}
 
 \begin{document}
 	\frame{\maketitle}
@@ -344,15 +337,17 @@ Alternative Indexverfahren mit unterschiedlichen Vor/Nachteile:
 
 \frame{\frametitle{Indexierung mit Solid State Drives}
 Datenstruktur FD-Baum
-\includegraphics[scale=0.24]{pdf/fdtree.png}
+\begin{center}
+\includegraphics[scale=0.246]{pdf/fdtree.png}
+\end{center}
 }
 
 
 
 \frame{\frametitle{Indexierung mit Solid State Drives - Fazit}
 \begin{itemize}
-\item abweichende Hardwareeigenschaften $\rightarrow$ andere Algorhythmen
 \item FD-Baumstruktur eliminiert häufige kleine \enquote{random read}-Zugriffe
+\item abweichende Hardwareeigenschaften $\rightarrow$ andere Algorhythmen
 \end{itemize}
 }
 
