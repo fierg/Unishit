@@ -92,7 +92,7 @@ Typische Systemeigenschaften Desktop-PC (stand 2018)
 
 
 	 	\frame{\frametitle{Index Creation - Hardware Constraints}
-		Reuters-RCV1 Modell Sammlung besitzt 100.000.000 Terme...\\
+		Reuters-RCV1 Modell Sammlung besitzt $100.000.000$ Terme...\\
 		\bigskip
 		Sortieren dieser Terme von einer Festplatte:
 		\begin{itemize}
@@ -153,13 +153,13 @@ WriteBlockToDisk(block, $f_n$)\;
 }
 
 	\frame{\frametitle{Blocked sort-based indexing (BSBI) - Fazit}
-	Reuters-RCV1 Modell Sammlung besitzt 100.000.000 Terme...\\
+	Reuters-RCV1 Modell Sammlung besitzt $100.000.000$ Terme...\\
 	Indizieren mit BSBI:
 	\begin{itemize}	
 	\item Annahme:
 	\begin{itemize}
 	\item Sortieren von (term, doc) - Paaren, je $12$ byte
-	\item Aufteiling in 64 Blocks, $1600000$ Paare pro Block
+	\item Aufteiling in $64$ Blocks, $1600000$ Paare pro Block
 	\end{itemize}	
 	\visible<2->{\item $64$ blocks $\cdot 1600000 $ Paare $\cdot 12$ bytes = $1228800000$ bytes 
 	\item $N \cdot log_2(N)$ - Vergleiche = $558457725093$
