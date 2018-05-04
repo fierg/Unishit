@@ -3,6 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[german]{babel}
 \usepackage[]{csquotes}
+\usepackage{amsmath}
+\usepackage[]{algorithm2e}
 
 \author{Sven Fiergolla \\ 1252732 \\ s4svfier@uni-trier.de}
 \title{Index Construction}
@@ -17,7 +19,7 @@
 Information Retrieval, zu deutsch Informationsrückgewinnung, ist ein Fachgebiet, welcher sich mit computergestütztem Suchen nach komplexen Inhalten befasst. Der häufigste Anwendungsbereich ist das Suchen von Dokumenten aus einer Sammlung, die für einen Anwender relevant sind. Würde dies auf der unveränderten Datenmenge geschehen, müsste bei jeder Suchanfrage, die komplette Menge an Rohdaten durchsucht werden. Dies ist ein sehr ressourcenintensiver Prozess, daher wird zunächst auf die Hardware sebst eingegangen. Anschließend werden einige Verfahren zum Erstellen eines Index vorgestellt und auf deren Vor- und Nachteile eingegangen.\par
 
 \section{Hardware Constraints}
-\begin{figure*}[h]
+\begin{figure*}[ht]
   \includegraphics[width=\textwidth]{pdf/Documents.pdf}
   \caption{beispielhafter Dokumenten-Korpus}
   \label{korpus}
@@ -57,22 +59,74 @@ Da mit sich der SSD eine neue Speichertechnologie verbreitet hat, welche deutlic
 \paragraph{}
 Um das ressourcenintensive Durchsuchen der Rohdaten zu vermeiden, existieren geeignete Datenstrukturen um Anfragen beantworten zu können, ohne alle Daten durchsuchen zu müssen. Eine einfache geeignete Struktur wäre eine \enquote{Term-Dokument-Matrix}, welche spaltenweise die Dokumente auflistet und zeilenweise das Vorkommen einzelner Worter. Auf einer solchen Matrix lässts sich mit einfachen boolschen Anfragen arbeiten, jedoch hat diese Datenstruktur auch einige Nachteile. Beipsielsweise wächst die Matrix zu stark an für große Sammlungen, es lassen sich keine Komplexeren Anfragen stelle und ein Ranking der Dokumente ist ebenfalls nicht möglich. Daher betrachten wir im Folgenden lediglich den invertierten Index als geeignete Datenstruktur.
 \par
+
+\paragraph{}
+Um aus einer Sammlung von Rohdaten (Abbildung \ref{korpus}) die relevanten Informationen zu gewinnen, müssen vorher einige Anpassungen getätigt werden. Besteht die Sammlung beispielsweise aus Webseiten, müssen die Informationen vor dem Indizieren aus der \textit{.html}-Datei geparst und von html-Tags befreit werden. In der Regel wird ebenfalls Tokenization und Stemming auf den Text angewendet. Bei der Tokenisierung wird Dokument in kleinste Einheiten (meistens einzene Wörter) geteilt. Stemming erlaubt, dass verschiedene morphologische Varianten eines Wortes auf ihren gemeinsamen Wortstamm zurückgeführt werden (beispielsweise die Deklination von Wortes oder Wörter zu Wort und Konjugation von gesehen oder sah zu seh). Dies ermöglicht, dass bei einer Suchanfrage auch Dokumente gefunden werden können, in denen eine leichte Variation des gesuchten Wortes vorkommt, da beide auf den gleichen Term reduziert werden.
+\par
+
 \subsection{Invertierter Index} \label{invertedIndex}
 \paragraph{}
-Um aus einer Sammlung von Rohdaten (\ref{korpus}) die relevanten Informationen zu gewinnen, müssen vorher einige Anpassungen getätigt werden. Besteht die Sammlung beispielsweise aus Webseiten, müssen die Informationen vor dem Indizieren aus der \textit{.html}-Datei geparst und von html-tags befreit werden. In der Regel wird ebenfalls Tokenization und Stemming auf den Text angewendet. Bei der Tokenisierung wird Dokument in kleinste Einheiten (meistens einzene Wörter) geteilt. Stemming erlaubt, dass verschiedene morphologische Varianten eines Wortes auf ihren gemeinsamen Wortstamm zurückgeführt werden (beispielsweise die Deklination von Wortes oder Wörter zu Wort und Konjugation von gesehen oder sah zu seh).
+Die wesentlichen Schritte zur Erstellung eines invertierten Index sind in Abbildung \ref{postingssList} dargestellt. Zuerst werden alle \enquote{Term-Dokument ID} Paare gesammelt. Diese werden anschließend, dem Term nach, lexikographisch sortiert. Zuletzt werden die Dokument ID's für jeden Term in einer so genannten Postingslist zusammengefasst und Statistiken wie die Frequenz eines Terms berechnet. Die Postingslisten aller Terme bezeichnet man als invertierten Index, da die Zuordnung von Dokumenten auf deren Text invertiert wurde zu der Zuordnung zwischen einem Term und dessen Vorkommen. Bei einer Suchanfrage muss nun lediglich die Postingsliste zu dem gesuchten Term zurückgegeben werden. Aus Performancegründen werden häufig eindeutige Term ID's statt den Termen selbst genutzt. Für kleine Sammlungen kann dies im Arbeitsspeicher geschehen, für größere Sammlungen werden jedoch alternative Verfahren benötigt, auf die im Folgenden eingegangen wird.
 \par
-\begin{figure*}
+
+\begin{figure*}[ht]
   \includegraphics[width=\textwidth]{pdf/postingslist3.pdf}
-  \caption{beispielhafter Dokumenten-Korpus}
+  \caption{Invertierter Index}
+  \label{postingssList}
 \end{figure*}
 
+\paragraph{}
+In \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}\cite{ir} wird beispielhaft mit einer Modelsammlung gearbeitet, der Reuters-RCV1. Sie umfasst rund $800.000$ Nachrichtenartikel, ist etwa 1 GB groß und besitzt $100.000.000$ Terme. Die \enquote{Term-Dokument ID} Paare dieser Sammlung auf einer Festplatte zu sortieren ist sehr ineffizient. Beim Sortieren kann von einer Komplexität von $O(n \cdot log_2 (n))$ ausgegangen werden. Möchte man nun alle Terme der Reuters-RCV1 Sammlung sortieren und man von 2 Zugriffen auf die Festplatte beim Sortieren sowie einer durchschnittlichen Zugriffszeit auf die Festplatte von 5ms ausgeht, dauert es in etwa:
+
+\[(100.000.000 \cdot log_2 (100.000.000)) \cdot 2 \cdot (5 \cdot 10^{-3}) \]
+\[ = 2.6575424759... \cdot 10^7 \text{ Sekunden}\]
+\[ = 307.59 \text{ Tage} \]
+
+Diese Dauer resultiert vorallem aus der hohen Zugriffszeit einer mechanischen Festplatte, da bei jedem wahlfreiem Zugriff der Lesekopf neu positioniert werden muss. Das Lesen von sequenziellen Daten ist deutlich schneller. Ein erster Ansatz ist es, den wahlfreien Zugriff zu minimieren und die Daten hauptsächlich Blockweise zu lesen.
+\par
+
 \subsection{Blocked sort-based indexing (BSBI)}
+
+\begin{algorithm}
+\caption{BSBI Algorithmus}
+ n = 0\;
+ \While{all documents have not been processed}{
+n = n + 1\;
+block = ParseNextBlock()\;
+BSBI-INVERT(block)\;
+WriteBlockToDisk(block, $f_n$)\;
+  }
+  MergeBlocks($f_1$, $\cdots$, $f_n$; $f_{merged}$)\;
+\end{algorithm}
+
+
 \begin{figure*}
   \includegraphics[width=\textwidth]{pdf/BSI_merging.pdf}
-  \caption{beispielhafter Dokumenten-Korpus}
+  \caption{merging bei BSBI}
 \end{figure*}
 
 \subsection{Single-pass in-memory indexing (SPIMI)}
+
+\begin{algorithm}
+\caption{SPIMI-invert Algorithmus}
+ outputFile = new File()\;
+ dictionary = new HashFile()\;
+ \While{free memory available}{
+ token = next(TokenStream)\;
+\eIf{term(token) $\notin$ dictionary}{
+PostingsList = AddToDictionary(dictionary, term(token))\;
+}{
+PostingsList = GetPostingsList(dictionary, term(token))\;
+}
+\If{full(PostingsList)}{
+PostingsList = DoublePostingsList(dictionary, term(token))\;
+}
+AddToPostingsList(PostingsList, docID(token))\;
+SortedTerms = SortTerms(dictionary)\;
+WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
+  }
+\end{algorithm}
+
 \subsection{Distributed indexing}
 \subsection{Dynamic indexing}
 \subsection{andere Indexierungsverfahren}
@@ -85,11 +139,14 @@ Um aus einer Sammlung von Rohdaten (\ref{korpus}) die relevanten Informationen z
 
 \begin{thebibliography}{9}
 
-		\item Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{\href{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}{Introduction to Information Retrieval}}  Cambridge University Press 2008, pp. 1-18 and 67-84.
+		\bibitem{ir}
+		Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{\href{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}{Introduction to Information Retrieval}}  Cambridge University Press 2008, pp. 1-18 and 67-84.
 
-	 \item Ian H. Witten, Alistair Moffat, Timothy C. Bell \enquote{\href{https://books.google.de/books?id=2F74jyPl48EC&dq=Witten+et+al.+index+1999&lr=&hl=de&source=gbs_navlinks_s}{Managing Gigabytes: Compressing and Indexing Documents and Images}}  Morgan Kaufman Publishers 1999, pp. 223-261.
+	 \bibitem{managigGig}
+	  Ian H. Witten, Alistair Moffat, Timothy C. Bell \enquote{\href{https://books.google.de/books?id=2F74jyPl48EC&dq=Witten+et+al.+index+1999&lr=&hl=de&source=gbs_navlinks_s}{Managing Gigabytes: Compressing and Indexing Documents and Images}}  Morgan Kaufman Publishers 1999, pp. 223-261.
 	
-	\item Yinan Li, Bingsheng He, Robin Jun Yang, Qiong Luo, Ke YiTree (Hong Kong University of Science and Technology) \enquote{\href{http://pages.cs.wisc.edu/~yinan/paper/fdtree_pvldb.pdf}{Indexing on Solid State Drives}} The 36th International Conference on Very Large Data Bases, September 13-17,
+	\bibitem{ssd}
+	Yinan Li, Bingsheng He, Robin Jun Yang, Qiong Luo, Ke YiTree (Hong Kong University of Science and Technology) \enquote{\href{http://pages.cs.wisc.edu/~yinan/paper/fdtree_pvldb.pdf}{Indexing on Solid State Drives}} The 36th International Conference on Very Large Data Bases, September 13-17,
 2010, Singapore.
 \end{thebibliography}
 \end{document}
