@@ -1,23 +1,95 @@
 \input{mc_article_preamble.tex}
 
-\author{Name \\ Matrickelnummer \\ Mail}
-\title{Title}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage[]{csquotes}
+
+\author{Sven Fiergolla \\ 1252732 \\ s4svfier@uni-trier.de}
+\title{Index Construction}
+
+
 
 \begin{document}
 \maketitle
 
-\section{What is Lorem Ipsum?}
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+\section{Einführung}
+\paragraph{}
+Information Retrieval, zu deutsch Informationsrückgewinnung, ist ein Fachgebiet, welcher sich mit computergestütztem Suchen nach komplexen Inhalten befasst. Der häufigste Anwendungsbereich ist das Suchen von Dokumenten aus einer Sammlung, die für einen Anwender relevant sind. Würde dies auf der unveränderten Datenmenge geschehen, müsste bei jeder Suchanfrage, die komplette Menge an Rohdaten durchsucht werden. Dies ist ein sehr ressourcenintensiver Prozess, daher wird zunächst auf die Hardware sebst eingegangen. Anschließend werden einige Verfahren zum Erstellen eines Index vorgestellt und auf deren Vor- und Nachteile eingegangen.\par
 
-\section{Where does it come from?}
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+\section{Hardware Constraints}
+\begin{figure*}[h]
+  \includegraphics[width=\textwidth]{pdf/Documents.pdf}
+  \caption{beispielhafter Dokumenten-Korpus}
+  \label{korpus}
+\end{figure*}
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+\paragraph{}
+Typische Systemeigenschaften eines Desktop PC im Consumerbereich:
+\begin{itemize}
+	\item \textit{clock rate} 2-4 GHz, 4-8 Kerne
+	\item \textit{main memory} 4-32 Gb
+	\item \textit{disk space} $\leq$ 1 TB SSD oder $\geq$ 1 TB HDD
+	\begin{itemize}
+	\item HDD (hard disk drive)
+	\begin{itemize}
+	\item \textit{average seek time} zwischen 2 und 10 ms
+	\item \textit{transfer} 150 - 300 MB/s
+	\end{itemize}
+	\item SSD (solid state disk)
+	\begin{itemize}
+	\item \textit{average seek time} zwischen 0.08 und 0.16 ms
+	\item \textit{transfer} Lesen: 545 MB/s, Schreiben: 525 MB/s
+	\end{itemize}
+	\end{itemize}
+\end{itemize}	 
+\par
 
-\section{Why do we use it?}
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+\paragraph{}
+Die zu durchsuchende Datensammlung, häufig auch Korpus geannt, befindet sich auf der Festplatte, welche deutlich langsamer arbeitet als der Arbeitsspeicher oder die CPU. Daher stellt die Festplatte in diesem Fall ein Bottleneck\footnote{Wörtlich: \enquote{Flaschenhals} oder \enquote{Engpass}. Gemeint ist ein Engpass beim Transport von Daten, der maßgeblichen Einfluss auf die Arbeitsgeschwindigkeit hat.} dar.
+\par
 
-\section{Where can I get some?}
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+\paragraph{}
+Um die intensive Nutzung der Festplatte zu vermeiden, wird eine alterntive Datenstruktur benötigt. Je nach Anforderung kann eine andere Struktur verwendet werden. Für klassisches \enquote{Document Retrival} wird jedoch in der Regel ein so genannter Invertiert Index konstruiert (siehe \nameref{invertedIndex}).
+Da mit sich der SSD eine neue Speichertechnologie verbreitet hat, welche deutlich bessere Zugriffszeiten hat als eine HDD, wird diese seperat betrachtet (siehe \nameref{indexSSD}).
+\par
 
+\section{Index Construction} \label{IndexConstruction}
+\paragraph{}
+Um das ressourcenintensive Durchsuchen der Rohdaten zu vermeiden, existieren geeignete Datenstrukturen um Anfragen beantworten zu können, ohne alle Daten durchsuchen zu müssen. Eine einfache geeignete Struktur wäre eine \enquote{Term-Dokument-Matrix}, welche spaltenweise die Dokumente auflistet und zeilenweise das Vorkommen einzelner Worter. Auf einer solchen Matrix lässts sich mit einfachen boolschen Anfragen arbeiten, jedoch hat diese Datenstruktur auch einige Nachteile. Beipsielsweise wächst die Matrix zu stark an für große Sammlungen, es lassen sich keine Komplexeren Anfragen stelle und ein Ranking der Dokumente ist ebenfalls nicht möglich. Daher betrachten wir im Folgenden lediglich den invertierten Index als geeignete Datenstruktur.
+\par
+\subsection{Invertierter Index} \label{invertedIndex}
+\paragraph{}
+Um aus einer Sammlung von Rohdaten (\ref{korpus}) die relevanten Informationen zu gewinnen, müssen vorher einige Anpassungen getätigt werden. Besteht die Sammlung beispielsweise aus Webseiten, müssen die Informationen vor dem Indizieren aus der \textit{.html}-Datei geparst und von html-tags befreit werden. In der Regel wird ebenfalls Tokenization und Stemming auf den Text angewendet. Bei der Tokenisierung wird Dokument in kleinste Einheiten (meistens einzene Wörter) geteilt. Stemming erlaubt, dass verschiedene morphologische Varianten eines Wortes auf ihren gemeinsamen Wortstamm zurückgeführt werden (beispielsweise die Deklination von Wortes oder Wörter zu Wort und Konjugation von gesehen oder sah zu seh).
+\par
+\begin{figure*}
+  \includegraphics[width=\textwidth]{pdf/postingslist3.pdf}
+  \caption{beispielhafter Dokumenten-Korpus}
+\end{figure*}
+
+\subsection{Blocked sort-based indexing (BSBI)}
+\begin{figure*}
+  \includegraphics[width=\textwidth]{pdf/BSI_merging.pdf}
+  \caption{beispielhafter Dokumenten-Korpus}
+\end{figure*}
+
+\subsection{Single-pass in-memory indexing (SPIMI)}
+\subsection{Distributed indexing}
+\subsection{Dynamic indexing}
+\subsection{andere Indexierungsverfahren}
+
+
+
+\section{Indexierung mit Solid State Drives} \label{indexSSD}
+
+\section{Fazit}
+
+\begin{thebibliography}{9}
+
+		\item Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{\href{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}{Introduction to Information Retrieval}}  Cambridge University Press 2008, pp. 1-18 and 67-84.
+
+	 \item Ian H. Witten, Alistair Moffat, Timothy C. Bell \enquote{\href{https://books.google.de/books?id=2F74jyPl48EC&dq=Witten+et+al.+index+1999&lr=&hl=de&source=gbs_navlinks_s}{Managing Gigabytes: Compressing and Indexing Documents and Images}}  Morgan Kaufman Publishers 1999, pp. 223-261.
+	
+	\item Yinan Li, Bingsheng He, Robin Jun Yang, Qiong Luo, Ke YiTree (Hong Kong University of Science and Technology) \enquote{\href{http://pages.cs.wisc.edu/~yinan/paper/fdtree_pvldb.pdf}{Indexing on Solid State Drives}} The 36th International Conference on Very Large Data Bases, September 13-17,
+2010, Singapore.
+\end{thebibliography}
 \end{document}
