@@ -26,7 +26,7 @@ Information Retrieval, zu deutsch Informationsrückgewinnung, ist ein Fachgebiet
 \end{figure*}
 
 \paragraph{}
-Typische Systemeigenschaften eines Desktop PC im Consumerbereich:
+Typische Systemeigenschaften eines Desktop PC im Consumerbereich (Stand 2018):
 \begin{itemize}
 	\item \textit{clock rate} 2-4 GHz, 4-8 Kerne
 	\item \textit{main memory} 4-32 Gb
@@ -48,9 +48,6 @@ Typische Systemeigenschaften eines Desktop PC im Consumerbereich:
 
 \paragraph{}
 Die zu durchsuchende Datensammlung, häufig auch Korpus geannt, befindet sich auf der Festplatte, welche deutlich langsamer arbeitet als der Arbeitsspeicher oder die CPU. Daher stellt die Festplatte in diesem Fall ein Bottleneck\footnote{Wörtlich: \enquote{Flaschenhals} oder \enquote{Engpass}. Gemeint ist ein Engpass beim Transport von Daten, der maßgeblichen Einfluss auf die Arbeitsgeschwindigkeit hat.} dar.
-\par
-
-\paragraph{}
 Um die intensive Nutzung der Festplatte zu vermeiden, wird eine alterntive Datenstruktur benötigt. Je nach Anforderung kann eine andere Struktur verwendet werden. Für klassisches \enquote{Document Retrival} wird jedoch in der Regel ein so genannter Invertiert Index konstruiert (siehe \nameref{invertedIndex}).
 Da mit sich der SSD eine neue Speichertechnologie verbreitet hat, welche deutlich bessere Zugriffszeiten hat als eine HDD, wird diese seperat betrachtet (siehe \nameref{indexSSD}).
 \par
@@ -70,7 +67,7 @@ Die wesentlichen Schritte zur Erstellung eines invertierten Index sind in Abbild
 \par
 
 \begin{figure*}[ht]
-  \includegraphics[width=\textwidth]{pdf/postingslist3.pdf}
+  \includegraphics[width=\textwidth,height=0.4\textheight]{pdf/postingslist3.pdf}
   \caption{Invertierter Index}
   \label{postingssList}
 \end{figure*}
@@ -86,9 +83,10 @@ Diese Dauer resultiert vorallem aus der hohen Zugriffszeit einer mechanischen Fe
 \par
 
 \subsection{Blocked sort-based indexing (BSBI)}
-
+\paragraph{}
+Eine mögliche Umsetzung den Index Blockweise zu erstellen ist der \textit{block sort-based indexing Algorithmus} (siehe Algorithmus \ref{bsbiAlgo}) oder auch \textit{BSBI} auf welchen im Folgenden näher eingegangen wird.
+\par
 \begin{algorithm}
-\caption{BSBI Algorithmus}
  n = 0\;
  \While{all documents have not been processed}{
 n = n + 1\;
@@ -97,18 +95,26 @@ BSBI-INVERT(block)\;
 WriteBlockToDisk(block, $f_n$)\;
   }
   MergeBlocks($f_1$, $\cdots$, $f_n$; $f_{merged}$)\;
+\caption{BSBI Algorithmus} \label{bsbiAlgo}
 \end{algorithm}
 
+\paragraph{}
+Der Algoritmus parst eine Menge von Dokumeten in \enquote{Term-Dokument ID} Paare bis ein Block mit einer festen Größe voll ist (ParseNextBlock()). Anschließend wird der Block sortiert, daher sollte der Block problemlos in den Arbeitsspeicher passen, da dieser wesentlich schneller arbeitet als die Festplatte und so ein effizienteres Sortieren ermöglicht wird. Nun wird ein invertierter Index für den Block erstellt und persistiert. Dies geschieht iterativ für alle Blöcke bis die Sammlung komplett bearbeitet wurde. Zuletzt werden die einzelnen Postingslist zusammengefügt (siehe Abbildung \ref{bsiMerging}).
+\par
 
-\begin{figure*}
+\begin{figure*}[ht]
   \includegraphics[width=\textwidth]{pdf/BSI_merging.pdf}
   \caption{merging bei BSBI}
+  \label{bsiMerging}
 \end{figure*}
 
-\subsection{Single-pass in-memory indexing (SPIMI)}
+\paragraph{}
+Soll über die Reuters-RCV1 Sammlung mit BSBI ein Index erstellt werden, so dauert dies unter gleichen Voraussetzungen nur noch 15,5 Stunden, da die Sammlung in 64 Blöcke aufgeteilt wird. Diese können innerhalb des Arbeitsspeichers sortiert werden, welcher eine wesentlich bessere Zugriffsgeschwindigkeit vorweist. Dennoch ist die theoretische Zeitkomplexität von BSBI $\Theta( T log_2 ( T))$ da die $T$ Terme sortiert werden müssen, auch wenn dies innerhalb eines Blocks geschieht. In der Praxis ist jedoch meistens das Parsen und Mergen der Blöcke am zeitaufwendigsten.\par
 
+\subsection{Single-pass in-memory indexing (SPIMI)}
+\paragraph{}
+BSBI lässt sich für viele Sammlungen anwenden, benötigt jedoch eine Datenstruktur für das Mapping zwischen Termen und ihren Term-ID's. Eine alternative Umsetzung ist der \textit{single-pass in-memory indexing Algorithmus} oder auch \textit{SPIMI} (siehe Algorithmus \ref{spimiAlgo}).\par
 \begin{algorithm}
-\caption{SPIMI-invert Algorithmus}
  outputFile = new File()\;
  dictionary = new HashFile()\;
  \While{free memory available}{
@@ -125,9 +131,19 @@ AddToPostingsList(PostingsList, docID(token))\;
 SortedTerms = SortTerms(dictionary)\;
 WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
   }
+  \caption{SPIMI-invert Algorithmus} \label{spimiAlgo}
 \end{algorithm}
 
+\paragraph{}
+ Die Sammlung von Dokumenten wird als Strom von \enquote{Term-Dokument ID} Paaren betrachtet und darauf wiederholt der Algorithmus angewendet, bis die ganze Sammlung indiziert wurde.
+
+
 \subsection{Distributed indexing}
+\begin{figure*}[hb]
+  \includegraphics[width=\textwidth,height=0.4\textheight]{pdf/distributedIndexAll.pdf}
+  \caption{distributed indexing mit MapReduce}
+  \label{distribIndex}
+\end{figure*}
 \subsection{Dynamic indexing}
 \subsection{andere Indexierungsverfahren}
 
