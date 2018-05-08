@@ -1,17 +1,23 @@
 \input{mc_article_preamble.tex}
 
-\usepackage[utf8]{inputenc}
-\usepackage[german]{babel}
-\usepackage[]{csquotes}
+
 \usepackage{amsmath}
 \usepackage[]{algorithm2e}
+\usepackage[]{csquotes}
+\usepackage{subfigure}
 
 \author{Sven Fiergolla \\ 1252732 \\ s4svfier@uni-trier.de}
 \title{Index Construction}
 
-
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
 
 \begin{document}
+
+\LinesNumbered
 \maketitle
 
 \section{Einführung}
@@ -49,7 +55,7 @@ Typische Systemeigenschaften eines Desktop PC im Consumerbereich (Stand 2018):
 \paragraph{}
 Die zu durchsuchende Datensammlung, häufig auch Korpus geannt, befindet sich auf der Festplatte, welche deutlich langsamer arbeitet als der Arbeitsspeicher oder die CPU. Daher stellt die Festplatte in diesem Fall ein Bottleneck\footnote{Wörtlich: \enquote{Flaschenhals} oder \enquote{Engpass}. Gemeint ist ein Engpass beim Transport von Daten, der maßgeblichen Einfluss auf die Arbeitsgeschwindigkeit hat.} dar.
 Um die intensive Nutzung der Festplatte zu vermeiden, wird eine alterntive Datenstruktur benötigt. Je nach Anforderung kann eine andere Struktur verwendet werden. Für klassisches \enquote{Document Retrival} wird jedoch in der Regel ein so genannter Invertiert Index konstruiert (siehe \nameref{invertedIndex}).
-Da mit sich der SSD eine neue Speichertechnologie verbreitet hat, welche deutlich bessere Zugriffszeiten hat als eine HDD, wird diese seperat betrachtet (siehe \nameref{indexSSD}).
+Da sich mit der SSD eine neue Speichertechnologie verbreitet hat, welche deutlich bessere Zugriffszeiten hat als eine HDD, wird diese seperat betrachtet (siehe \nameref{indexSSD}).
 \par
 
 \section{Index Construction} \label{IndexConstruction}
@@ -73,7 +79,7 @@ Die wesentlichen Schritte zur Erstellung eines invertierten Index sind in Abbild
 \end{figure*}
 
 \paragraph{}
-In \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}\cite{ir} wird beispielhaft mit einer Modelsammlung gearbeitet, der Reuters-RCV1. Sie umfasst rund $800.000$ Nachrichtenartikel, ist etwa 1 GB groß und besitzt $100.000.000$ Terme. Die \enquote{Term-Dokument ID} Paare dieser Sammlung auf einer Festplatte zu sortieren ist sehr ineffizient. Beim Sortieren kann von einer Komplexität von $O(n \cdot log_2 (n))$ ausgegangen werden. Möchte man nun alle Terme der Reuters-RCV1 Sammlung sortieren und man von 2 Zugriffen auf die Festplatte beim Sortieren sowie einer durchschnittlichen Zugriffszeit auf die Festplatte von 5ms ausgeht, dauert es in etwa:
+In \enquote{Introduction to Information Retrieval}\cite{ir} wird beispielhaft mit einer Modelsammlung gearbeitet, der Reuters-RCV1. Sie umfasst rund $800.000$ Nachrichtenartikel, ist etwa 1 GB groß und besitzt $100.000.000$ Terme. Die \enquote{Term-Dokument ID} Paare dieser Sammlung auf einer Festplatte zu sortieren ist sehr ineffizient. Beim Sortieren kann von einer Komplexität von $O(n \cdot log_2 (n))$ ausgegangen werden. Möchte man nun alle Terme der Reuters-RCV1 Sammlung sortieren und man von 2 Zugriffen auf die Festplatte beim Sortieren sowie einer durchschnittlichen Zugriffszeit auf die Festplatte von 5ms ausgeht, dauert es in etwa:
 
 \[(100.000.000 \cdot log_2 (100.000.000)) \cdot 2 \cdot (5 \cdot 10^{-3}) \]
 \[ = 2.6575424759... \cdot 10^7 \text{ Sekunden}\]
@@ -82,9 +88,9 @@ In \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}\c
 Diese Dauer resultiert vorallem aus der hohen Zugriffszeit einer mechanischen Festplatte, da bei jedem wahlfreiem Zugriff der Lesekopf neu positioniert werden muss. Das Lesen von sequenziellen Daten ist deutlich schneller. Ein erster Ansatz ist es, den wahlfreien Zugriff zu minimieren und die Daten hauptsächlich Blockweise zu lesen.
 \par
 
-\subsection{Blocked sort-based indexing (BSBI)}
+\subsection{Blocked sort-based indexing}
 \paragraph{}
-Eine mögliche Umsetzung den Index Blockweise zu erstellen ist der \textit{block sort-based indexing Algorithmus} (siehe Algorithmus \ref{bsbiAlgo}) oder auch \textit{BSBI} auf welchen im Folgenden näher eingegangen wird.
+Eine Ansatz dies zu umgehen ist den Index Blockweise zu erstellen mit Hilfe des \textit{block sort-based indexing Algorithmus} (siehe Algorithmus \ref{bsbiAlgo}) oder auch \textit{BSBI} auf welchen im Folgenden näher eingegangen wird.
 \par
 \begin{algorithm}
  n = 0\;
@@ -99,7 +105,7 @@ WriteBlockToDisk(block, $f_n$)\;
 \end{algorithm}
 
 \paragraph{}
-Der Algoritmus parst eine Menge von Dokumeten in \enquote{Term-Dokument ID} Paare bis ein Block mit einer festen Größe voll ist (ParseNextBlock()). Anschließend wird der Block sortiert, daher sollte der Block problemlos in den Arbeitsspeicher passen, da dieser wesentlich schneller arbeitet als die Festplatte und so ein effizienteres Sortieren ermöglicht wird. Nun wird ein invertierter Index für den Block erstellt und persistiert. Dies geschieht iterativ für alle Blöcke bis die Sammlung komplett bearbeitet wurde. Zuletzt werden die einzelnen Postingslist zusammengefügt (siehe Abbildung \ref{bsiMerging}).
+Der Algoritmus parst eine Menge von Dokumeten in \enquote{Term-Dokument ID} Paare bis ein Block mit einer festen Größe voll ist (Zeile 4). Anschließend wird der Block sortiert, daher sollte der Block problemlos in den Arbeitsspeicher passen, da dieser wesentlich schneller arbeitet als die Festplatte und so ein effizienteres Sortieren ermöglicht wird. Nun wird ein invertierter Index für den Block erstellt und persistiert (Zeile 5). Dies geschieht iterativ für alle Blöcke bis die Sammlung komplett bearbeitet wurde. Zuletzt werden die einzelnen Postingslist zusammengefügt (Zeile 8) bis alle Listen in einen Invertierten Index über alle Dokumente gemerged wurden (siehe Abbildung \ref{bsiMerging}). 
 \par
 
 \begin{figure*}[ht]
@@ -109,42 +115,33 @@ Der Algoritmus parst eine Menge von Dokumeten in \enquote{Term-Dokument ID} Paar
 \end{figure*}
 
 \paragraph{}
-Soll über die Reuters-RCV1 Sammlung mit BSBI ein Index erstellt werden, so dauert dies unter gleichen Voraussetzungen nur noch 15,5 Stunden, da die Sammlung in 64 Blöcke aufgeteilt wird. Diese können innerhalb des Arbeitsspeichers sortiert werden, welcher eine wesentlich bessere Zugriffsgeschwindigkeit vorweist. Dennoch ist die theoretische Zeitkomplexität von BSBI $\Theta( T log_2 ( T))$ da die $T$ Terme sortiert werden müssen, auch wenn dies innerhalb eines Blocks geschieht. In der Praxis ist jedoch meistens das Parsen und Mergen der Blöcke am zeitaufwendigsten.\par
+Soll über die Reuters-RCV1 Sammlung mit BSBI ein Index erstellt werden, so dauert dies unter gleichen Voraussetzungen nur noch 15,5 Stunden, da die Sammlung in 64 Blöcke aufgeteilt wird. Diese können innerhalb des Arbeitsspeichers sortiert werden, welcher eine wesentlich bessere Zugriffsgeschwindigkeit vorweist. Dennoch ist die theoretische Zeitkomplexität von BSBI $\Theta( T log_2 ( T))$ da die $T$ Terme sortiert werden müssen, auch wenn dies innerhalb eines Blocks geschieht. In der Praxis ist jedoch meistens das Parsen und Mergen der Blöcke am zeitaufwendigsten. Zudem wird mit Term-ID's gearbeitet,  daher muss zusätzlich eine Datenstruktur für das Mapping zwischen Termen und Term-ID's im Arbeitsspeicher gehalten werden.\par
 
-\subsection{Single-pass in-memory indexing (SPIMI)}
+\subsection{Single-pass in-memory indexing}
 \paragraph{}
-BSBI lässt sich für viele Sammlungen anwenden, benötigt jedoch eine Datenstruktur für das Mapping zwischen Termen und ihren Term-ID's. Eine alternative Umsetzung ist der \textit{single-pass in-memory indexing Algorithmus} oder auch \textit{SPIMI} (siehe Algorithmus \ref{spimiAlgo}).\par
-\begin{algorithm}
- outputFile = new File()\;
- dictionary = new HashFile()\;
- \While{free memory available}{
- token = next(TokenStream)\;
-\eIf{term(token) $\notin$ dictionary}{
-PostingsList = AddToDictionary(dictionary, term(token))\;
-}{
-PostingsList = GetPostingsList(dictionary, term(token))\;
-}
-\If{full(PostingsList)}{
-PostingsList = DoublePostingsList(dictionary, term(token))\;
-}
-AddToPostingsList(PostingsList, docID(token))\;
-SortedTerms = SortTerms(dictionary)\;
-WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
-  }
-  \caption{SPIMI-invert Algorithmus} \label{spimiAlgo}
-\end{algorithm}
+BSBI lässt sich für viele Sammlungen anwenden, benötigt jedoch eine Datenstruktur für das Mapping zwischen Termen und ihren Term-ID's. Eine alternative Umsetzung ist der \textit{single-pass in-memory indexing Algorithmus} oder auch \textit{SPIMI} (siehe Algorithmus \ref{spimiAlgo}). Anders als bei BSBI werden bei SPIMI Terme statt Term-ID's betrachtet, daher kann auf ein Mapping wie bei BSBI verzichtet werden. Zudem werden die Terme in einem Dictionary gehalten und beim Auftreten der Postingslist angehangen, sodass auf das Sortieren der Terme verzichtet werden kann. Das Dictionary ist eine einfach geordnete Datenstruktur für das Mapping zwischen einem Term und dessen Hash, welche für jeden Block seperat erstellt wird.\par
 
 \paragraph{}
- Die Sammlung von Dokumenten wird als Strom von \enquote{Term-Dokument ID} Paaren betrachtet und darauf wiederholt der Algorithmus angewendet, bis die ganze Sammlung indiziert wurde.
+ Die Sammlung von Dokumenten wird als Datenstrom\footnote{Als Datenstrom (Englisch: data streams) bezeichnet man einen kontinuierlichen Fluss von Datensätzen, dessen Ende meist nicht im Voraus abzusehen ist.} von \enquote{Term-Dokument ID} Paaren betrachtet und darauf wiederholt der Algorithmus angewendet, bis die ganze Sammlung indiziert wurde. Wenn ein Term innerhalb eines Bocks zum ersten mal vorkommt, wird er dem Dictionary hinzugefügt (Zeile 6, Abbildung \ref{fig:subfigure1}) und eine neue Postingsliste wird erstellt. Kommt ein Term wiederholt vor, so wird über das Hash des Dictionary auf die Postingsliste zugegriffen (Zeile 8, Abbildung \ref{fig:subfigure2}) und das neue Vorkommen als Posting der Liste hinzugefügt. Da die Länge der Postingsliste nicht dynamisch ist, muss sie bei Bedarf verdoppelt werden (Zeile 11). Wenn der verfügbare Arbeitsseicher verbraucht ist, wird das Dictionary und die Postingslisten des Blocks persistiert und ein neuer Block geparst und bearbeitet (Zeile 17). Die Terme müssen sortiert im Dictionary vorliegen, da die Postingslisten dann in lexikoraphischer Ordnung persistiert werden können. Wurden alle Blöcke bearbeitet, werden die einzelnen Postingslisten zusammengeführt. Dies ist deutlich effizienter wenn sich die Postingslisten der einzelnen Blöcke bereits in lexikographischer Ordnung befinden.\par
 
+\paragraph{}
+%TODO
+todo fazit\par
 
 \subsection{Distributed indexing}
-\begin{figure*}[hb]
-  \includegraphics[width=\textwidth,height=0.4\textheight]{pdf/distributedIndexAll.pdf}
-  \caption{distributed indexing mit MapReduce}
-  \label{distribIndex}
-\end{figure*}
+\paragraph{}
+BSBI und SPIMI eignen sich gut für Datensammlungen, die von einem Rechner verarbeitet werden können. Übersteigt der Umfang der Sammlung jedoch die Rechenleistung eines einzelnen Rechners, muss auf andere Weise herangegangen werden. Das Web umfasst ca eine Millarden Webseiten und muss daher von einem Computer-Cluster bearbeitet werden. Ein Computercluster oder Rechnerverbund bezeichnet eine Menge von vernetzten Computern. Solche Cluster bieten die Möglichkeit eine \textit{MapReduce}-Architektur anzuwenden, eine generelle Architektur für verteiltes Arbeiten. So können aufwendige Probleme von vielen, günstigen Rechnern, auch \textit{Nodes} genannt, gelöst werden. Ein einzelner Rechner wird zum \textit{Master-Node}, welcher für das Verteilen der einzelnen Aufgaben verantwortlich ist. Da einzelne Nodes jederzeit ausfallen können, muss der Master-Node Aufgaben jederzeit neu zuweisen können.\par
+
+\paragraph{}
+Wird ein Index auf einem solchen verteiltem System erstellt, ist auch der Index selbst geteilt (siehe \nameref{distribIndex}). Dies geschieht entweder nach Dokumenten oder nach Termen. Wird der Index nach Dokumenten geteilt, bearbeiten unterschiedliche Maschinen des Clusters unterschiedliche Abschnitte der Sammlung und erstellen einen Index für jeden Abschnitt welche abschließend zusammengeführt werden. Häufig wird der Index jedoch auch nach Termen geteilt, diese Herangehensweise wird im Folgenden näher beschrieben. Da der Index verteilt erstelt wird, ist auch die Zuordnung zwischen Termen und ihren Term-ID's verteilt und daher komplexer. Eine einfache Lösung ist es, die Zuordnung für häufige Terme im Voraus zu berechnen und auf alle Nodes zu verteilen. Für seltene Terme können die Terme statt Term-ID's verwendet werden.\par
+
+\paragraph{}
+Zu Beginn wird die Sammlung in $n$ gleiche Teile unterteilt, die sogenannten \textit{Splits}. Ein Ansatz ist es, die Anzahl der Splits gleich der Anzahl an Nodes zu wählen, so kann jedem Node genau ein Split zugeordnet werden. Alternativ sollte die Größe eines Splits so gewählt werden, dass die Arbeit gleich verteilt werden kann und ein Split von einem herkömmlichen Rechner in einer kurzen Zeit bearbeitet werden kann (16 oder 64MB pro Split). Während der ersten Phase von MapReduce, der \textit{Map-Phase} wird jedem Node ein Split zugewiesen und geparst. Die Ausgabe der $r$ Nodes wird in $j$ lokale Hilfsdateien gespeichert, welche auch \textit{segment files} genannt werden. Sie beinhalten die Postings je einen von mehreren lexikographischen Abschnitt von Termen eines Splits, was es ermöglicht diese später sequenziell auszulesen. In der \textit{Reduce-Phase} weist der Master-Node je einen der $j$ lexikographischen Abschnitte einem Node zu, welcher alle $r$ segment files dieses Abschnittes zusammenführt. Abschließend werden die verbundenen und sortierten Postingslisten persistiert (siehe \enquote{postings} in Abbildung \ref{distribIndex}).\par
+
 \subsection{Dynamic indexing}
+\paragraph{}
+
+
 \subsection{andere Indexierungsverfahren}
 
 
@@ -165,4 +162,74 @@ WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
 	Yinan Li, Bingsheng He, Robin Jun Yang, Qiong Luo, Ke YiTree (Hong Kong University of Science and Technology) \enquote{\href{http://pages.cs.wisc.edu/~yinan/paper/fdtree_pvldb.pdf}{Indexing on Solid State Drives}} The 36th International Conference on Very Large Data Bases, September 13-17,
 2010, Singapore.
 \end{thebibliography}
+
+\newpage
+
+\section*{Appendix}
+\subsubsection*{Single-pass in-memory indexing Algorithmus}
+
+\begin{algorithm}
+\emph{SPIMI-Invert(token\_ stream)}\\
+ outputFile = new File()\;
+ dictionary = new HashFile()\;
+ \While{free memory available}{
+ token = next(TokenStream)\;
+\eIf{term(token) $\notin$ dictionary}{
+PostingsList = AddToDictionary(dictionary, term(token))\;
+}{
+PostingsList = GetPostingsList(dictionary, term(token))\;
+}
+\If{full(PostingsList)}{
+PostingsList = DoublePostingsList(dictionary, term(token))\;
+}
+AddToPostingsList(PostingsList, docID(token))\;
+  }
+SortedTerms = SortTerms(dictionary)\;
+WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
+
+  \caption{SPIMI-invert Algorithmus} \label{spimiAlgo}
+\end{algorithm}
+
+\pagebreak
+\newpage
+
+
+\begin{figure*}[ht]
+       \subfigure{
+            \includegraphics[height=.46\textheight]{pdf/spimi3.pdf}
+        }
+        \subfigure{
+           \includegraphics[height=.46\textheight]{pdf/spimi4.pdf}
+        }
+    \caption{
+        Erstes Auftreten eines Terms. Term wird Dictionary hinzugefügt und Postingsliste wird erstellt.
+     }
+   \label{fig:subfigure1}
+\end{figure*}
+
+
+\begin{figure*}[ht]
+        \subfigure{
+            \includegraphics[height=.46\textheight]{pdf/spimi6.pdf}
+        }
+        \subfigure{
+           \includegraphics[height=.46\textheight]{pdf/spimi7.pdf}
+        }
+    \caption{
+        Wiederholtes Auftreten eines Terms. Term wird in Dictionary gefunden und per Hash der Postingsliste des Terms hinzuefügt.
+     }
+   \label{fig:subfigure2}
+\end{figure*}
+
+\begin{figure*}[hb]
+  \includegraphics[width=\textwidth]{pdf/distributedIndexAll.pdf}
+  \caption{distributed indexing mit MapReduce}
+  \label{distribIndex}
+\end{figure*}
+
+\begin{figure*}[hb]
+  \includegraphics[width=\textwidth]{pdf/dynamicindex.pdf}
+  \caption{Query auf einem dynamic index}
+  \label{dynIndex}
+\end{figure*}
 \end{document}
