@@ -79,13 +79,13 @@ Die wesentlichen Schritte zur Erstellung eines invertierten Index sind in Abbild
 \end{figure*}
 
 \paragraph{}
-In \enquote{Introduction to Information Retrieval}\cite{ir} wird beispielhaft mit einer Modelsammlung gearbeitet, der Reuters-RCV1. Sie umfasst rund $800.000$ Nachrichtenartikel, ist etwa 1 GB groß und besitzt $100.000.000$ Terme. Die \enquote{Term-Dokument ID} Paare dieser Sammlung auf einer Festplatte zu sortieren ist sehr ineffizient. Beim Sortieren kann von einer Komplexität von $O(n \cdot log_2 (n))$ ausgegangen werden. Möchte man nun alle Terme der Reuters-RCV1 Sammlung sortieren und man von 2 Zugriffen auf die Festplatte beim Sortieren sowie einer durchschnittlichen Zugriffszeit auf die Festplatte von 5ms ausgeht, dauert es in etwa:
+In \enquote{Introduction to Information Retrieval}\cite{ir} wird mit einer Modellsammlung gearbeitet, der Reuters-RCV1. Sie umfasst rund $800.000$ Nachrichtenartikel aus einem Zeitraum von einem Jahr, ist etwa 1 GB groß und besitzt $100.000.000$ Terme. Die \enquote{Term-Dokument ID} Paare dieser Sammlung auf einer Festplatte zu sortieren ist sehr ineffizient. Beim Sortieren kann von einer theoretischen Komplexität von $O(n \cdot log_2 (n))$ ausgegangen werden. Möchte man nun alle Terme der Reuters-RCV1 Sammlung sortieren und man von 2 Zugriffen auf die Festplatte beim Sortieren sowie einer durchschnittlichen Zugriffszeit auf die Festplatte von 5 ms ausgeht, dauert es in etwa:
 
 \[(100.000.000 \cdot log_2 (100.000.000)) \cdot 2 \cdot (5 \cdot 10^{-3}) \]
 \[ = 2.6575424759... \cdot 10^7 \text{ Sekunden}\]
 \[ = 307.59 \text{ Tage} \]
 
-Diese Dauer resultiert vor allem aus der hohen Zugriffszeit einer mechanischen Festplatte, da bei jedem wahlfreiem Zugriff der Lesekopf neu positioniert werden muss. Das Lesen von sequenziellen Daten ist deutlich schneller. Ein erster Ansatz ist es, den wahlfreien Zugriff zu minimieren und die Daten hauptsächlich Blockweise zu lesen.
+Diese Dauer resultiert vor allem aus der hohen Zugriffszeit einer mechanischen Festplatte, da bei jedem wahlfreiem Zugriff der Lesekopf neu positioniert werden muss. Das Lesen von sequenziellen Daten ist deutlich schneller. Ein erster Ansatz dieses Problem zu umgehen ist es, den wahlfreien Zugriff zu minimieren und die Daten vorzugsweise Blockweise zu lesen.
 \par
 
 \subsection{Blocked sort-based indexing}
@@ -119,18 +119,17 @@ Soll über die Reuters-RCV1 Sammlung mit BSBI ein Index erstellt werden, so daue
 
 \subsection{Single-pass in-memory indexing}
 \paragraph{}
-BSBI lässt sich für viele Sammlungen anwenden, benötigt jedoch eine Datenstruktur für das Mapping zwischen Termen und ihren Term-ID's. Eine alternative Umsetzung ist der \textit{single-pass in-memory indexing Algorithmus} oder auch \textit{SPIMI} (siehe Algorithmus \ref{spimiAlgo}). Anders als bei BSBI werden bei SPIMI Terme statt Term-ID's betrachtet, daher kann auf ein Mapping wie bei BSBI verzichtet werden. Zudem werden die Terme in einem Dictionary gehalten und beim Auftreten der Postingslist angehangen, sodass auf das Sortieren der Terme verzichtet werden kann. Das Dictionary ist eine einfach geordnete Datenstruktur für das Mapping zwischen einem Term und dessen Hash, welche für jeden Block separat erstellt wird.\par
+BSBI lässt sich für viele Sammlungen anwenden, benötigt jedoch eine Datenstruktur für die Zuordnung zwischen Termen und ihren Term-ID's. Eine alternative Umsetzung ist der \textit{single-pass in-memory indexing Algorithmus} oder auch \textit{SPIMI} (siehe Algorithmus \ref{spimiAlgo}). Anders als bei BSBI werden bei SPIMI Terme statt Term-ID's betrachtet, daher kann auf ein Mapping wie bei BSBI verzichtet werden. Zudem werden die Terme in einem Dictionary gehalten und beim Auftreten der Postingslist angehangen, sodass auf das Sortieren der Terme verzichtet werden kann. Das Dictionary ist eine einfach geordnete Datenstruktur für das Mapping zwischen einem Term und dessen Hash, welche für jeden Block separat erstellt wird.\par
 
 \paragraph{}
  Die Sammlung von Dokumenten wird als Datenstrom\footnote{Als Datenstrom (Englisch: data streams) bezeichnet man einen kontinuierlichen Fluss von Datensätzen, dessen Ende meist nicht im Voraus abzusehen ist.} von \enquote{Term-Dokument ID} Paaren betrachtet und darauf wiederholt der Algorithmus angewendet, bis die ganze Sammlung indiziert wurde. Wenn ein Term innerhalb eines Bocks zum ersten mal vorkommt, wird er dem Dictionary hinzugefügt (Zeile 6, Abbildung \ref{fig:subfigure1}) und eine neue Postingsliste wird erstellt. Kommt ein Term wiederholt vor, so wird über das Hash des Dictionary auf die Postingsliste zugegriffen (Zeile 8, Abbildung \ref{fig:subfigure2}) und das neue Vorkommen als Posting der Liste hinzugefügt. Da die Länge der Postingsliste nicht dynamisch ist, muss sie bei Bedarf verdoppelt werden (Zeile 11). Wenn der verfügbare Arbeitsseicher verbraucht ist, wird das Dictionary und die Postingslisten des Blocks persistiert und ein neuer Block geparst und bearbeitet (Zeile 17). Die Terme müssen sortiert im Dictionary vorliegen, da die Postingslisten dann in lexikoraphischer Ordnung persistiert werden können. Wurden alle Blöcke bearbeitet, werden die einzelnen Postingslisten zusammengeführt. Dies ist deutlich effizienter wenn sich die Postingslisten der einzelnen Blöcke bereits in lexikographischer Ordnung befinden.\par
 
 \paragraph{}
-%TODO
-todo fazit\par
+Anders als BSBI kann SPIMI über beliebig große Sammlungen einen Index erstellen, solange das Festplattenvolumen nicht überschritten wird, da keine weitere Datenstruktur für die Zuordnung zwischen Termen und ihren Term-ID's im Arbeitsspeicher gehalten werden muss. Zudem können die bearbeiteten Blöcke größer sein, da weniger Arbeitsspeicher verbraucht wird, was die Indexerstellung als ganzes effizienter macht. Ein weiterer Aspekt ist Komprimierung, das Dictionary eines Blocks und die Postingslisten können so besonders kompakt gespeichert werden. Da die Terme sortiert in das Dictionary eingefügt werden und somit das Sortieren der Terme ausbleibt sind alle Operationen von SPIMI linear, die Zeitkomplexität beträgt $\Theta(T)$ mit $T$ als Anzahl der Terme der Sammlung.
 
 \subsection{Distributed indexing}
 \paragraph{}
-BSBI und SPIMI eignen sich gut für Datensammlungen, die von einem Rechner verarbeitet werden können. Übersteigt der Umfang der Sammlung jedoch die Rechenleistung eines einzelnen Rechners, muss auf andere Weise herangegangen werden. Das Web umfasst ca.\ eine Millarden Webseiten und muss daher von einem Computer-Cluster bearbeitet werden. Ein Computercluster oder Rechnerverbund bezeichnet eine Menge von vernetzten Computern. Solche Cluster bieten die Möglichkeit eine \textit{MapReduce}-Architektur anzuwenden, eine generelle Architektur für verteiltes Arbeiten. So können aufwendige Probleme von vielen, günstigen Rechnern, auch \textit{Nodes} genannt, gelöst werden. Ein einzelner Rechner wird zum \textit{Master-Node}, welcher für das Verteilen der einzelnen Aufgaben verantwortlich ist. Da einzelne Nodes jederzeit ausfallen können, muss der Master-Node Aufgaben jederzeit neu zuweisen können.\par
+BSBI und SPIMI eignen sich gut für Datensammlungen, die von einem Rechner verarbeitet werden können. Übersteigt der Umfang der Sammlung jedoch die Rechenleistung eines einzelnen Rechners, muss ein Index über solch eine Sammlung auf andere Weise erstellt werden. Das Web umfasst ca.\ eine Millarden Webseiten und muss daher von einem Computer-Cluster bearbeitet werden. Ein Computercluster oder Rechnerverbund bezeichnet eine Menge von vernetzten Computern. Solche Cluster bieten die Möglichkeit eine \textit{MapReduce}-Architektur anzuwenden, eine generelle Architektur für verteiltes Arbeiten. So können aufwendige Probleme von vielen, günstigen Rechnern, auch \textit{Nodes} genannt, gelöst werden. Ein einzelner Rechner wird zum \textit{Master-Node}, welcher für das Verteilen der einzelnen Aufgaben verantwortlich ist. Da einzelne Nodes jederzeit ausfallen können, muss der Master-Node Aufgaben jederzeit neu zuweisen können.\par
 
 \paragraph{}
 Wird ein Index auf einem solchen verteiltem System erstellt, ist auch der Index selbst geteilt (siehe \nameref{distribIndex}). Dies geschieht entweder nach Dokumenten oder nach Termen. Wird der Index nach Dokumenten geteilt, bearbeiten unterschiedliche Maschinen des Clusters unterschiedliche Abschnitte der Sammlung und erstellen einen Index für jeden Abschnitt welche abschließend zusammengeführt werden. Häufig wird der Index jedoch auch nach Termen geteilt, diese Herangehensweise wird im Folgenden näher beschrieben. Da der Index verteilt erstellt wird, ist auch die Zuordnung zwischen Termen und ihren Term-ID's verteilt und daher komplexer. Eine einfache Lösung ist es, die Zuordnung für häufige Terme im Voraus zu berechnen und auf alle Nodes zu verteilen. Für seltene Terme können die Terme statt Term-ID's verwendet werden.\par
@@ -140,14 +139,40 @@ Zu Beginn wird die Sammlung in $n$ gleiche Teile unterteilt, die sogenannten \te
 
 \subsection{Dynamic indexing}
 \paragraph{}
-In den bisher vorgestellten Indexierungsverfahren wurde von einer Statischen Sammlung mit statischen Inhalten ausgegangen. Viele Sammlungen sind jedoch sehr dynamisch und ändern sich häufig, Webseiten beispielsweise werden geändert, gelöscht oder es werden neue hinzugefügt. Sollten die Änderungen nicht sehr gravierend sein, kann es reichen periodisch einen neuen Index zu erstellen und damit den alten Index zu ersetzten. Müssen die Änderungen jedoch sofort sichtbar sein, muss der Index über eine solche dynamische Sammlung ebenfalls dynamisch sein.\par
+In den bisher vorgestellten Indexierungsverfahren wurde von einer statischen Sammlung mit statischen Inhalten ausgegangen. Viele Sammlungen sind jedoch sehr dynamisch und ändern sich häufig, Webseiten beispielsweise werden geändert, gelöscht oder es werden neue hinzugefügt. Sollten die Änderungen nicht sehr gravierend sein, kann es reichen periodisch einen neuen Index zu erstellen und damit den alten Index zu ersetzten. Müssen die Änderungen jedoch sofort sichtbar sein, muss der Index über eine solche dynamische Sammlung ebenfalls dynamisch sein.\par
 
 \paragraph{}
+Dazu erstellt man sich einen Hauptindex der die wesentlichen Informationen enthält und einen Hilfsindex, welcher Änderungen enthält. In einem einfachen Bit-Vektor werden gelöschte Dokumente eingetragen. Wird der Hilfsindex zu umfangreich, werden Haupt- und Hilfsindex zusammengeführt, dabei werden auch als gelöscht markierte Dokumente aus dem Index entfernt. Der Aufwand dieser merge-Operation hängt stark von der Art der Speicherung der Indexes ab. Ist jede Postingslist eine eigene Datei so muss lediglich die Postingsliste des Hauptindex um die zugehörige Postingsliste aus dem Hilfsindex erweitert werden. In diesem Fall ist der Nutzen des Hilfsindex lediglich den Zugriff auf die Festplatte zu minimieren, da so nur beim Zusammenführen der Indizes zusätzlicher Festplattenzugriff stattfindet. Viele Betriebssysteme können jedoch nicht effizient mit einer sehr großen Menge an Dateien umgehen. In der Praxis wird daher häufig eine Konkatenation der einzelnen Postingslisten aller Dokumente, aufgeteilt auf wenige Dateien, verwendet.\par
 
+\paragraph{}
+Anfragen werden gegen beide Indizes und den Bit-Vektor ausgeführt. Trifft ein Dokument auf eine Query zu, so wird dieses zurückgegeben. Falls Änderungen in dem Dokument sind, wird das geänderte Dokument aus dem Hilfsindex und nicht aus dem Hauptindex zurückgegeben. Sollte das Dokument als gelöscht markiert im Bit-Vektor vorliegen, so wird es aus der Ergebnismenge  gefiltert. Das Ausführen einer Query auf einem dynamischen Index ist ebenfalls in Abbildung \ref{dynIndex} visualisiert.\par
+
+\paragraph{}
+In dieser Herangehensweise muss beim Mergen jeder der  $T$ Terme $ \lfloor \frac{T}{n}\rfloor$ mal betrachtet werden, bei eine Größe $n$ des Hilfsindex. Daher beträgt die theoretische Zeitkomplexität dieses Zusammenführens $\Theta(\frac{T^2}{n})$. Diese Zeitkomplexität kann durch das Einführen von weiteren Hilfsindizes $I_0 , I_1 , I_2  \dots $ der Größe $2^0 \times n, 2^1 \times n, 2^2 \times n\dots$ und sogenanntes \textit{logarithmic merging} verbessert werden. Wie zuvor werden bis zu $n$ Postings in einem Hilfsindex $Z_0$ gespeichert. Ist dieser voll, werden die $2^0 \times n$ Postings in einen Index $I_0$ auf der Festplatte transferiert. Ist $Z_0$ erneut voll, so wird dieser mit Index $I_0$ zu Index $Z_1$ der Größe $2^1 \times n$. Existiert noch kein Index $I_1$, so wird $Z_0$ zu $I_1$, andernfalls wird $Z_0$ mit $I_1$ zusammengeführt und zu $Z_2$. Dieses Verfahren gilt für alle Iterationen des Index. Um eine Query auszuwerten, muss diese gegen $Z_0$ und alle validen Indizes $I_i$ ausgeführt werden, die Ergebnisse werden zusammengeführt. Die Zeitkomplexität dieser Herangehensweise beträgt $\Theta (T log(\frac{T}{n}))$, da jedes Posting nur ein mal auf jeder der $log(\frac{T}{n})$ Ebenen betrachtet werden muss. Diese gewonnene Effizienz bei der Erstellung des Index resultiert jedoch aus einer langsameren Ausführung einer Query auf diesem Index, da nun mehrere Indizes durchsucht werden müssen.\par
 
 \subsection{andere Indexierungsverfahren}
+\paragraph{}
+Neben den bisher vorgestellten Verfahren zum Erstellen eines Index, welche unterschiedliche funktionale Aspekte aufwiesen, existieren noch weitere, auf welche hier nur kurz eingegangen wird.\par
+
+\paragraph{}
+Häufig wird statt \textit{boolean retrieval} ein \textit{ranked retrieval} umgesetzt, sodass bei einer Anfrage eine Ordnung nach Relevanz gegeben werden kann. In diesem Fall werden die Postings nach einer Gewichtung sortiert in die Postingsliste aufgenommen. Werden bei einer Anfrage lange Postingslisten für einen Term gefunden, müssen diese nicht vollständig durchsucht werden, da die weiteren Postings der Dokumente von niedriger Relevanz nicht benötigt werden. Dies erschwert jedoch das Erweitern eines solchen Invertierten Index, da die Postings für neue Dokumente an beliebiger Position in die Postingsliste eines Terms aufgenommen werden können.\par
+
+\paragraph{}
+Sicherheit spielt vor allem in betrieblich oder kommerziell genutzten Indizes eine Rolle, in denen verschiedene Nutzergruppen unterschiedliche Rechte zum Auslesen des Index besitzen. Dazu werden die Zugriffsrechte der Nutzergruppen in einer \textit{acces controll list}, einer einfachen Matrix mit dem Schema Nutzer $\times$ Dokumente gespeichert. Die Ergebnismenge wird nach dem Ausführen einer Query nach dieser Matrix gefiltert, sodass der Nutzer nur Dokumente finden kann, auf welche er auch Zugriffsrecht hat.\par
+
+\paragraph{}
+In \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}\cite{managingGig} wird eine Herangehensweise zur \enquote{in situ}-Erstellung eines Index vorgestellt. Dabei wird mit einer minimalen Anzahl an Hilfsdateien gearbeitet, sodass bei der Erstellung nicht mehr Speicherplatz verbraucht wird als der finale Index groß ist. Dies findet vor allem in der wachsenden Zahl an \enquote{embedded systems} Anwendung, da diese über sehr limitierte Hardware verfügen.\par
 
 \section{Indexierung mit Solid State Drives} \label{indexSSD}
+
+\begin{figure*}[ht]
+  \includegraphics[width=\textwidth]{pdf/ssdperformance.png}
+  \caption{Zugriffsgeschwindigkeit verschiedener SSD's bei unterschiedlichen IO-Anfragen}
+  \label{fig:accessSSD}
+\end{figure*}
+
+\paragraph{}
+Seit geraumer Zeit setzten sich \textit{Solid State Drives} (SSD) gegenüber herkömmlichen mechanischen Festplatten auf dem Markt durch, da sie über immer mehr Datenvolumen verfügen und sich preislich angleichen. Viele Algorithmen, besonders die zur Erstellung eines Index, hatten als funktionale Anforderung die Minimierung des Festplattenzugriffs, da besonders der wahlfreie Zugriff durch das Positionieren des Lesekopfs sehr langsam ist. In der Arbeit \enquote{Indexing on Solid State Drives}\cite{ssd} wurden dazu die Zugriffszeiten verschiedener Festplatten gemessen, darunter eine günstige SSD von Samsung, eine herkömmliche SSD von Mitron und eine teure SSD von Intel sowie eine HDD als Referenzwert (siehe Abbildung \ref{fig:accessSSD}).
 
 \section{Fazit}
 
@@ -156,7 +181,7 @@ In den bisher vorgestellten Indexierungsverfahren wurde von einer Statischen Sam
 		\bibitem{ir}
 		Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze \enquote{\href{https://nlp.stanford.edu/IR-book/pdf/04const.pdf}{Introduction to Information Retrieval}}  Cambridge University Press 2008, pp. 1-18 and 67-84.
 
-	 \bibitem{managigGig}
+	 \bibitem{managingGig}
 	  Ian H. Witten, Alistair Moffat, Timothy C. Bell \enquote{\href{https://books.google.de/books?id=2F74jyPl48EC&dq=Witten+et+al.+index+1999&lr=&hl=de&source=gbs_navlinks_s}{Managing Gigabytes: Compressing and Indexing Documents and Images}}  Morgan Kaufman Publishers 1999, pp. 223-261.
 	
 	\bibitem{ssd}
@@ -196,29 +221,21 @@ WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
 
 
 \begin{figure*}[ht]
-       \subfigure{
-            \includegraphics[height=.46\textheight]{pdf/spimi3.pdf}
-        }
-        \subfigure{
-           \includegraphics[height=.46\textheight]{pdf/spimi4.pdf}
-        }
-    \caption{
-        Erstes Auftreten eines Terms. Term wird Dictionary hinzugefügt und Postingsliste wird erstellt.
-     }
+       \subfigure{\includegraphics[height=.46\textheight]{pdf/spmi-crop1.pdf}}
+        \subfigure{\includegraphics[height=.46\textheight]{pdf/spmi-crop2.pdf}}
+    \caption{Erstes Auftreten eines Terms. Term wird Dictionary hinzugefügt und Postingsliste wird erstellt.}
    \label{fig:subfigure1}
 \end{figure*}
 
 
 \begin{figure*}[ht]
         \subfigure{
-            \includegraphics[height=.46\textheight]{pdf/spimi6.pdf}
+            \includegraphics[height=.46\textheight]{pdf/spmi-crop3.pdf}
         }
         \subfigure{
-           \includegraphics[height=.46\textheight]{pdf/spimi7.pdf}
+           \includegraphics[height=.46\textheight]{pdf/spmi-crop4.pdf}
         }
-    \caption{
-        Wiederholtes Auftreten eines Terms. Term wird in Dictionary gefunden und per Hash der Postingsliste des Terms hinzuefügt.
-     }
+    \caption{ Wiederholtes Auftreten eines Terms. Term wird in Dictionary gefunden und per Hash der Postingsliste des Terms hinzuefügt.}
    \label{fig:subfigure2}
 \end{figure*}
 
