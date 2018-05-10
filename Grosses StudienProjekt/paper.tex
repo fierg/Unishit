@@ -69,11 +69,11 @@ Um aus einer Sammlung von Rohdaten (Abbildung \ref{korpus}) die relevanten Infor
 
 \subsection{Invertierter Index} \label{invertedIndex}
 \paragraph{}
-Die wesentlichen Schritte zur Erstellung eines invertierten Index sind in Abbildung \ref{postingssList} dargestellt. Zuerst werden alle \enquote{Term-Dokument ID} Paare gesammelt. Diese werden anschließend, dem Term nach, lexikographisch sortiert. Zuletzt werden die Dokument ID's für jeden Term in einer so genannten Postingslist zusammengefasst und Statistiken wie die Frequenz eines Terms berechnet. Die Postingslisten aller Terme bezeichnet man als invertierten Index, da die Zuordnung von Dokumenten auf deren Text invertiert wurde zu der Zuordnung zwischen einem Term und dessen Vorkommen. Bei einer Suchanfrage muss nun lediglich die Postingsliste zu dem gesuchten Term zurückgegeben werden. Aus Performancegründen werden häufig eindeutige Term ID's statt den Termen selbst genutzt. Für kleine Sammlungen kann dies im Arbeitsspeicher geschehen, für größere Sammlungen werden jedoch alternative Verfahren benötigt, auf die im Folgenden eingegangen wird.
+Die wesentlichen Schritte zur Erstellung eines invertierten Index sind in Abbildung \ref{postingssList} dargestellt. Zuerst werden alle \enquote{Term-Dokument ID} Paare gesammelt. Diese werden anschließend, dem Term nach, lexikographisch sortiert. Zuletzt werden die Dokument ID's für jeden Term in einer so genannten Postingslist zusammengefasst und Statistiken wie die Frequenz eines Terms berechnet. Die Postingslisten aller Terme bezeichnet man als invertierten Index, da die Zuordnung von Dokumenten auf deren Text invertiert wurde zu der Zuordnung zwischen einem Term und dessen Vorkommen. Sie enthalten zusätzlich statistische Information wie die Anzahl der Dokumente in welchen sie vorkommen. Bei einer Suchanfrage muss nun lediglich die Postingsliste zu dem gesuchten Term zurückgegeben werden. Aus Performancegründen werden häufig eindeutige Term ID's statt den Termen selbst genutzt. Für kleine Sammlungen kann dies im Arbeitsspeicher geschehen, für größere Sammlungen werden jedoch alternative Verfahren benötigt, auf die im Folgenden eingegangen wird.
 \par
 
 \begin{figure*}[ht]
-  \includegraphics[width=\textwidth,height=0.4\textheight]{pdf/postingslist3.pdf}
+  \includegraphics[width=\textwidth,height=0.45\textheight]{pdf/postingslist3.pdf}
   \caption{Invertierter Index}
   \label{postingssList}
 \end{figure*}
@@ -115,14 +115,14 @@ Der Algorithmus parst eine Menge von Dokumenten in \enquote{Term-Dokument ID} Pa
 \end{figure*}
 
 \paragraph{}
-Soll über die Reuters-RCV1 Sammlung mit BSBI ein Index erstellt werden, so dauert dies unter gleichen Voraussetzungen nur noch 15,5 Stunden, da die Sammlung in 64 Blöcke aufgeteilt wird. Diese können innerhalb des Arbeitsspeichers sortiert werden, welcher eine wesentlich bessere Zugriffsgeschwindigkeit vorweist. Dennoch ist die theoretische Zeitkomplexität von BSBI $\Theta( T log_2 ( T))$ da die $T$ Terme sortiert werden müssen, auch wenn dies innerhalb eines Blocks geschieht. In der Praxis ist jedoch meistens das Parsen und Mergen der Blöcke am zeitaufwendigsten. Zudem wird mit Term-ID's gearbeitet,  daher muss zusätzlich eine Datenstruktur für das Mapping zwischen Termen und Term-ID's im Arbeitsspeicher gehalten werden.\par
+Soll über die Reuters-RCV1 Sammlung mit BSBI ein Index erstellt werden, so dauert dies unter gleichen Voraussetzungen nur noch 15,5 Stunden, da die Sammlung in 64 Blöcke aufgeteilt wird. Diese können innerhalb des Arbeitsspeichers sortiert werden, welcher eine wesentlich bessere Zugriffsgeschwindigkeit vorweist. Dennoch ist die theoretische Zeitkomplexität von BSBI $\Theta( T\cdot log_2( T))$ da die $T$ Terme sortiert werden müssen, auch wenn dies innerhalb eines Blocks geschieht. In der Praxis ist jedoch meistens das Parsen und Mergen der Blöcke am zeitaufwendigsten. Zudem wird mit Term-ID's gearbeitet, daher muss zusätzlich eine Datenstruktur für das Mapping zwischen Termen und Term-ID's im Arbeitsspeicher gehalten werden.\par
 
 \subsection{Single-pass in-memory indexing}
 \paragraph{}
 BSBI lässt sich für viele Sammlungen anwenden, benötigt jedoch eine Datenstruktur für die Zuordnung zwischen Termen und ihren Term-ID's. Eine alternative Umsetzung ist der \textit{single-pass in-memory indexing Algorithmus} oder auch \textit{SPIMI} (siehe Algorithmus \ref{spimiAlgo}). Anders als bei BSBI werden bei SPIMI Terme statt Term-ID's betrachtet, daher kann auf ein Mapping wie bei BSBI verzichtet werden. Zudem werden die Terme in einem Dictionary gehalten und beim Auftreten der Postingslist angehangen, sodass auf das Sortieren der Terme verzichtet werden kann. Das Dictionary ist eine einfach geordnete Datenstruktur für das Mapping zwischen einem Term und dessen Hash, welche für jeden Block separat erstellt wird.\par
 
 \paragraph{}
- Die Sammlung von Dokumenten wird als Datenstrom\footnote{Als Datenstrom (Englisch: data streams) bezeichnet man einen kontinuierlichen Fluss von Datensätzen, dessen Ende meist nicht im Voraus abzusehen ist.} von \enquote{Term-Dokument ID} Paaren betrachtet und darauf wiederholt der Algorithmus angewendet, bis die ganze Sammlung indiziert wurde. Wenn ein Term innerhalb eines Bocks zum ersten mal vorkommt, wird er dem Dictionary hinzugefügt (Zeile 6, Abbildung \ref{fig:subfigure1}) und eine neue Postingsliste wird erstellt. Kommt ein Term wiederholt vor, so wird über das Hash des Dictionary auf die Postingsliste zugegriffen (Zeile 8, Abbildung \ref{fig:subfigure2}) und das neue Vorkommen als Posting der Liste hinzugefügt. Da die Länge der Postingsliste nicht dynamisch ist, muss sie bei Bedarf verdoppelt werden (Zeile 11). Wenn der verfügbare Arbeitsseicher verbraucht ist, wird das Dictionary und die Postingslisten des Blocks persistiert und ein neuer Block geparst und bearbeitet (Zeile 17). Die Terme müssen sortiert im Dictionary vorliegen, da die Postingslisten dann in lexikoraphischer Ordnung persistiert werden können. Wurden alle Blöcke bearbeitet, werden die einzelnen Postingslisten zusammengeführt. Dies ist deutlich effizienter wenn sich die Postingslisten der einzelnen Blöcke bereits in lexikographischer Ordnung befinden.\par
+ Die Sammlung von Dokumenten wird als Datenstrom\footnote{Als Datenstrom (Englisch: data streams) bezeichnet man einen kontinuierlichen Fluss von Datensätzen, dessen Ende meist nicht im Voraus abzusehen ist.} von \enquote{Term-Dokument ID} Paaren betrachtet und darauf wiederholt der Algorithmus angewendet, bis die ganze Sammlung indiziert wurde. Wenn ein Term innerhalb eines Bocks zum ersten mal vorkommt, wird er dem Dictionary hinzugefügt (Zeile 6 und Abbildung \ref{fig:subfigure1}) und eine neue Postingsliste wird erstellt. Kommt ein Term wiederholt vor, so wird über das Hash des Dictionary auf die Postingsliste zugegriffen (Zeile 8 und Abbildung \ref{fig:subfigure2}) und das neue Vorkommen als Posting der Liste hinzugefügt. Da die Länge der Postingsliste nicht dynamisch ist, muss sie bei Bedarf verdoppelt werden (Zeile 11). Wenn der verfügbare Arbeitsseicher verbraucht ist, wird das Dictionary und die Postingslisten des Blocks persistiert und ein neuer Block geparst und bearbeitet (Zeile 17). Die Terme müssen sortiert im Dictionary vorliegen, da die Postingslisten dann in lexikoraphischer Ordnung persistiert werden können. Wurden alle Blöcke bearbeitet, werden die einzelnen Postingslisten zusammengeführt. Dies ist deutlich effizienter wenn sich die Postingslisten der einzelnen Blöcke bereits in lexikographischer Ordnung befinden.\par
 
 \paragraph{}
 Anders als BSBI kann SPIMI über beliebig große Sammlungen einen Index erstellen, solange das Festplattenvolumen nicht überschritten wird, da keine weitere Datenstruktur für die Zuordnung zwischen Termen und ihren Term-ID's im Arbeitsspeicher gehalten werden muss. Zudem können die bearbeiteten Blöcke größer sein, da weniger Arbeitsspeicher verbraucht wird, was die Indexerstellung als ganzes effizienter macht. Ein weiterer Aspekt ist Komprimierung, das Dictionary eines Blocks und die Postingslisten können so besonders kompakt gespeichert werden. Da die Terme sortiert in das Dictionary eingefügt werden und somit das Sortieren der Terme ausbleibt sind alle Operationen von SPIMI linear, die Zeitkomplexität beträgt $\Theta(T)$ mit $T$ als Anzahl der Terme der Sammlung.
@@ -137,7 +137,13 @@ Wird ein Index auf einem solchen verteiltem System erstellt, ist auch der Index 
 \paragraph{}
 Zu Beginn wird die Sammlung in $n$ gleiche Teile unterteilt, die sogenannten \textit{Splits}. Ein Ansatz ist es, die Anzahl der Splits gleich der Anzahl an Nodes zu wählen, so kann jedem Node genau ein Split zugeordnet werden. Alternativ sollte die Größe eines Splits so gewählt werden, dass die Arbeit gleich verteilt werden kann und ein Split von einem herkömmlichen Rechner in einer kurzen Zeit bearbeitet werden kann (16 oder 64MB pro Split). Während der ersten Phase von MapReduce, der \textit{Map-Phase} wird jedem Node ein Split zugewiesen und geparst. Die Ausgabe der $r$ Nodes wird in $j$ lokale Hilfsdateien gespeichert, welche auch \textit{segment files} genannt werden. Sie beinhalten die Postings je eines lexikographischen Abschnitts von Termen eines Splits, was es ermöglicht diese später sequenziell auszulesen. In der \textit{Reduce-Phase} weist der Master-Node je einen der $j$ lexikographischen Abschnitte einem Node zu, welcher alle $r$ segment files dieses Abschnittes zusammenführt. Abschließend werden die verbundenen und sortierten Postingslisten persistiert (siehe \enquote{postings} in Abbildung \ref{distribIndex}).\par
 
-\subsection{Dynamic indexing}
+\subsection{Dynamic indexing} \label{Section:dynamicIndex}
+\begin{figure*}[ht]
+  \includegraphics[width=\textwidth,height=.25\textheight]{pdf/dynIndexCrop.pdf}
+  \caption{Query auf einem dynamic index}
+  \label{dynIndex}
+\end{figure*}
+
 \paragraph{}
 In den bisher vorgestellten Indexierungsverfahren wurde von einer statischen Sammlung mit statischen Inhalten ausgegangen. Viele Sammlungen sind jedoch sehr dynamisch und ändern sich häufig, Webseiten beispielsweise werden geändert, gelöscht oder es werden neue hinzugefügt. Sollten die Änderungen nicht sehr gravierend sein, kann es reichen periodisch einen neuen Index zu erstellen und damit den alten Index zu ersetzten. Müssen die Änderungen jedoch sofort sichtbar sein, muss der Index über eine solche dynamische Sammlung ebenfalls dynamisch sein.\par
 
@@ -148,7 +154,7 @@ Dazu erstellt man sich einen Hauptindex der die wesentlichen Informationen enth�
 Anfragen werden gegen beide Indizes und den Bit-Vektor ausgeführt. Trifft ein Dokument auf eine Query zu, so wird dieses zurückgegeben. Falls Änderungen in dem Dokument sind, wird das geänderte Dokument aus dem Hilfsindex und nicht aus dem Hauptindex zurückgegeben. Sollte das Dokument als gelöscht markiert im Bit-Vektor vorliegen, so wird es aus der Ergebnismenge  gefiltert. Das Ausführen einer Query auf einem dynamischen Index ist ebenfalls in Abbildung \ref{dynIndex} visualisiert.\par
 
 \paragraph{}
-In dieser Herangehensweise muss beim Mergen jeder der  $T$ Terme $ \lfloor \frac{T}{n}\rfloor$ mal betrachtet werden, bei eine Größe $n$ des Hilfsindex. Daher beträgt die theoretische Zeitkomplexität dieses Zusammenführens $\Theta(\frac{T^2}{n})$. Diese Zeitkomplexität kann durch das Einführen von weiteren Hilfsindizes $I_0 , I_1 , I_2  \dots $ der Größe $2^0 \times n, 2^1 \times n, 2^2 \times n\dots$ und sogenanntes \textit{logarithmic merging} verbessert werden. Wie zuvor werden bis zu $n$ Postings in einem Hilfsindex $Z_0$ gespeichert. Ist dieser voll, werden die $2^0 \times n$ Postings in einen Index $I_0$ auf der Festplatte transferiert. Ist $Z_0$ erneut voll, so wird dieser mit Index $I_0$ zu Index $Z_1$ der Größe $2^1 \times n$. Existiert noch kein Index $I_1$, so wird $Z_0$ zu $I_1$, andernfalls wird $Z_0$ mit $I_1$ zusammengeführt und zu $Z_2$. Dieses Verfahren gilt für alle Iterationen des Index. Um eine Query auszuwerten, muss diese gegen $Z_0$ und alle validen Indizes $I_i$ ausgeführt werden, die Ergebnisse werden zusammengeführt. Die Zeitkomplexität dieser Herangehensweise beträgt $\Theta (T log(\frac{T}{n}))$, da jedes Posting nur ein mal auf jeder der $log(\frac{T}{n})$ Ebenen betrachtet werden muss. Diese gewonnene Effizienz bei der Erstellung des Index resultiert jedoch aus einer langsameren Ausführung einer Query auf diesem Index, da nun mehrere Indizes durchsucht werden müssen.\par
+In dieser Herangehensweise muss beim Mergen jeder der  $T$ Terme $ \lfloor \frac{T}{n}\rfloor$ mal betrachtet werden, bei eine Größe $n$ des Hilfsindex. Daher beträgt die theoretische Zeitkomplexität dieses Zusammenführens $\Theta(\frac{T^2}{n})$. Diese Zeitkomplexität kann durch das Einführen von weiteren Hilfsindizes $I_0 , I_1 , I_2  \dots $ der Größe $2^0 \times n, 2^1 \times n, 2^2 \times n\dots$ und sogenanntes \textit{logarithmic merging} verbessert werden. Wie zuvor werden bis zu $n$ Postings in einem Hilfsindex $Z_0$ gespeichert. Ist dieser voll, werden die $2^0 \times n$ Postings in einen Index $I_0$ auf der Festplatte transferiert. Ist $Z_0$ erneut voll, so wird dieser mit Index $I_0$ zu Index $Z_1$ der Größe $2^1 \times n$. Existiert noch kein Index $I_1$, so wird $Z_0$ zu $I_1$, andernfalls wird $Z_0$ mit $I_1$ zusammengeführt und zu $Z_2$. Dieses Verfahren gilt für alle Iterationen des Index. Um eine Query auszuwerten, muss diese gegen $Z_0$ und alle validen Indizes $I_i$ ausgeführt werden, die Ergebnisse werden zusammengeführt. Die Zeitkomplexität dieser Herangehensweise beträgt $\Theta (T \cdot log(\frac{T}{n}))$, da jedes Posting nur ein mal auf jeder der $log(\frac{T}{n})$ Ebenen betrachtet werden muss. Diese gewonnene Effizienz bei der Erstellung des Index resultiert jedoch aus einer langsameren Ausführung einer Query auf diesem Index, da nun mehrere Indizes durchsucht werden müssen.\par
 
 \subsection{andere Indexierungsverfahren}
 \paragraph{}
@@ -166,15 +172,33 @@ In \enquote{Managing Gigabytes: Compressing and Indexing Documents and Images}\c
 \section{Indexierung mit Solid State Drives} \label{indexSSD}
 
 \begin{figure*}[ht]
-  \includegraphics[width=\textwidth]{pdf/ssdperformance.png}
-  \caption{Zugriffsgeschwindigkeit verschiedener SSD's bei unterschiedlichen IO-Anfragen}
+  \includegraphics[width=\textwidth,height=.29\textheight]{pdf/ssdperformance.png}
+  \caption{Zugriffsgeschwindigkeit verschiedener SSD's bei unterschiedlichen Aufgaben sowie einer HDD als Referenz}
   \label{fig:accessSSD}
 \end{figure*}
 
 \paragraph{}
-Seit geraumer Zeit setzten sich \textit{Solid State Drives} (SSD) gegenüber herkömmlichen mechanischen Festplatten auf dem Markt durch, da sie über immer mehr Datenvolumen verfügen und sich preislich angleichen. Viele Algorithmen, besonders die zur Erstellung eines Index, hatten als funktionale Anforderung die Minimierung des Festplattenzugriffs, da besonders der wahlfreie Zugriff durch das Positionieren des Lesekopfs sehr langsam ist. In der Arbeit \enquote{Indexing on Solid State Drives}\cite{ssd} wurden dazu die Zugriffszeiten verschiedener Festplatten gemessen, darunter eine günstige SSD von Samsung, eine herkömmliche SSD von Mitron und eine teure SSD von Intel sowie eine HDD als Referenzwert (siehe Abbildung \ref{fig:accessSSD}).
+Seit geraumer Zeit setzten sich \textit{Solid State Drives} (SSD) gegenüber herkömmlichen mechanischen Festplatten auf dem Markt durch, da sie über immer mehr Datenvolumen verfügen, weniger Energie verbrauchen und sich preislich angleichen. Viele Algorithmen, besonders die zur Erstellung eines Index, hatten als funktionale Anforderung die Minimierung des Festplattenzugriffs, da besonders der wahlfreie Zugriff durch das Positionieren des Lesekopfs sehr langsam ist. In der Arbeit \enquote{Indexing on Solid State Drives}\cite{ssd} wurden dazu die Zugriffszeiten verschiedener Festplatten gemessen, darunter eine günstige SSD von Samsung, eine herkömmliche SSD von Mitron und eine teure SSD von Intel sowie eine HDD als Referenzwert. Wie aus der Abbildung ersichtlich ist, sind auch bei SSD's die sequenziellen, schreibenden Zugriffe (Abbildung \ref{fig:accessSSD}, mitte 2KB \& rechts 512KB) deutlich schneller sind als ein wahlfreier Zugriff (Abbildung \ref{fig:accessSSD}, links). Diese Eigeschaft resultiert aus dem sogenannten \enquote{erase before write}-Mechanismus von \textit{EEPROM} oder \enquote{electrically erasable programmable read only memory} Speichertechnologien wie der SSD. Soll ein Sektor des Flashspeichers, auch Page genannt, beschrieben werden und es befinden sich bereits Daten darauf muss, auch wenn diese als gelöscht markiert wurden, die komplette Page gelöscht und mit 1 überschrieben werden. Dies muss geschehen, da die Schreibeoperation auf Grund der technischen Realisierung dieser Speichermedien nur bits von 1 zu 0 ändern können. Diese Eigenschaft verlangsamt das Speichermedium wenn häufig wahlfreie schreibende Zugriffe erfolgen.\par
+
+\paragraph{}
+Da vorallem Baumindizes die primäre Zugriffsmethode für Datenbanken sind, gilt es diese an die neue Hardware anzupassen. Der klassische B+ Baum als Datenstruktur für mechanische Festplatten, funktioniert grundsätzlich auch auf einer SSD. Ein B+ Baum ist Erweiterung eines immer vollständig balancierten Baumes, der Daten nach Schlüsseln sortiert speichert. Durch die Sortierung ist das Suchen in einem solchen Baum sehr effizient. Suchoperationen werden durch die schnellen, wahlfreien lesenden Zugriffe begünstigt, Updateoperationen werden jedoch langsamer. Um dieses Problem zu umgehen wird in \enquote{Indexing on Solid State Drives}\cite{ssd} ein sogenannter FD-Baum als geeignete Datenstruktur vorgeschlagen (siehe Abbildung \ref{FD Tree}).\par
+
+\paragraph{}
+Um die Updateperformace des Indexes zu verbessern während die Sucheffizienz beibehalten werden soll, wird eine logarithmische Datenstruktur gewählt um den Aufwand eines Updates gering zu halten. Das \textit{logarithmic merging} von Updates ist bereits aus \nameref{Section:dynamicIndex} bekannt und wird hier ebenfalls verwendet. Die Baumstruktur selbst besteht aus einem kleinen B+ Baum als oberste Ebene (genannt \textit{head tree}), über mehreren sortierten Ebenen welche nach untern in der Größe zunehmen. Je ein Blatt des Baums besitzt die Größe einer Page der Festplatte. Über \enquote{Fences} wird auf andere Blätter anderer Ebenen mit Indexeinträgen referenziert um im Baum zu suchen. Mit Hilfe von \textit{fractional cascading} wird die Suche weiter beschleunigt. Fractional cascading bietet die Möglichkeit, die Bereichssuche in einem Bereichsbaum schneller zu gestalten. Dabei wird der jeweils höchstdimensionale assoziierte Baum nicht als Baum, sondern als Array gespeichert. Von jedem Element des Arrays gehen Verweise auf mindestens gleich große Schlüsselwerte in den beiden Kindarrays. Updates werden nur im head tree getätigt und iterativ in die unteren sortierten Ebenen eingefügt. Dies hat zur Folge, dass die meisten wahlfreien Zugriffe zu sequenziellen Zugriffen auf die Festplatte werden.\par
+
+\paragraph{}
+Auf einem FD-Baum mit $n$ Einträgen und einer Page-Größe von $B$ lässt sich analytisch zeigen, dass eine Update-Operation in $\mathcal{O}(log_B(n))$ sequenziellen Festplattenzugriffen und das Ausführen einer Query in $\mathcal{O}(log_B(n))$ wahlfreien Zugriffen erfolgt. Damit hat der FD-Baum eine vergleichbare Suchperformance wie der standart B+ Baum und eine ähnliche Update-Performance wie die für schreibenden Zugriff optimierte B+ Baum Variante. Dies zeigt, dass die Gesamtperformance des FD-Baums über den anderen B+ Baum Varianten liegt, vorallem auf SSD's jedoch auch auf mechanischen Festplatten.\par 
+
+\paragraph{}
+Zwischen den SSD's verschiedener Modelle und Hersteller bestehen jedoch gravierende Unterschiede wie die Page-Größe und die verwendeten Hardwarecontroller. Um dem entgegen zu wirken, wurde als Teil der Arbeit zusätzlich ein Kostenmodel entwickelt um die optimale Größe der sortierten Ebenen an die jeweilige Festplatte anzupassen und die Performance so noch weiter zu steigern.\par
 
 \section{Fazit}
+\paragraph{}
+Grundsätzlich erfordern unterschiedliche Anforderungen unterschiedliche Indexierungsverfahren. Auf einzelnen Rechnern lassen sich mit Hilfe von BSBI oder SPIMI auf einfache Weise ein invertierter Index erstellen, SPIMI ermöglich dies sogar in linearer Zeitkomplexität. Für größere Datenmengen wie das Web oder sehr dynamische Sammlungen müssen andere Architekturen verwendet werden um den Anforderungen gerecht zu werden, doch mit MapReduce und logarithmischem zusammenführen von Hilfsindizes ist dies ebenfalls möglich. Da sich die Hardware jedoch ebenfalls im Laufe der Zeit geändert hat und mit Solid State Drives eine neue Speichertechnologie durchgesetzt hat, müssen für mechanische Festplatten entwickelte Algorithmen neu überdacht werden. Mit Hilfe eines FD-Baumes, der speziell für neue Speichermedien konzipiert wurde, ist dies im Bereich der Indexerstellung geschehen.\par
+
+\paragraph{}
+Abschließend lässt sich sagen, dass für gängige Anforderungen eine geeignetes Indexierungsverfahren und eine Indexstruktur existiert. Die Menge an Daten welche Weltweit gesammelt und gespeichert wird wächst jedoch weiter und es kommen neue, gänzlich unterschiedliche Ansätze für Information Retrieval bzw.\ Document Retrieval auf. Der Einsatz von künstlicher Intelligenz zeigt auch in diesem Bereich Erfolge. Multimedia Information Retrieval, wie das Suchen nach Bildern und Videos anhand von Ähnlichkeit oder anderen nicht textuellen Aspekten, lässt sich mit neuen Modellen und Ansätzen lösen.
+\par
 
 \begin{thebibliography}{9}
 
@@ -189,7 +213,7 @@ Seit geraumer Zeit setzten sich \textit{Solid State Drives} (SSD) gegenüber her
 2010, Singapore.
 \end{thebibliography}
 
-\newpage
+%\newpage
 
 \section*{Appendix}
 \subsubsection*{Single-pass in-memory indexing Algorithmus}
@@ -245,9 +269,10 @@ WriteBlockToDisk(SortedTerms, dictionary, OutputFile)\;
   \label{distribIndex}
 \end{figure*}
 
-\begin{figure*}[hb]
-  \includegraphics[width=\textwidth]{pdf/dynamicindex.pdf}
-  \caption{Query auf einem dynamic index}
-  \label{dynIndex}
+\begin{figure*}[ht]
+  \includegraphics[width=\textwidth]{pdf/fdtree.png}
+  \caption{FD-Baum, tree index}
+  \label{FD Tree}
 \end{figure*}
+
 \end{document}
