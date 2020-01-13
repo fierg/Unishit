@@ -1,0 +1,99 @@
+\documentclass[14]{article}
+
+%opening
+\title{Virtualisierungskosten}
+\author{Sven Fiergolla}
+
+\begin{document}
+
+\maketitle
+
+\par{
+Benutzte Hardware:\\
+- AMD Ryzen 5 2600X Six-Core Processor (12 Threads) 3.6 GHz Base Clock, 4.2 GHz Boost\\
+- 16GB 3200MHz Ram\\ 
+- Samsung evo ssd\\
+}
+
+\section{Aufgabe 1: “Virtualisierungskosten (Nativ)”}
+\par{
+Performance results (FLOPS and IOPs in G-FLOPS): 
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|r|r|r||r|r}	
+		 & time (real) & time(usr) & time (sys) & Number of FLOPs & Number of IOPs\\
+		\hline
+		native & 0m4.101s & 0m2.096s & 0m0.000s & 14.149101 & 14.437010\\
+		native & 0m4.089s & 0m2.084s & 0m0.002s & 14.036330 & 14.435551\\
+		native & 0m4.096s & 0m2.088s & 0m0.002s & 14.228415 & 14.425814\\
+		native & 0m4.096s & 0m2.090s & 0m0.001s & 14.195853 & 14.451477\\
+		native & 0m4.103s & 0m2.091s & 0m0.000s & 14.184424 & 14.555823\\
+		\hline
+		native (average) & 0m4.94s & 0m2.091s & 0m0.001s & 14.196281 & 14.452789 \\
+	\end{tabular}
+	\caption{Native Performance}
+	\label{tab:t1:Native Performance}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|r|r|r||r|r}	
+		& time (real) & time(usr) & time (sys) & Number of FLOPs & Number of IOPs\\
+		\hline
+		vm & 0m4.101s & 0m2.096s & 0m0.000s & 14.149101 & 14.437010\\
+		vm & 0m4.089s & 0m2.084s & 0m0.002s & 14.036330 & 14.435551\\
+		vm & 0m4.096s & 0m2.088s & 0m0.002s & 14.228415 & 14.425814\\
+		vm & 0m4.096s & 0m2.090s & 0m0.001s & 14.195853 & 14.451477\\
+		vm & 0m4.103s & 0m2.091s & 0m0.000s & 14.184424 & 14.555823\\
+		\hline
+		vm (average) & 0m4.094s & 0m2.091s & 0m0.001s & 14.196281 & 14.452789 \\
+	\end{tabular}
+	\caption{Virtual Performance}
+	\label{tab:t2:Virtual Performance}
+\end{table}
+}
+
+\section{Aufgabe 2}
+Aufgabe 2 konnte nur bedingt erfüllt werden, es ist nicht gelungen die Ergebnisse oder die Porgramme sinnvoll in Relation zu setzten außer über eie relative Performance in FLOPs und IOPs, welche aber sehr start abweichten. Dies hing von einer menge Faktoren ab, wie zb die Anzahl durchgeführte Operationen, das JDK etc. Bei weniger iterationen schien der Unterschied deutlicher zu sein als bei vielen Interationen. Mit dem 1.8 OpenJdk wurden ca 7 GFLOPs erreicht, mit der GraalVM sogar fast 9.
+Allgemein kann man jedoch sagen, dass die Initialisierung der Laufzeitumgebung einiges an Resources ud Zeit in Anspruch nimmt, danach jedoch fast ähnliche Performance wie natives Ausführen erreicht.
+
+\section{Aufgabe 3}
+\par{
+Genutztes C Programm aus Aufgabe 1, docker container ersellt von:\\
+FROM ubuntu\\
+COPY . .\\
+CMD bash -c 'time ./CPU/CPUBenchmark 100000000 1'\\
+\\
+docker build -t benchmark .
+\\
+\\
+Ausführung als:\\
+time docker run --it benchmark\\
+
+sodass time ein mal vom Hostsymtem und ein mal von der Bash aus dem Ubuntu Container ausgeführt wird, das Hostsystem misst die Zeit inclusive des Starten des COntainers, das time innerhalb lediglich den Aufruf des benchmark Programms.
+}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|r|r|r||r r}	
+		& time (real) & time(usr) & time (sys) & Number of FLOPs & Number of IOPs\\
+		\hline
+		in docker & 0m4.120s & 0m2.113s & 0m0.002s & 14.026831 & 14.29935\\
+		system time & 0m4.421s & 0m0.025s & 0m0.020s\\
+		in docker & 0m4.103s & 0m2.095s & 0m0.001s & 14.172581 & 14.373986\\
+		system time &0m4.711s & 0m0.028s & 0m0.013s\\
+		in docker & 0m4.104s & 0m2.097s & 0m0.002s & 14.167995 & 14.364781\\
+		system time &0m4.704s & 0m0.021s & 0m0.021s\\
+		\hline
+		in docker(average) & 0m4.109s & 0m2.099s & 0m0.002s & 14.196281 & 14.452789 \\
+		system (average) & 0m4.160s & 0m0.025s & 0m0.018s
+	\end{tabular}
+	\caption{Native in docker Performance}
+	\label{tab:t3:Native in docker Performance}
+\end{table}
+
+
+\par{
+Schnell wird klar, dass die eigentliche Performance des programms nicht beeinflusst ist, da die Anzahl an Operation quasi idetisch zur nativen Auführung ist. Jedoch benotigt 
+}
+\end{document}
