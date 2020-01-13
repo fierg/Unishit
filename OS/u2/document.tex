@@ -41,24 +41,26 @@ Performance results (FLOPS and IOPs in G-FLOPS):
 	\begin{tabular}{l|r|r|r||r|r}	
 		& time (real) & time(usr) & time (sys) & Number of FLOPs & Number of IOPs\\
 		\hline
-		vm & 0m4.101s & 0m2.096s & 0m0.000s & 14.149101 & 14.437010\\
-		vm & 0m4.089s & 0m2.084s & 0m0.002s & 14.036330 & 14.435551\\
-		vm & 0m4.096s & 0m2.088s & 0m0.002s & 14.228415 & 14.425814\\
-		vm & 0m4.096s & 0m2.090s & 0m0.001s & 14.195853 & 14.451477\\
-		vm & 0m4.103s & 0m2.091s & 0m0.000s & 14.184424 & 14.555823\\
+		vm & 0m11.225s & 0m9.087s & 0m0.041s & 3.28 & 3.29\\
+		vm & 0m11.089s & 0m9.084s & 0m0.042s & 3.29 & 3.55\\
+		vm & 0m10.996s & 0m9.101s & 0m0.039s & 3.48 & 3.60\\
+		vm & 0m10.527s & 0m8.436s & 0m0.027s & 3.36 & 3.56\\
 		\hline
-		vm (average) & 0m4.094s & 0m2.091s & 0m0.001s & 14.196281 & 14.452789 \\
+		vm (average) & 0m11.1s & 0m8.9s & 0m0.038s & 3.35 & 3.56 \\
 	\end{tabular}
 	\caption{Virtual Performance}
 	\label{tab:t2:Virtual Performance}
 \end{table}
+
+Zur Rirtualisierung wurde qemu benutzt, da es bei meinem Hostsystem Fedora bereits vorinstalliert ist. Um den Effekt besser sichtbar zu machen wurde auf eine Installation von KVM (Kernel based Virtual Machine) verzichtet und normale virtualisierung über qemu verwendet. Der Performanceunterschied ist sehr deutlich erkennbar, die virtualisierte Lösung hat nur ein virtel der Hostsystemleistung aufzuweisen. Zu erwähnen ist jedoch, das nur 4 der 6 Kerne dem Gastssytem zugeteilt wurden um eine Benutzung des Hosts zu gewährleisten, was ebenfalls die Leistung vermindert.
+Ein Unterschied zwischen IOPs und FLOPs ist nicht deutlich zu erkennen, obwohl zu erwarten wäre, dass die IOPs nicht so stark von der Virtualisierung betroffen sind.
 }
 
-\section{Aufgabe 2}
-Aufgabe 2 konnte nur bedingt erfüllt werden, es ist nicht gelungen die Ergebnisse oder die Porgramme sinnvoll in Relation zu setzten außer über eie relative Performance in FLOPs und IOPs, welche aber sehr start abweichten. Dies hing von einer menge Faktoren ab, wie zb die Anzahl durchgeführte Operationen, das JDK etc. Bei weniger iterationen schien der Unterschied deutlicher zu sein als bei vielen Interationen. Mit dem 1.8 OpenJdk wurden ca 7 GFLOPs erreicht, mit der GraalVM sogar fast 9.
-Allgemein kann man jedoch sagen, dass die Initialisierung der Laufzeitumgebung einiges an Resources ud Zeit in Anspruch nimmt, danach jedoch fast ähnliche Performance wie natives Ausführen erreicht.
+\section{Aufgabe 2: “Virtualisierungskosten (JVM/CLR)”}
+Aufgabe 2 konnte nur bedingt erfüllt werden, es ist nicht gelungen die Ergebnisse oder die Programme sinnvoll in Relation zu setzten außer über eie relative Performance in FLOPs und IOPs, welche aber sehr stark abweichten. Dies hing von einer Menge Faktoren ab, wie zb die Anzahl durchgeführte Operationen, das JDK etc. Bei weniger Iterationen schien der Unterschied deutlicher zu sein als bei vielen Iterationen. Mit dem 1.8 OpenJdk wurden ca 7 GFLOPs erreicht, mit der GraalVM sogar fast 9.
+Allgemein kann man jedoch sagen, dass die Initialisierung der Laufzeitumgebung einiges an Ressourcen und Zeit in Anspruch nimmt, danach jedoch fast ähnliche Performance wie natives Ausführen erreicht.
 
-\section{Aufgabe 3}
+\section{Aufgabe 3: “Container (Docker)”}
 \par{
 Genutztes C Programm aus Aufgabe 1, docker container ersellt von:\\
 FROM ubuntu\\
@@ -94,6 +96,6 @@ sodass time ein mal vom Hostsymtem und ein mal von der Bash aus dem Ubuntu Conta
 
 
 \par{
-Schnell wird klar, dass die eigentliche Performance des programms nicht beeinflusst ist, da die Anzahl an Operation quasi idetisch zur nativen Auführung ist. Jedoch benotigt 
+Schnell wird klar, dass die eigentliche Performance des programms nicht beeinflusst ist, da die Anzahl an Operation quasi idetisch zur nativen Auführung ist. Jedoch benotigt das starten des containers etwas Zeit in Anspruch, was in der time Auswertung des Hostsystems als time (sys) auffällt.
 }
 \end{document}
